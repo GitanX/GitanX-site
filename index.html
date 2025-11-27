@@ -402,6 +402,15 @@
       header { padding: 10px 12px; }
       .hero { padding-top: 140px; }
     }
+   .count-anim {
+  animation: bump 2s; /* plus lent aussi */
+}
+@keyframes bump {
+  0% { transform: scale(1); color: inherit; }
+  20% { transform: scale(1.15); color: #ffd54f; }
+  80% { transform: scale(1.1); color: #4fc3f7; }
+  100% { transform: scale(1); color: inherit; }
+}
   </style>
 </head>
 <body>
@@ -445,7 +454,7 @@
   <article class="card" id="community" aria-labelledby="community-title">
     <h3 id="community-title">💬 Communauté GitanX</h3>
     <p>Rejoins la communauté et partage tes interfaces avec les autres utilisateurs.</p>
-    <a href="#community">Community</a>
+    <a href="#exemples">Community</a>
   </article>
 </section>
 
@@ -649,18 +658,55 @@ end)</code></pre>
     });
   }, { threshold: 0.1 });
 
-  document.querySelectorAll(".fade-in").forEach(el => observer.observe(el));
-    async function updateDiscordCount() {
+    // Animation numérique LENTE (3s par défaut)
+function animateValue(obj, start, end, duration = 3000) {
+  if (start === end) return obj.innerText = end;
+  obj.classList.add("count-anim");
+  let startTimestamp = null;
+  const step = (timestamp) => {
+    if (!startTimestamp) startTimestamp = timestamp;
+    const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+    // Interpolation non linéaire pour plus d’effet visuel (ease-in-out)
+    const eased = 0.5 - Math.cos(progress * Math.PI) / 2;
+    const value = Math.round(eased * (end - start) + start);
+    obj.innerText = value;
+    if (progress < 1) {
+      requestAnimationFrame(step);
+    } else {
+      obj.innerText = end;
+      obj.classList.remove("count-anim");
+    }
+  };
+  requestAnimationFrame(step);
+}
+
+let lastMemberCount = null;
+
+async function updateDiscordCount() {
   try {
-    const res = await fetch("http://localhost:3000/discord-count"); // ton bot Express
+    const res = await fetch("http://147.135.128.19:20116/discord-count");
     const data = await res.json();
-    document.getElementById("discordCount").innerText = `💠 ${data.member_count} membres Discord`;
+
+    const el = document.getElementById("discordCount");
+    // Première fois : affichage direct
+    if (lastMemberCount === null) lastMemberCount = data.member_count;
+
+    el.innerHTML = `<span id="count-membre">${lastMemberCount}</span> membres Discord`;
+
+    animateValue(
+      document.getElementById("count-membre"),
+      lastMemberCount,
+      data.member_count,
+      3000 // Animation lente : 3 secondes
+    );
+
+    lastMemberCount = data.member_count;
   } catch (e) {
     console.error("Erreur Discord:", e);
   }
 }
 
-setInterval(updateDiscordCount, 30000);
+setInterval(updateDiscordCount, 10000); // Rafraichit toutes les 10 secondes
 updateDiscordCount();
 
 </script>
