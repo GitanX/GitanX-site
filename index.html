@@ -2,144 +2,143 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
-  <title>Documentation GitanX</title>
+  <title>GitanX Framework</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <style>
+    :root {
+      --bg: #0d0d1a;
+      --text: #eaf0ff;
+      --primary: #7c4dff;
+      --accent: #00e5ff;
+      --danger: #ff4081;
+    }
+    * { box-sizing: border-box; }
     body {
       margin: 0;
-      font-family: "Segoe UI", sans-serif;
-      background: #0d0d1a;
-      color: #e0e0ff;
-      display: flex;
+      font-family: "Poppins", sans-serif;
+      background: radial-gradient(circle at 20% -20%, #232a52, var(--bg));
+      color: var(--text);
+      overflow-x: hidden;
     }
-    /* Sidebar */
-    nav {
-      width: 240px;
-      background: #151530;
-      padding: 20px;
-      height: 100vh;
-      position: fixed;
-      overflow-y: auto;
-      box-shadow: 4px 0 12px rgba(0,0,0,0.4);
+    header {
+      position: fixed; top: 0; left: 0; right: 0;
+      backdrop-filter: blur(10px);
+      background: rgba(15,18,38,0.6);
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 14px 24px; z-index: 999;
     }
-    nav h2 {
-      color: #7c4dff;
-      margin-bottom: 20px;
-    }
+    header h1 { color: var(--accent); }
     nav a {
-      display: block;
-      color: #e0e0ff;
-      text-decoration: none;
-      margin: 10px 0;
-      transition: 0.2s;
+      color: var(--text); margin-left: 20px; text-decoration: none;
+      transition: 0.3s;
     }
-    nav a:hover {
-      color: #00e5ff;
-      transform: translateX(4px);
+    nav a:hover { color: var(--accent); }
+    .hero {
+      min-height: 100vh; display: flex; flex-direction: column;
+      justify-content: center; align-items: center; text-align: center;
+      padding: 120px 20px 60px;
+      position: relative; isolation: isolate;
     }
-    /* Content */
-    main {
-      margin-left: 260px;
-      padding: 40px;
-      max-width: 900px;
+    .hero h2 {
+      font-size: clamp(2rem, 6vw, 4rem);
+      background: linear-gradient(120deg, #fff, var(--accent));
+      -webkit-background-clip: text; color: transparent;
     }
-    h1, h2 {
-      color: #00e5ff;
+    .hero p { max-width: 700px; color: #b8c2ff; }
+    .btn {
+      padding: 12px 20px; border-radius: 12px; border: none;
+      cursor: pointer; font-weight: 600; margin: 10px;
+      transition: 0.3s; box-shadow: 0 10px 20px rgba(0,0,0,0.4);
     }
-    section {
-      margin-bottom: 60px;
+    .btn-primary {
+      background: linear-gradient(120deg, var(--primary), var(--accent));
+      color: #0d0d1a;
     }
+    .btn-primary:hover { transform: scale(1.05); }
+    section { max-width: 1100px; margin: 0 auto; padding: 60px 20px; }
+    h3 { color: var(--accent); }
+    .grid {
+      display: grid; gap: 20px;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    }
+    .card {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 16px; padding: 20px;
+      transition: 0.3s; backdrop-filter: blur(10px);
+    }
+    .card:hover { transform: translateY(-6px) scale(1.02); }
     pre {
-      background: #1a1a3d;
-      padding: 16px;
-      border-radius: 8px;
-      overflow-x: auto;
-      color: #cfd8ff;
-      box-shadow: 0 0 12px rgba(124,77,255,0.4);
-    }
-    code {
-      font-family: Consolas, monospace;
-    }
-    .highlight {
-      color: #7c4dff;
-      font-weight: bold;
+      background: #1a1a3d; padding: 14px; border-radius: 8px;
+      overflow-x: auto; color: #cfd8ff;
     }
     footer {
-      text-align: center;
-      padding: 20px;
-      border-top: 1px solid #333;
+      text-align: center; padding: 20px;
+      border-top: 1px solid rgba(255,255,255,0.1);
       color: #888;
+    }
+    /* Neon orbs */
+    .orb {
+      position: absolute; border-radius: 50%; filter: blur(80px);
+      opacity: 0.3; mix-blend-mode: screen; animation: float 12s infinite ease-in-out;
+    }
+    .orb.one { width: 400px; height: 400px; background: var(--primary); top: 10%; left: -10%; }
+    .orb.two { width: 300px; height: 300px; background: var(--accent); bottom: -10%; right: -10%; animation-delay: 2s; }
+    .orb.three { width: 350px; height: 350px; background: var(--danger); top: 50%; left: 60%; animation-delay: 4s; }
+    @keyframes float {
+      0%,100% { transform: translateY(0); }
+      50% { transform: translateY(-20px); }
     }
   </style>
 </head>
 <body>
-  <!-- Sidebar -->
-  <nav>
-    <h2>📚 GitanX Docs</h2>
-    <a href="#intro">Introduction</a>
-    <a href="#install">Installation</a>
-    <a href="#window">Créer une fenêtre</a>
-    <a href="#components">Composants UI</a>
-    <a href="#colorpicker">Color Picker</a>
-    <a href="#safe">Bonnes pratiques</a>
-  </nav>
+  <header>
+    <h1>⚡ GitanX</h1>
+    <nav>
+      <a href="#features">Features</a>
+      <a href="#code">Code</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </header>
 
-  <!-- Content -->
-  <main>
-    <section id="intro">
-      <h1>Bienvenue dans la librairie GitanX</h1>
-      <p>
-        GitanX est une librairie Lua orientée <span class="highlight">UI dynamique</span> :
-        fenêtres, onglets, boutons, sliders, color pickers… tout est prêt pour créer des interfaces stylées.
-      </p>
-    </section>
+  <div class="hero">
+    <div class="orb one"></div>
+    <div class="orb two"></div>
+    <div class="orb three"></div>
+    <h2>Librairie UI Futuriste</h2>
+    <p>Fenêtres, onglets, sliders, color pickers… GitanX te donne les outils pour créer des interfaces incroyables.</p>
+    <div>
+      <button class="btn btn-primary">Découvrir</button>
+      <button class="btn">Documentation</button>
+    </div>
+  </div>
 
-    <section id="install">
-      <h2>Installation</h2>
-      <p>Incluez simplement le fichier <code>librairie GitanX.lua</code> dans votre projet.</p>
-      <pre><code>local lib = loadstring(game:HttpGet("URL_DE_TON_SCRIPT"))()</code></pre>
-    </section>
+  <section id="features">
+    <h3>✨ Features principales</h3>
+    <div class="grid">
+      <div class="card"><h4>Fenêtres</h4><p>Création de fenêtres drag & drop avec animations.</p></div>
+      <div class="card"><h4>Onglets</h4><p>Navigation fluide entre plusieurs sections.</p></div>
+      <div class="card"><h4>Composants</h4><p>Boutons, toggles, sliders, dropdowns, textboxes.</p></div>
+      <div class="card"><h4>Color Picker</h4><p>Sélecteur HSV avec mode arc-en-ciel animé.</p></div>
+    </div>
+  </section>
 
-    <section id="window">
-      <h2>Créer une fenêtre</h2>
-      <p>La fonction <code>lib:Window()</code> instancie une fenêtre draggable avec onglets.</p>
-      <pre><code>local win = lib:Window("Mon UI", "Preset", Enum.KeyCode.RightControl)</code></pre>
-    </section>
+  <section id="code">
+    <h3>📜 Exemple de code</h3>
+    <pre><code>local win = lib:Window("Mon UI", "Preset", Enum.KeyCode.RightControl)
+local tab = win:Tab("Outils")
+tab:Button("Clique-moi", function() print("Bouton pressé !") end)
+tab:Toggle("Activer option", false, function(state) print("Toggle:", state) end)</code></pre>
+  </section>
 
-    <section id="components">
-      <h2>Ajouter des composants</h2>
-      <p>Chaque onglet peut contenir des boutons, toggles, sliders, dropdowns…</p>
-      <pre><code>local tab = win:Tab("Outils")
-
-tab:Button("Clique-moi", function()
-  print("Bouton pressé !")
-end)
-
-tab:Toggle("Activer option", false, function(state)
-  print("Toggle:", state)
-end)</code></pre>
-    </section>
-
-    <section id="colorpicker">
-      <h2>Color Picker</h2>
-      <p>Un color picker HSV avec mode arc-en-ciel est intégré.</p>
-      <pre><code>tab:Colorpicker("Choisis une couleur", Color3.fromRGB(255,0,0), function(c)
-  print("Couleur choisie:", c)
-end)</code></pre>
-    </section>
-
-    <section id="safe">
-      <h2>Bonnes pratiques</h2>
-      <ul>
-        <li>⚠️ Utilise <code>PlayerGui</code> plutôt que <code>CoreGui</code> en Studio.</li>
-        <li>✅ Structure ton code en modules pour réutiliser tes composants.</li>
-        <li>🎨 Expérimente avec <code>TweenService</code> pour des animations fluides.</li>
-      </ul>
-    </section>
-  </main>
+  <section id="contact">
+    <h3>📩 Contact</h3>
+    <p>Envie de contribuer ou d’en savoir plus ?</p>
+    <button class="btn btn-primary">Rejoindre la communauté</button>
+  </section>
 
   <footer>
-    <p>&copy; 2025 — Documentation GitanX. Inspiré par la communauté.</p>
+    <p>&copy; 2025 GitanX — Page de fou designée pour toi ⚡</p>
   </footer>
 </body>
 </html>
