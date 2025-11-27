@@ -1,346 +1,145 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Tutoriel GitanX — Page de fou</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link
-    href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap"
-    rel="stylesheet"
-  />
+  <meta charset="UTF-8">
+  <title>Documentation GitanX</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <style>
-    :root{
-      --bg:#0e1225; --text:#eaf0ff; --muted:#b8c2ff; --primary:#7c4dff; --accent:#00e5ff; --card:#1a2146;
-      --success:#00c853; --warn:#ffb300; --danger:#ff5252; --shadow:0 20px 40px rgba(0,0,0,.35);
+    body {
+      margin: 0;
+      font-family: "Segoe UI", sans-serif;
+      background: #0d0d1a;
+      color: #e0e0ff;
+      display: flex;
     }
-    *{box-sizing:border-box}
-    html{scroll-behavior:smooth}
-    body{
-      margin:0; font-family:"Poppins",system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial;
-      color:var(--text); background: radial-gradient(1200px 600px at 10% -20%, #232a52 0%, #0e1225 50%) fixed;
-      overflow-x:hidden;
+    /* Sidebar */
+    nav {
+      width: 240px;
+      background: #151530;
+      padding: 20px;
+      height: 100vh;
+      position: fixed;
+      overflow-y: auto;
+      box-shadow: 4px 0 12px rgba(0,0,0,0.4);
     }
-
-    /* Header */
-    header{position:fixed; inset:0 auto auto 0; right:0; z-index:999; backdrop-filter:saturate(140%) blur(10px);
-      background:rgba(14,18,37,.6); border-bottom:1px solid rgba(255,255,255,.08)}
-    .nav{max-width:1100px; margin:0 auto; display:flex; align-items:center; justify-content:space-between; padding:14px 20px}
-    .brand{display:flex; align-items:center; gap:10px; font-weight:700; letter-spacing:.5px}
-    .dot{width:12px; height:12px; border-radius:50%; background:linear-gradient(120deg,var(--primary),var(--accent));
-      box-shadow:0 0 20px var(--primary); animation:pulse 2.2s infinite ease-in-out}
-    @keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.3)}}
-    .nav a{color:var(--text); text-decoration:none; margin-left:16px; font-weight:500}
-    .nav a:hover{color:var(--accent)}
-    .toggle{border:1px solid rgba(255,255,255,.15); padding:8px 14px; border-radius:999px; cursor:pointer;
-      background:rgba(255,255,255,.06); transition:.25s ease}
-    .toggle:hover{transform:translateY(-2px); background:rgba(255,255,255,.12)}
-
-    /* Hero */
-    .hero{min-height:92vh; display:grid; place-items:center; text-align:center; padding:120px 20px 60px; position:relative; isolation:isolate}
-    .hero h1{font-size:clamp(2.2rem,6vw,4.2rem); line-height:1.05; margin:0 0 14px; letter-spacing:.4px;
-      background:linear-gradient(120deg,#fff,var(--muted)); -webkit-background-clip:text; background-clip:text; color:transparent}
-    .hero p{max-width:900px; margin:0 auto 22px; color:var(--muted)}
-    .actions{display:flex; flex-wrap:wrap; gap:12px; justify-content:center}
-    .btn{padding:12px 18px; border-radius:14px; border:none; cursor:pointer; font-weight:600; transition:.25s ease; box-shadow:var(--shadow)}
-    .btn-primary{background:linear-gradient(120deg,var(--primary),var(--accent)); color:#0b0e1e}
-    .btn-primary:hover{transform:translateY(-2px) scale(1.02)}
-    .btn-ghost{background:rgba(255,255,255,.1); color:var(--text); border:1px solid rgba(255,255,255,.14)}
-    .btn-ghost:hover{transform:translateY(-2px); background:rgba(255,255,255,.18)}
-    .badge{display:inline-block; padding:6px 10px; border-radius:999px; font-size:.84rem; color:#0b0e1e; font-weight:700;
-      background:linear-gradient(120deg,var(--accent),#a7ffeb); box-shadow:0 6px 16px rgba(0,229,255,.35)}
-
-    /* Floating orbs */
-    .orbs{position:absolute; inset:0; z-index:-1; pointer-events:none}
-    .orb{position:absolute; width:380px; height:380px; border-radius:50%; filter:blur(60px); opacity:.25; mix-blend-mode:screen; animation:float 12s ease-in-out infinite}
-    .orb.one{background:#7c4dff; top:10%; left:-6%}
-    .orb.two{background:#00e5ff; bottom:-10%; right:-6%; animation-delay:1.5s}
-    .orb.three{background:#ff4081; top:50%; left:60%; animation-delay:3s}
-    @keyframes float{0%,100%{transform:translateY(0) translateX(0)}50%{transform:translateY(-20px) translateX(6px)}}
-
-    /* Sections */
-    section{max-width:1100px; margin:0 auto; padding:60px 20px}
-    .grid{display:grid; gap:20px; grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}
-    .card{background:var(--card); border:1px solid rgba(255,255,255,.08); border-radius:16px; padding:20px; box-shadow:var(--shadow);
-      transform:translateY(0); transition:.25s ease}
-    .card:hover{transform:translateY(-6px) scale(1.01)}
-    .card h3{margin:0 0 8px}
-    .card p{color:var(--muted); margin:0}
-
-    /* Code blocks */
-    pre{background:#0a0d1f; border:1px solid rgba(255,255,255,.08); border-radius:12px; padding:14px; overflow:auto}
-    code{color:#cbd5ff}
-
-    /* Steps */
-    .step{display:flex; gap:16px; align-items:flex-start}
-    .step-num{min-width:34px; height:34px; border-radius:999px; display:grid; place-items:center; font-weight:700; color:#0b0e1e;
-      background:linear-gradient(120deg,var(--primary),var(--accent)); box-shadow:0 10px 20px rgba(124,77,255,.25)}
-
-    /* Footer + light theme */
-    footer{padding:40px 20px; text-align:center; color:var(--muted); border-top:1px solid rgba(255,255,255,.08);
-      background:linear-gradient(180deg,transparent,rgba(0,0,0,.2))}
-    .light{
-      --bg:#f6f8ff; --text:#0b0e1e; --muted:#4b5a88; --card:#ffffff;
-      background: radial-gradient(1200px 600px at 10% -20%, #f3f4ff 0%, #f6f8ff 50%) fixed;
+    nav h2 {
+      color: #7c4dff;
+      margin-bottom: 20px;
     }
-    .note{color:var(--muted); font-size:.95rem}
-    .warn{color:var(--warn); font-weight:600}
+    nav a {
+      display: block;
+      color: #e0e0ff;
+      text-decoration: none;
+      margin: 10px 0;
+      transition: 0.2s;
+    }
+    nav a:hover {
+      color: #00e5ff;
+      transform: translateX(4px);
+    }
+    /* Content */
+    main {
+      margin-left: 260px;
+      padding: 40px;
+      max-width: 900px;
+    }
+    h1, h2 {
+      color: #00e5ff;
+    }
+    section {
+      margin-bottom: 60px;
+    }
+    pre {
+      background: #1a1a3d;
+      padding: 16px;
+      border-radius: 8px;
+      overflow-x: auto;
+      color: #cfd8ff;
+      box-shadow: 0 0 12px rgba(124,77,255,0.4);
+    }
+    code {
+      font-family: Consolas, monospace;
+    }
+    .highlight {
+      color: #7c4dff;
+      font-weight: bold;
+    }
+    footer {
+      text-align: center;
+      padding: 20px;
+      border-top: 1px solid #333;
+      color: #888;
+    }
   </style>
 </head>
 <body>
-  <!-- Header -->
-  <header>
-    <nav class="nav">
-      <div class="brand">
-        <div class="dot"></div>
-        <span>GitanX Tutor</span>
-      </div>
-      <div>
-        <a href="#intro">Intro</a>
-        <a href="#lecture">Lecture du code</a>
-        <a href="#safe">Apprendre “safe”</a>
-        <a href="#exemples">Exemples</a>
-        <button class="toggle" id="themeToggle">Basculer thème</button>
-      </div>
-    </nav>
-  </header>
+  <!-- Sidebar -->
+  <nav>
+    <h2>📚 GitanX Docs</h2>
+    <a href="#intro">Introduction</a>
+    <a href="#install">Installation</a>
+    <a href="#window">Créer une fenêtre</a>
+    <a href="#components">Composants UI</a>
+    <a href="#colorpicker">Color Picker</a>
+    <a href="#safe">Bonnes pratiques</a>
+  </nav>
 
-  <!-- Hero -->
-  <div class="hero" id="intro">
-    <div class="orbs"><div class="orb one"></div><div class="orb two"></div><div class="orb three"></div></div>
-    <div>
-      <span class="badge">Comprends. Expérimente. Crée.</span>
-      <h1>Tuto interactif pour décoder et t’inspirer de la librairie GitanX</h1>
-      <p>Ce guide te montre ce que fait la librairie (UI glissant, tabs, boutons, sliders, colorpicker) et comment construire
-        tes propres interfaces en Roblox Studio avec de bonnes pratiques. Certaines fonctions sont conçues pour des contextes d’exécution spécifiques
-        et ne marchent pas en Studio tel quel — on s’appuie dessus pour apprendre les concepts, puis on les recrée proprement.</p>
-      <div class="actions">
-        <a class="btn btn-primary" href="#lecture">Lire le code</a>
-        <a class="btn btn-ghost" href="#safe">Parcours “safe”</a>
-      </div>
-    </div>
-  </div>
+  <!-- Content -->
+  <main>
+    <section id="intro">
+      <h1>Bienvenue dans la librairie GitanX</h1>
+      <p>
+        GitanX est une librairie Lua orientée <span class="highlight">UI dynamique</span> :
+        fenêtres, onglets, boutons, sliders, color pickers… tout est prêt pour créer des interfaces stylées.
+      </p>
+    </section>
 
-  <!-- Lecture du code de la librairie -->
-  <section id="lecture">
-    <h2>Lecture guidée de la librairie</h2>
-    <p class="note">Aperçu simplifié des blocs clés, pour comprendre la structure et les patterns utilisés.</p>
-    <div class="grid">
-      <div class="card">
-        <h3>Initialisation & environnement</h3>
-        <p>La librairie crée un ScreenGui, tente de le “protéger” et le parent au CoreGui (syn.protect_gui, gethui),
-          puis gère l’ouverture/fermeture via une touche et rend l’UI draggable. Ce ciblage de CoreGui est typique des UIs injectées,
-          pas des UIs de jeu Studio.</p>
-        <pre><code>-- Création et parentage spécial (simplifié)
-local CoreGui = game:GetService("CoreGui")
-local ui = Instance.new("ScreenGui")
-ui.Name = "ui"
--- safe_parent(ui) essaie syn.protect_gui/gethui, fallback CoreGui
-        </code></pre>
-      </div>
-      <div class="card">
-        <h3>Fenêtre & onglets</h3>
-        <p>lib:Window(text, preset, closebind) instancie la fenêtre (Frame & UI), anime la taille, et prépare la zone des onglets.
-          tabhold:Tab(text) crée un bouton d’onglet et un ScrollingFrame de contenu avec sélection active.</p>
-        <pre><code>-- lib:Window(...) puis tabhold:Tab("Outils")
-local Tab = Instance.new("ScrollingFrame")
--- Cliquer un onglet: visible = true, animation d'indicateur
-        </code></pre>
-      </div>
-      <div class="card">
-        <h3>Composants interactifs</h3>
-        <p>Boutons, toggles, sliders, dropdowns, labels, textboxes, binds: chaque composant crée son UI,
-          gère le hover (TweenService), et déclenche un callback pcall(...) côté script.</p>
-        <pre><code>-- Exemple bouton
-Button.MouseButton1Click:Connect(function()
-  pcall(callback)
-end)
-        </code></pre>
-      </div>
-      <div class="card">
-        <h3>Color picker avancé</h3>
-        <p>Un colorpicker HSV avec sélection et un mode “rainbow” animé (via RunService & valeurs HSV),
-          plus un toggle pour activer/désactiver l’animation. Un bon modèle pour comprendre HSV & UI events.</p>
-        <pre><code>-- Mise à jour couleur
-local function UpdateColorPicker()
-  BoxColor.BackgroundColor3 = Color3.fromHSV(H,S,V)
-  pcall(callback, BoxColor.BackgroundColor3)
-end
-        </code></pre>
-      </div>
-    </div>
-    <p class="warn">Note: Parentage dans CoreGui, appels à syn/gethui et LocalPlayer:GetMouse() indiquent un usage orienté injecteur.
-    En Studio, utilise StarterGui et évite CoreGui pour tes UIs de jeu.</p>
-  </section>
+    <section id="install">
+      <h2>Installation</h2>
+      <p>Incluez simplement le fichier <code>librairie GitanX.lua</code> dans votre projet.</p>
+      <pre><code>local lib = loadstring(game:HttpGet("URL_DE_TON_SCRIPT"))()</code></pre>
+    </section>
 
-  <!-- Parcours d'apprentissage "safe" -->
-  <section id="safe">
-    <h2>Construire la même expérience en Roblox Studio (voie “safe”)</h2>
-    <div class="step">
-      <div class="step-num">1</div>
-      <div>
-        <p><strong>Crée ta UI dans StarterGui</strong> — Ajoute un ScreenGui dans StarterGui, puis des Frames/TextButtons.
-           Évite CoreGui: il est réservé au système Roblox.</p>
-        <pre><code>-- Dans Roblox Studio, StarterGui
-local player = game.Players.LocalPlayer
-local gui = Instance.new("ScreenGui")
-gui.Name = "MyUI"
-gui.Parent = player:WaitForChild("PlayerGui") -- safe ici
-        </code></pre>
-      </div>
-    </div>
-    <div class="step">
-      <div class="step-num">2</div>
-      <div>
-        <p><strong>Rends un Frame draggable</strong> — Reproduis le pattern MakeDraggable avec UserInputService, sans toucher CoreGui.</p>
-        <pre><code>local uis = game:GetService("UserInputService")
-local dragging, dragInput, dragStart, startPos = false, nil, nil, nil
-local topbar, frame = TopBar, MainFrame
+    <section id="window">
+      <h2>Créer une fenêtre</h2>
+      <p>La fonction <code>lib:Window()</code> instancie une fenêtre draggable avec onglets.</p>
+      <pre><code>local win = lib:Window("Mon UI", "Preset", Enum.KeyCode.RightControl)</code></pre>
+    </section>
 
-local function update(input)
-  local delta = input.Position - dragStart
-  frame.Position = UDim2.new(
-    startPos.X.Scale, startPos.X.Offset + delta.X,
-    startPos.Y.Scale, startPos.Y.Offset + delta.Y
-  )
-end
+    <section id="components">
+      <h2>Ajouter des composants</h2>
+      <p>Chaque onglet peut contenir des boutons, toggles, sliders, dropdowns…</p>
+      <pre><code>local tab = win:Tab("Outils")
 
-topbar.InputBegan:Connect(function(input)
-  if input.UserInputType == Enum.UserInputType.MouseButton1 then
-    dragging = true; dragStart = input.Position; startPos = frame.Position
-    input.Changed:Connect(function()
-      if input.UserInputState == Enum.UserInputState.End then dragging = false end
-    end)
-  end
+tab:Button("Clique-moi", function()
+  print("Bouton pressé !")
 end)
 
-uis.InputChanged:Connect(function(input)
-  if dragging and input.UserInputType == Enum.UserInputType.MouseMovement then update(input) end
-end)
-        </code></pre>
-      </div>
-    </div>
-    <div class="step">
-      <div class="step-num">3</div>
-      <div>
-        <p><strong>Tabs & navigation</strong> — Stocke tes pages dans des Frames et bascule Visible avec une animation via TweenService.</p>
-        <pre><code>local TweenService = game:GetService("TweenService")
-local pages = {Page1, Page2, Page3}
-local function showPage(i)
-  for idx, p in ipairs(pages) do
-    p.Visible = (idx == i)
-    TweenService:Create(p, TweenInfo.new(0.25), {BackgroundTransparency = (idx==i) and 0 or 1}):Play()
-  end
-end
-        </code></pre>
-      </div>
-    </div>
-    <div class="step">
-      <div class="step-num">4</div>
-      <div>
-        <p><strong>Composants</strong> — Recrée Button/Toggle/Slider en utilisant les événements (MouseButton1Click, FocusLost) et des callbacks.</p>
-        <pre><code>-- Toggle
-local toggled = false
-ToggleBtn.MouseButton1Click:Connect(function()
-  toggled = not toggled
-  TweenService:Create(ToggleKnob, TweenInfo.new(0.2),
-    {Position = UDim2.new(toggled and 0.6 or 0.1,0,0.5,-10)}):Play()
-  print("Toggle:", toggled)
-end)
-        </code></pre>
-      </div>
-    </div>
-  </section>
+tab:Toggle("Activer option", false, function(state)
+  print("Toggle:", state)
+end)</code></pre>
+    </section>
 
-  <!-- Exemples inspirés -->
-  <section id="exemples">
-    <h2>Exemples rapides (inspirés de la librairie)</h2>
-    <div class="grid">
-      <div class="card">
-        <h3>Bouton + notification</h3>
-        <p>Affiche un panneau animé avec un bouton “OK”.</p>
-        <pre><code>local TweenService = game:GetService("TweenService")
-local notif = NotificationFrame
-notif.Size = UDim2.new(0,0,0,0); notif.Visible = true
-TweenService:Create(notif, TweenInfo.new(0.3, Enum.EasingStyle.Quart), {Size = UDim2.new(0,164,0,193)}):Play()
-OkayBtn.MouseButton1Click:Connect(function()
-  TweenService:Create(notif, TweenInfo.new(0.3), {Size = UDim2.new(0,0,0,0)}):Play()
-end)
-        </code></pre>
-      </div>
-      <div class="card">
-        <h3>Color picker HSV</h3>
-        <p>Reprend le principe: calcule la couleur depuis H, S, V et met à jour un aperçu.</p>
-        <pre><code>local h,s,v = 0,1,1
-local function update()
-  local c = Color3.fromHSV(h,s,v)
-  Preview.BackgroundColor3 = c
-end
-HueBar.InputChanged:Connect(function(input) h = math.clamp((input.Position.Y - HueBar.AbsolutePosition.Y)/HueBar.AbsoluteSize.Y,0,1); update() end)
-SaturationPad.InputChanged:Connect(function(input)
-  local x = math.clamp((input.Position.X - SaturationPad.AbsolutePosition.X)/SaturationPad.AbsoluteSize.X,0,1)
-  local y = math.clamp((input.Position.Y - SaturationPad.AbsolutePosition.Y)/SaturationPad.AbsoluteSize.Y,0,1)
-  s = x; v = 1 - y; update()
-end)
-        </code></pre>
-      </div>
-      <div class="card">
-        <h3>Bind de touche</h3>
-        <p>Appuie sur une touche pour déclencher une action.</p>
-        <pre><code>local uis = game:GetService("UserInputService")
-local bind = Enum.KeyCode.F
-uis.InputBegan:Connect(function(io, gp)
-  if not gp and io.KeyCode == bind then
-    print("Action bind F")
-  end
-end)
-        </code></pre>
-      </div>
-      <div class="card">
-        <h3>Slider doux</h3>
-        <p>Un slider avec knob + barre remplie.</p>
-        <pre><code>local dragging = false
-Knob.InputBegan:Connect(function(i) if i.UserInputType==Enum.UserInputType.MouseButton1 then dragging=true end end)
-Knob.InputEnded:Connect(function(i) if i.UserInputType==Enum.UserInputType.MouseButton1 then dragging=false end end)
-game:GetService("UserInputService").InputChanged:Connect(function(i)
-  if dragging and i.UserInputType==Enum.UserInputType.MouseMovement then
-    local scale = math.clamp((i.Position.X - Bar.AbsolutePosition.X)/Bar.AbsoluteSize.X, 0, 1)
-    Fill.Size = UDim2.new(scale,0,1,0)
-    Knob.Position = UDim2.new(scale,-12,0.5,-12)
-  end
-end)
-        </code></pre>
-      </div>
-    </div>
-  </section>
+    <section id="colorpicker">
+      <h2>Color Picker</h2>
+      <p>Un color picker HSV avec mode arc-en-ciel est intégré.</p>
+      <pre><code>tab:Colorpicker("Choisis une couleur", Color3.fromRGB(255,0,0), function(c)
+  print("Couleur choisie:", c)
+end)</code></pre>
+    </section>
 
-  <!-- Footer -->
+    <section id="safe">
+      <h2>Bonnes pratiques</h2>
+      <ul>
+        <li>⚠️ Utilise <code>PlayerGui</code> plutôt que <code>CoreGui</code> en Studio.</li>
+        <li>✅ Structure ton code en modules pour réutiliser tes composants.</li>
+        <li>🎨 Expérimente avec <code>TweenService</code> pour des animations fluides.</li>
+      </ul>
+    </section>
+  </main>
+
   <footer>
-    <p>&copy; 2025 — Tutoriel conçu pour apprendre et créer des UIs propres en Studio. <a href="#intro">Retour en haut</a></p>
-    <p class="note">Ce guide s’inspire des concepts UI de la librairie (draggable, tabs, TweenService, HSV),
-      sans reproduire le parentage ou les APIs réservées à des environnements tiers.</p>
+    <p>&copy; 2025 — Documentation GitanX. Inspiré par la communauté.</p>
   </footer>
-
-  <script>
-    // Theme toggle with localStorage
-    const toggle = document.getElementById('themeToggle');
-    const saved = localStorage.getItem('theme');
-    if (saved === 'light') document.body.classList.add('light');
-    toggle.addEventListener('click', () => {
-      document.body.classList.toggle('light');
-      localStorage.setItem('theme', document.body.classList.contains('light') ? 'light' : 'dark');
-    });
-
-    // Gentle parallax on hero
-    const hero = document.querySelector('.hero');
-    hero.addEventListener('pointermove', (e) => {
-      const r = hero.getBoundingClientRect();
-      const x = (e.clientX - r.width / 2) / r.width;
-      const y = (e.clientY - r.height / 2) / r.height;
-      hero.style.transform = `perspective(800px) translateZ(0) rotateX(${y * -2}deg) rotateY(${x * 2}deg)`;
-    });
-    hero.addEventListener('pointerleave', () => { hero.style.transform = 'none'; });
-  </script>
 </body>
 </html>
