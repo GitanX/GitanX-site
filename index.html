@@ -5,13 +5,30 @@
   <title>Tutoriel GitanX</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <style>
+    :root {
+      --bg-color: #0d0d1a;
+      --text-color: #eaf0ff;
+      --card-bg: rgba(255,255,255,0.05);
+      --card-border: rgba(255,255,255,0.1);
+      --pre-bg: #1a1a3d;
+    }
+
+    body.light {
+      --bg-color: #f5f7fa;
+      --text-color: #1a1a1a;
+      --card-bg: rgba(0,0,0,0.05);
+      --card-border: rgba(0,0,0,0.1);
+      --pre-bg: #e0e0e0;
+    }
+
     body {
       margin: 0;
       font-family: "Poppins", sans-serif;
-      background: #0d0d1a;
-      color: #eaf0ff;
+      background: var(--bg-color);
+      color: var(--text-color);
       overflow-x: hidden;
       position: relative;
+      transition: background 0.4s, color 0.4s;
     }
 
     /* Orbes colorés en fond */
@@ -45,11 +62,22 @@
     }
     header h1 { color: #00e5ff; }
     nav a {
-      color: #eaf0ff;
+      color: var(--text-color);
       margin-left: 20px;
       text-decoration: none;
     }
     nav a:hover { color: #00e5ff; }
+
+    .theme-toggle {
+      margin-left: 20px;
+      padding: 6px 12px;
+      background: linear-gradient(120deg, #7c4dff, #00e5ff);
+      color: #0d0d1a;
+      font-weight: 600;
+      border-radius: 10px;
+      cursor: pointer;
+      border: none;
+    }
 
     .hero {
       display: flex;
@@ -79,8 +107,8 @@
     h3 { color: #00e5ff; }
 
     .step {
-      background: rgba(255,255,255,0.05);
-      border: 1px solid rgba(255,255,255,0.1);
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
       border-radius: 12px;
       padding: 20px;
       margin-bottom: 20px;
@@ -88,11 +116,11 @@
     }
 
     pre {
-      background: #1a1a3d;
+      background: var(--pre-bg);
       padding: 12px;
       border-radius: 8px;
       overflow-x: auto;
-      color: #cfd8ff;
+      color: var(--text-color);
     }
 
     .copy-btn {
@@ -117,8 +145,8 @@
     }
 
     .card {
-      background: rgba(255,255,255,0.05);
-      border: 1px solid rgba(255,255,255,0.1);
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
       border-radius: 16px;
       padding: 20px;
       text-align: center;
@@ -168,7 +196,7 @@
     footer {
       text-align: center;
       padding: 10px;
-      border-top: 1px solid rgba(255,255,255,0.1);
+      border-top: 1px solid var(--card-border);
       color: #888;
     }
   </style>
@@ -185,6 +213,7 @@
       <a href="#intro">Home</a>
       <a href="#etapes">Tutoriel</a>
       <a href="#exemples">Discord</a>
+      <button class="theme-toggle" onclick="toggleTheme()">Changer de thème</button>
     </nav>
   </header>
 
@@ -207,7 +236,7 @@
     </div>
   </section>
 
-  <!-- Cartes grises -->
+    <!-- Cartes grises -->
   <section class="card-grid">
     <div class="card">
       <h3>🏠 Home</h3>
@@ -229,7 +258,8 @@
       <pre><code>local lib = loadstring(game:HttpGet("URL_DE_TON_SCRIPT"))()</code></pre>
       <button class="copy-btn" onclick="copyCode(this)">📋 Copier le script</button>
     </div>
-        <div class="step">
+
+    <div class="step">
       <h4>2. Créer une fenêtre</h4>
       <pre><code>local win = lib:Window("Mon UI", "Preset", Enum.KeyCode.RightControl)</code></pre>
       <button class="copy-btn" onclick="copyCode(this)">📋 Copier le script</button>
@@ -292,7 +322,7 @@ end)</code></pre>
     <p>&copy; 2025 Tutoriel GitanX — Créé pour apprendre étape par étape ⚡</p>
   </footer>
 
-  <!-- Script JS pour copier le code -->
+  <!-- Script JS pour copier le code et changer de thème -->
   <script>
     function copyCode(button) {
       const codeBlock = button.previousElementSibling;
@@ -303,6 +333,10 @@ end)</code></pre>
           setTimeout(() => button.innerText = "📋 Copier le script", 2000);
         });
       }
+    }
+
+    function toggleTheme() {
+      document.body.classList.toggle("light");
     }
   </script>
 </body>
