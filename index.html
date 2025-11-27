@@ -1,9 +1,15 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8">
-  <title>Tutoriel GitanX</title>
+  <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Tutoriel GitanX — apprends à créer des interfaces (fenêtres, onglets, sliders, color pickers) pas à pas.">
+  <title>Tutoriel GitanX</title>
+
+  <!-- Font: Poppins -->
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
   <style>
     :root {
       --bg-color: #0d0d1a;
@@ -11,39 +17,59 @@
       --card-bg: rgba(255,255,255,0.05);
       --card-border: rgba(255,255,255,0.1);
       --pre-bg: #1a1a3d;
+      --accent-start: #7c4dff;
+      --accent-end: #00e5ff;
     }
 
     body.light {
       --bg-color: #f5f7fa;
       --text-color: #1a1a1a;
-      --card-bg: rgba(0,0,0,0.05);
-      --card-border: rgba(0,0,0,0.1);
-      --pre-bg: #e0e0e0;
+      --card-bg: rgba(0,0,0,0.03);
+      --card-border: rgba(0,0,0,0.08);
+      --pre-bg: #e9e9ef;
+      --accent-start: #ffd54f;
+      --accent-end: #4fc3f7;
+    }
+
+    html,body {
+      height: 100%;
     }
 
     body {
       margin: 0;
-      font-family: "Poppins", sans-serif;
+      font-family: "Poppins", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
       background: var(--bg-color);
       color: var(--text-color);
       overflow-x: hidden;
       position: relative;
-      transition: background 0.4s, color 0.4s;
+      transition: background 0.3s ease, color 0.3s ease;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
     }
 
-    /* Progress bar */
-    #progress-bar {
-      position: fixed;
-      top: 0;
-      left: 0;
-      height: 4px;
-      background: linear-gradient(90deg, #7c4dff, #00e5ff);
-      width: 0%;
-      z-index: 1000;
-      transition: width 0.2s ease;
+    /* Skip link for keyboard users */
+    .skip-link {
+      position: absolute;
+      left: -999px;
+      top: auto;
+      width: 1px;
+      height: 1px;
+      overflow: hidden;
+    }
+    .skip-link:focus {
+      left: 12px;
+      top: 12px;
+      width: auto;
+      height: auto;
+      background: #fff;
+      color: #000;
+      padding: 8px 12px;
+      border-radius: 6px;
+      z-index: 10000;
+      text-decoration: none;
     }
 
-    /* Orbes colorés en fond */
+    /* Orbs en fond */
     .orb {
       position: absolute;
       border-radius: 50%;
@@ -52,11 +78,13 @@
       mix-blend-mode: screen;
       animation: float 12s infinite ease-in-out;
       z-index: -1;
+      pointer-events: none; /* ne capte pas les interactions */
     }
     .orb.one { width: 400px; height: 400px; background: #7c4dff; top: -100px; left: -100px; }
     .orb.two { width: 300px; height: 300px; background: #00e5ff; bottom: -100px; right: -100px; animation-delay: 2s; }
-    .orb.three { width: 350px; height: 350px; background: #ff4081; top: 50%; left: 60%; animation-delay: 4s; }
+    .orb.three { width: 350px; height: 350px; background: #ff4081; top: 50%; left: 60%; transform: translate(-50%, -50%); animation-delay: 4s; }
 
+    /* Variante claire */
     body.light .orb {
       mix-blend-mode: multiply;
       opacity: 0.5;
@@ -70,6 +98,12 @@
       50% { transform: translateY(-30px); }
     }
 
+    /* Respecter la préférence de réduction des animations */
+    @media (prefers-reduced-motion: reduce) {
+      .orb { animation: none; transform: none !important; transition: none !important; }
+      .card, .card:hover { transition: none; }
+    }
+
     header {
       position: fixed;
       top: 0; left: 0; right: 0;
@@ -80,52 +114,84 @@
       align-items: center;
       padding: 14px 24px;
       z-index: 999;
+      gap: 12px;
     }
-    header h1 { color: #00e5ff; }
+    body.light header {
+      background: rgba(255,255,255,0.75);
+    }
+
+    header h1 {
+      color: var(--accent-end);
+      margin: 0;
+      font-size: 1.1rem;
+      line-height: 1;
+    }
+
+    nav {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
     nav a {
       color: var(--text-color);
-      margin-left: 20px;
+      margin-left: 8px;
       text-decoration: none;
+      padding: 6px;
+      border-radius: 6px;
+      font-weight: 600;
+      font-size: 0.95rem;
     }
-    nav a:hover { color: #00e5ff; }
+    nav a:hover, nav a:focus {
+      color: var(--accent-end);
+      outline: none;
+    }
 
     .theme-toggle {
-      margin-left: 20px;
+      margin-left: 8px;
       padding: 6px 12px;
-      background: linear-gradient(120deg, #7c4dff, #00e5ff);
+      background: linear-gradient(120deg, var(--accent-start), var(--accent-end));
       color: #0d0d1a;
       font-weight: 600;
       border-radius: 10px;
       cursor: pointer;
       border: none;
+      display: inline-flex;
+      align-items: center;
+    }
+    .theme-toggle:focus {
+      outline: 3px solid rgba(0,0,0,0.12);
+      outline-offset: 2px;
     }
 
+    /* Hero */
     .hero {
       display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: center;
       text-align: center;
-      padding: 100px 20px 10px;
+      padding: 120px 20px 10px;
       position: relative;
     }
     .hero h2 {
-      font-size: clamp(2rem, 6vw, 4rem);
-      background: linear-gradient(120deg, #fff, #00e5ff);
+      font-size: clamp(2rem, 6vw, 3rem);
+      background: linear-gradient(120deg, #fff, var(--accent-end));
       -webkit-background-clip: text;
       color: transparent;
       margin-bottom: 10px;
     }
     .hero p {
       margin: 0 0 10px;
+      max-width: 900px;
     }
 
-    section {
+    main {
       max-width: 1000px;
       margin: 0 auto;
-      padding: 20px 20px;
+      padding: 20px 20px 80px;
     }
-    h3 { color: #00e5ff; }
+
+    h3 { color: var(--accent-end); }
 
     .step {
       background: var(--card-bg);
@@ -142,21 +208,28 @@
       border-radius: 8px;
       overflow-x: auto;
       color: var(--text-color);
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, "Roboto Mono", "Courier New", monospace;
+      font-size: 0.95rem;
+      line-height: 1.45;
     }
 
     .copy-btn {
       display: inline-block;
       margin-top: 8px;
       padding: 8px 16px;
-      background: linear-gradient(120deg, #7c4dff, #00e5ff);
+      background: linear-gradient(120deg, var(--accent-start), var(--accent-end));
       color: #0d0d1a;
       font-weight: 600;
       border-radius: 12px;
       text-decoration: none;
       cursor: pointer;
-      transition: 0.3s;
+      border: none;
+      transition: transform 0.18s ease;
     }
-    .copy-btn:hover { transform: scale(1.05); }
+    .copy-btn:hover, .copy-btn:focus {
+      transform: scale(1.03);
+      outline: none;
+    }
 
     .card-grid {
       display: grid;
@@ -173,13 +246,12 @@
       text-align: center;
       transition: transform 0.3s ease, box-shadow 0.3s ease;
       backdrop-filter: blur(10px);
-      box-shadow: 0 6px 20px rgba(124,77,255,0.2);
+      box-shadow: 0 6px 20px rgba(124,77,255,0.12);
     }
 
-    .card:hover {
-      transform: scale(1.05);
-      box-shadow: 0 12px 30px rgba(124,77,255,0.4),
-                  0 6px 20px rgba(0,229,255,0.3);
+    .card:hover, .card:focus-within {
+      transform: scale(1.02);
+      box-shadow: 0 12px 30px rgba(124,77,255,0.18), 0 6px 20px rgba(0,229,255,0.08);
     }
 
     .card h3 { margin-top: 0; margin-bottom: 8px; }
@@ -189,14 +261,14 @@
       display: inline-block;
       margin-top: 6px;
       padding: 8px 16px;
-      background: linear-gradient(120deg, #7c4dff, #00e5ff);
+      background: linear-gradient(120deg, var(--accent-start), var(--accent-end));
       color: #0d0d1a;
       font-weight: 600;
       border-radius: 12px;
       text-decoration: none;
     }
 
-    .card a:hover { transform: scale(1.05); }
+    .card a:hover, .card a:focus { transform: scale(1.03); }
 
     #community {
       text-align: center;
@@ -206,87 +278,139 @@
       display: inline-block;
       margin-top: 10px;
       padding: 10px 18px;
-      background: linear-gradient(120deg, #7c4dff, #00e5ff);
+      background: linear-gradient(120deg, var(--accent-start), var(--accent-end));
       color: #0d0d1a;
       font-weight: 600;
       border-radius: 14px;
       text-decoration: none;
-      box-shadow: 0 6px 16px rgba(0,0,0,0.4);
+      box-shadow: 0 6px 16px rgba(0,0,0,0.12);
     }
 
     footer {
       text-align: center;
-      padding: 10px;
+      padding: 20px;
       border-top: 1px solid var(--card-border);
       color: #888;
+    }
+
+    /* Small helpers */
+    .sr-only {
+      position: absolute !important;
+      height: 1px; width: 1px;
+      overflow: hidden;
+      clip: rect(1px, 1px, 1px, 1px);
+      white-space: nowrap;
+    }
+
+    /* Focus-visible for keyboard navigation */
+    :focus:not(:focus-visible) { outline: none; }
+    :focus-visible { outline: 3px solid rgba(0,120,255,0.18); outline-offset: 2px; border-radius: 6px; }
+
+    @media (max-width: 520px) {
+      header { padding: 10px 12px; }
+      .hero { padding-top: 140px; }
     }
   </style>
 </head>
 <body>
-  <!-- Progress bar -->
-  <div id="progress-bar"></div>
+  <a class="skip-link" href="#main">Passer au contenu</a>
 
   <!-- Orbes en fond -->
-  <div class="orb one"></div>
-  <div class="orb two"></div>
-  <div class="orb three"></div>
+  <div class="orb one" aria-hidden="true"></div>
+  <div class="orb two" aria-hidden="true"></div>
+  <div class="orb three" aria-hidden="true"></div>
 
-  <header>
+  <header role="banner">
     <h1>Tutoriel GitanX</h1>
-    <nav>
+    <nav role="navigation" aria-label="Navigation principale">
       <a href="#intro">Home</a>
       <a href="#etapes">Tutoriel</a>
       <a href="#exemples">Discord</a>
-      <button class="theme-toggle" onclick="toggleTheme()">Changer de thème</button>
+      <button class="theme-toggle" id="themeToggle" aria-pressed="false" aria-label="Changer le thème">Changer de thème</button>
     </nav>
   </header>
 
-  <div class="hero" id="intro">
-    <h2>Apprends à utiliser GitanX pas à pas</h2>
-        <p>Fenêtres, onglets, sliders, color pickers… Découvre comment créer ton interface avec la librairie GitanX.</p>
-  </div>
+  <main id="main" tabindex="-1">
+    <section class="hero" id="intro" aria-labelledby="hero-title">
+      <h2 id="hero-title">Apprends à utiliser GitanX pas à pas</h2>
+      <p>Fenêtres, onglets, sliders, color pickers… Découvre comment créer ton interface avec la librairie GitanX.</p>
+    </section>
 
-  <!-- Cartes rouges -->
-  <section class="card-grid">
-    <div class="card">
-      <h3>📘 Tutoriel</h3>
-      <p>Explore les étapes pour maîtriser GitanX pas à pas.</p>
-      <a href="#etapes">Voir le tuto</a>
-    </div>
-    <div class="card">
-      <h3>🌐 Communauté</h3>
-      <p>Rejoins les autres créateurs, pose tes questions, partage tes projets.</p>
-      <a href="#community">Rejoindre</a>
-    </div>
-  </section>
+    <!-- Cartes rouges -->
+    <section class="card-grid" aria-label="Accès rapides">
+      <article class="card" aria-labelledby="tuto-title">
+        <h3 id="tuto-title">📘 Tutoriel</h3>
+        <p>Explore les étapes pour maîtriser GitanX pas à pas.</p>
+        <a href="#etapes">Voir le tuto</a>
+      </article>
 
-  <!-- Cartes grises -->
-  <section class="card-grid">
-    <div class="card">
-      <h3>🏠 Home</h3>
-      <p>Retour à l’intro de la page principale.</p>
-      <a href="#intro">Retour</a>
-    </div>
-    <div class="card">
-      <h3>📜 Script final</h3>
-      <p>Voir l’exemple complet du script GitanX.</p>
-      <a href="#exemples">Voir le script</a>
-    </div>
-  </section>
+      <article class="card" aria-labelledby="comm-title">
+        <h3 id="comm-title">🌐 Communauté</h3>
+        <p>Rejoins les autres créateurs, pose tes questions, partage tes projets.</p>
+        <a href="#community">Rejoindre</a>
+      </article>
+    </section>
 
-  <section id="etapes">
-    <h3>🚀 Étapes du tutoriel</h3>
-    <div class="step">
-      <h4>1. Charger la librairie</h4>
-      <pre><code>local lib = loadstring(game:HttpGet("URL_DE_TON_SCRIPT"))()</code></pre>
-      <button class="copy-btn" onclick="copyCode(this)">📋 Copier le script</button>
-    </div>
-    <!-- autres étapes... -->
-  </section>
+    <!-- Cartes grises -->
+    <section class="card-grid" aria-hidden="false">
+      <article class="card" aria-labelledby="home-title">
+        <h3 id="home-title">🏠 Home</h3>
+        <p>Retour à l’intro de la page principale.</p>
+        <a href="#intro">Retour</a>
+      </article>
 
-  <section id="exemples">
-    <h3>📜 Exemple complet</h3>
-    <pre><code>local win = lib:Window("Mon UI", "Preset", Enum.KeyCode.RightControl)
+      <article class="card" aria-labelledby="script-title">
+        <h3 id="script-title">📜 Script final</h3>
+        <p>Voir l’exemple complet du script GitanX.</p>
+        <a href="#exemples">Voir le script</a>
+      </article>
+    </section>
+
+    <section id="etapes" aria-labelledby="etapes-title">
+      <h3 id="etapes-title">🚀 Étapes du tutoriel</h3>
+
+      <div class="step">
+        <h4>1. Charger la librairie</h4>
+        <pre><code>local lib = loadstring(game:HttpGet("URL_DE_TON_SCRIPT"))()</code></pre>
+        <button class="copy-btn" onclick="copyCode(this)" aria-label="Copier le script de chargement">📋 Copier le script</button>
+      </div>
+
+      <div class="step">
+        <h4>2. Créer une fenêtre</h4>
+        <pre><code>local win = lib:Window("Mon UI", "Preset", Enum.KeyCode.RightControl)</code></pre>
+        <button class="copy-btn" onclick="copyCode(this)" aria-label="Copier le script de création de fenêtre">📋 Copier le script</button>
+      </div>
+
+      <div class="step">
+        <h4>3. Ajouter un onglet</h4>
+        <pre><code>local tab = win:Tab("Outils")</code></pre>
+        <button class="copy-btn" onclick="copyCode(this)" aria-label="Copier le script d'ajout d'onglet">📋 Copier le script</button>
+      </div>
+
+      <div class="step">
+        <h4>4. Ajouter des composants</h4>
+        <pre><code>tab:Button("Clique-moi", function()
+  print("Bouton pressé !")
+end)
+
+tab:Toggle("Activer option", false, function(state)
+  print("Toggle:", state)
+end)</code></pre>
+        <button class="copy-btn" onclick="copyCode(this)" aria-label="Copier le script composants">📋 Copier le script</button>
+      </div>
+
+      <div class="step">
+        <h4>5. Utiliser le color picker</h4>
+        <pre><code>tab:Colorpicker("Choisis une couleur", Color3.fromRGB(255,0,0), function(c)
+  print("Couleur choisie:", c)
+end)</code></pre>
+        <button class="copy-btn" onclick="copyCode(this)" aria-label="Copier le script color picker">📋 Copier le script</button>
+      </div>
+    </section>
+
+    <section id="exemples" aria-labelledby="exemples-title">
+      <h3 id="exemples-title">📜 Exemple complet</h3>
+      <pre><code>local win = lib:Window("Mon UI", "Preset", Enum.KeyCode.RightControl)
 local tab = win:Tab("Outils")
 
 tab:Button("Clique-moi", function()
@@ -300,43 +424,112 @@ end)
 tab:Colorpicker("Choisis une couleur", Color3.fromRGB(255,0,0), function(c)
   print("Couleur choisie:", c)
 end)</code></pre>
-    <button class="copy-btn" onclick="copyCode(this)">📋 Copier le script</button>
-  </section>
+      <button class="copy-btn" onclick="copyCode(this)" aria-label="Copier l'exemple complet">📋 Copier le script</button>
+    </section>
 
-  <section id="community">
-    <h3>💬 Rejoins la communauté GitanX</h3>
-    <p>Tu veux discuter avec d'autres utilisateurs, poser tes questions, ou montrer ton interface GitanX ? 
-       Rejoins notre serveur Discord et connecte-toi avec la communauté.</p>
-    <a href="https://discord.gg/TON-LIEN-DISCORD" target="_blank">🔗 Rejoindre le Discord</a>
-  </section>
+    <section id="community" aria-labelledby="community-title">
+      <h3 id="community-title">💬 Rejoins la communauté GitanX</h3>
+      <p>Tu veux discuter avec d'autres utilisateurs, poser tes questions, ou montrer ton interface GitanX ? Rejoins notre serveur Discord et connecte-toi avec la communauté.</p>
+      <a href="https://discord.gg/TON-LIEN-DISCORD" target="_blank" rel="noopener noreferrer">🔗 Rejoindre le Discord</a>
+    </section>
+  </main>
 
-  <footer>
+  <footer role="contentinfo">
     <p>&copy; 2025 Tutoriel GitanX — Créé pour apprendre étape par étape ⚡</p>
   </footer>
 
-  <!-- Script JS pour copier le code, changer de thème et gérer la progress bar -->
+  <!-- Messages pour lecteurs d'écran -->
+  <div id="ariaStatus" class="sr-only" aria-live="polite" aria-atomic="true"></div>
+
   <script>
+    // Theme: init from localStorage or prefers-color-scheme
+    (function() {
+      const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+      const stored = localStorage.getItem('gitanx-theme');
+      if (stored === 'light') {
+        document.body.classList.remove('dark');
+        document.body.classList.add('light');
+        document.getElementById('themeToggle').setAttribute('aria-pressed', 'true');
+      } else if (stored === 'dark') {
+        document.body.classList.remove('light');
+        document.getElementById('themeToggle').setAttribute('aria-pressed', 'false');
+      } else {
+        // default to system
+        if (!prefersDark) {
+          document.body.classList.add('light');
+          document.getElementById('themeToggle').setAttribute('aria-pressed', 'true');
+        }
+      }
+    })();
+
+    // Toggle theme and persist
+    function toggleTheme() {
+      const btn = document.getElementById('themeToggle');
+      const isLight = document.body.classList.toggle('light');
+      btn.setAttribute('aria-pressed', isLight ? 'true' : 'false');
+      localStorage.setItem('gitanx-theme', isLight ? 'light' : 'dark');
+    }
+    document.getElementById('themeToggle').addEventListener('click', toggleTheme);
+
+    // Copy code: robust fallback for older browsers
     function copyCode(button) {
-      const codeBlock = button.previousElementSibling;
-      if (codeBlock && codeBlock.tagName.toLowerCase() === "pre") {
-        const text = codeBlock.innerText;
+      // Find the closest pre > code element
+      const pre = button.previousElementSibling;
+      let text = '';
+      if (pre) {
+        const code = pre.querySelector('code') || pre;
+        text = code.innerText || code.textContent || '';
+      }
+      if (!text) { return; }
+
+      const ariaStatus = document.getElementById('ariaStatus');
+
+      // Try Clipboard API first
+      if (navigator.clipboard && navigator.clipboard.writeText) {
         navigator.clipboard.writeText(text).then(() => {
           button.innerText = "✅ Copié !";
+          ariaStatus.textContent = "Code copié dans le presse-papiers.";
           setTimeout(() => button.innerText = "📋 Copier le script", 2000);
-        });
+        }).catch(() => fallbackCopy(text, button, ariaStatus));
+      } else {
+        fallbackCopy(text, button, ariaStatus);
       }
     }
 
-    function toggleTheme() {
-      document.body.classList.toggle("light");
+    function fallbackCopy(text, button, ariaStatus) {
+      try {
+        const textarea = document.createElement('textarea');
+        textarea.value = text;
+        // Prevent scrolling to bottom
+        textarea.style.position = 'fixed';
+        textarea.style.top = '-9999px';
+        textarea.style.left = '-9999px';
+        document.body.appendChild(textarea);
+        textarea.select();
+        textarea.setSelectionRange(0, textarea.value.length);
+        const ok = document.execCommand('copy');
+        document.body.removeChild(textarea);
+        if (ok) {
+          button.innerText = "✅ Copié !";
+          ariaStatus.textContent = "Code copié dans le presse-papiers.";
+          setTimeout(() => button.innerText = "📋 Copier le script", 2000);
+        } else {
+          throw new Error('execCommand failed');
+        }
+      } catch (e) {
+        // Provide a fallback prompt so user can copy manually
+        ariaStatus.textContent = "Impossible de copier automatiquement. Sélectionne le code et utilise Ctrl/Cmd+C.";
+        // Open a prompt with the code selected as last resort (user can copy)
+        window.prompt("Copie ceci (Ctrl/Cmd+C, Entrée pour fermer):", text);
+      }
     }
 
-    // Progress bar qui suit le scroll
-    window.addEventListener("scroll", () => {
-      const scrollTop = window.scrollY;
-      const docHeight = document.body.scrollHeight - window.innerHeight;
-      const progress = (scrollTop / docHeight) * 100;
-      document.getElementById("progress-bar").style.width = progress + "%";
+    // Accessibility: enable 'Skip to content' target focusing after clicking
+    document.querySelectorAll('.skip-link').forEach(link => {
+      link.addEventListener('click', function() {
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) target.focus();
+      });
     });
   </script>
 </body>
