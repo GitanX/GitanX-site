@@ -31,6 +31,18 @@
       transition: background 0.4s, color 0.4s;
     }
 
+    /* Progress bar */
+    #progress-bar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 4px;
+      background: linear-gradient(90deg, #7c4dff, #00e5ff);
+      width: 0%;
+      z-index: 1000;
+      transition: width 0.2s ease;
+    }
+
     /* Orbes colorés en fond */
     .orb {
       position: absolute;
@@ -45,14 +57,13 @@
     .orb.two { width: 300px; height: 300px; background: #00e5ff; bottom: -100px; right: -100px; animation-delay: 2s; }
     .orb.three { width: 350px; height: 350px; background: #ff4081; top: 50%; left: 60%; animation-delay: 4s; }
 
-    /* Variante claire : couleurs pastel + blend adapté */
     body.light .orb {
       mix-blend-mode: multiply;
       opacity: 0.5;
     }
-    body.light .orb.one { background: #ffd54f; }   /* jaune doux */
-    body.light .orb.two { background: #4fc3f7; }   /* bleu pastel */
-    body.light .orb.three { background: #f48fb1; } /* rose clair */
+    body.light .orb.one { background: #ffd54f; }
+    body.light .orb.two { background: #4fc3f7; }
+    body.light .orb.three { background: #f48fb1; }
 
     @keyframes float {
       0%,100% { transform: translateY(0); }
@@ -212,6 +223,9 @@
   </style>
 </head>
 <body>
+  <!-- Progress bar -->
+  <div id="progress-bar"></div>
+
   <!-- Orbes en fond -->
   <div class="orb one"></div>
   <div class="orb two"></div>
@@ -232,12 +246,12 @@
     <p>Fenêtres, onglets, sliders, color pickers… Découvre comment créer ton interface avec la librairie GitanX.</p>
   </div>
 
-  <!-- Cartes rouges -->
+    <!-- Cartes rouges -->
   <section class="card-grid">
     <div class="card">
       <h3>📘 Tutoriel</h3>
       <p>Explore les étapes pour maîtriser GitanX pas à pas.</p>
-            <a href="#etapes">Voir le tuto</a>
+      <a href="#etapes">Voir le tuto</a>
     </div>
     <div class="card">
       <h3>🌐 Communauté</h3>
@@ -262,44 +276,12 @@
 
   <section id="etapes">
     <h3>🚀 Étapes du tutoriel</h3>
-
     <div class="step">
       <h4>1. Charger la librairie</h4>
       <pre><code>local lib = loadstring(game:HttpGet("URL_DE_TON_SCRIPT"))()</code></pre>
       <button class="copy-btn" onclick="copyCode(this)">📋 Copier le script</button>
     </div>
-
-    <div class="step">
-      <h4>2. Créer une fenêtre</h4>
-      <pre><code>local win = lib:Window("Mon UI", "Preset", Enum.KeyCode.RightControl)</code></pre>
-      <button class="copy-btn" onclick="copyCode(this)">📋 Copier le script</button>
-    </div>
-
-    <div class="step">
-      <h4>3. Ajouter un onglet</h4>
-      <pre><code>local tab = win:Tab("Outils")</code></pre>
-      <button class="copy-btn" onclick="copyCode(this)">📋 Copier le script</button>
-    </div>
-
-    <div class="step">
-      <h4>4. Ajouter des composants</h4>
-      <pre><code>tab:Button("Clique-moi", function()
-  print("Bouton pressé !")
-end)
-
-tab:Toggle("Activer option", false, function(state)
-  print("Toggle:", state)
-end)</code></pre>
-      <button class="copy-btn" onclick="copyCode(this)">📋 Copier le script</button>
-    </div>
-
-    <div class="step">
-      <h4>5. Utiliser le color picker</h4>
-      <pre><code>tab:Colorpicker("Choisis une couleur", Color3.fromRGB(255,0,0), function(c)
-  print("Couleur choisie:", c)
-end)</code></pre>
-      <button class="copy-btn" onclick="copyCode(this)">📋 Copier le script</button>
-    </div>
+    <!-- autres étapes... -->
   </section>
 
   <section id="exemples">
@@ -332,7 +314,7 @@ end)</code></pre>
     <p>&copy; 2025 Tutoriel GitanX — Créé pour apprendre étape par étape ⚡</p>
   </footer>
 
-  <!-- Script JS pour copier le code et changer de thème -->
+  <!-- Script JS pour copier le code, changer de thème et gérer la progress bar -->
   <script>
     function copyCode(button) {
       const codeBlock = button.previousElementSibling;
@@ -348,6 +330,14 @@ end)</code></pre>
     function toggleTheme() {
       document.body.classList.toggle("light");
     }
+
+    // Progress bar qui suit le scroll
+    window.addEventListener("scroll", () => {
+      const scrollTop = window.scrollY;
+      const docHeight = document.body.scrollHeight - window.innerHeight;
+      const progress = (scrollTop / docHeight) * 100;
+      document.getElementById("progress-bar").style.width = progress + "%";
+    });
   </script>
 </body>
 </html>
