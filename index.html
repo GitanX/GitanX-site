@@ -38,7 +38,7 @@
       justify-content: center;
       align-items: center;
       text-align: center;
-      padding: 120px 20px 20px; /* réduit l'espace bas */
+      padding: 100px 20px 5px; /* encore plus rapproché */
       position: relative;
     }
     .hero h2 {
@@ -46,12 +46,16 @@
       background: linear-gradient(120deg, #fff, #00e5ff);
       -webkit-background-clip: text;
       color: transparent;
+      margin-bottom: 10px; /* réduit l’espace sous le titre */
+    }
+    .hero p {
+      margin: 0; /* supprime l’espace inutile */
     }
 
     section {
       max-width: 1000px;
       margin: 0 auto;
-      padding: 40px 20px;
+      padding: 20px 20px; /* réduit l’espace vertical */
     }
     h3 { color: #00e5ff; }
 
@@ -60,12 +64,12 @@
       border: 1px solid rgba(255,255,255,0.1);
       border-radius: 12px;
       padding: 20px;
-      margin-bottom: 30px;
+      margin-bottom: 20px; /* réduit l’espace entre étapes */
     }
 
     pre {
       background: #1a1a3d;
-      padding: 14px;
+      padding: 12px;
       border-radius: 8px;
       overflow-x: auto;
       color: #cfd8ff;
@@ -74,27 +78,28 @@
     .card-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-      gap: 20px;
-      padding: 20px 20px; /* réduit l'espace haut */
+      gap: 15px; /* réduit l’espace entre cartes */
+      padding: 10px 20px; /* réduit l’espace haut/bas */
     }
 
     .card {
       background: rgba(255,255,255,0.05);
       border: 1px solid rgba(255,255,255,0.1);
       border-radius: 16px;
-      padding: 24px;
+      padding: 20px;
       text-align: center;
       transition: 0.3s;
       backdrop-filter: blur(10px);
-      box-shadow: 0 10px 30px rgba(124,77,255,0.2);
+      box-shadow: 0 6px 20px rgba(124,77,255,0.2);
     }
 
-    .card h3 { margin-top: 0; }
+    .card h3 { margin-top: 0; margin-bottom: 8px; }
+    .card p { margin: 0 0 8px; }
 
     .card a {
       display: inline-block;
-      margin-top: 12px;
-      padding: 10px 18px;
+      margin-top: 6px;
+      padding: 8px 16px;
       background: linear-gradient(120deg, #7c4dff, #00e5ff);
       color: #0d0d1a;
       font-weight: 600;
@@ -110,19 +115,19 @@
 
     #community a {
       display: inline-block;
-      margin-top: 20px;
-      padding: 12px 20px;
+      margin-top: 10px;
+      padding: 10px 18px;
       background: linear-gradient(120deg, #7c4dff, #00e5ff);
       color: #0d0d1a;
       font-weight: 600;
       border-radius: 14px;
       text-decoration: none;
-      box-shadow: 0 10px 20px rgba(0,0,0,0.4);
+      box-shadow: 0 6px 16px rgba(0,0,0,0.4);
     }
 
     footer {
       text-align: center;
-      padding: 20px;
+      padding: 10px;
       border-top: 1px solid rgba(255,255,255,0.1);
       color: #888;
     }
@@ -231,7 +236,7 @@ tab:Colorpicker("Choisis une couleur", Color3.fromRGB(255,0,0), function(c)
 end)</code></pre>
   </section>
 
-    <section id="community">
+  <section id="community">
     <h3>💬 Rejoins la communauté GitanX</h3>
     <p>Tu veux discuter avec d'autres utilisateurs, poser tes questions, ou montrer ton interface GitanX ? 
        Rejoins notre serveur Discord et connecte-toi avec la communauté.</p>
