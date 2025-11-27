@@ -351,15 +351,6 @@
   50% { background-position: 100% 50%; }
   100% { background-position: 0% 50%; }
 }
-    .discord-counter {
-  margin-top: 15px;
-  font-size: 1.2rem;
-  font-weight: 700;
-  background: linear-gradient(120deg, var(--accent-start), var(--accent-end));
-  -webkit-background-clip: text;
-  color: transparent;
-  text-shadow: 0 2px 6px rgba(0,0,0,0.25);
-}
 
     #community {
       text-align: center;
@@ -442,10 +433,15 @@
   <p>Tu veux discuter avec d'autres utilisateurs, poser tes questions, ou montrer ton interface GitanX ? Rejoins notre serveur Discord et connecte-toi avec la communauté.</p>
   <a href="https://discord.gg/TON-LIEN-DISCORD" target="_blank" rel="noopener noreferrer">🔗 Rejoindre le Discord</a>
 
-  <!-- Compteur Discord stylé -->
-  <p id="discordCount" class="discord-counter">💠 50 membres Discord</p>
+  <!-- Widget Discord -->
+  <iframe src="https://discord.com/widget?id=TON_ID_SERVEUR&theme=dark"
+          width="350"
+          height="500"
+          allowtransparency="true"
+          frameborder="0"
+          sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts">
+  </iframe>
 </section>
-
 
 
     <!-- Cartes grises -->
@@ -649,5 +645,6 @@ end)</code></pre>
 
   document.querySelectorAll(".fade-in").forEach(el => observer.observe(el));
 </script>
+
 </body>
 </html>
