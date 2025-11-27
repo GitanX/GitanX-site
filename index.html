@@ -440,20 +440,20 @@
     </section>
     
      <!-- Compteur Discord -->
-  <div id="discordCount" class="discord-counter">💠 ... membres Discord</div>
+  <div id="discordCount" class="discord-counter">💠 291 members Discord</div>
     
     <!-- Cartes rouges -->
     <section class="card-grid" aria-label="Accès rapides">
       <article class="card" aria-labelledby="tuto-title">
         <h3 id="tuto-title">📘 Tutoriel</h3>
-        <p>Explore les étapes pour maîtriser GitanX pas à pas.</p>
-        <a href="#etapes">Voir le tuto</a>
+        <p>A eazy tuto for use GitanX library</p>
+        <a href="#etapes">See the tuto</a>
       </article>
 
       <!-- Carte Communauté -->
   <article class="card" id="community" aria-labelledby="community-title">
-    <h3 id="community-title">💬 Communauté GitanX</h3>
-    <p>Rejoins la communauté et partage tes interfaces avec les autres utilisateurs.</p>
+    <h3 id="community-title">💬 Community GitanX</h3>
+    <p>Join Discord for see 20games+ script, support-help and soon a executor GitanX</p>
     <a href="#exemples">Community</a>
   </article>
 </section>
@@ -463,34 +463,34 @@
     <section class="card-grid" aria-hidden="false">
       <article class="card" aria-labelledby="home-title">
         <h3 id="home-title">🏠 Home</h3>
-        <p>Retour à l’intro de la page principale.</p>
-        <a href="#intro">Retour</a>
+        <p>Back in the Home page.</p>
+        <a href="#intro">Back</a>
       </article>
 
       <article class="card" aria-labelledby="script-title">
         <h3 id="script-title">📜 Script final</h3>
-        <p>Voir l’exemple complet du script GitanX.</p>
-        <a href="#exemples">Voir le script</a>
+        <p>A final script for try the UI..</p>
+        <a href="#exemples">See the script.</a>
       </article>
     </section>
 
     <section id="etapes" aria-labelledby="etapes-title">
-      <h3 id="etapes-title">🚀 Étapes du tutoriel</h3>
+      <h3 id="etapes-title">🚀 Tuto</h3>
 
       <div class="step">
-        <h4>1. Charger la librairie</h4>
+        <h4>1. Loading the library</h4>
         <pre><code>local lib = loadstring(game:HttpGet("URL_DE_TON_SCRIPT"))()</code></pre>
         <button class="copy-btn" onclick="copyCode(this)" aria-label="Copier le script de chargement">📋 Copier le script</button>
       </div>
 
       <div class="step">
-        <h4>2. Créer une fenêtre</h4>
+        <h4>2. Creating a Window</h4>
         <pre><code>local win = lib:Window("Mon UI", "Preset", Enum.KeyCode.RightControl)</code></pre>
         <button class="copy-btn" onclick="copyCode(this)" aria-label="Copier le script de création de fenêtre">📋 Copier le script</button>
       </div>
 
       <div class="step">
-        <h4>3. Ajouter un onglet</h4>
+        <h4>3. Add a Tab</h4>
         <pre><code>local tab = win:Tab("Outils")</code></pre>
         <button class="copy-btn" onclick="copyCode(this)" aria-label="Copier le script d'ajout d'onglet">📋 Copier le script</button>
       </div>
@@ -536,14 +536,17 @@ end)</code></pre>
     </section>
 
     <section id="community" aria-labelledby="community-title">
-      <h3 id="community-title">💬 Rejoins la communauté GitanX</h3>
-      <p>Tu veux discuter avec d'autres utilisateurs, poser tes questions, ou montrer ton interface GitanX ? Rejoins notre serveur Discord et connecte-toi avec la communauté.</p>
-      <a href="https://discord.gg/TON-LIEN-DISCORD" target="_blank" rel="noopener noreferrer">🔗 Rejoindre le Discord</a>
-    </section>
+  <h3 id="community-title">💬 Join the Discord of GitanX</h3>
+  <p>Join Discord for see 20games+ script, support-help and soon a executor GitanX</p>
+  <a href="https://discord.gg/TON-LIEN-DISCORD" target="_blank" rel="noopener noreferrer">
+    <img src="discord-logo.svg" alt="Discord Logo" class="discord-icon"> Join Discord
+  </a>
+</section>
+
   </main>
 
   <footer role="contentinfo">
-    <p>&copy; 2025 Tutoriel GitanX — Créé pour apprendre étape par étape ⚡</p>
+    <p>&copy; 2025 Tutoriel GitanX — use GitanX UI for your script.</p>
   </footer>
 
   <!-- Messages pour lecteurs d'écran -->
@@ -657,57 +660,6 @@ end)</code></pre>
       }
     });
   }, { threshold: 0.1 });
-
-    // Animation numérique LENTE (3s par défaut)
-function animateValue(obj, start, end, duration = 3000) {
-  if (start === end) return obj.innerText = end;
-  obj.classList.add("count-anim");
-  let startTimestamp = null;
-  const step = (timestamp) => {
-    if (!startTimestamp) startTimestamp = timestamp;
-    const progress = Math.min((timestamp - startTimestamp) / duration, 1);
-    // Interpolation non linéaire pour plus d’effet visuel (ease-in-out)
-    const eased = 0.5 - Math.cos(progress * Math.PI) / 2;
-    const value = Math.round(eased * (end - start) + start);
-    obj.innerText = value;
-    if (progress < 1) {
-      requestAnimationFrame(step);
-    } else {
-      obj.innerText = end;
-      obj.classList.remove("count-anim");
-    }
-  };
-  requestAnimationFrame(step);
-}
-
-let lastMemberCount = null;
-
-async function updateDiscordCount() {
-  try {
-    const res = await fetch("http://147.135.128.19:20116/discord-count");
-    const data = await res.json();
-
-    const el = document.getElementById("discordCount");
-    // Première fois : affichage direct
-    if (lastMemberCount === null) lastMemberCount = data.member_count;
-
-    el.innerHTML = `<span id="count-membre">${lastMemberCount}</span> membres Discord`;
-
-    animateValue(
-      document.getElementById("count-membre"),
-      lastMemberCount,
-      data.member_count,
-      3000 // Animation lente : 3 secondes
-    );
-
-    lastMemberCount = data.member_count;
-  } catch (e) {
-    console.error("Erreur Discord:", e);
-  }
-}
-
-setInterval(updateDiscordCount, 10000); // Rafraichit toutes les 10 secondes
-updateDiscordCount();
 
 </script>
 
