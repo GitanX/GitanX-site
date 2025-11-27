@@ -11,6 +11,7 @@
       --card-bg: rgba(255,255,255,0.05);
       --card-border: rgba(255,255,255,0.1);
       --pre-bg: #1a1a3d;
+      --accent: #00e5ff;
     }
 
     body.light {
@@ -19,6 +20,7 @@
       --card-bg: rgba(0,0,0,0.05);
       --card-border: rgba(0,0,0,0.1);
       --pre-bg: #e0e0e0;
+      --accent: #7c4dff;
     }
 
     body {
@@ -28,7 +30,19 @@
       color: var(--text-color);
       overflow-x: hidden;
       position: relative;
-      transition: background 0.4s, color 0.4s;
+      transition: background 0.6s ease, color 0.6s ease;
+    }
+
+    /* Progress bar */
+    #progress-bar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 4px;
+      background: linear-gradient(90deg, #7c4dff, #00e5ff);
+      width: 0%;
+      z-index: 1000;
+      transition: width 0.2s ease;
     }
 
     /* Orbes colorés en fond */
@@ -40,19 +54,19 @@
       mix-blend-mode: screen;
       animation: float 12s infinite ease-in-out;
       z-index: -1;
+      transition: background 0.6s ease, opacity 0.6s ease;
     }
     .orb.one { width: 400px; height: 400px; background: #7c4dff; top: -100px; left: -100px; }
     .orb.two { width: 300px; height: 300px; background: #00e5ff; bottom: -100px; right: -100px; animation-delay: 2s; }
     .orb.three { width: 350px; height: 350px; background: #ff4081; top: 50%; left: 60%; animation-delay: 4s; }
 
-    /* Variante claire : couleurs pastel + blend adapté */
     body.light .orb {
       mix-blend-mode: multiply;
       opacity: 0.5;
     }
-    body.light .orb.one { background: #ffd54f; }   /* jaune doux */
-    body.light .orb.two { background: #4fc3f7; }   /* bleu pastel */
-    body.light .orb.three { background: #f48fb1; } /* rose clair */
+    body.light .orb.one { background: #ffd54f; }
+    body.light .orb.two { background: #4fc3f7; }
+    body.light .orb.three { background: #f48fb1; }
 
     @keyframes float {
       0%,100% { transform: translateY(0); }
@@ -70,13 +84,23 @@
       padding: 14px 24px;
       z-index: 999;
     }
-    header h1 { color: #00e5ff; }
+    header h1 { color: var(--accent); }
     nav a {
       color: var(--text-color);
       margin-left: 20px;
       text-decoration: none;
+      position: relative;
     }
-    nav a:hover { color: #00e5ff; }
+    nav a:hover { color: var(--accent); }
+    nav a.active::after {
+      content: "";
+      position: absolute;
+      bottom: -4px;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      background: var(--accent);
+    }
 
     .theme-toggle {
       margin-left: 20px;
@@ -97,24 +121,35 @@
       text-align: center;
       padding: 100px 20px 10px;
       position: relative;
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 1s ease, transform 1s ease;
+    }
+    .hero.visible {
+      opacity: 1;
+      transform: translateY(0);
     }
     .hero h2 {
       font-size: clamp(2rem, 6vw, 4rem);
-      background: linear-gradient(120deg, #fff, #00e5ff);
+      background: linear-gradient(120deg, #fff, var(--accent));
       -webkit-background-clip: text;
       color: transparent;
       margin-bottom: 10px;
-    }
-    .hero p {
-      margin: 0 0 10px;
     }
 
     section {
       max-width: 1000px;
       margin: 0 auto;
       padding: 20px 20px;
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 1s ease, transform 1s ease;
     }
-    h3 { color: #00e5ff; }
+    section.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    h3 { color: var(--accent); }
 
     .step {
       background: var(--card-bg);
@@ -166,26 +201,10 @@
     }
 
     .card:hover {
-      transform: scale(1.05);
+      transform: scale(1.05) rotateY(3deg);
       box-shadow: 0 12px 30px rgba(124,77,255,0.4),
                   0 6px 20px rgba(0,229,255,0.3);
     }
-
-    .card h3 { margin-top: 0; margin-bottom: 8px; }
-    .card p { margin: 0 0 8px; }
-
-    .card a {
-      display: inline-block;
-      margin-top: 6px;
-      padding: 8px 16px;
-      background: linear-gradient(120deg, #7c4dff, #00e5ff);
-      color: #0d0d1a;
-      font-weight: 600;
-      border-radius: 12px;
-      text-decoration: none;
-    }
-
-    .card a:hover { transform: scale(1.05); }
 
     #community {
       text-align: center;
@@ -209,9 +228,54 @@
       border-top: 1px solid var(--card-border);
       color: #888;
     }
+
+    /* Bouton retour en haut */
+    #back-to-top {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: var(--accent);
+      color: #0d0d1a;
+      border: none;
+      border-radius: 50%;
+      width: 45px;
+      height: 45px;
+      cursor: pointer;
+      font-size: 20px;
+      display: none;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+            transition: transform 0.3s ease;
+    }
+    #back-to-top:hover {
+      transform: scale(1.1);
+    }
+
+    /* Toast notification */
+    #toast {
+      position: fixed;
+      bottom: 80px;
+      right: 20px;
+      background: linear-gradient(120deg, #7c4dff, #00e5ff);
+      color: #0d0d1a;
+      padding: 10px 16px;
+      border-radius: 8px;
+      font-weight: 600;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.5s ease, transform 0.5s ease;
+      z-index: 1001;
+    }
+    #toast.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
   </style>
 </head>
 <body>
+  <!-- Progress bar -->
+  <div id="progress-bar"></div>
+
   <!-- Orbes en fond -->
   <div class="orb one"></div>
   <div class="orb two"></div>
@@ -222,7 +286,8 @@
     <nav>
       <a href="#intro">Home</a>
       <a href="#etapes">Tutoriel</a>
-      <a href="#exemples">Discord</a>
+      <a href="#exemples">Exemples</a>
+      <a href="#community">Communauté</a>
       <button class="theme-toggle" onclick="toggleTheme()">Changer de thème</button>
     </nav>
   </header>
@@ -232,12 +297,12 @@
     <p>Fenêtres, onglets, sliders, color pickers… Découvre comment créer ton interface avec la librairie GitanX.</p>
   </div>
 
-  <!-- Cartes rouges -->
+  <!-- Cartes -->
   <section class="card-grid">
     <div class="card">
       <h3>📘 Tutoriel</h3>
       <p>Explore les étapes pour maîtriser GitanX pas à pas.</p>
-            <a href="#etapes">Voir le tuto</a>
+      <a href="#etapes">Voir le tuto</a>
     </div>
     <div class="card">
       <h3>🌐 Communauté</h3>
@@ -246,62 +311,23 @@
     </div>
   </section>
 
-  <!-- Cartes grises -->
-  <section class="card-grid">
-    <div class="card">
-      <h3>🏠 Home</h3>
-      <p>Retour à l’intro de la page principale.</p>
-      <a href="#intro">Retour</a>
-    </div>
-    <div class="card">
-      <h3>📜 Script final</h3>
-      <p>Voir l’exemple complet du script GitanX.</p>
-      <a href="#exemples">Voir le script</a>
-    </div>
-  </section>
-
+  <!-- Étapes -->
   <section id="etapes">
     <h3>🚀 Étapes du tutoriel</h3>
-
     <div class="step">
       <h4>1. Charger la librairie</h4>
       <pre><code>local lib = loadstring(game:HttpGet("URL_DE_TON_SCRIPT"))()</code></pre>
       <button class="copy-btn" onclick="copyCode(this)">📋 Copier le script</button>
     </div>
-
     <div class="step">
       <h4>2. Créer une fenêtre</h4>
       <pre><code>local win = lib:Window("Mon UI", "Preset", Enum.KeyCode.RightControl)</code></pre>
       <button class="copy-btn" onclick="copyCode(this)">📋 Copier le script</button>
     </div>
-
-    <div class="step">
-      <h4>3. Ajouter un onglet</h4>
-      <pre><code>local tab = win:Tab("Outils")</code></pre>
-      <button class="copy-btn" onclick="copyCode(this)">📋 Copier le script</button>
-    </div>
-
-    <div class="step">
-      <h4>4. Ajouter des composants</h4>
-      <pre><code>tab:Button("Clique-moi", function()
-  print("Bouton pressé !")
-end)
-
-tab:Toggle("Activer option", false, function(state)
-  print("Toggle:", state)
-end)</code></pre>
-      <button class="copy-btn" onclick="copyCode(this)">📋 Copier le script</button>
-    </div>
-
-    <div class="step">
-      <h4>5. Utiliser le color picker</h4>
-      <pre><code>tab:Colorpicker("Choisis une couleur", Color3.fromRGB(255,0,0), function(c)
-  print("Couleur choisie:", c)
-end)</code></pre>
-      <button class="copy-btn" onclick="copyCode(this)">📋 Copier le script</button>
-    </div>
+    <!-- autres étapes... -->
   </section>
 
+  <!-- Exemples -->
   <section id="exemples">
     <h3>📜 Exemple complet</h3>
     <pre><code>local win = lib:Window("Mon UI", "Preset", Enum.KeyCode.RightControl)
@@ -321,10 +347,10 @@ end)</code></pre>
     <button class="copy-btn" onclick="copyCode(this)">📋 Copier le script</button>
   </section>
 
+  <!-- Communauté -->
   <section id="community">
     <h3>💬 Rejoins la communauté GitanX</h3>
-    <p>Tu veux discuter avec d'autres utilisateurs, poser tes questions, ou montrer ton interface GitanX ? 
-       Rejoins notre serveur Discord et connecte-toi avec la communauté.</p>
+    <p>Tu veux discuter avec d'autres utilisateurs, poser tes questions, ou montrer ton interface GitanX ?</p>
     <a href="https://discord.gg/TON-LIEN-DISCORD" target="_blank">🔗 Rejoindre le Discord</a>
   </section>
 
@@ -332,22 +358,61 @@ end)</code></pre>
     <p>&copy; 2025 Tutoriel GitanX — Créé pour apprendre étape par étape ⚡</p>
   </footer>
 
-  <!-- Script JS pour copier le code et changer de thème -->
+  <!-- Bouton retour en haut -->
+  <button id="back-to-top" onclick="scrollToTop()">↑</button>
+
+  <!-- Toast -->
+  <div id="toast">✅ Script copié !</div>
+
+  <!-- Script JS -->
   <script>
+    // Copier code avec toast
     function copyCode(button) {
       const codeBlock = button.previousElementSibling;
       if (codeBlock && codeBlock.tagName.toLowerCase() === "pre") {
         const text = codeBlock.innerText;
         navigator.clipboard.writeText(text).then(() => {
-          button.innerText = "✅ Copié !";
-          setTimeout(() => button.innerText = "📋 Copier le script", 2000);
+          showToast();
         });
       }
     }
+    function showToast() {
+      const toast = document.getElementById("toast");
+      toast.classList.add("show");
+      setTimeout(() => toast.classList.remove("show"), 2000);
+    }
 
+    // Toggle thème
     function toggleTheme() {
       document.body.classList.toggle("light");
     }
+
+    // Bouton retour en haut
+    function scrollToTop() {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+    window.addEventListener("scroll", () => {
+      const btn = document.getElementById("back-to-top");
+      btn.style.display = window.scrollY > 300 ? "block" : "none";
+    });
+
+    // Progress bar
+    window.addEventListener("scroll", () => {
+      const scrollTop = window.scrollY;
+      const docHeight = document.body.scrollHeight - window.innerHeight;
+      const progress = (scrollTop / docHeight) * 100;
+      document.getElementById("progress-bar").style.width = progress + "%";
+    });
+
+    // Animations au scroll
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("visible");
+        }
+      });
+    }, { threshold: 0.1 });
+    document.querySelectorAll(".hero, section").forEach(el => observer.observe(el));
   </script>
 </body>
 </html>
