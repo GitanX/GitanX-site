@@ -31,18 +31,6 @@
       transition: background 0.4s, color 0.4s;
     }
 
-    /* Progress bar */
-    #progress-bar {
-      position: fixed;
-      top: 0;
-      left: 0;
-      height: 4px;
-      background: linear-gradient(90deg, #7c4dff, #00e5ff);
-      width: 0%;
-      z-index: 1000;
-      transition: width 0.2s ease;
-    }
-
     /* Orbes colorés en fond */
     .orb {
       position: absolute;
@@ -52,73 +40,178 @@
       mix-blend-mode: screen;
       animation: float 12s infinite ease-in-out;
       z-index: -1;
-      transition: background 0.6s ease, opacity 0.6s ease;
     }
     .orb.one { width: 400px; height: 400px; background: #7c4dff; top: -100px; left: -100px; }
     .orb.two { width: 300px; height: 300px; background: #00e5ff; bottom: -100px; right: -100px; animation-delay: 2s; }
     .orb.three { width: 350px; height: 350px; background: #ff4081; top: 50%; left: 60%; animation-delay: 4s; }
 
+    /* Variante claire : couleurs pastel + blend adapté */
     body.light .orb {
       mix-blend-mode: multiply;
       opacity: 0.5;
     }
-    body.light .orb.one { background: #ffd54f; }
-    body.light .orb.two { background: #4fc3f7; }
-    body.light .orb.three { background: #f48fb1; }
+    body.light .orb.one { background: #ffd54f; }   /* jaune doux */
+    body.light .orb.two { background: #4fc3f7; }   /* bleu pastel */
+    body.light .orb.three { background: #f48fb1; } /* rose clair */
 
     @keyframes float {
       0%,100% { transform: translateY(0); }
       50% { transform: translateY(-30px); }
     }
 
-    /* Bouton retour en haut */
-    #back-to-top {
+    header {
       position: fixed;
-      bottom: 20px;
-      right: 20px;
-      background: #00e5ff;
-      color: #0d0d1a;
-      border: none;
-      border-radius: 50%;
-      width: 45px;
-      height: 45px;
-      cursor: pointer;
-      font-size: 20px;
-      display: none;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-      transition: transform 0.3s ease;
-      z-index: 1000;
+      top: 0; left: 0; right: 0;
+      backdrop-filter: blur(10px);
+      background: rgba(15,18,38,0.6);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 14px 24px;
+      z-index: 999;
     }
-    #back-to-top:hover {
-      transform: scale(1.1);
+    header h1 { color: #00e5ff; }
+    nav a {
+      color: var(--text-color);
+      margin-left: 20px;
+      text-decoration: none;
     }
+    nav a:hover { color: #00e5ff; }
 
-    /* Toast notification */
-    #toast {
-      position: fixed;
-      bottom: 80px;
-      right: 20px;
+    .theme-toggle {
+      margin-left: 20px;
+      padding: 6px 12px;
       background: linear-gradient(120deg, #7c4dff, #00e5ff);
       color: #0d0d1a;
-      padding: 10px 16px;
-      border-radius: 8px;
       font-weight: 600;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-      opacity: 0;
-      transform: translateY(20px);
-      transition: opacity 0.5s ease, transform 0.5s ease;
-      z-index: 1001;
+      border-radius: 10px;
+      cursor: pointer;
+      border: none;
     }
-    #toast.show {
-      opacity: 1;
-      transform: translateY(0);
+
+    .hero {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 100px 20px 10px;
+      position: relative;
+    }
+    .hero h2 {
+      font-size: clamp(2rem, 6vw, 4rem);
+      background: linear-gradient(120deg, #fff, #00e5ff);
+      -webkit-background-clip: text;
+      color: transparent;
+      margin-bottom: 10px;
+    }
+    .hero p {
+      margin: 0 0 10px;
+    }
+
+    section {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 20px 20px;
+    }
+    h3 { color: #00e5ff; }
+
+    .step {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 12px;
+      padding: 20px;
+      margin-bottom: 20px;
+      backdrop-filter: blur(6px);
+    }
+
+    pre {
+      background: var(--pre-bg);
+      padding: 12px;
+      border-radius: 8px;
+      overflow-x: auto;
+      color: var(--text-color);
+    }
+
+    .copy-btn {
+      display: inline-block;
+      margin-top: 8px;
+      padding: 8px 16px;
+      background: linear-gradient(120deg, #7c4dff, #00e5ff);
+      color: #0d0d1a;
+      font-weight: 600;
+      border-radius: 12px;
+      text-decoration: none;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+    .copy-btn:hover { transform: scale(1.05); }
+
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 15px;
+      padding: 10px 20px;
+    }
+
+    .card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 16px;
+      padding: 20px;
+      text-align: center;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      backdrop-filter: blur(10px);
+      box-shadow: 0 6px 20px rgba(124,77,255,0.2);
+    }
+
+    .card:hover {
+      transform: scale(1.05);
+      box-shadow: 0 12px 30px rgba(124,77,255,0.4),
+                  0 6px 20px rgba(0,229,255,0.3);
+    }
+
+    .card h3 { margin-top: 0; margin-bottom: 8px; }
+    .card p { margin: 0 0 8px; }
+
+    .card a {
+      display: inline-block;
+      margin-top: 6px;
+      padding: 8px 16px;
+      background: linear-gradient(120deg, #7c4dff, #00e5ff);
+      color: #0d0d1a;
+      font-weight: 600;
+      border-radius: 12px;
+      text-decoration: none;
+    }
+
+    .card a:hover { transform: scale(1.05); }
+
+    #community {
+      text-align: center;
+    }
+
+    #community a {
+      display: inline-block;
+      margin-top: 10px;
+      padding: 10px 18px;
+      background: linear-gradient(120deg, #7c4dff, #00e5ff);
+      color: #0d0d1a;
+      font-weight: 600;
+      border-radius: 14px;
+      text-decoration: none;
+      box-shadow: 0 6px 16px rgba(0,0,0,0.4);
+    }
+
+    footer {
+      text-align: center;
+      padding: 10px;
+      border-top: 1px solid var(--card-border);
+      color: #888;
     }
   </style>
 </head>
 <body>
-  <!-- Progress bar -->
-  <div id="progress-bar"></div>
-
   <!-- Orbes en fond -->
   <div class="orb one"></div>
   <div class="orb two"></div>
@@ -144,7 +237,7 @@
     <div class="card">
       <h3>📘 Tutoriel</h3>
       <p>Explore les étapes pour maîtriser GitanX pas à pas.</p>
-      <a href="#etapes">Voir le tuto</a>
+            <a href="#etapes">Voir le tuto</a>
     </div>
     <div class="card">
       <h3>🌐 Communauté</h3>
@@ -169,12 +262,44 @@
 
   <section id="etapes">
     <h3>🚀 Étapes du tutoriel</h3>
+
     <div class="step">
       <h4>1. Charger la librairie</h4>
       <pre><code>local lib = loadstring(game:HttpGet("URL_DE_TON_SCRIPT"))()</code></pre>
       <button class="copy-btn" onclick="copyCode(this)">📋 Copier le script</button>
     </div>
-    <!-- autres étapes... -->
+
+    <div class="step">
+      <h4>2. Créer une fenêtre</h4>
+      <pre><code>local win = lib:Window("Mon UI", "Preset", Enum.KeyCode.RightControl)</code></pre>
+      <button class="copy-btn" onclick="copyCode(this)">📋 Copier le script</button>
+    </div>
+
+    <div class="step">
+      <h4>3. Ajouter un onglet</h4>
+      <pre><code>local tab = win:Tab("Outils")</code></pre>
+      <button class="copy-btn" onclick="copyCode(this)">📋 Copier le script</button>
+    </div>
+
+    <div class="step">
+      <h4>4. Ajouter des composants</h4>
+      <pre><code>tab:Button("Clique-moi", function()
+  print("Bouton pressé !")
+end)
+
+tab:Toggle("Activer option", false, function(state)
+  print("Toggle:", state)
+end)</code></pre>
+      <button class="copy-btn" onclick="copyCode(this)">📋 Copier le script</button>
+    </div>
+
+    <div class="step">
+      <h4>5. Utiliser le color picker</h4>
+      <pre><code>tab:Colorpicker("Choisis une couleur", Color3.fromRGB(255,0,0), function(c)
+  print("Couleur choisie:", c)
+end)</code></pre>
+      <button class="copy-btn" onclick="copyCode(this)">📋 Copier le script</button>
+    </div>
   </section>
 
   <section id="exemples">
@@ -207,53 +332,22 @@ end)</code></pre>
     <p>&copy; 2025 Tutoriel GitanX — Créé pour apprendre étape par étape ⚡</p>
   </footer>
 
-  <!-- Bouton retour en haut -->
-  <button id="back-to-top" onclick="scrollToTop()">↑</button>
-
-  <!-- Toast -->
-  <div id="toast">✅ Script copié !</div>
-
-  <!-- Script JS pour copier le code, changer de thème, progress bar et retour en haut -->
+  <!-- Script JS pour copier le code et changer de thème -->
   <script>
-    // Copier code avec toast
     function copyCode(button) {
       const codeBlock = button.previousElementSibling;
       if (codeBlock && codeBlock.tagName.toLowerCase() === "pre") {
         const text = codeBlock.innerText;
         navigator.clipboard.writeText(text).then(() => {
-          showToast();
+          button.innerText = "✅ Copié !";
+          setTimeout(() => button.innerText = "📋 Copier le script", 2000);
         });
       }
     }
 
-    // Afficher toast
-    function showToast() {
-      const toast = document.getElementById("toast");
-      toast.classList.add("show");
-      setTimeout(() => toast.classList.remove("show"), 2000);
-    }
-
-    // Toggle thème clair/sombre
     function toggleTheme() {
       document.body.classList.toggle("light");
     }
-
-    // Bouton retour en haut
-    function scrollToTop() {
-      window.scrollTo({ top: 0, behavior: "smooth" });
-    }
-    window.addEventListener("scroll", () => {
-      const btn = document.getElementById("back-to-top");
-      btn.style.display = window.scrollY > 300 ? "block" : "none";
-    });
-
-    // Progress bar
-    window.addEventListener("scroll", () => {
-      const scrollTop = window.scrollY;
-      const docHeight = document.body.scrollHeight - window.innerHeight;
-      const progress = (scrollTop / docHeight) * 100;
-      document.getElementById("progress-bar").style.width = progress + "%";
-    });
   </script>
 </body>
 </html>
