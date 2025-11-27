@@ -95,6 +95,20 @@
       color: #cfd8ff;
     }
 
+    .copy-btn {
+      display: inline-block;
+      margin-top: 8px;
+      padding: 8px 16px;
+      background: linear-gradient(120deg, #7c4dff, #00e5ff);
+      color: #0d0d1a;
+      font-weight: 600;
+      border-radius: 12px;
+      text-decoration: none;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+    .copy-btn:hover { transform: scale(1.05); }
+
     .card-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
@@ -206,40 +220,40 @@
 
     <div class="step">
       <h4>1. Charger la librairie</h4>
-      <p>Commence par importer le script GitanX dans ton projet.</p>
       <pre><code>local lib = loadstring(game:HttpGet("URL_DE_TON_SCRIPT"))()</code></pre>
+      <button class="copy-btn" onclick="copyCode(this)">📋 Copier le script</button>
     </div>
 
     <div class="step">
       <h4>2. Créer une fenêtre</h4>
-      <p>Utilise <code>lib:Window()</code> pour instancier une fenêtre draggable.</p>
       <pre><code>local win = lib:Window("Mon UI", "Preset", Enum.KeyCode.RightControl)</code></pre>
+      <button class="copy-btn" onclick="copyCode(this)">📋 Copier le script</button>
     </div>
 
-    <div class="step">
+        <div class="step">
       <h4>3. Ajouter un onglet</h4>
-      <p>Chaque fenêtre peut contenir plusieurs onglets.</p>
       <pre><code>local tab = win:Tab("Outils")</code></pre>
+      <button class="copy-btn" onclick="copyCode(this)">📋 Copier le script</button>
     </div>
 
     <div class="step">
       <h4>4. Ajouter des composants</h4>
-      <p>Ajoute des boutons, toggles, sliders…</p>
       <pre><code>tab:Button("Clique-moi", function()
   print("Bouton pressé !")
-        end)
+end)
 
 tab:Toggle("Activer option", false, function(state)
   print("Toggle:", state)
 end)</code></pre>
+      <button class="copy-btn" onclick="copyCode(this)">📋 Copier le script</button>
     </div>
 
     <div class="step">
       <h4>5. Utiliser le color picker</h4>
-      <p>Un sélecteur HSV est intégré pour choisir des couleurs.</p>
       <pre><code>tab:Colorpicker("Choisis une couleur", Color3.fromRGB(255,0,0), function(c)
   print("Couleur choisie:", c)
 end)</code></pre>
+      <button class="copy-btn" onclick="copyCode(this)">📋 Copier le script</button>
     </div>
   </section>
 
@@ -259,6 +273,7 @@ end)
 tab:Colorpicker("Choisis une couleur", Color3.fromRGB(255,0,0), function(c)
   print("Couleur choisie:", c)
 end)</code></pre>
+    <button class="copy-btn" onclick="copyCode(this)">📋 Copier le script</button>
   </section>
 
   <section id="community">
@@ -271,5 +286,19 @@ end)</code></pre>
   <footer>
     <p>&copy; 2025 Tutoriel GitanX — Créé pour apprendre étape par étape ⚡</p>
   </footer>
+
+  <!-- Script JS pour copier le code -->
+  <script>
+    function copyCode(button) {
+      const codeBlock = button.previousElementSibling;
+      if (codeBlock && codeBlock.tagName.toLowerCase() === "pre") {
+        const text = codeBlock.innerText;
+        navigator.clipboard.writeText(text).then(() => {
+          button.innerText = "✅ Copié !";
+          setTimeout(() => button.innerText = "📋 Copier le script", 2000);
+        });
+      }
+    }
+  </script>
 </body>
 </html>
