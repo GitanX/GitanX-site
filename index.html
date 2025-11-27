@@ -11,7 +11,6 @@
       --card-bg: rgba(255,255,255,0.05);
       --card-border: rgba(255,255,255,0.1);
       --pre-bg: #1a1a3d;
-      --accent: #00e5ff;
     }
 
     body.light {
@@ -20,7 +19,6 @@
       --card-bg: rgba(0,0,0,0.05);
       --card-border: rgba(0,0,0,0.1);
       --pre-bg: #e0e0e0;
-      --accent: #7c4dff;
     }
 
     body {
@@ -73,144 +71,12 @@
       50% { transform: translateY(-30px); }
     }
 
-    header {
-      position: fixed;
-      top: 0; left: 0; right: 0;
-      backdrop-filter: blur(10px);
-      background: rgba(15,18,38,0.6);
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 14px 24px;
-      z-index: 999;
-    }
-    header h1 { color: var(--accent); }
-    nav a {
-      color: var(--text-color);
-      margin-left: 20px;
-      text-decoration: none;
-    }
-    nav a:hover { color: var(--accent); }
-
-    .theme-toggle {
-      margin-left: 20px;
-      padding: 6px 12px;
-      background: linear-gradient(120deg, #7c4dff, #00e5ff);
-      color: #0d0d1a;
-      font-weight: 600;
-      border-radius: 10px;
-      cursor: pointer;
-      border: none;
-    }
-
-    .hero {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-      padding: 100px 20px 10px;
-      position: relative;
-    }
-    .hero h2 {
-      font-size: clamp(2rem, 6vw, 4rem);
-      background: linear-gradient(120deg, #fff, var(--accent));
-      -webkit-background-clip: text;
-      color: transparent;
-      margin-bottom: 10px;
-    }
-
-    section {
-      max-width: 1000px;
-      margin: 0 auto;
-      padding: 20px 20px;
-    }
-    h3 { color: var(--accent); }
-
-    .step {
-      background: var(--card-bg);
-      border: 1px solid var(--card-border);
-      border-radius: 12px;
-      padding: 20px;
-      margin-bottom: 20px;
-      backdrop-filter: blur(6px);
-    }
-
-    pre {
-      background: var(--pre-bg);
-      padding: 12px;
-      border-radius: 8px;
-      overflow-x: auto;
-      color: var(--text-color);
-    }
-
-    .copy-btn {
-      display: inline-block;
-      margin-top: 8px;
-      padding: 8px 16px;
-      background: linear-gradient(120deg, #7c4dff, #00e5ff);
-      color: #0d0d1a;
-      font-weight: 600;
-      border-radius: 12px;
-      text-decoration: none;
-      cursor: pointer;
-      transition: 0.3s;
-    }
-    .copy-btn:hover { transform: scale(1.05); }
-
-    .card-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-      gap: 15px;
-      padding: 10px 20px;
-    }
-
-    .card {
-      background: var(--card-bg);
-      border: 1px solid var(--card-border);
-      border-radius: 16px;
-      padding: 20px;
-      text-align: center;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-      backdrop-filter: blur(10px);
-      box-shadow: 0 6px 20px rgba(124,77,255,0.2);
-    }
-
-    .card:hover {
-      transform: scale(1.05);
-      box-shadow: 0 12px 30px rgba(124,77,255,0.4),
-                  0 6px 20px rgba(0,229,255,0.3);
-    }
-
-    #community {
-      text-align: center;
-    }
-
-    #community a {
-      display: inline-block;
-      margin-top: 10px;
-      padding: 10px 18px;
-      background: linear-gradient(120deg, #7c4dff, #00e5ff);
-      color: #0d0d1a;
-      font-weight: 600;
-      border-radius: 14px;
-      text-decoration: none;
-      box-shadow: 0 6px 16px rgba(0,0,0,0.4);
-    }
-
-    footer {
-      text-align: center;
-      padding: 10px;
-      border-top: 1px solid var(--card-border);
-      color: #888;
-    }
-
     /* Bouton retour en haut */
     #back-to-top {
       position: fixed;
       bottom: 20px;
       right: 20px;
-      background: var(--accent);
+      background: #00e5ff;
       color: #0d0d1a;
       border: none;
       border-radius: 50%;
@@ -240,7 +106,9 @@
       box-shadow: 0 4px 10px rgba(0,0,0,0.3);
       opacity: 0;
       transform: translateY(20px);
-      transition: opacity 0.5s ease, transform 0.5s ease    }
+      transition: opacity 0.5s ease, transform 0.5s ease;
+      z-index: 1001;
+    }
     #toast.show {
       opacity: 1;
       transform: translateY(0);
@@ -261,8 +129,7 @@
     <nav>
       <a href="#intro">Home</a>
       <a href="#etapes">Tutoriel</a>
-      <a href="#exemples">Exemples</a>
-      <a href="#community">Communauté</a>
+      <a href="#exemples">Discord</a>
       <button class="theme-toggle" onclick="toggleTheme()">Changer de thème</button>
     </nav>
   </header>
@@ -272,7 +139,7 @@
     <p>Fenêtres, onglets, sliders, color pickers… Découvre comment créer ton interface avec la librairie GitanX.</p>
   </div>
 
-  <!-- Cartes -->
+  <!-- Cartes rouges -->
   <section class="card-grid">
     <div class="card">
       <h3>📘 Tutoriel</h3>
@@ -286,7 +153,20 @@
     </div>
   </section>
 
-  <!-- Étapes -->
+  <!-- Cartes grises -->
+  <section class="card-grid">
+    <div class="card">
+      <h3>🏠 Home</h3>
+      <p>Retour à l’intro de la page principale.</p>
+      <a href="#intro">Retour</a>
+    </div>
+    <div class="card">
+      <h3>📜 Script final</h3>
+      <p>Voir l’exemple complet du script GitanX.</p>
+      <a href="#exemples">Voir le script</a>
+    </div>
+  </section>
+
   <section id="etapes">
     <h3>🚀 Étapes du tutoriel</h3>
     <div class="step">
@@ -297,7 +177,6 @@
     <!-- autres étapes... -->
   </section>
 
-  <!-- Exemples -->
   <section id="exemples">
     <h3>📜 Exemple complet</h3>
     <pre><code>local win = lib:Window("Mon UI", "Preset", Enum.KeyCode.RightControl)
@@ -317,10 +196,10 @@ end)</code></pre>
     <button class="copy-btn" onclick="copyCode(this)">📋 Copier le script</button>
   </section>
 
-  <!-- Communauté -->
   <section id="community">
     <h3>💬 Rejoins la communauté GitanX</h3>
-    <p>Tu veux discuter avec d'autres utilisateurs, poser tes questions, ou montrer ton interface GitanX ?</p>
+    <p>Tu veux discuter avec d'autres utilisateurs, poser tes questions, ou montrer ton interface GitanX ? 
+       Rejoins notre serveur Discord et connecte-toi avec la communauté.</p>
     <a href="https://discord.gg/TON-LIEN-DISCORD" target="_blank">🔗 Rejoindre le Discord</a>
   </section>
 
@@ -334,7 +213,7 @@ end)</code></pre>
   <!-- Toast -->
   <div id="toast">✅ Script copié !</div>
 
-  <!-- Script JS -->
+  <!-- Script JS pour copier le code, changer de thème, progress bar et retour en haut -->
   <script>
     // Copier code avec toast
     function copyCode(button) {
@@ -346,13 +225,15 @@ end)</code></pre>
         });
       }
     }
+
+    // Afficher toast
     function showToast() {
       const toast = document.getElementById("toast");
       toast.classList.add("show");
       setTimeout(() => toast.classList.remove("show"), 2000);
     }
 
-    // Toggle thème
+    // Toggle thème clair/sombre
     function toggleTheme() {
       document.body.classList.toggle("light");
     }
