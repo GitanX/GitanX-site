@@ -150,16 +150,12 @@
       border-radius: 16px;
       padding: 20px;
       text-align: center;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
       backdrop-filter: blur(10px);
       box-shadow: 0 6px 20px rgba(124,77,255,0.2);
-      overflow: hidden;
     }
 
-    .card-inner {
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-    }
-
-    .card:hover .card-inner {
+    .card:hover {
       transform: scale(1.05);
       box-shadow: 0 12px 30px rgba(124,77,255,0.4),
                   0 6px 20px rgba(0,229,255,0.3);
@@ -229,36 +225,28 @@
   <!-- Cartes rouges -->
   <section class="card-grid">
     <div class="card">
-      <div class="card-inner">
-        <h3>📘 Tutoriel</h3>
-        <p>Explore les étapes pour maîtriser GitanX pas à pas.</p>
-        <a href="#etapes">Voir le tuto</a>
-      </div>
+      <h3>📘 Tutoriel</h3>
+      <p>Explore les étapes pour maîtriser GitanX pas à pas.</p>
+      <a href="#etapes">Voir le tuto</a>
     </div>
     <div class="card">
-      <div class="card-inner">
-        <h3>🌐 Communauté</h3>
-               <p>Rejoins les autres créateurs, pose tes questions, partage tes projets.</p>
-        <a href="#community">Rejoindre</a>
-      </div>
+      <h3>🌐 Communauté</h3>
+      <p>Rejoins les autres créateurs, pose tes questions, partage tes projets.</p>
+      <a href="#community">Rejoindre</a>
     </div>
   </section>
 
-  <!-- Cartes grises -->
+    <!-- Cartes grises -->
   <section class="card-grid">
     <div class="card">
-      <div class="card-inner">
-        <h3>🏠 Home</h3>
-        <p>Retour à l’intro de la page principale.</p>
-        <a href="#intro">Retour</a>
-      </div>
+      <h3>🏠 Home</h3>
+      <p>Retour à l’intro de la page principale.</p>
+      <a href="#intro">Retour</a>
     </div>
     <div class="card">
-      <div class="card-inner">
-        <h3>📜 Script final</h3>
-        <p>Voir l’exemple complet du script GitanX.</p>
-        <a href="#exemples">Voir le script</a>
-      </div>
+      <h3>📜 Script final</h3>
+      <p>Voir l’exemple complet du script GitanX.</p>
+      <a href="#exemples">Voir le script</a>
     </div>
   </section>
 
