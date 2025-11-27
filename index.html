@@ -351,6 +351,15 @@
   50% { background-position: 100% 50%; }
   100% { background-position: 0% 50%; }
 }
+    .discord-counter {
+  margin-top: 15px;
+  font-size: 1.2rem;
+  font-weight: 700;
+  background: linear-gradient(120deg, var(--accent-start), var(--accent-end));
+  -webkit-background-clip: text;
+  color: transparent;
+  text-shadow: 0 2px 6px rgba(0,0,0,0.25);
+}
 
     #community {
       text-align: center;
@@ -433,15 +442,10 @@
   <p>Tu veux discuter avec d'autres utilisateurs, poser tes questions, ou montrer ton interface GitanX ? Rejoins notre serveur Discord et connecte-toi avec la communauté.</p>
   <a href="https://discord.gg/TON-LIEN-DISCORD" target="_blank" rel="noopener noreferrer">🔗 Rejoindre le Discord</a>
 
-  <!-- Widget Discord -->
-  <iframe src="https://discord.com/widget?id=TON_ID_SERVEUR&theme=dark"
-          width="350"
-          height="500"
-          allowtransparency="true"
-          frameborder="0"
-          sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts">
-  </iframe>
+  <!-- Compteur Discord stylé -->
+  <p id="discordCount" class="discord-counter">💠 50 membres Discord</p>
 </section>
+
 
 
     <!-- Cartes grises -->
@@ -539,141 +543,111 @@ end)</code></pre>
 <div id="toast">✅ Script copié !</div>
 <section class="fade-in"> ... </section>
   <script>
-    // Theme: init from localStorage or prefers-color-scheme
-    (function() {
-      const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
-      const stored = localStorage.getItem('gitanx-theme');
-      if (stored === 'light') {
-        document.body.classList.remove('dark');
+  // Theme: init from localStorage or prefers-color-scheme
+  (function() {
+    const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+    const stored = localStorage.getItem('gitanx-theme');
+    if (stored === 'light') {
+      document.body.classList.add('light');
+      document.getElementById('themeToggle').setAttribute('aria-pressed', 'true');
+    } else if (stored === 'dark') {
+      document.body.classList.remove('light');
+      document.getElementById('themeToggle').setAttribute('aria-pressed', 'false');
+    } else {
+      if (!prefersDark) {
         document.body.classList.add('light');
         document.getElementById('themeToggle').setAttribute('aria-pressed', 'true');
-      } else if (stored === 'dark') {
-        document.body.classList.remove('light');
-        document.getElementById('themeToggle').setAttribute('aria-pressed', 'false');
-      } else {
-        // default to system
-        if (!prefersDark) {
-          document.body.classList.add('light');
-          document.getElementById('themeToggle').setAttribute('aria-pressed', 'true');
-        }
       }
-    })();
-
-    // Toggle theme and persist
-    function toggleTheme() {
-      const btn = document.getElementById('themeToggle');
-      const isLight = document.body.classList.toggle('light');
-      btn.setAttribute('aria-pressed', isLight ? 'true' : 'false');
-      localStorage.setItem('gitanx-theme', isLight ? 'light' : 'dark');
     }
-    document.getElementById('themeToggle').addEventListener('click', toggleTheme);
+  })();
 
-    // Copier tout le contenu du bloc <pre><code>
-function copyCode(button) {
-  const pre = button.previousElementSibling; // le <pre>
-  let text = "";
-  if (pre) {
-    const code = pre.querySelector("code"); // cherche le <code> à l'intérieur
-    text = code ? code.textContent : pre.textContent;
+  // Toggle theme and persist
+  function toggleTheme() {
+    const btn = document.getElementById('themeToggle');
+    const isLight = document.body.classList.toggle('light');
+    btn.setAttribute('aria-pressed', isLight ? 'true' : 'false');
+    localStorage.setItem('gitanx-theme', isLight ? 'light' : 'dark');
   }
-  if (!text) return;
+  document.getElementById('themeToggle').addEventListener('click', toggleTheme);
 
-  navigator.clipboard.writeText(text).then(() => {
-    showToast(); // affiche le toast ✅ Script copié !
-  });
-}
-
-
-      const ariaStatus = document.getElementById('ariaStatus');
-
-      // Try Clipboard API first
-      if (navigator.clipboard && navigator.clipboard.writeText) {
-        navigator.clipboard.writeText(text).then(() => {
-          button.innerText = "✅ Copié !";
-          ariaStatus.textContent = "Code copié dans le presse-papiers.";
-          setTimeout(() => button.innerText = "📋 Copier le script", 2000);
-        }).catch(() => fallbackCopy(text, button, ariaStatus));
-      } else {
-        fallbackCopy(text, button, ariaStatus);
-      }
+  // Copier tout le contenu du bloc <pre><code>
+  function copyCode(button) {
+    const pre = button.previousElementSibling; // le <pre>
+    let text = "";
+    if (pre) {
+      const code = pre.querySelector("code"); // cherche le <code> à l'intérieur
+      text = code ? code.textContent : pre.textContent;
     }
+    if (!text) return;
 
-    function fallbackCopy(text, button, ariaStatus) {
-      try {
-        const textarea = document.createElement('textarea');
-        textarea.value = text;
-        // Prevent scrolling to bottom
-        textarea.style.position = 'fixed';
-        textarea.style.top = '-9999px';
-        textarea.style.left = '-9999px';
-        document.body.appendChild(textarea);
-        textarea.select();
-        textarea.setSelectionRange(0, textarea.value.length);
-        const ok = document.execCommand('copy');
-        document.body.removeChild(textarea);
-        if (ok) {
-          button.innerText = "✅ Copié !";
-          ariaStatus.textContent = "Code copié dans le presse-papiers.";
-          setTimeout(() => button.innerText = "📋 Copier le script", 2000);
-        } else {
-          throw new Error('execCommand failed');
-        }
-      } catch (e) {
-        // Provide a fallback prompt so user can copy manually
-        ariaStatus.textContent = "Impossible de copier automatiquement. Sélectionne le code et utilise Ctrl/Cmd+C.";
-        // Open a prompt with the code selected as last resort (user can copy)
-        window.prompt("Copie ceci (Ctrl/Cmd+C, Entrée pour fermer):", text);
-      }
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text).then(() => {
+        showToast(); // ✅ affiche la notif
+      }).catch(() => fallbackCopy(text));
+    } else {
+      fallbackCopy(text);
     }
+  }
 
-    // Accessibility: enable 'Skip to content' target focusing after clicking
-    document.querySelectorAll('.skip-link').forEach(link => {
-      link.addEventListener('click', function() {
-        const target = document.querySelector(this.getAttribute('href'));
-        if (target) target.focus();
-      });
-    });
-    // Progress bar qui suit le scroll
-window.addEventListener("scroll", () => {
-  const scrollTop = window.scrollY;
-  const docHeight = document.body.scrollHeight - window.innerHeight;
-  const progress = (scrollTop / docHeight) * 100;
-  document.getElementById("progress-bar").style.width = progress + "%";
-});
-  // Bouton retour en haut
-function scrollToTop() {
-  window.scrollTo({ top: 0, behavior: "smooth" });
-}
-window.addEventListener("scroll", () => {
-  const btn = document.getElementById("back-to-top");
-  btn.style.display = window.scrollY > 300 ? "block" : "none";
-});
-  // Copier code avec toast
-function copyCode(button) {
-  const codeBlock = button.previousElementSibling;
-  if (codeBlock && codeBlock.tagName.toLowerCase() === "pre") {
-    const text = codeBlock.innerText;
-    navigator.clipboard.writeText(text).then(() => {
+  // Fallback pour vieux navigateurs
+  function fallbackCopy(text) {
+    try {
+      const textarea = document.createElement("textarea");
+      textarea.value = text;
+      textarea.style.position = "fixed";
+      textarea.style.top = "-9999px";
+      document.body.appendChild(textarea);
+      textarea.select();
+      document.execCommand("copy");
+      document.body.removeChild(textarea);
       showToast();
-    });
-  }
-}
-function showToast() {
-  const toast = document.getElementById("toast");
-  toast.classList.add("show");
-  setTimeout(() => toast.classList.remove("show"), 2000);
-}
-// Animations au scroll
-const observer = new IntersectionObserver(entries => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      entry.target.classList.add("visible");
+    } catch (e) {
+      window.prompt("Copie manuelle (Ctrl/Cmd+C):", text);
     }
+  }
+
+  // Toast notification
+  function showToast() {
+    const toast = document.getElementById("toast");
+    toast.classList.add("show");
+    setTimeout(() => toast.classList.remove("show"), 2000);
+  }
+
+  // Accessibility: enable 'Skip to content' target focusing after clicking
+  document.querySelectorAll('.skip-link').forEach(link => {
+    link.addEventListener('click', function() {
+      const target = document.querySelector(this.getAttribute('href'));
+      if (target) target.focus();
+    });
   });
-}, { threshold: 0.1 });
 
-document.querySelectorAll(".fade-in").forEach(el => observer.observe(el));
+  // Progress bar qui suit le scroll
+  window.addEventListener("scroll", () => {
+    const scrollTop = window.scrollY;
+    const docHeight = document.body.scrollHeight - window.innerHeight;
+    const progress = (scrollTop / docHeight) * 100;
+    document.getElementById("progress-bar").style.width = progress + "%";
+  });
 
-  </script>
+  // Bouton retour en haut
+  function scrollToTop() {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }
+  window.addEventListener("scroll", () => {
+    const btn = document.getElementById("back-to-top");
+    btn.style.display = window.scrollY > 300 ? "block" : "none";
+  });
+
+  // Animations au scroll
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add("visible");
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll(".fade-in").forEach(el => observer.observe(el));
+</script>
 </body>
 </html>
