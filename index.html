@@ -44,6 +44,34 @@
       background: #1a1a3d; padding: 14px; border-radius: 8px;
       overflow-x: auto; color: #cfd8ff;
     }
+    .card-grid {
+      display: flex; gap: 20px; justify-content: center; flex-wrap: wrap; padding: 40px 20px;
+    }
+    .card {
+      flex: 1; min-width: 280px; max-width: 400px;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 16px; padding: 24px; text-align: center;
+      transition: 0.3s; backdrop-filter: blur(10px);
+      box-shadow: 0 10px 30px rgba(124,77,255,0.2);
+    }
+    .card h3 { margin-top: 0; }
+    .card a {
+      display: inline-block; margin-top: 12px; padding: 10px 18px;
+      background: linear-gradient(120deg, #7c4dff, #00e5ff);
+      color: #0d0d1a; font-weight: 600; border-radius: 12px;
+      text-decoration: none;
+    }
+    .card a:hover { transform: scale(1.05); }
+    #community {
+      text-align: center;
+    }
+    #community a {
+      display: inline-block; margin-top: 20px; padding: 12px 20px;
+      background: linear-gradient(120deg, #7c4dff, #00e5ff);
+      color: #0d0d1a; font-weight: 600; border-radius: 14px;
+      text-decoration: none; box-shadow: 0 10px 20px rgba(0,0,0,0.4);
+    }
     footer {
       text-align: center; padding: 20px;
       border-top: 1px solid rgba(255,255,255,0.1);
@@ -65,6 +93,19 @@
     <h2>Apprends à utiliser GitanX pas à pas</h2>
     <p>Fenêtres, onglets, sliders, color pickers… Découvre comment créer ton interface avec la librairie GitanX.</p>
   </div>
+
+  <section class="card-grid">
+    <div class="card">
+      <h3>📘 Tutoriel</h3>
+      <p>Explore les étapes pour maîtriser GitanX pas à pas.</p>
+      <a href="#etapes">Voir le tuto</a>
+    </div>
+    <div class="card">
+      <h3>🌐 Communauté</h3>
+      <p>Rejoins les autres créateurs, pose tes questions, partage tes projets.</p>
+      <a href="#community">Rejoindre</a>
+    </div>
+  </section>
 
   <section id="etapes">
     <h3>🚀 Étapes du tutoriel</h3>
@@ -124,6 +165,12 @@ end)
 tab:Colorpicker("Choisis une couleur", Color3.fromRGB(255,0,0), function(c)
   print("Couleur choisie:", c)
 end)</code></pre>
+  </section>
+
+  <section id="community">
+    <h3>💬 Rejoins la communauté GitanX</h3>
+    <p>Tu veux discuter avec d'autres utilisateurs, poser tes questions, ou montrer ton interface GitanX ? Rejoins notre serveur Discord et connecte-toi avec la communauté.</p>
+    <a href="https://discord.gg/TON-LIEN-DISCORD" target="_blank">🔗 Rejoindre le Discord</a>
   </section>
 
   <footer>
