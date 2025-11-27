@@ -2,22 +2,14 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
-  <title>GitanX Framework</title>
+  <title>Tutoriel GitanX</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <style>
-    :root {
-      --bg: #0d0d1a;
-      --text: #eaf0ff;
-      --primary: #7c4dff;
-      --accent: #00e5ff;
-      --danger: #ff4081;
-    }
-    * { box-sizing: border-box; }
     body {
       margin: 0;
       font-family: "Poppins", sans-serif;
-      background: radial-gradient(circle at 20% -20%, #232a52, var(--bg));
-      color: var(--text);
+      background: radial-gradient(circle at 20% -20%, #232a52, #0d0d1a);
+      color: #eaf0ff;
       overflow-x: hidden;
     }
     header {
@@ -27,47 +19,27 @@
       display: flex; justify-content: space-between; align-items: center;
       padding: 14px 24px; z-index: 999;
     }
-    header h1 { color: var(--accent); }
-    nav a {
-      color: var(--text); margin-left: 20px; text-decoration: none;
-      transition: 0.3s;
-    }
-    nav a:hover { color: var(--accent); }
+    header h1 { color: #00e5ff; }
+    nav a { color: #eaf0ff; margin-left: 20px; text-decoration: none; }
+    nav a:hover { color: #00e5ff; }
     .hero {
       min-height: 100vh; display: flex; flex-direction: column;
       justify-content: center; align-items: center; text-align: center;
       padding: 120px 20px 60px;
-      position: relative; isolation: isolate;
+      position: relative;
     }
     .hero h2 {
       font-size: clamp(2rem, 6vw, 4rem);
-      background: linear-gradient(120deg, #fff, var(--accent));
+      background: linear-gradient(120deg, #fff, #00e5ff);
       -webkit-background-clip: text; color: transparent;
     }
-    .hero p { max-width: 700px; color: #b8c2ff; }
-    .btn {
-      padding: 12px 20px; border-radius: 12px; border: none;
-      cursor: pointer; font-weight: 600; margin: 10px;
-      transition: 0.3s; box-shadow: 0 10px 20px rgba(0,0,0,0.4);
-    }
-    .btn-primary {
-      background: linear-gradient(120deg, var(--primary), var(--accent));
-      color: #0d0d1a;
-    }
-    .btn-primary:hover { transform: scale(1.05); }
-    section { max-width: 1100px; margin: 0 auto; padding: 60px 20px; }
-    h3 { color: var(--accent); }
-    .grid {
-      display: grid; gap: 20px;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-    }
-    .card {
+    section { max-width: 1000px; margin: 0 auto; padding: 60px 20px; }
+    h3 { color: #00e5ff; }
+    .step {
       background: rgba(255,255,255,0.05);
       border: 1px solid rgba(255,255,255,0.1);
-      border-radius: 16px; padding: 20px;
-      transition: 0.3s; backdrop-filter: blur(10px);
+      border-radius: 12px; padding: 20px; margin-bottom: 30px;
     }
-    .card:hover { transform: translateY(-6px) scale(1.02); }
     pre {
       background: #1a1a3d; padding: 14px; border-radius: 8px;
       overflow-x: auto; color: #cfd8ff;
@@ -77,68 +49,85 @@
       border-top: 1px solid rgba(255,255,255,0.1);
       color: #888;
     }
-    /* Neon orbs */
-    .orb {
-      position: absolute; border-radius: 50%; filter: blur(80px);
-      opacity: 0.3; mix-blend-mode: screen; animation: float 12s infinite ease-in-out;
-    }
-    .orb.one { width: 400px; height: 400px; background: var(--primary); top: 10%; left: -10%; }
-    .orb.two { width: 300px; height: 300px; background: var(--accent); bottom: -10%; right: -10%; animation-delay: 2s; }
-    .orb.three { width: 350px; height: 350px; background: var(--danger); top: 50%; left: 60%; animation-delay: 4s; }
-    @keyframes float {
-      0%,100% { transform: translateY(0); }
-      50% { transform: translateY(-20px); }
-    }
   </style>
 </head>
 <body>
   <header>
-    <h1>⚡ GitanX</h1>
+    <h1>⚡ Tutoriel GitanX</h1>
     <nav>
-      <a href="#features">Features</a>
-      <a href="#code">Code</a>
-      <a href="#contact">Contact</a>
+      <a href="#intro">Intro</a>
+      <a href="#etapes">Étapes</a>
+      <a href="#exemples">Exemples</a>
     </nav>
   </header>
 
-  <div class="hero">
-    <div class="orb one"></div>
-    <div class="orb two"></div>
-    <div class="orb three"></div>
-    <h2>Librairie UI Futuriste</h2>
-    <p>Fenêtres, onglets, sliders, color pickers… GitanX te donne les outils pour créer des interfaces incroyables.</p>
-    <div>
-      <button class="btn btn-primary">Découvrir</button>
-      <button class="btn">Documentation</button>
-    </div>
+  <div class="hero" id="intro">
+    <h2>Apprends à utiliser GitanX pas à pas</h2>
+    <p>Fenêtres, onglets, sliders, color pickers… Découvre comment créer ton interface avec la librairie GitanX.</p>
   </div>
 
-  <section id="features">
-    <h3>✨ Features principales</h3>
-    <div class="grid">
-      <div class="card"><h4>Fenêtres</h4><p>Création de fenêtres drag & drop avec animations.</p></div>
-      <div class="card"><h4>Onglets</h4><p>Navigation fluide entre plusieurs sections.</p></div>
-      <div class="card"><h4>Composants</h4><p>Boutons, toggles, sliders, dropdowns, textboxes.</p></div>
-      <div class="card"><h4>Color Picker</h4><p>Sélecteur HSV avec mode arc-en-ciel animé.</p></div>
+  <section id="etapes">
+    <h3>🚀 Étapes du tutoriel</h3>
+
+    <div class="step">
+      <h4>1. Charger la librairie</h4>
+      <p>Commence par importer le script GitanX dans ton projet.</p>
+      <pre><code>local lib = loadstring(game:HttpGet("URL_DE_TON_SCRIPT"))()</code></pre>
+    </div>
+
+    <div class="step">
+      <h4>2. Créer une fenêtre</h4>
+      <p>Utilise <code>lib:Window()</code> pour instancier une fenêtre draggable.</p>
+      <pre><code>local win = lib:Window("Mon UI", "Preset", Enum.KeyCode.RightControl)</code></pre>
+    </div>
+
+    <div class="step">
+      <h4>3. Ajouter un onglet</h4>
+      <p>Chaque fenêtre peut contenir plusieurs onglets.</p>
+      <pre><code>local tab = win:Tab("Outils")</code></pre>
+    </div>
+
+    <div class="step">
+      <h4>4. Ajouter des composants</h4>
+      <p>Ajoute des boutons, toggles, sliders…</p>
+      <pre><code>tab:Button("Clique-moi", function()
+  print("Bouton pressé !")
+end)
+
+tab:Toggle("Activer option", false, function(state)
+  print("Toggle:", state)
+end)</code></pre>
+    </div>
+
+    <div class="step">
+      <h4>5. Utiliser le color picker</h4>
+      <p>Un sélecteur HSV est intégré pour choisir des couleurs.</p>
+      <pre><code>tab:Colorpicker("Choisis une couleur", Color3.fromRGB(255,0,0), function(c)
+  print("Couleur choisie:", c)
+end)</code></pre>
     </div>
   </section>
 
-  <section id="code">
-    <h3>📜 Exemple de code</h3>
+  <section id="exemples">
+    <h3>📜 Exemple complet</h3>
     <pre><code>local win = lib:Window("Mon UI", "Preset", Enum.KeyCode.RightControl)
 local tab = win:Tab("Outils")
-tab:Button("Clique-moi", function() print("Bouton pressé !") end)
-tab:Toggle("Activer option", false, function(state) print("Toggle:", state) end)</code></pre>
-  </section>
 
-  <section id="contact">
-    <h3>📩 Contact</h3>
-    <p>Envie de contribuer ou d’en savoir plus ?</p>
-    <button class="btn btn-primary">Rejoindre la communauté</button>
+tab:Button("Clique-moi", function()
+  print("Bouton pressé !")
+end)
+
+tab:Toggle("Activer option", false, function(state)
+  print("Toggle:", state)
+end)
+
+tab:Colorpicker("Choisis une couleur", Color3.fromRGB(255,0,0), function(c)
+  print("Couleur choisie:", c)
+end)</code></pre>
   </section>
 
   <footer>
-    <p>&copy; 2025 GitanX — Page de fou designée pour toi ⚡</p>
+    <p>&copy; 2025 Tutoriel GitanX — Créé pour apprendre étape par étape ⚡</p>
   </footer>
 </body>
 </html>
