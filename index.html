@@ -144,16 +144,22 @@
       padding: 10px 20px;
     }
 
-    .card {
-      background: var(--card-bg);
-      border: 1px solid var(--card-border);
-      border-radius: 16px;
-      padding: 20px;
-      text-align: center;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-      backdrop-filter: blur(10px);
-      box-shadow: 0 6px 20px rgba(124,77,255,0.2);
-    }
+   .card {
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: 16px;
+  padding: 20px;
+  text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 6px 20px rgba(124,77,255,0.2);
+
+  /* Ajout pour éviter le flou du texte */
+  will-change: transform;
+  backface-visibility: hidden;
+  transform: translateZ(0);
+}
+
 
     .card:hover {
       transform: scale(1.05);
