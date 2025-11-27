@@ -351,6 +351,16 @@
   50% { background-position: 100% 50%; }
   100% { background-position: 0% 50%; }
 }
+    .discord-counter {
+  text-align: center;
+  margin: 20px auto;
+  font-size: 1.3rem;
+  font-weight: 700;
+  background: linear-gradient(120deg, var(--accent-start), var(--accent-end));
+  -webkit-background-clip: text;
+  color: transparent;
+  text-shadow: 0 2px 6px rgba(0,0,0,0.25);
+}
 
     #community {
       text-align: center;
@@ -419,7 +429,10 @@
       <h2 id="hero-title">Apprends à utiliser GitanX pas à pas</h2>
       <p>Fenêtres, onglets, sliders, color pickers… Découvre comment créer ton interface avec la librairie GitanX.</p>
     </section>
-
+    
+     <!-- Compteur Discord -->
+  <div id="discordCount" class="discord-counter">💠 ... membres Discord</div>
+    
     <!-- Cartes rouges -->
     <section class="card-grid" aria-label="Accès rapides">
       <article class="card" aria-labelledby="tuto-title">
@@ -432,7 +445,7 @@
   <article class="card" id="community" aria-labelledby="community-title">
     <h3 id="community-title">💬 Communauté GitanX</h3>
     <p>Rejoins la communauté et partage tes interfaces avec les autres utilisateurs.</p>
-    <a href="#community">Voir le script</a>
+    <a href="#community">Community</a>
   </article>
 </section>
 
@@ -637,6 +650,19 @@ end)</code></pre>
   }, { threshold: 0.1 });
 
   document.querySelectorAll(".fade-in").forEach(el => observer.observe(el));
+    async function updateDiscordCount() {
+  try {
+    const res = await fetch("http://localhost:3000/discord-count"); // ton bot Express
+    const data = await res.json();
+    document.getElementById("discordCount").innerText = `💠 ${data.member_count} membres Discord`;
+  } catch (e) {
+    console.error("Erreur Discord:", e);
+  }
+}
+
+setInterval(updateDiscordCount, 30000);
+updateDiscordCount();
+
 </script>
 
 </body>
