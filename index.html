@@ -216,28 +216,28 @@
   </section>
 
   <section id="etapes">
-    <h3>🚀 Étapes du tutoriel</h3>
+    <h3>🚀 Tutoriel</h3>
 
     <div class="step">
-      <h4>1. Charger la librairie</h4>
-      <pre><code>local lib = loadstring(game:HttpGet("URL_DE_TON_SCRIPT"))()</code></pre>
-      <button class="copy-btn" onclick="copyCode(this)">📋 Copier le script</button>
+      <h4>1. Loading GitanX library</h4>
+      <pre><code>local lib = loadstring(game:HttpGet("https://raw.githubusercontent.com/GitanX/GitanX-librairie/refs/heads/main/librairie%20GitanX.lua"))()</code></pre>
+      <button class="copy-btn" onclick="copyCode(this)">📋 Copy the script</button>
     </div>
 
     <div class="step">
-      <h4>2. Créer une fenêtre</h4>
+      <h4>2. Creating a Windows</h4>
       <pre><code>local win = lib:Window("Mon UI", "Preset", Enum.KeyCode.RightControl)</code></pre>
-      <button class="copy-btn" onclick="copyCode(this)">📋 Copier le script</button>
+      <button class="copy-btn" onclick="copyCode(this)">📋 Copy the script</button>
     </div>
 
         <div class="step">
-      <h4>3. Ajouter un onglet</h4>
+      <h4>3. Add a Tab</h4>
       <pre><code>local tab = win:Tab("Outils")</code></pre>
-      <button class="copy-btn" onclick="copyCode(this)">📋 Copier le script</button>
+      <button class="copy-btn" onclick="copyCode(this)">📋 Copy the script</button>
     </div>
 
     <div class="step">
-      <h4>4. Ajouter des composants</h4>
+      <h4>4. Button, Toggle</h4>
       <pre><code>tab:Button("Clique-moi", function()
   print("Bouton pressé !")
 end)
@@ -245,7 +245,7 @@ end)
 tab:Toggle("Activer option", false, function(state)
   print("Toggle:", state)
 end)</code></pre>
-      <button class="copy-btn" onclick="copyCode(this)">📋 Copier le script</button>
+      <button class="copy-btn" onclick="copyCode(this)">📋 Copy the script</button>
     </div>
 
     <div class="step">
@@ -253,12 +253,12 @@ end)</code></pre>
       <pre><code>tab:Colorpicker("Choisis une couleur", Color3.fromRGB(255,0,0), function(c)
   print("Couleur choisie:", c)
 end)</code></pre>
-      <button class="copy-btn" onclick="copyCode(this)">📋 Copier le script</button>
+      <button class="copy-btn" onclick="copyCode(this)">📋 Copy the script</button>
     </div>
   </section>
 
   <section id="exemples">
-    <h3>📜 Exemple complet</h3>
+    <h3>📜 Script final (test)</h3>
     <pre><code>local win = lib:Window("Mon UI", "Preset", Enum.KeyCode.RightControl)
 local tab = win:Tab("Outils")
 
@@ -273,7 +273,7 @@ end)
 tab:Colorpicker("Choisis une couleur", Color3.fromRGB(255,0,0), function(c)
   print("Couleur choisie:", c)
 end)</code></pre>
-    <button class="copy-btn" onclick="copyCode(this)">📋 Copier le script</button>
+    <button class="copy-btn" onclick="copyCode(this)">📋 Copy the script</button>
   </section>
 
   <section id="community">
