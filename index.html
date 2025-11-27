@@ -535,13 +535,11 @@ end)</code></pre>
       <button class="copy-btn" onclick="copyCode(this)" aria-label="Copier l'exemple complet">📋 Copier le script</button>
     </section>
 
-    <section id="community" aria-labelledby="community-title">
-  <h3 id="community-title">💬 Join the Discord of GitanX</h3>
-  <p>Join Discord for see 20games+ script, support-help and soon a executor GitanX</p>
-  <a href="https://discord.gg/TON-LIEN-DISCORD" target="_blank" rel="noopener noreferrer">
-    <img src="discord-logo.svg" alt="Discord Logo" class="discord-icon"> Join Discord
-  </a>
-</section>
+   <section id="community" aria-labelledby="community-title"> 
+     <h3 id="community-title">💬 Join the Discord of GitanX</h3>
+     <p>Join Discord for see 20games+ script, support-help and soon a executor GitanX</p> 
+     <a href="https://discord.gg/TON-LIEN-DISCORD" target="_blank" rel="noopener noreferrer">🔗 Join Discord</a>
+   </section>
 
   </main>
 
@@ -586,22 +584,23 @@ end)</code></pre>
 
   // Copier tout le contenu du bloc <pre><code>
   function copyCode(button) {
-    const pre = button.previousElementSibling; // le <pre>
-    let text = "";
-    if (pre) {
-      const code = pre.querySelector("code"); // cherche le <code> à l'intérieur
-      text = code ? code.textContent : pre.textContent;
-    }
-    if (!text) return;
-
-    if (navigator.clipboard && navigator.clipboard.writeText) {
-      navigator.clipboard.writeText(text).then(() => {
-        showToast(); // ✅ affiche la notif
-      }).catch(() => fallbackCopy(text));
-    } else {
-      fallbackCopy(text);
-    }
+  const pre = button.previousElementSibling; // le <pre>
+  let text = "";
+  if (pre) {
+    const code = pre.querySelector("code");
+    text = code ? code.innerText : pre.innerText; // 🔥 innerText garde les retours
   }
+  if (!text) return;
+
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(text).then(() => {
+      showToast();
+    }).catch(() => fallbackCopy(text));
+  } else {
+    fallbackCopy(text);
+  }
+}
+
 
   // Fallback pour vieux navigateurs
   function fallbackCopy(text) {
