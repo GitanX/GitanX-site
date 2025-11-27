@@ -334,6 +334,23 @@
     html {
   scroll-behavior: smooth;
 }
+    /* Gradient animé sur le h2 */
+.hero h2 {
+  font-size: clamp(2rem, 6vw, 3rem);
+  background: linear-gradient(270deg, #fff, var(--accent-end), #fff);
+  background-size: 200% 200%;
+  -webkit-background-clip: text;
+  color: transparent;
+  margin-bottom: 10px;
+  animation: gradientMove 6s ease infinite;
+}
+
+/* Animation du gradient */
+@keyframes gradientMove {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
 
     #community {
       text-align: center;
