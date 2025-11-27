@@ -32,13 +32,12 @@
     nav a:hover { color: #00e5ff; }
 
     .hero {
-      min-height: 100vh;
       display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: center;
       text-align: center;
-      padding: 100px 20px 5px; /* encore plus rapproché */
+      padding: 100px 20px 0px;
       position: relative;
     }
     .hero h2 {
@@ -46,16 +45,16 @@
       background: linear-gradient(120deg, #fff, #00e5ff);
       -webkit-background-clip: text;
       color: transparent;
-      margin-bottom: 10px; /* réduit l’espace sous le titre */
+      margin-bottom: 10px;
     }
     .hero p {
-      margin: 0; /* supprime l’espace inutile */
+      margin: 0 0 -10px;
     }
 
     section {
       max-width: 1000px;
       margin: 0 auto;
-      padding: 20px 20px; /* réduit l’espace vertical */
+      padding: 20px 20px;
     }
     h3 { color: #00e5ff; }
 
@@ -64,7 +63,7 @@
       border: 1px solid rgba(255,255,255,0.1);
       border-radius: 12px;
       padding: 20px;
-      margin-bottom: 20px; /* réduit l’espace entre étapes */
+      margin-bottom: 20px;
     }
 
     pre {
@@ -78,8 +77,8 @@
     .card-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-      gap: 15px; /* réduit l’espace entre cartes */
-      padding: 10px 20px; /* réduit l’espace haut/bas */
+      gap: 15px;
+      padding: 0px 20px;
     }
 
     .card {
