@@ -1,512 +1,370 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8">
-  <title>Tutoriel GitanX UI Library</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Page de fou</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
   <style>
+    :root {
+      --bg: #0f1226;
+      --bg-alt: #151a34;
+      --text: #e8eaf6;
+      --muted: #aeb6ff;
+      --primary: #7c4dff;
+      --primary-2: #00e5ff;
+      --card: #1c2147;
+      --success: #00c853;
+      --danger: #ff5252;
+      --shadow: 0 20px 40px rgba(0,0,0,0.4);
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
     body {
-      background:#141a24;
-      color:#eaf0ff;
-      font-family:Arial, sans-serif;
-      margin:0;
-      line-height:1.7;
-      transition:background 0.3s, color 0.3s;
+      margin: 0;
+      font-family: "Poppins", system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Noto Sans";
+      color: var(--text);
+      background: radial-gradient(1200px 600px at 20% -20%, #232a52 0%, var(--bg) 50%) fixed;
+      overflow-x: hidden;
     }
+    /* Header / Nav */
     header {
-      background:#1b2330;
-      padding:20px;
-      position:sticky;
-      top:0;
-      z-index:1000;
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      backdrop-filter: saturate(140%) blur(10px);
+      background: rgba(15,18,38,0.6);
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      z-index: 999;
     }
-    nav {
-      display:flex;
-      flex-wrap:wrap;
-      gap:20px;
-      justify-content:center;
+    .nav {
+      max-width: 1100px; margin: 0 auto;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 14px 24px;
     }
-    nav a {
-      color:#eaf0ff;
-      text-decoration:none;
-      font-weight:bold;
-      padding:8px 14px;
-      border-radius:6px;
-      transition:background 0.3s;
+    .brand {
+      display: flex; align-items: center; gap: 10px; font-weight: 700; letter-spacing: .6px;
     }
-    nav a:hover {
-      background:#2a3750;
-      color:#4a8cff;
+    .brand-dot {
+      width: 12px; height: 12px; border-radius: 50%;
+      background: linear-gradient(120deg, var(--primary), var(--primary-2));
+      box-shadow: 0 0 20px var(--primary);
+      animation: pulse 2.2s infinite ease-in-out;
     }
-    .container {
-      max-width:900px;
-      margin:0 auto;
-      padding:40px 20px;
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.3); }
     }
-    h1,h2,h3 {
-      color:#4a8cff;
-      margin-bottom:15px;
+    .nav a {
+      color: var(--text); text-decoration: none; margin-left: 18px; font-weight: 500;
+    }
+    .nav a:hover { color: var(--primary-2); }
+    .toggle {
+      border: 1px solid rgba(255,255,255,0.15);
+      padding: 8px 14px; border-radius: 32px; cursor: pointer;
+      background: rgba(255,255,255,0.04);
+      transition: 0.25s ease;
+    }
+    .toggle:hover { transform: translateY(-2px); background: rgba(255,255,255,0.12); }
+
+    /* Hero */
+    .hero {
+      min-height: 92vh;
+      display: grid; place-items: center;
+      text-align: center; padding: 120px 20px 60px;
+      position: relative; isolation: isolate;
+    }
+    .hero h1 {
+      font-size: clamp(2.2rem, 6vw, 4.2rem);
+      line-height: 1.05; margin: 0 0 14px;
+      letter-spacing: .5px;
+      background: linear-gradient(120deg, #fff, var(--muted));
+      -webkit-background-clip: text; background-clip: text; color: transparent;
+    }
+    .hero p {
+      max-width: 820px; margin: 0 auto 24px; color: var(--muted);
+      font-size: 1.1rem;
+    }
+    .hero .actions {
+      display: flex; flex-wrap: wrap; gap: 12px; justify-content: center;
+    }
+    .btn {
+      padding: 12px 18px; border-radius: 14px; border: none; cursor: pointer;
+      font-weight: 600; transition: 0.25s ease; box-shadow: var(--shadow);
+    }
+    .btn-primary {
+      background: linear-gradient(120deg, var(--primary), var(--primary-2));
+      color: #0b0e1e;
+    }
+    .btn-primary:hover { transform: translateY(-2px) scale(1.02); }
+    .btn-ghost {
+      background: rgba(255,255,255,0.1);
+      color: var(--text); border: 1px solid rgba(255,255,255,0.14);
+    }
+    .btn-ghost:hover { transform: translateY(-2px); background: rgba(255,255,255,0.18); }
+
+    /* Hero decoration */
+    .orbs {
+      position: absolute; inset: 0; z-index: -1; pointer-events: none;
+    }
+    .orb {
+      position: absolute; width: 380px; height: 380px; border-radius: 50%;
+      filter: blur(60px); opacity: 0.25; mix-blend-mode: screen;
+      animation: float 12s ease-in-out infinite;
+    }
+    .orb.one { background: #7c4dff; top: 10%; left: -6%; }
+    .orb.two { background: #00e5ff; bottom: -10%; right: -6%; animation-delay: 1.5s; }
+    .orb.three { background: #ff4081; top: 50%; left: 60%; animation-delay: 3s; }
+    @keyframes float {
+      0%, 100% { transform: translateY(0) translateX(0); }
+      50% { transform: translateY(-20px) translateX(6px); }
+    }
+
+    /* Sections */
+    section { max-width: 1100px; margin: 0 auto; padding: 60px 20px; }
+    .grid {
+      display: grid; gap: 20px;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
     }
     .card {
-      background:#1b2330;
-      border:1px solid #2a3750;
-      border-radius:12px;
-      padding:30px;
-      margin-bottom:40px;
-      box-shadow:0 6px 20px rgba(0,0,0,0.3);
+      background: var(--card);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 16px; padding: 20px; box-shadow: var(--shadow);
+      transform: translateY(0); transition: 0.25s ease;
     }
-    pre {
-      background:#0f1520;
-      color:#eaf0ff;
-      padding:16px;
-      border-radius:8px;
-      overflow:auto;
-      margin-top:15px;
-      margin-bottom:20px;
-    }
-    button {
-      background:#4a8cff;
-      border:none;
-      color:white;
-      padding:8px 16px;
-      border-radius:6px;
-      cursor:pointer;
-      font-weight:bold;
-    }
-    button:hover { filter:brightness(1.1); }
-    #notif {
-      position:fixed;
-      bottom:120px;
-      right:20px;
-      background:#4a8cff;
-      color:white;
-      padding:12px 18px;
-      border-radius:8px;
-      display:none;
-      font-weight:bold;
-      box-shadow:0 4px 12px rgba(0,0,0,0.3);
-    }
-    #themeToggle {
-      position:fixed;
-      bottom:20px;
-      right:20px;
-      width:50px;
-      height:50px;
-      border-radius:50%;
-      background:#4a8cff;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      cursor:pointer;
-      box-shadow:0 4px 12px rgba(0,0,0,0.3);
-    }
-    #themeToggle .icon {
-      width:20px; height:20px;
-      border-radius:50%;
-      background:white;
-    }
-    #themeToggle:hover { background:#2a3750; }
-    #themeMenu {
-      position:fixed;
-      bottom:80px;
-      right:20px;
-      background:#1b2330;
-      border:1px solid #2a3750;
-      border-radius:8px;
-      padding:10px;
-      display:none;
-      flex-direction:column;
-      gap:8px;
-      box-shadow:0 4px 12px rgba(0,0,0,0.3);
-    }
-    #themeMenu button {
-      background:#4a8cff;
-      border:none;
-      color:white;
-      padding:6px 12px;
-      border-radius:6px;
-      cursor:pointer;
-    }
-    #themeMenu button:hover { filter:brightness(1.1); }
-    body.light {
-      background:#eaeaea;
-      color:#141a24;
-    }
-    body.light .card {
-      background:#f9f9f9;
-      color:#141a24;
-      border:1px solid #ccc;
-    }
-    body.light nav a { color:#141a24; }
-    body.light nav a:hover { background:#ddd; color:#4a8cff; }
-    /* Menu responsive pour mobile */
-@media (max-width: 768px) {
-  nav {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 10px;
-    padding: 10px;
-  }
-  nav a {
-    display: block;
-    width: 100%;
-    text-align: left;
-    padding: 12px;
-    border-radius: 0;
-    border-bottom: 1px solid #2a3750;
-  }
-  nav a:last-child {
-    border-bottom: none;
-  }
-}
+    .card:hover { transform: translateY(-6px) scale(1.01); }
+    .card h3 { margin: 0 0 8px; }
+    .card p { color: var(--muted); margin: 0; }
 
+    /* Feature badges */
+    .badge {
+      display: inline-block;
+      padding: 6px 10px; border-radius: 999px;
+      font-size: .84rem; color: #0b0e1e; font-weight: 700;
+      background: linear-gradient(120deg, var(--primary-2), #a7ffeb);
+      box-shadow: 0 6px 16px rgba(0, 229, 255, .35);
+    }
+
+    /* Counter */
+    .counter {
+      display: flex; gap: 18px; flex-wrap: wrap; justify-content: center;
+      margin-top: 16px;
+    }
+    .counter .num {
+      font-size: clamp(1.6rem, 4vw, 2.6rem); font-weight: 700;
+      background: linear-gradient(120deg, #fff, #cfd8ff);
+      -webkit-background-clip: text; color: transparent;
+    }
+    .counter .label { color: var(--muted); font-weight: 500; text-transform: uppercase; letter-spacing: 1px; }
+
+    /* Form */
+    .form {
+      display: grid; gap: 14px; max-width: 720px; margin: 0 auto;
+    }
+    .input, .textarea {
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.14);
+      border-radius: 12px; padding: 12px 14px; color: var(--text);
+      outline: none; transition: 0.2s ease;
+    }
+    .input:focus, .textarea:focus {
+      border-color: var(--primary-2);
+      box-shadow: 0 0 0 4px rgba(0,229,255,0.18);
+    }
+    .textarea { min-height: 120px; resize: vertical; }
+    .note { color: var(--muted); font-size: .95rem; }
+
+    /* Footer */
+    footer {
+      padding: 40px 20px; text-align: center; color: var(--muted);
+      border-top: 1px solid rgba(255,255,255,0.08);
+      background: linear-gradient(180deg, transparent, rgba(0,0,0,0.2));
+    }
+
+    /* Light theme toggle */
+    .light {
+      --bg: #f6f8ff;
+      --bg-alt: #eef1ff;
+      --text: #0b0e1e;
+      --muted: #4b5a88;
+      --card: #ffffff;
+      background: radial-gradient(1200px 600px at 20% -20%, #f3f4ff 0%, var(--bg) 50%) fixed;
+    }
   </style>
 </head>
 <body>
+  <!-- Header / Nav -->
+  <header>
+    <nav class="nav">
+      <div class="brand">
+        <div class="brand-dot"></div>
+        <span>FolioX</span>
+      </div>
+      <div>
+        <a href="#features">Fonctionnalités</a>
+        <a href="#galerie">Galerie</a>
+        <a href="#contact">Contact</a>
+        <button class="toggle" id="themeToggle">Basculer thème</button>
+      </div>
+    </nav>
+  </header>
 
-<header>
-  <nav>
-    <a href="#installation">Installation</a>
-    <a href="#buttons">Boutons</a>
-    <a href="#toggles">Toggles</a>
-    <a href="#sliders">Sliders</a>
-    <a href="#dropdowns">Dropdowns</a>
-    <a href="#notifications">Notifications</a>
-    <a href="#themes">Thèmes</a>
-    <a href="#script-final">Script final</a>
-  </nav>
-</header>
+  <!-- Hero -->
+  <div class="hero" id="top">
+    <div class="orbs">
+      <div class="orb one"></div>
+      <div class="orb two"></div>
+      <div class="orb three"></div>
+    </div>
+    <div>
+      <span class="badge">Nouvelle génération</span>
+      <h1>Construis une page de fou, élégante et ultra fluide</h1>
+      <p>Animations, défilement doux, cartes interactives, compteur dynamique, thème sombre/clair, tout prêt à être remixé. Inspire, expérimente, publie.</p>
+      <div class="actions">
+        <a class="btn btn-primary" href="#features">Voir les features</a>
+        <a class="btn btn-ghost" href="#galerie">Parcourir la galerie</a>
+      </div>
+      <div class="counter" id="counter">
+        <div>
+          <div class="num" data-target="1280">0</div>
+          <div class="label">visites</div>
+        </div>
+        <div>
+          <div class="num" data-target="42">0</div>
+          <div class="label">projets</div>
+        </div>
+        <div>
+          <div class="num" data-target="99">0</div>
+          <div class="label">satisfaction</div>
+        </div>
+      </div>
+    </div>
+  </div>
 
-<div class="container">
-
-  <!-- Installation -->
-  <section id="installation" class="card">
-    <h2>Installation</h2>
-    <pre id="install">
-local GitanX = loadstring(game:HttpGet("https://raw.githubusercontent.com/fsqddsfdqsfd/Site/refs/heads/main/test1.lua"))()
-    </pre>
-    <button onclick="copyCode('install')">Copier le code</button>
-    <h3>Résultat complet :</h3>
-    <pre>
-local GitanX = loadstring(game:HttpGet("https://raw.githubusercontent.com/fsqddsfdqsfd/Site/refs/heads/main/test1.lua"))()
-local Library = GitanX:CreateWindow({
-    Name = "GitanX Menu",
-    Theme = "Amethyst"
-})
-local TabGameplay = Library:CreateTab("Gameplay")
-local Section = TabGameplay:CreateSection("Actions")
-    </pre>
+  <!-- Features -->
+  <section id="features">
+    <h2>Fonctionnalités</h2>
+    <p class="note">Survole les cartes pour voir l’animation. Clique sur “Action” pour un petit effet.</p>
+    <div class="grid">
+      <div class="card">
+        <h3>Défilement fluide</h3>
+        <p>Les ancres naviguent avec douceur dans la page.</p>
+        <button class="btn btn-ghost" onclick="location.href='#galerie'">Action</button>
+      </div>
+      <div class="card">
+        <h3>Thème sombre/clair</h3>
+        <p>Basculer instantanément avec un simple bouton.</p>
+        <button class="btn btn-ghost" onclick="document.body.classList.toggle('light')">Basculer</button>
+      </div>
+      <div class="card">
+        <h3>Composants réutilisables</h3>
+        <p>Boutons, cartes, badges… mixe à ta guise.</p>
+        <button class="btn btn-ghost" onclick="alert('Tu peux les copier dans tes projets !')">Action</button>
+      </div>
+      <div class="card">
+        <h3>Parallax subtil</h3>
+        <p>Des orbes flottent pour une ambiance premium.</p>
+        <button class="btn btn-ghost" onclick="alert('Regarde le fond qui respire.')">Action</button>
+      </div>
+    </div>
   </section>
 
-  <!-- Boutons -->
-  <section id="buttons" class="card">
-    <h2>Boutons</h2>
-    <pre id="button">
-Section:CreateButton({
-    Name = "Nom du bouton",
-    Callback = function()
-        -- votre script ici
-    end
-})
-    </pre>
-    <button onclick="copyCode('button')">Copier le code</button>
-    <h3>Résultat complet :</h3>
-    <pre>
-Section:CreateButton({
-    Name = "Boost vitesse",
-    Callback = function()
-        local hum = game.Players.LocalPlayer.Character:FindFirstChildOfClass("Humanoid")
-        if hum then hum.WalkSpeed = 50 end
-    end
-})
-    </pre>
+  <!-- Galerie -->
+  <section id="galerie">
+    <h2>Galerie interactive</h2>
+    <p class="note">Cartes responsive avec hover et focus, parfaites pour un portfolio.</p>
+    <div class="grid">
+      <div class="card">
+        <h3>Projet Neon</h3>
+        <p>Design vibrant et contrastes assumés.</p>
+      </div>
+      <div class="card">
+        <h3>Terra Nova</h3>
+        <p>Palette douce, interfaces calmes.</p>
+      </div>
+      <div class="card">
+        <h3>Skyline</h3>
+        <p>Minimalisme et typographie forte.</p>
+      </div>
+      <div class="card">
+        <h3>Pulse</h3>
+        <p>Animations organiques et fluides.</p>
+      </div>
+    </div>
   </section>
 
-  <!-- Toggles -->
-  <section id="toggles" class="card">
-    <h2>Toggles</h2>
-    <pre id="toggle">
-Section:CreateToggle({
-    Name = "Nom du toggle",
-    CurrentValue = false,
-    Callback = function(state)
-        -- votre script ici
-    end
-})
-    </pre>
-    <button onclick="copyCode('toggle')">Copier le code</button>
-    <h3>Résultat complet :</h3>
-    <pre>
-Section:CreateToggle({
-    Id = "InvincibleToggle",
-    Name = "Mode invincible",
-    CurrentValue = false,
-    Callback = function(state)
-        local hum = game.Players.LocalPlayer.Character:FindFirstChildOfClass("Humanoid")
-        if hum then
-            hum.MaxHealth = state and math.huge or 100
-            hum.Health    = state and math.huge or 100
-        end
-    end
-})
-    </pre>
+  <!-- Contact / Form -->
+  <section id="contact">
+    <h2>Contact</h2>
+    <p class="note">Un formulaire stylé pour recevoir des messages (simulation côté client).</p>
+    <form class="form" onsubmit="handleSubmit(event)">
+      <input class="input" type="text" name="nom" placeholder="Ton nom" required>
+      <input class="input" type="email" name="email" placeholder="Email" required>
+      <textarea class="textarea" name="message" placeholder="Ton message…" required></textarea>
+      <button class="btn btn-primary" type="submit">Envoyer</button>
+    </form>
+    <p id="status" class="note" style="margin-top:12px;"></p>
   </section>
 
-  <!-- Sliders -->
-  <section id="sliders" class="card">
-    <h2>Sliders</h2>
-    <pre id="slider">
-Section:CreateSlider({
-    Name = "Nom du slider",
-    Range = {0,100},
-    Increment = 1,
-    CurrentValue = 0,
-    Callback = function(val)
-        -- votre script ici
-    end
-})
-    </pre>
-    <button onclick="copyCode('slider')">Copier le code</button>
-    <h3>Résultat complet :</h3>
-    <pre>
-Section:CreateSlider({
-    Id = "SpeedSlider",
-    Name = "Vitesse",
-    Range = {16, 120},
-    Increment = 1,
-    CurrentValue = 16,
-    Callback = function(val)
-        local hum = game.Players.LocalPlayer.Character:FindFirstChildOfClass("Humanoid")
-        if hum then hum.WalkSpeed = val end
-    end
-})
-    </pre>
-  </section>
+  <!-- Footer -->
+  <footer>
+    <p>&copy; 2025 FolioX — Conçu avec passion. <a href="#top">Retour en haut</a></p>
+  </footer>
 
-  <!-- Dropdowns -->
-  <section id="dropdowns" class="card">
-    <h2>Dropdowns</h2>
-    <pre id="dropdown">
-Section:CreateDropdown({
-    Name = "Nom du dropdown",
-    Options = {"Option1","Option2","Option3"},
-    CurrentOption = "Option1",
-    Callback = function(choice)
-        -- votre script ici
-    end
-})
-    </pre>
-    <button onclick="copyCode('dropdown')">Copier le code</button>
-    <h3>Résultat complet :</h3>
-        <pre>
-Section:CreateDropdown({
-    Id = "SpeedChoice",
-    Name = "Choix de vitesse",
-    Options = {"16","50","100"},
-    CurrentOption = "16",
-    Callback = function(choice)
-        local hum = game.Players.LocalPlayer.Character:FindFirstChildOfClass("Humanoid")
-        if hum then hum.WalkSpeed = tonumber(choice) end
-    end
-})
-    </pre>
-  </section>
-
-  <!-- Notifications -->
-  <section id="notifications" class="card">
-    <h2>Notifications</h2>
-    <pre id="notify">
-Library:Notify({
-    Title = "Titre",
-    Content = "Message",
-    Type = "Info",
-    Duration = 3
-})
-    </pre>
-    <button onclick="copyCode('notify')">Copier le code</button>
-    <h3>Résultat complet :</h3>
-    <pre>
-Library:Notify({
-    Title = "GitanX",
-    Content = "Interface chargée avec succès.",
-    Type = "Success",
-    Duration = 3
-})
-    </pre>
-  </section>
-
-  <!-- Thèmes -->
-  <section id="themes" class="card">
-    <h2>Changer de thème</h2>
-    <pre id="theme">
-Library:ChangeTheme("Ocean") -- Thèmes disponibles: Default, Ocean, Amethyst, Light
-    </pre>
-    <button onclick="copyCode('theme')">Copier le code</button>
-    <h3>Résultat complet :</h3>
-    <pre>
-Section:CreateDropdown({
-    Id = "ThemeDropdown",
-    Name = "Thème",
-    Options = {"Default","Ocean","Amethyst","Light"},
-    CurrentOption = "Amethyst",
-    Callback = function(choice)
-        Library:ChangeTheme(choice)
-    end
-})
-    </pre>
-  </section>
-
-  <!-- Script final -->
-  <section id="script-final" class="card">
-    <h2>Script final</h2>
-    <pre id="final">
-local GitanX = loadstring(game:HttpGet("https://raw.githubusercontent.com/fsqddsfdqsfd/Site/refs/heads/main/test1.lua"))()
-
-local Library = GitanX:CreateWindow({
-    Name = "GitanX Menu",
-    Theme = "Amethyst"
-})
-
-local TabGameplay = Library:CreateTab("Gameplay")
-local Section = TabGameplay:CreateSection("Actions")
-
-Section:CreateButton({
-    Name = "Boost vitesse",
-    Callback = function()
-        local hum = game.Players.LocalPlayer.Character and game.Players.LocalPlayer.Character:FindFirstChildOfClass("Humanoid")
-        if hum then hum.WalkSpeed = 50 end
-    end
-})
-
-Section:CreateToggle({
-    Id = "InvincibleToggle",
-    Name = "Mode invincible",
-    CurrentValue = false,
-    Callback = function(state)
-        local hum = game.Players.LocalPlayer.Character and game.Players.LocalPlayer.Character:FindFirstChildOfClass("Humanoid")
-        if hum then
-            hum.MaxHealth = state and math.huge or 100
-            hum.Health    = state and math.huge or 100
-        end
-    end
-})
-
-Section:CreateSlider({
-    Id = "SpeedSlider",
-    Name = "Vitesse",
-    Range = {16, 120},
-    Increment = 1,
-    CurrentValue = 16,
-    Callback = function(val)
-        local hum = game.Players.LocalPlayer.Character and game.Players.LocalPlayer.Character:FindFirstChildOfClass("Humanoid")
-        if hum then hum.WalkSpeed = val end
-    end
-})
-
-Section:CreateDropdown({
-    Id = "SpeedChoice",
-    Name = "Choix de vitesse",
-    Options = {"16","50","100"},
-    CurrentOption = "16",
-    Callback = function(choice)
-        local hum = game.Players.LocalPlayer.Character and game.Players.LocalPlayer.Character:FindFirstChildOfClass("Humanoid")
-        if hum then hum.WalkSpeed = tonumber(choice) end
-    end
-})
-
-local TabUI = Library:CreateTab("Interface")
-local SectionUI = TabUI:CreateSection("Réglages")
-
-SectionUI:CreateDropdown({
-    Id = "ThemeDropdown",
-    Name = "Thème",
-    Options = {"Default","Ocean","Amethyst","Light"},
-    CurrentOption = "Amethyst",
-    Callback = function(choice)
-        Library:ChangeTheme(choice)
-    end
-})
-
-SectionUI:CreateKeybind({
-    Id = "ToggleMenuKey",
-    Name = "Raccourci menu",
-    CurrentKey = Enum.KeyCode.RightControl,
-    Callback = function()
-        Library:Notify({
-            Title = "Keybind",
-            Content = "Menu key pressed",
-            Type = "Info",
-            Duration = 2
-        })
-    end
-})
-
-Library:Notify({
-    Title = "GitanX",
-    Content = "Interface chargée avec succès.",
-    Type = "Success",
-    Duration = 3
-})
-    </pre>
-    <button onclick="copyCode('final')">Copier le code</button>
-  </section>
-
-</div>
-
-<!-- Notification -->
-<div id="notif">Code copié !</div>
-
-<!-- Bouton rond thème -->
-<div id="themeToggle"><div class="icon"></div></div>
-
-<!-- Mini menu thème -->
-<div id="themeMenu">
-  <button onclick="setTheme('dark')">🌑 Sombre</button>
-  <button onclick="setTheme('light')">☀️ Clair</button>
-  <button onclick="setTheme('auto')">⚙️ Auto</button>
-</div>
-
-<script>
-  // Fonction copier le code
-  function copyCode(id){
-    const code = document.getElementById(id).innerText;
-    navigator.clipboard.writeText(code).then(()=>{
-      const notif = document.getElementById("notif");
-      notif.style.display = "block";
-      setTimeout(()=>{ notif.style.display = "none"; },2000);
+  <script>
+    // Theme toggle with memory
+    const toggle = document.getElementById('themeToggle');
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme === 'light') document.body.classList.add('light');
+    toggle.addEventListener('click', () => {
+      document.body.classList.toggle('light');
+      localStorage.setItem('theme', document.body.classList.contains('light') ? 'light' : 'dark');
     });
-  }
 
-  // Gestion du thème
-  let mode = "dark";
-  const themeBtn = document.getElementById("themeToggle");
-  const themeMenu = document.getElementById("themeMenu");
+    // Counter animation
+    const animateCounter = (el) => {
+      const target = parseInt(el.dataset.target, 10);
+      let current = 0;
+      const duration = 1400;
+      const start = performance.now();
+      const step = (now) => {
+        const p = Math.min((now - start) / duration, 1);
+        current = Math.floor(target * (p < 1 ? (1 - Math.pow(1 - p, 3)) : 1)); // ease-out-cubic
+        el.textContent = current.toLocaleString('fr-FR');
+        if (p < 1) requestAnimationFrame(step);
+      };
+      requestAnimationFrame(step);
+    };
+    const counters = document.querySelectorAll('.num');
+    const obs = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) { animateCounter(e.target); obs.unobserve(e.target); } });
+    }, { threshold: 0.6 });
+    counters.forEach(c => obs.observe(c));
 
-  function applyTheme(){
-    if(mode === "light"){
-      document.body.classList.add("light");
-    } else if(mode === "dark"){
-      document.body.classList.remove("light");
-    } else if(mode === "auto"){
-      const prefersLight = window.matchMedia("(prefers-color-scheme: light)").matches;
-      if(prefersLight) document.body.classList.add("light");
-      else document.body.classList.remove("light");
+    // Form submit simulation
+    function handleSubmit(e) {
+      e.preventDefault();
+      const status = document.getElementById('status');
+      status.textContent = 'Envoi en cours…';
+      setTimeout(() => {
+        status.textContent = 'Merci ! Ton message a bien été envoyé (simulation).';
+        status.style.color = 'var(--success)';
+        e.target.reset();
+      }, 900);
     }
-  }
 
-  function setTheme(newMode){
-    mode = newMode;
-    applyTheme();
-    themeMenu.style.display = "none";
-  }
-
-  themeBtn.addEventListener("click", ()=>{
-    themeMenu.style.display = themeMenu.style.display === "flex" ? "none" : "flex";
-  });
-
-  // Appliquer au chargement
-  applyTheme();
-</script>
-
+    // Gentle parallax on orb group
+    const hero = document.querySelector('.hero');
+    hero.addEventListener('pointermove', (e) => {
+      const r = hero.getBoundingClientRect();
+      const x = (e.clientX - r.width / 2) / r.width;
+      const y = (e.clientY - r.height / 2) / r.height;
+      hero.style.transform = `perspective(800px) translateZ(0) rotateX(${y * -2}deg) rotateY(${x * 2}deg)`;
+    });
+    hero.addEventListener('pointerleave', () => {
+      hero.style.transform = 'none';
+    });
+  </script>
 </body>
 </html>
