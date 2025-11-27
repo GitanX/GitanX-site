@@ -122,9 +122,15 @@
       border-radius: 16px;
       padding: 20px;
       text-align: center;
-      transition: 0.3s;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
       backdrop-filter: blur(10px);
       box-shadow: 0 6px 20px rgba(124,77,255,0.2);
+    }
+
+    .card:hover {
+      transform: scale(1.05);
+      box-shadow: 0 12px 30px rgba(124,77,255,0.4),
+                  0 6px 20px rgba(0,229,255,0.3);
     }
 
     .card h3 { margin-top: 0; margin-bottom: 8px; }
@@ -183,21 +189,21 @@
   </header>
 
   <div class="hero" id="intro">
-    <h2>How use GitanX tuto</h2>
-    <p>The new library GitanX its just eazy try and you go to understand</p>
+    <h2>Apprends à utiliser GitanX pas à pas</h2>
+    <p>Fenêtres, onglets, sliders, color pickers… Découvre comment créer ton interface avec la librairie GitanX.</p>
   </div>
 
   <!-- Cartes rouges -->
   <section class="card-grid">
     <div class="card">
       <h3>📘 Tutoriel</h3>
-      <p>Follow the tuto its eazy.</p>
-      <a href="#etapes">See the tuto</a>
+      <p>Explore les étapes pour maîtriser GitanX pas à pas.</p>
+      <a href="#etapes">Voir le tuto</a>
     </div>
     <div class="card">
-      <h3>🌐 Community</h3>
-      <p>Join the discord for better help,scirpt,chat.</p>
-      <a href="#community">Join</a>
+      <h3>🌐 Communauté</h3>
+      <p>Rejoins les autres créateurs, pose tes questions, partage tes projets.</p>
+      <a href="#community">Rejoindre</a>
     </div>
   </section>
 
@@ -205,39 +211,38 @@
   <section class="card-grid">
     <div class="card">
       <h3>🏠 Home</h3>
-      <p>Home of the page</p>
-      <a href="#intro">Back</a>
+      <p>Retour à l’intro de la page principale.</p>
+      <a href="#intro">Retour</a>
     </div>
     <div class="card">
       <h3>📜 Script final</h3>
-      <p>A scirpt final for try</p>
-      <a href="#exemples">See the script</a>
+      <p>Voir l’exemple complet du script GitanX.</p>
+      <a href="#exemples">Voir le script</a>
     </div>
   </section>
 
   <section id="etapes">
-    <h3>🚀 Tutoriel</h3>
+    <h3>🚀 Étapes du tutoriel</h3>
 
     <div class="step">
-      <h4>1. Loading GitanX library</h4>
-      <pre><code>local lib = loadstring(game:HttpGet("https://raw.githubusercontent.com/GitanX/GitanX-librairie/refs/heads/main/librairie%20GitanX.lua"))()</code></pre>
-      <button class="copy-btn" onclick="copyCode(this)">📋 Copy the script</button>
+      <h4>1. Charger la librairie</h4>
+      <pre><code>local lib = loadstring(game:HttpGet("URL_DE_TON_SCRIPT"))()</code></pre>
+      <button class="copy-btn" onclick="copyCode(this)">📋 Copier le script</button>
     </div>
-
-    <div class="step">
-      <h4>2. Creating a Windows</h4>
-      <pre><code>local win = lib:Window("Mon UI", "Preset", Enum.KeyCode.RightControl)</code></pre>
-      <button class="copy-btn" onclick="copyCode(this)">📋 Copy the script</button>
-    </div>
-
         <div class="step">
-      <h4>3. Add a Tab</h4>
-      <pre><code>local tab = win:Tab("Outils")</code></pre>
-      <button class="copy-btn" onclick="copyCode(this)">📋 Copy the script</button>
+      <h4>2. Créer une fenêtre</h4>
+      <pre><code>local win = lib:Window("Mon UI", "Preset", Enum.KeyCode.RightControl)</code></pre>
+      <button class="copy-btn" onclick="copyCode(this)">📋 Copier le script</button>
     </div>
 
     <div class="step">
-      <h4>4. Button, Toggle</h4>
+      <h4>3. Ajouter un onglet</h4>
+      <pre><code>local tab = win:Tab("Outils")</code></pre>
+      <button class="copy-btn" onclick="copyCode(this)">📋 Copier le script</button>
+    </div>
+
+    <div class="step">
+      <h4>4. Ajouter des composants</h4>
       <pre><code>tab:Button("Clique-moi", function()
   print("Bouton pressé !")
 end)
@@ -245,7 +250,7 @@ end)
 tab:Toggle("Activer option", false, function(state)
   print("Toggle:", state)
 end)</code></pre>
-      <button class="copy-btn" onclick="copyCode(this)">📋 Copy the script</button>
+      <button class="copy-btn" onclick="copyCode(this)">📋 Copier le script</button>
     </div>
 
     <div class="step">
@@ -253,12 +258,12 @@ end)</code></pre>
       <pre><code>tab:Colorpicker("Choisis une couleur", Color3.fromRGB(255,0,0), function(c)
   print("Couleur choisie:", c)
 end)</code></pre>
-      <button class="copy-btn" onclick="copyCode(this)">📋 Copy the script</button>
+      <button class="copy-btn" onclick="copyCode(this)">📋 Copier le script</button>
     </div>
   </section>
 
   <section id="exemples">
-    <h3>📜 Script final (test)</h3>
+    <h3>📜 Exemple complet</h3>
     <pre><code>local win = lib:Window("Mon UI", "Preset", Enum.KeyCode.RightControl)
 local tab = win:Tab("Outils")
 
@@ -273,17 +278,18 @@ end)
 tab:Colorpicker("Choisis une couleur", Color3.fromRGB(255,0,0), function(c)
   print("Couleur choisie:", c)
 end)</code></pre>
-    <button class="copy-btn" onclick="copyCode(this)">📋 Copy the script</button>
+    <button class="copy-btn" onclick="copyCode(this)">📋 Copier le script</button>
   </section>
 
   <section id="community">
-    <h3>Join the discord of GitanX</h3>
-    <p>Support ticket for help, 20 games+ cheat, chat with the community of exploiter</p>
-    <a href="https://discord.gg/nqVTXUeDHk" target="_blank">🔗 Join Discord</a>
+    <h3>💬 Rejoins la communauté GitanX</h3>
+    <p>Tu veux discuter avec d'autres utilisateurs, poser tes questions, ou montrer ton interface GitanX ? 
+       Rejoins notre serveur Discord et connecte-toi avec la communauté.</p>
+    <a href="https://discord.gg/TON-LIEN-DISCORD" target="_blank">🔗 Rejoindre le Discord</a>
   </section>
 
   <footer>
-    <p>&copy; 2025 Tutoriel GitanX — Create your scirpt with GitanX Hub</p>
+    <p>&copy; 2025 Tutoriel GitanX — Créé pour apprendre étape par étape ⚡</p>
   </footer>
 
   <!-- Script JS pour copier le code -->
@@ -294,7 +300,7 @@ end)</code></pre>
         const text = codeBlock.innerText;
         navigator.clipboard.writeText(text).then(() => {
           button.innerText = "✅ Copié !";
-          setTimeout(() => button.innerText = "📋 Copy the script.", 2000);
+          setTimeout(() => button.innerText = "📋 Copier le script", 2000);
         });
       }
     }
