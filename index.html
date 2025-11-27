@@ -3,358 +3,336 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Page de fou</title>
+  <title>Tutoriel GitanX — Page de fou</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap"
+    rel="stylesheet"
+  />
   <style>
-    :root {
-      --bg: #0f1226;
-      --bg-alt: #151a34;
-      --text: #e8eaf6;
-      --muted: #aeb6ff;
-      --primary: #7c4dff;
-      --primary-2: #00e5ff;
-      --card: #1c2147;
-      --success: #00c853;
-      --danger: #ff5252;
-      --shadow: 0 20px 40px rgba(0,0,0,0.4);
+    :root{
+      --bg:#0e1225; --text:#eaf0ff; --muted:#b8c2ff; --primary:#7c4dff; --accent:#00e5ff; --card:#1a2146;
+      --success:#00c853; --warn:#ffb300; --danger:#ff5252; --shadow:0 20px 40px rgba(0,0,0,.35);
     }
-    * { box-sizing: border-box; }
-    html { scroll-behavior: smooth; }
-    body {
-      margin: 0;
-      font-family: "Poppins", system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Noto Sans";
-      color: var(--text);
-      background: radial-gradient(1200px 600px at 20% -20%, #232a52 0%, var(--bg) 50%) fixed;
-      overflow-x: hidden;
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0; font-family:"Poppins",system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial;
+      color:var(--text); background: radial-gradient(1200px 600px at 10% -20%, #232a52 0%, #0e1225 50%) fixed;
+      overflow-x:hidden;
     }
-    /* Header / Nav */
-    header {
-      position: fixed;
-      top: 0; left: 0; right: 0;
-      backdrop-filter: saturate(140%) blur(10px);
-      background: rgba(15,18,38,0.6);
-      border-bottom: 1px solid rgba(255,255,255,0.08);
-      z-index: 999;
-    }
-    .nav {
-      max-width: 1100px; margin: 0 auto;
-      display: flex; align-items: center; justify-content: space-between;
-      padding: 14px 24px;
-    }
-    .brand {
-      display: flex; align-items: center; gap: 10px; font-weight: 700; letter-spacing: .6px;
-    }
-    .brand-dot {
-      width: 12px; height: 12px; border-radius: 50%;
-      background: linear-gradient(120deg, var(--primary), var(--primary-2));
-      box-shadow: 0 0 20px var(--primary);
-      animation: pulse 2.2s infinite ease-in-out;
-    }
-    @keyframes pulse {
-      0%, 100% { transform: scale(1); }
-      50% { transform: scale(1.3); }
-    }
-    .nav a {
-      color: var(--text); text-decoration: none; margin-left: 18px; font-weight: 500;
-    }
-    .nav a:hover { color: var(--primary-2); }
-    .toggle {
-      border: 1px solid rgba(255,255,255,0.15);
-      padding: 8px 14px; border-radius: 32px; cursor: pointer;
-      background: rgba(255,255,255,0.04);
-      transition: 0.25s ease;
-    }
-    .toggle:hover { transform: translateY(-2px); background: rgba(255,255,255,0.12); }
+
+    /* Header */
+    header{position:fixed; inset:0 auto auto 0; right:0; z-index:999; backdrop-filter:saturate(140%) blur(10px);
+      background:rgba(14,18,37,.6); border-bottom:1px solid rgba(255,255,255,.08)}
+    .nav{max-width:1100px; margin:0 auto; display:flex; align-items:center; justify-content:space-between; padding:14px 20px}
+    .brand{display:flex; align-items:center; gap:10px; font-weight:700; letter-spacing:.5px}
+    .dot{width:12px; height:12px; border-radius:50%; background:linear-gradient(120deg,var(--primary),var(--accent));
+      box-shadow:0 0 20px var(--primary); animation:pulse 2.2s infinite ease-in-out}
+    @keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.3)}}
+    .nav a{color:var(--text); text-decoration:none; margin-left:16px; font-weight:500}
+    .nav a:hover{color:var(--accent)}
+    .toggle{border:1px solid rgba(255,255,255,.15); padding:8px 14px; border-radius:999px; cursor:pointer;
+      background:rgba(255,255,255,.06); transition:.25s ease}
+    .toggle:hover{transform:translateY(-2px); background:rgba(255,255,255,.12)}
 
     /* Hero */
-    .hero {
-      min-height: 92vh;
-      display: grid; place-items: center;
-      text-align: center; padding: 120px 20px 60px;
-      position: relative; isolation: isolate;
-    }
-    .hero h1 {
-      font-size: clamp(2.2rem, 6vw, 4.2rem);
-      line-height: 1.05; margin: 0 0 14px;
-      letter-spacing: .5px;
-      background: linear-gradient(120deg, #fff, var(--muted));
-      -webkit-background-clip: text; background-clip: text; color: transparent;
-    }
-    .hero p {
-      max-width: 820px; margin: 0 auto 24px; color: var(--muted);
-      font-size: 1.1rem;
-    }
-    .hero .actions {
-      display: flex; flex-wrap: wrap; gap: 12px; justify-content: center;
-    }
-    .btn {
-      padding: 12px 18px; border-radius: 14px; border: none; cursor: pointer;
-      font-weight: 600; transition: 0.25s ease; box-shadow: var(--shadow);
-    }
-    .btn-primary {
-      background: linear-gradient(120deg, var(--primary), var(--primary-2));
-      color: #0b0e1e;
-    }
-    .btn-primary:hover { transform: translateY(-2px) scale(1.02); }
-    .btn-ghost {
-      background: rgba(255,255,255,0.1);
-      color: var(--text); border: 1px solid rgba(255,255,255,0.14);
-    }
-    .btn-ghost:hover { transform: translateY(-2px); background: rgba(255,255,255,0.18); }
+    .hero{min-height:92vh; display:grid; place-items:center; text-align:center; padding:120px 20px 60px; position:relative; isolation:isolate}
+    .hero h1{font-size:clamp(2.2rem,6vw,4.2rem); line-height:1.05; margin:0 0 14px; letter-spacing:.4px;
+      background:linear-gradient(120deg,#fff,var(--muted)); -webkit-background-clip:text; background-clip:text; color:transparent}
+    .hero p{max-width:900px; margin:0 auto 22px; color:var(--muted)}
+    .actions{display:flex; flex-wrap:wrap; gap:12px; justify-content:center}
+    .btn{padding:12px 18px; border-radius:14px; border:none; cursor:pointer; font-weight:600; transition:.25s ease; box-shadow:var(--shadow)}
+    .btn-primary{background:linear-gradient(120deg,var(--primary),var(--accent)); color:#0b0e1e}
+    .btn-primary:hover{transform:translateY(-2px) scale(1.02)}
+    .btn-ghost{background:rgba(255,255,255,.1); color:var(--text); border:1px solid rgba(255,255,255,.14)}
+    .btn-ghost:hover{transform:translateY(-2px); background:rgba(255,255,255,.18)}
+    .badge{display:inline-block; padding:6px 10px; border-radius:999px; font-size:.84rem; color:#0b0e1e; font-weight:700;
+      background:linear-gradient(120deg,var(--accent),#a7ffeb); box-shadow:0 6px 16px rgba(0,229,255,.35)}
 
-    /* Hero decoration */
-    .orbs {
-      position: absolute; inset: 0; z-index: -1; pointer-events: none;
-    }
-    .orb {
-      position: absolute; width: 380px; height: 380px; border-radius: 50%;
-      filter: blur(60px); opacity: 0.25; mix-blend-mode: screen;
-      animation: float 12s ease-in-out infinite;
-    }
-    .orb.one { background: #7c4dff; top: 10%; left: -6%; }
-    .orb.two { background: #00e5ff; bottom: -10%; right: -6%; animation-delay: 1.5s; }
-    .orb.three { background: #ff4081; top: 50%; left: 60%; animation-delay: 3s; }
-    @keyframes float {
-      0%, 100% { transform: translateY(0) translateX(0); }
-      50% { transform: translateY(-20px) translateX(6px); }
-    }
+    /* Floating orbs */
+    .orbs{position:absolute; inset:0; z-index:-1; pointer-events:none}
+    .orb{position:absolute; width:380px; height:380px; border-radius:50%; filter:blur(60px); opacity:.25; mix-blend-mode:screen; animation:float 12s ease-in-out infinite}
+    .orb.one{background:#7c4dff; top:10%; left:-6%}
+    .orb.two{background:#00e5ff; bottom:-10%; right:-6%; animation-delay:1.5s}
+    .orb.three{background:#ff4081; top:50%; left:60%; animation-delay:3s}
+    @keyframes float{0%,100%{transform:translateY(0) translateX(0)}50%{transform:translateY(-20px) translateX(6px)}}
 
     /* Sections */
-    section { max-width: 1100px; margin: 0 auto; padding: 60px 20px; }
-    .grid {
-      display: grid; gap: 20px;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-    }
-    .card {
-      background: var(--card);
-      border: 1px solid rgba(255,255,255,0.08);
-      border-radius: 16px; padding: 20px; box-shadow: var(--shadow);
-      transform: translateY(0); transition: 0.25s ease;
-    }
-    .card:hover { transform: translateY(-6px) scale(1.01); }
-    .card h3 { margin: 0 0 8px; }
-    .card p { color: var(--muted); margin: 0; }
+    section{max-width:1100px; margin:0 auto; padding:60px 20px}
+    .grid{display:grid; gap:20px; grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}
+    .card{background:var(--card); border:1px solid rgba(255,255,255,.08); border-radius:16px; padding:20px; box-shadow:var(--shadow);
+      transform:translateY(0); transition:.25s ease}
+    .card:hover{transform:translateY(-6px) scale(1.01)}
+    .card h3{margin:0 0 8px}
+    .card p{color:var(--muted); margin:0}
 
-    /* Feature badges */
-    .badge {
-      display: inline-block;
-      padding: 6px 10px; border-radius: 999px;
-      font-size: .84rem; color: #0b0e1e; font-weight: 700;
-      background: linear-gradient(120deg, var(--primary-2), #a7ffeb);
-      box-shadow: 0 6px 16px rgba(0, 229, 255, .35);
-    }
+    /* Code blocks */
+    pre{background:#0a0d1f; border:1px solid rgba(255,255,255,.08); border-radius:12px; padding:14px; overflow:auto}
+    code{color:#cbd5ff}
 
-    /* Counter */
-    .counter {
-      display: flex; gap: 18px; flex-wrap: wrap; justify-content: center;
-      margin-top: 16px;
-    }
-    .counter .num {
-      font-size: clamp(1.6rem, 4vw, 2.6rem); font-weight: 700;
-      background: linear-gradient(120deg, #fff, #cfd8ff);
-      -webkit-background-clip: text; color: transparent;
-    }
-    .counter .label { color: var(--muted); font-weight: 500; text-transform: uppercase; letter-spacing: 1px; }
+    /* Steps */
+    .step{display:flex; gap:16px; align-items:flex-start}
+    .step-num{min-width:34px; height:34px; border-radius:999px; display:grid; place-items:center; font-weight:700; color:#0b0e1e;
+      background:linear-gradient(120deg,var(--primary),var(--accent)); box-shadow:0 10px 20px rgba(124,77,255,.25)}
 
-    /* Form */
-    .form {
-      display: grid; gap: 14px; max-width: 720px; margin: 0 auto;
+    /* Footer + light theme */
+    footer{padding:40px 20px; text-align:center; color:var(--muted); border-top:1px solid rgba(255,255,255,.08);
+      background:linear-gradient(180deg,transparent,rgba(0,0,0,.2))}
+    .light{
+      --bg:#f6f8ff; --text:#0b0e1e; --muted:#4b5a88; --card:#ffffff;
+      background: radial-gradient(1200px 600px at 10% -20%, #f3f4ff 0%, #f6f8ff 50%) fixed;
     }
-    .input, .textarea {
-      background: rgba(255,255,255,0.06);
-      border: 1px solid rgba(255,255,255,0.14);
-      border-radius: 12px; padding: 12px 14px; color: var(--text);
-      outline: none; transition: 0.2s ease;
-    }
-    .input:focus, .textarea:focus {
-      border-color: var(--primary-2);
-      box-shadow: 0 0 0 4px rgba(0,229,255,0.18);
-    }
-    .textarea { min-height: 120px; resize: vertical; }
-    .note { color: var(--muted); font-size: .95rem; }
-
-    /* Footer */
-    footer {
-      padding: 40px 20px; text-align: center; color: var(--muted);
-      border-top: 1px solid rgba(255,255,255,0.08);
-      background: linear-gradient(180deg, transparent, rgba(0,0,0,0.2));
-    }
-
-    /* Light theme toggle */
-    .light {
-      --bg: #f6f8ff;
-      --bg-alt: #eef1ff;
-      --text: #0b0e1e;
-      --muted: #4b5a88;
-      --card: #ffffff;
-      background: radial-gradient(1200px 600px at 20% -20%, #f3f4ff 0%, var(--bg) 50%) fixed;
-    }
+    .note{color:var(--muted); font-size:.95rem}
+    .warn{color:var(--warn); font-weight:600}
   </style>
 </head>
 <body>
-  <!-- Header / Nav -->
+  <!-- Header -->
   <header>
     <nav class="nav">
       <div class="brand">
-        <div class="brand-dot"></div>
-        <span>FolioX</span>
+        <div class="dot"></div>
+        <span>GitanX Tutor</span>
       </div>
       <div>
-        <a href="#features">Fonctionnalités</a>
-        <a href="#galerie">Galerie</a>
-        <a href="#contact">Contact</a>
+        <a href="#intro">Intro</a>
+        <a href="#lecture">Lecture du code</a>
+        <a href="#safe">Apprendre “safe”</a>
+        <a href="#exemples">Exemples</a>
         <button class="toggle" id="themeToggle">Basculer thème</button>
       </div>
     </nav>
   </header>
 
   <!-- Hero -->
-  <div class="hero" id="top">
-    <div class="orbs">
-      <div class="orb one"></div>
-      <div class="orb two"></div>
-      <div class="orb three"></div>
-    </div>
+  <div class="hero" id="intro">
+    <div class="orbs"><div class="orb one"></div><div class="orb two"></div><div class="orb three"></div></div>
     <div>
-      <span class="badge">Nouvelle génération</span>
-      <h1>Construis une page de fou, élégante et ultra fluide</h1>
-      <p>Animations, défilement doux, cartes interactives, compteur dynamique, thème sombre/clair, tout prêt à être remixé. Inspire, expérimente, publie.</p>
+      <span class="badge">Comprends. Expérimente. Crée.</span>
+      <h1>Tuto interactif pour décoder et t’inspirer de la librairie GitanX</h1>
+      <p>Ce guide te montre ce que fait la librairie (UI glissant, tabs, boutons, sliders, colorpicker) et comment construire
+        tes propres interfaces en Roblox Studio avec de bonnes pratiques. Certaines fonctions sont conçues pour des contextes d’exécution spécifiques
+        et ne marchent pas en Studio tel quel — on s’appuie dessus pour apprendre les concepts, puis on les recrée proprement.</p>
       <div class="actions">
-        <a class="btn btn-primary" href="#features">Voir les features</a>
-        <a class="btn btn-ghost" href="#galerie">Parcourir la galerie</a>
-      </div>
-      <div class="counter" id="counter">
-        <div>
-          <div class="num" data-target="1280">0</div>
-          <div class="label">visites</div>
-        </div>
-        <div>
-          <div class="num" data-target="42">0</div>
-          <div class="label">projets</div>
-        </div>
-        <div>
-          <div class="num" data-target="99">0</div>
-          <div class="label">satisfaction</div>
-        </div>
+        <a class="btn btn-primary" href="#lecture">Lire le code</a>
+        <a class="btn btn-ghost" href="#safe">Parcours “safe”</a>
       </div>
     </div>
   </div>
 
-  <!-- Features -->
-  <section id="features">
-    <h2>Fonctionnalités</h2>
-    <p class="note">Survole les cartes pour voir l’animation. Clique sur “Action” pour un petit effet.</p>
+  <!-- Lecture du code de la librairie -->
+  <section id="lecture">
+    <h2>Lecture guidée de la librairie</h2>
+    <p class="note">Aperçu simplifié des blocs clés, pour comprendre la structure et les patterns utilisés.</p>
     <div class="grid">
       <div class="card">
-        <h3>Défilement fluide</h3>
-        <p>Les ancres naviguent avec douceur dans la page.</p>
-        <button class="btn btn-ghost" onclick="location.href='#galerie'">Action</button>
+        <h3>Initialisation & environnement</h3>
+        <p>La librairie crée un ScreenGui, tente de le “protéger” et le parent au CoreGui (syn.protect_gui, gethui),
+          puis gère l’ouverture/fermeture via une touche et rend l’UI draggable. Ce ciblage de CoreGui est typique des UIs injectées,
+          pas des UIs de jeu Studio.</p>
+        <pre><code>-- Création et parentage spécial (simplifié)
+local CoreGui = game:GetService("CoreGui")
+local ui = Instance.new("ScreenGui")
+ui.Name = "ui"
+-- safe_parent(ui) essaie syn.protect_gui/gethui, fallback CoreGui
+        </code></pre>
       </div>
       <div class="card">
-        <h3>Thème sombre/clair</h3>
-        <p>Basculer instantanément avec un simple bouton.</p>
-        <button class="btn btn-ghost" onclick="document.body.classList.toggle('light')">Basculer</button>
+        <h3>Fenêtre & onglets</h3>
+        <p>lib:Window(text, preset, closebind) instancie la fenêtre (Frame & UI), anime la taille, et prépare la zone des onglets.
+          tabhold:Tab(text) crée un bouton d’onglet et un ScrollingFrame de contenu avec sélection active.</p>
+        <pre><code>-- lib:Window(...) puis tabhold:Tab("Outils")
+local Tab = Instance.new("ScrollingFrame")
+-- Cliquer un onglet: visible = true, animation d'indicateur
+        </code></pre>
       </div>
       <div class="card">
-        <h3>Composants réutilisables</h3>
-        <p>Boutons, cartes, badges… mixe à ta guise.</p>
-        <button class="btn btn-ghost" onclick="alert('Tu peux les copier dans tes projets !')">Action</button>
+        <h3>Composants interactifs</h3>
+        <p>Boutons, toggles, sliders, dropdowns, labels, textboxes, binds: chaque composant crée son UI,
+          gère le hover (TweenService), et déclenche un callback pcall(...) côté script.</p>
+        <pre><code>-- Exemple bouton
+Button.MouseButton1Click:Connect(function()
+  pcall(callback)
+end)
+        </code></pre>
       </div>
       <div class="card">
-        <h3>Parallax subtil</h3>
-        <p>Des orbes flottent pour une ambiance premium.</p>
-        <button class="btn btn-ghost" onclick="alert('Regarde le fond qui respire.')">Action</button>
+        <h3>Color picker avancé</h3>
+        <p>Un colorpicker HSV avec sélection et un mode “rainbow” animé (via RunService & valeurs HSV),
+          plus un toggle pour activer/désactiver l’animation. Un bon modèle pour comprendre HSV & UI events.</p>
+        <pre><code>-- Mise à jour couleur
+local function UpdateColorPicker()
+  BoxColor.BackgroundColor3 = Color3.fromHSV(H,S,V)
+  pcall(callback, BoxColor.BackgroundColor3)
+end
+        </code></pre>
+      </div>
+    </div>
+    <p class="warn">Note: Parentage dans CoreGui, appels à syn/gethui et LocalPlayer:GetMouse() indiquent un usage orienté injecteur.
+    En Studio, utilise StarterGui et évite CoreGui pour tes UIs de jeu.</p>
+  </section>
+
+  <!-- Parcours d'apprentissage "safe" -->
+  <section id="safe">
+    <h2>Construire la même expérience en Roblox Studio (voie “safe”)</h2>
+    <div class="step">
+      <div class="step-num">1</div>
+      <div>
+        <p><strong>Crée ta UI dans StarterGui</strong> — Ajoute un ScreenGui dans StarterGui, puis des Frames/TextButtons.
+           Évite CoreGui: il est réservé au système Roblox.</p>
+        <pre><code>-- Dans Roblox Studio, StarterGui
+local player = game.Players.LocalPlayer
+local gui = Instance.new("ScreenGui")
+gui.Name = "MyUI"
+gui.Parent = player:WaitForChild("PlayerGui") -- safe ici
+        </code></pre>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">2</div>
+      <div>
+        <p><strong>Rends un Frame draggable</strong> — Reproduis le pattern MakeDraggable avec UserInputService, sans toucher CoreGui.</p>
+        <pre><code>local uis = game:GetService("UserInputService")
+local dragging, dragInput, dragStart, startPos = false, nil, nil, nil
+local topbar, frame = TopBar, MainFrame
+
+local function update(input)
+  local delta = input.Position - dragStart
+  frame.Position = UDim2.new(
+    startPos.X.Scale, startPos.X.Offset + delta.X,
+    startPos.Y.Scale, startPos.Y.Offset + delta.Y
+  )
+end
+
+topbar.InputBegan:Connect(function(input)
+  if input.UserInputType == Enum.UserInputType.MouseButton1 then
+    dragging = true; dragStart = input.Position; startPos = frame.Position
+    input.Changed:Connect(function()
+      if input.UserInputState == Enum.UserInputState.End then dragging = false end
+    end)
+  end
+end)
+
+uis.InputChanged:Connect(function(input)
+  if dragging and input.UserInputType == Enum.UserInputType.MouseMovement then update(input) end
+end)
+        </code></pre>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">3</div>
+      <div>
+        <p><strong>Tabs & navigation</strong> — Stocke tes pages dans des Frames et bascule Visible avec une animation via TweenService.</p>
+        <pre><code>local TweenService = game:GetService("TweenService")
+local pages = {Page1, Page2, Page3}
+local function showPage(i)
+  for idx, p in ipairs(pages) do
+    p.Visible = (idx == i)
+    TweenService:Create(p, TweenInfo.new(0.25), {BackgroundTransparency = (idx==i) and 0 or 1}):Play()
+  end
+end
+        </code></pre>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">4</div>
+      <div>
+        <p><strong>Composants</strong> — Recrée Button/Toggle/Slider en utilisant les événements (MouseButton1Click, FocusLost) et des callbacks.</p>
+        <pre><code>-- Toggle
+local toggled = false
+ToggleBtn.MouseButton1Click:Connect(function()
+  toggled = not toggled
+  TweenService:Create(ToggleKnob, TweenInfo.new(0.2),
+    {Position = UDim2.new(toggled and 0.6 or 0.1,0,0.5,-10)}):Play()
+  print("Toggle:", toggled)
+end)
+        </code></pre>
       </div>
     </div>
   </section>
 
-  <!-- Galerie -->
-  <section id="galerie">
-    <h2>Galerie interactive</h2>
-    <p class="note">Cartes responsive avec hover et focus, parfaites pour un portfolio.</p>
+  <!-- Exemples inspirés -->
+  <section id="exemples">
+    <h2>Exemples rapides (inspirés de la librairie)</h2>
     <div class="grid">
       <div class="card">
-        <h3>Projet Neon</h3>
-        <p>Design vibrant et contrastes assumés.</p>
+        <h3>Bouton + notification</h3>
+        <p>Affiche un panneau animé avec un bouton “OK”.</p>
+        <pre><code>local TweenService = game:GetService("TweenService")
+local notif = NotificationFrame
+notif.Size = UDim2.new(0,0,0,0); notif.Visible = true
+TweenService:Create(notif, TweenInfo.new(0.3, Enum.EasingStyle.Quart), {Size = UDim2.new(0,164,0,193)}):Play()
+OkayBtn.MouseButton1Click:Connect(function()
+  TweenService:Create(notif, TweenInfo.new(0.3), {Size = UDim2.new(0,0,0,0)}):Play()
+end)
+        </code></pre>
       </div>
       <div class="card">
-        <h3>Terra Nova</h3>
-        <p>Palette douce, interfaces calmes.</p>
+        <h3>Color picker HSV</h3>
+        <p>Reprend le principe: calcule la couleur depuis H, S, V et met à jour un aperçu.</p>
+        <pre><code>local h,s,v = 0,1,1
+local function update()
+  local c = Color3.fromHSV(h,s,v)
+  Preview.BackgroundColor3 = c
+end
+HueBar.InputChanged:Connect(function(input) h = math.clamp((input.Position.Y - HueBar.AbsolutePosition.Y)/HueBar.AbsoluteSize.Y,0,1); update() end)
+SaturationPad.InputChanged:Connect(function(input)
+  local x = math.clamp((input.Position.X - SaturationPad.AbsolutePosition.X)/SaturationPad.AbsoluteSize.X,0,1)
+  local y = math.clamp((input.Position.Y - SaturationPad.AbsolutePosition.Y)/SaturationPad.AbsoluteSize.Y,0,1)
+  s = x; v = 1 - y; update()
+end)
+        </code></pre>
       </div>
       <div class="card">
-        <h3>Skyline</h3>
-        <p>Minimalisme et typographie forte.</p>
+        <h3>Bind de touche</h3>
+        <p>Appuie sur une touche pour déclencher une action.</p>
+        <pre><code>local uis = game:GetService("UserInputService")
+local bind = Enum.KeyCode.F
+uis.InputBegan:Connect(function(io, gp)
+  if not gp and io.KeyCode == bind then
+    print("Action bind F")
+  end
+end)
+        </code></pre>
       </div>
       <div class="card">
-        <h3>Pulse</h3>
-        <p>Animations organiques et fluides.</p>
+        <h3>Slider doux</h3>
+        <p>Un slider avec knob + barre remplie.</p>
+        <pre><code>local dragging = false
+Knob.InputBegan:Connect(function(i) if i.UserInputType==Enum.UserInputType.MouseButton1 then dragging=true end end)
+Knob.InputEnded:Connect(function(i) if i.UserInputType==Enum.UserInputType.MouseButton1 then dragging=false end end)
+game:GetService("UserInputService").InputChanged:Connect(function(i)
+  if dragging and i.UserInputType==Enum.UserInputType.MouseMovement then
+    local scale = math.clamp((i.Position.X - Bar.AbsolutePosition.X)/Bar.AbsoluteSize.X, 0, 1)
+    Fill.Size = UDim2.new(scale,0,1,0)
+    Knob.Position = UDim2.new(scale,-12,0.5,-12)
+  end
+end)
+        </code></pre>
       </div>
     </div>
-  </section>
-
-  <!-- Contact / Form -->
-  <section id="contact">
-    <h2>Contact</h2>
-    <p class="note">Un formulaire stylé pour recevoir des messages (simulation côté client).</p>
-    <form class="form" onsubmit="handleSubmit(event)">
-      <input class="input" type="text" name="nom" placeholder="Ton nom" required>
-      <input class="input" type="email" name="email" placeholder="Email" required>
-      <textarea class="textarea" name="message" placeholder="Ton message…" required></textarea>
-      <button class="btn btn-primary" type="submit">Envoyer</button>
-    </form>
-    <p id="status" class="note" style="margin-top:12px;"></p>
   </section>
 
   <!-- Footer -->
   <footer>
-    <p>&copy; 2025 FolioX — Conçu avec passion. <a href="#top">Retour en haut</a></p>
+    <p>&copy; 2025 — Tutoriel conçu pour apprendre et créer des UIs propres en Studio. <a href="#intro">Retour en haut</a></p>
+    <p class="note">Ce guide s’inspire des concepts UI de la librairie (draggable, tabs, TweenService, HSV),
+      sans reproduire le parentage ou les APIs réservées à des environnements tiers.</p>
   </footer>
 
   <script>
-    // Theme toggle with memory
+    // Theme toggle with localStorage
     const toggle = document.getElementById('themeToggle');
-    const savedTheme = localStorage.getItem('theme');
-    if (savedTheme === 'light') document.body.classList.add('light');
+    const saved = localStorage.getItem('theme');
+    if (saved === 'light') document.body.classList.add('light');
     toggle.addEventListener('click', () => {
       document.body.classList.toggle('light');
       localStorage.setItem('theme', document.body.classList.contains('light') ? 'light' : 'dark');
     });
 
-    // Counter animation
-    const animateCounter = (el) => {
-      const target = parseInt(el.dataset.target, 10);
-      let current = 0;
-      const duration = 1400;
-      const start = performance.now();
-      const step = (now) => {
-        const p = Math.min((now - start) / duration, 1);
-        current = Math.floor(target * (p < 1 ? (1 - Math.pow(1 - p, 3)) : 1)); // ease-out-cubic
-        el.textContent = current.toLocaleString('fr-FR');
-        if (p < 1) requestAnimationFrame(step);
-      };
-      requestAnimationFrame(step);
-    };
-    const counters = document.querySelectorAll('.num');
-    const obs = new IntersectionObserver((entries) => {
-      entries.forEach(e => { if (e.isIntersecting) { animateCounter(e.target); obs.unobserve(e.target); } });
-    }, { threshold: 0.6 });
-    counters.forEach(c => obs.observe(c));
-
-    // Form submit simulation
-    function handleSubmit(e) {
-      e.preventDefault();
-      const status = document.getElementById('status');
-      status.textContent = 'Envoi en cours…';
-      setTimeout(() => {
-        status.textContent = 'Merci ! Ton message a bien été envoyé (simulation).';
-        status.style.color = 'var(--success)';
-        e.target.reset();
-      }, 900);
-    }
-
-    // Gentle parallax on orb group
+    // Gentle parallax on hero
     const hero = document.querySelector('.hero');
     hero.addEventListener('pointermove', (e) => {
       const r = hero.getBoundingClientRect();
@@ -362,9 +340,7 @@
       const y = (e.clientY - r.height / 2) / r.height;
       hero.style.transform = `perspective(800px) translateZ(0) rotateX(${y * -2}deg) rotateY(${x * 2}deg)`;
     });
-    hero.addEventListener('pointerleave', () => {
-      hero.style.transform = 'none';
-    });
+    hero.addEventListener('pointerleave', () => { hero.style.transform = 'none'; });
   </script>
 </body>
 </html>
