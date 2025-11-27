@@ -559,16 +559,21 @@ end)</code></pre>
     }
     document.getElementById('themeToggle').addEventListener('click', toggleTheme);
 
-    // Copy code: robust fallback for older browsers
-    function copyCode(button) {
-      // Find the closest pre > code element
-      const pre = button.previousElementSibling;
-      let text = '';
-      if (pre) {
-        const code = pre.querySelector('code') || pre;
-        text = code.innerText || code.textContent || '';
-      }
-      if (!text) { return; }
+    // Copier tout le contenu du bloc <pre><code>
+function copyCode(button) {
+  const pre = button.previousElementSibling; // le <pre>
+  let text = "";
+  if (pre) {
+    const code = pre.querySelector("code"); // cherche le <code> à l'intérieur
+    text = code ? code.textContent : pre.textContent;
+  }
+  if (!text) return;
+
+  navigator.clipboard.writeText(text).then(() => {
+    showToast(); // affiche le toast ✅ Script copié !
+  });
+}
+
 
       const ariaStatus = document.getElementById('ariaStatus');
 
