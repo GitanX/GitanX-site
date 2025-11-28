@@ -21,6 +21,32 @@
       background: var(--bg);
       color: var(--text);
       font-family: Arial, sans-serif;
+      position: relative;
+      overflow-x: hidden;
+    }
+
+    /* Orbs floues en fond */
+    body::before, body::after {
+      content: "";
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(120px);
+      opacity: 0.5;
+      z-index: -1;
+    }
+    body::before {
+      width: 400px;
+      height: 400px;
+      background: var(--accent);
+      top: -100px;
+      left: -100px;
+    }
+    body::after {
+      width: 500px;
+      height: 500px;
+      background: var(--accent2);
+      bottom: -150px;
+      right: -150px;
     }
 
     nav {
@@ -47,20 +73,26 @@
     }
 
     header {
-      padding: 40px 20px;
+      padding: 60px 20px;
       text-align: center;
-      background: linear-gradient(90deg, var(--accent), var(--accent2));
-      color: #0b0c10;
+      background: transparent;
+      color: var(--text);
     }
 
     header h1 {
       margin: 0;
-      font-size: 2.2em;
+      font-size: 3em;
+      font-weight: 900;
+      background: linear-gradient(90deg, var(--accent), var(--accent2));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-shadow: 0 0 25px rgba(106,141,255,0.6);
     }
 
     header p {
       margin-top: 10px;
       font-weight: 600;
+      color: var(--muted);
     }
 
     main {
@@ -131,7 +163,6 @@
 
   <main>
     <div class="scroll-box">
-      <!-- Carte de mise à jour -->
       <div class="update-card">
         <time>28/11/2025</time>
         <h3>Ajout de la page “Mise à jour”</h3>
@@ -150,7 +181,6 @@
         <p>Première version du site avec les sections Tutoriel, Communauté et Script final.</p>
       </div>
 
-      <!-- Ajoute autant de cartes que tu veux ici -->
       <div class="update-card">
         <time>25/11/2025</time>
         <h3>Ajout des visuels Discord</h3>
