@@ -366,21 +366,31 @@
     bottom: 0;
     left: 0;
     right: 0;
-    background: #000; /* noir */
-    color: #eee;      /* texte clair */
-    padding: 20px;
+    background: #0f0f0f;
+    color: #eee;
+    padding: 20px 30px;
     display: flex;
     justify-content: space-between;
     align-items: center;
     font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
     z-index: 9999;
     box-shadow: 0 -4px 20px rgba(0,0,0,0.6);
-    animation: slideUp 0.5s ease-out;
+    animation: slideUp 0.4s ease-out;
   }
 
   @keyframes slideUp {
     from { transform: translateY(100%); }
     to   { transform: translateY(0); }
+  }
+
+  .cookie-left {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .cookie-icon {
+    font-size: 24px;
   }
 
   .cookie-text {
@@ -390,7 +400,7 @@
 
   .cookie-actions {
     display: flex;
-    gap: 12px;
+    gap: 14px;
   }
 
   .btn {
@@ -403,7 +413,7 @@
   }
 
   .btn-accept {
-    background: #22c55e; /* vert stylé */
+    background: #22c55e;
     color: #fff;
   }
   .btn-accept:hover {
@@ -411,7 +421,7 @@
   }
 
   .btn-reject {
-    background: #ef4444; /* rouge stylé */
+    background: #ef4444;
     color: #fff;
   }
   .btn-reject:hover {
@@ -470,7 +480,10 @@
 </head>
 <body>
   <div id="cookieBanner" class="cookie-banner">
-  <span class="cookie-text">Ce site utilise des cookies.</span>
+  <div class="cookie-left">
+    <div class="cookie-icon">🍪</div>
+    <span class="cookie-text">Ce site utilise des cookies.</span>
+  </div>
   <div class="cookie-actions">
     <button id="acceptCookies" class="btn btn-accept">Accepter</button>
     <button id="rejectCookies" class="btn btn-reject">Refuser</button>
