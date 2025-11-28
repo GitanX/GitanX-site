@@ -2,6 +2,8 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
+  <!-- ✅ Balise viewport pour mobile -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Mises à jour — GitanX</title>
   <style>
     :root {
@@ -206,11 +208,12 @@
       }
 
       main {
+        max-width: 100%; /* ✅ prend toute la largeur sur mobile */
         padding: 10px;
       }
 
       .scroll-box {
-        max-height: none;
+        max-height: none; /* ✅ pas de hauteur fixe */
         overflow-y: visible;
         padding-right: 0;
       }
@@ -293,5 +296,4 @@
     });
   </script>
 
-</body>
-</html>
+</
