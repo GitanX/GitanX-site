@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <title>Ghost qui suit le curseur</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    /* Style global */
+    html, body {
+      height: 100%;
+      margin: 0;
+      background: #0f1115;
+    }
+    body {
+      cursor: none; /* cacher le curseur natif */
+      overflow: hidden;
+      display: grid;
+      place-items: center;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+      color: #c9d1d9;
+    }
+
+    /* Zone de démo */
+    .stage {
+      position: relative;
+      width: 100%;
+      height: 100%;
+    }
+
+    /* Le ghost */
+    .ghost {
+      position: absolute;
+      width: 64px;
+      height: 64px;
+      pointer-events: none;            /* ne bloque pas la souris */
+      transform: translate(-50%, -50%);/* centre sur le pointeur */
+      will-change: transform, left, top;
+      filter: drop-shadow(0 6px 12px rgba(0,0,0,0.35));
+      transition: transform 120ms ease-out; /* léger flottement */
+      background: url("https://upload.wikimedia.org/wikipedia/commons/0/0b/Ghost_icon.svg")
+                  no-repeat center / contain;
+    }
+
+    /* Petit texte de démo */
+    .hint {
+      position: absolute;
+      inset: auto 0 40px 0;
+      text-align: center;
+      opacity: 0.7;
+      font-size: 14px;
+      letter-spacing: 0.2px;
+      user-select: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="stage">
+    <div class="ghost" id="ghost"></div>
+    <div class="hint">Bouge ta souris — le fantôme te suit 👻</div>
+  </div>
+
+  <script>
+    // CIBLE
+    const ghost = document.getElementById('ghost');
+
+    // Position courante et cible (pour un léger "delay")
+    let targetX = window.innerWidth / 2;
+    let targetY = window.innerHeight / 2;
+    let currentX = targetX;
+    let currentY = targetY;
+
+    // Suivi de la souris
+    document.addEventListener('mousemove', (e) => {
+      targetX = e.clientX;
+      targetY = e.clientY;
+    });
+
+    // Animation avec interpolation (ease)
+    function animate() {
+      // facteur de lissage: plus proche de 0 = plus de delay
+      const ease = 0.18;
+      currentX += (targetX - currentX) * ease;
+      currentY += (targetY - currentY) * ease;
+
+      ghost.style.left = currentX + 'px';
+      ghost.style.top  = currentY + 'px';
+
+      // petit effet de flottement/rotation en fonction de la vitesse
+      const dx = targetX - currentX;
+      const dy = targetY - currentY;
+      const speed = Math.hypot(dx, dy);
+      const tilt = Math.max(Math.min(speed * 0.05, 10), -10); // limite l'angle
+      ghost.style.transform = `translate(-50%, -50%) rotate(${tilt}deg)`;
+
+      requestAnimationFrame(animate);
+    }
+    animate();
+
+    // Recalage en cas de resize
+    window.addEventListener('resize', () => {
+      targetX = window.innerWidth / 2;
+      targetY = window.innerHeight / 2;
+    });
+  </script>
+</body>
+</html>
