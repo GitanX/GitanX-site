@@ -366,7 +366,7 @@
     bottom: 0;
     left: 0;
     right: 0;
-    background: #111; /* noir profond */
+    background: #000; /* noir */
     color: #eee;      /* texte clair */
     padding: 20px;
     display: flex;
@@ -744,8 +744,6 @@ const banner = document.getElementById('cookieBanner');
 
   function closeBanner() {
     banner.style.display = 'none';
-    // tu peux stocker le choix si tu veux :
-    // localStorage.setItem('cookiesAccepted', 'true/false');
   }
 
   acceptBtn.addEventListener('click', closeBanner);
