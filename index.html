@@ -586,59 +586,107 @@
       <div class="step">
         <h4>1. Loading the library</h4>
         <pre><code>local lib = loadstring(game:HttpGet("https://raw.githubusercontent.com/GitanX/GitanX-librairie/refs/heads/main/librairie%20GitanX.lua"))()</code></pre>
-        <button class="copy-btn" onclick="copyCode(this)" aria-label="Copier le script de chargement">📋 Copier le script</button>
+        <button class="copy-btn" onclick="copyCode(this)" aria-label="Copier le script de chargement">📋 Copier le script (beta)</button>
       </div>
 
       <div class="step">
         <h4>2. Creating a Window</h4>
-        <pre><code>local win = lib:Window("Mon UI", "Preset", Enum.KeyCode.RightControl)</code></pre>
-        <button class="copy-btn" onclick="copyCode(this)" aria-label="Copier le script de création de fenêtre">📋 Copier le script</button>
+        <pre><code>local win = lib:Window("GiatnX Test", Color3.fromRGB(44, 120, 224), Enum.KeyCode.RightControl)</code></pre>
+        <button class="copy-btn" onclick="copyCode(this)" aria-label="Copier le script de création de fenêtre">📋 Copier le script (beta)</button>
       </div>
 
       <div class="step">
         <h4>3. Add a Tab</h4>
-        <pre><code>local tab = win:Tab("Outils")</code></pre>
-        <button class="copy-btn" onclick="copyCode(this)" aria-label="Copier le script d'ajout d'onglet">📋 Copier le script</button>
+        <pre><code>local tab = win:Tab("Test")</code></pre>
+        <button class="copy-btn" onclick="copyCode(this)" aria-label="Copier le script d'ajout d'onglet">📋 Copier le script (beta)</button>
       </div>
 
       <div class="step">
         <h4>4. Ajouter des composants</h4>
-        <pre><code>tab:Button("Clique-moi", function()
-  print("Bouton pressé !")
+        <pre><code>
+tab:Button("Test", function()
+    lib:Notification("Notification", "Hello!", "Hi!") --you can change with a walkspeed or other
 end)
 
-tab:Toggle("Activer option", false, function(state)
-  print("Toggle:", state)
+tab:Toggle("Test", false, function(state)
+    --script here
+    lib:Notification("Test notif", state and "Activé" or "Désactivé", "Info")
 end)</code></pre>
-        <button class="copy-btn" onclick="copyCode(this)" aria-label="Copier le script composants">📋 Copier le script</button>
+        <button class="copy-btn" onclick="copyCode(this)" aria-label="Copier le script composants">📋 Copier le script (beta)</button>
       </div>
-
       <div class="step">
-        <h4>5. Utiliser le color picker</h4>
-        <pre><code>tab:Colorpicker("Choisis une couleur", Color3.fromRGB(255,0,0), function(c)
-  print("Couleur choisie:", c)
+        <h4>5. Slider</h4>
+        <pre><code>tab:Slider("WalkSpeed", 16, 100, 16, function(value)
+    local player = game:GetService("Players").LocalPlayer
+    local humanoid = player.Character and player.Character:FindFirstChildOfClass("Humanoid")
+    if humanoid then
+        humanoid.WalkSpeed = value
+    end
 end)</code></pre>
-        <button class="copy-btn" onclick="copyCode(this)" aria-label="Copier le script color picker">📋 Copier le script</button>
+        <button class="copy-btn" onclick="copyCode(this)" aria-label="Copier le script color picker">📋 Copier le script (beta)</button>
+      </div>
+      
+      <div class="step">
+        <h4>6. Utiliser le color picker</h4>
+        <pre><codechangeclr:Colorpicker("Test", Color3.fromRGB(44, 120, 224), function(color)
+    lib:ChangePresetColor(Color3.fromRGB(color.R * 255, color.G * 255, color.B * 255))
+end)</code></pre>
+        <button class="copy-btn" onclick="copyCode(this)" aria-label="Copier le script color picker">📋 Copier le script (beta)</button>
       </div>
     </section>
 
     <section id="exemples" aria-labelledby="exemples-title">
       <h3 id="exemples-title">📜 Exemple complet</h3>
-      <pre><code>local win = lib:Window("Mon UI", "Preset", Enum.KeyCode.RightControl)
-local tab = win:Tab("Outils")
+      <pre><code>
+local lib = loadstring(game:HttpGet("https://raw.githubusercontent.com/GitanX/GitanX-librairie/refs/heads/main/librairie%20GitanX.lua"))()
 
-tab:Button("Clique-moi", function()
-  print("Bouton pressé !")
+
+local win = lib:Window("GiatnX hub", Color3.fromRGB(44, 120, 224), Enum.KeyCode.RightControl)
+
+
+local tab = win:Tab("Fonctions")
+
+tab:Button("Test", function()
+    lib:Notification("Notification", "Hello!", "Hi!") --you can change with a walkspeed or other
 end)
 
-tab:Toggle("Activer option", false, function(state)
-  print("Toggle:", state)
+
+local infiniteJumpEnabled = false
+
+tab:Toggle("Infinite Jump", false, function(state)
+    infiniteJumpEnabled = state
+    lib:Notification("Infinite Jump", state and "Activé" or "Désactivé", "Info")
 end)
 
-tab:Colorpicker("Choisis une couleur", Color3.fromRGB(255,0,0), function(c)
-  print("Couleur choisie:", c)
-end)</code></pre>
-      <button class="copy-btn" onclick="copyCode(this)" aria-label="Copier l'exemple complet">📋 Copier le script</button>
+
+local UserInputService = game:GetService("UserInputService")
+UserInputService.JumpRequest:Connect(function()
+    if infiniteJumpEnabled then
+        local player = game:GetService("Players").LocalPlayer
+        local humanoid = player.Character and player.Character:FindFirstChildOfClass("Humanoid")
+        if humanoid then
+            humanoid:ChangeState(Enum.HumanoidStateType.Jumping)
+        end
+    end
+end)
+
+
+tab:Slider("WalkSpeed", 16, 100, 16, function(value)
+    local player = game:GetService("Players").LocalPlayer
+    local humanoid = player.Character and player.Character:FindFirstChildOfClass("Humanoid")
+    if humanoid then
+        humanoid.WalkSpeed = value
+    end
+end)
+
+
+local changeclr = win:Tab("UI Color")
+
+changeclr:Colorpicker("Test", Color3.fromRGB(44, 120, 224), function(color)
+    lib:ChangePresetColor(Color3.fromRGB(color.R * 255, color.G * 255, color.B * 255))
+end)
+</code></pre>
+      <button class="copy-btn" onclick="copyCode(this)" aria-label="Copier l'exemple complet">📋 Copier le script (beta)</button>
     </section>
 
    <section id="community" aria-labelledby="community-title"> 
