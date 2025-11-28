@@ -2,35 +2,75 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
-  <title>Ghost Cursor</title>
+  <title>Ghost Cursor Animation</title>
   <style>
     body {
       margin: 0;
       height: 100vh;
       background: #111;
+      overflow: hidden;
     }
 
+    /* Fantôme stylisé en CSS */
     .ghost {
       position: absolute;
-      width: 60px;
-      height: 60px;
-      background: url('https://upload.wikimedia.org/wikipedia/commons/0/0b/Ghost_icon.svg') no-repeat center/contain;
+      width: 80px;
+      height: 100px;
+      background: white;
+      border-radius: 40% 40% 50% 50%;
       pointer-events: none;
       transform: translate(-50%, -50%);
-      transition: left 0.1s ease-out, top 0.1s ease-out;
+      box-shadow: 0 0 20px rgba(255,255,255,0.6);
+      animation: float 2s ease-in-out infinite;
+    }
+
+    /* Yeux du fantôme */
+    .ghost::before, .ghost::after {
+      content: "";
+      position: absolute;
+      top: 30px;
+      width: 15px;
+      height: 20px;
+      background: black;
+      border-radius: 50%;
+    }
+    .ghost::before { left: 20px; }
+    .ghost::after { right: 20px; }
+
+    /* Animation flottante */
+    @keyframes float {
+      0%   { transform: translate(-50%, -50%) translateY(0); }
+      50%  { transform: translate(-50%, -50%) translateY(-10px); }
+      100% { transform: translate(-50%, -50%) translateY(0); }
     }
   </style>
 </head>
 <body>
-  <div class="ghost"></div>
+  <div class="ghost" id="ghost"></div>
 
   <script>
-    const ghost = document.querySelector('.ghost');
+    const ghost = document.getElementById('ghost');
+    let targetX = window.innerWidth / 2;
+    let targetY = window.innerHeight / 2;
+    let currentX = targetX;
+    let currentY = targetY;
 
     document.addEventListener('mousemove', e => {
-      ghost.style.left = e.pageX + 'px';
-      ghost.style.top = e.pageY + 'px';
+      targetX = e.clientX;
+      targetY = e.clientY;
     });
+
+    function animate() {
+      // interpolation pour un effet de traînée
+      currentX += (targetX - currentX) * 0.1;
+      currentY += (targetY - currentY) * 0.1;
+
+      ghost.style.left = currentX + 'px';
+      ghost.style.top  = currentY + 'px';
+
+      requestAnimationFrame(animate);
+    }
+    animate();
   </script>
 </body>
 </html>
