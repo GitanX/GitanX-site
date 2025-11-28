@@ -2,21 +2,21 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
-  <title>Ghost Cursor</title>
+  <title>Ghost Test</title>
   <style>
     body {
       margin: 0;
       height: 100vh;
       background: #111;
-      /* on garde le curseur visible */
     }
 
     .ghost {
       position: absolute;
       width: 60px;
       height: 60px;
-      background: url('https://upload.wikimedia.org/wikipedia/commons/0/0b/Ghost_icon.svg') no-repeat center/contain;
-      pointer-events: none; /* ne bloque pas la souris */
+      background: white; /* cercle blanc visible */
+      border-radius: 50%; /* rond */
+      pointer-events: none;
       transform: translate(-50%, -50%);
     }
   </style>
