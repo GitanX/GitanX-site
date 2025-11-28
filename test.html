@@ -2,7 +2,7 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
-  <title>Ghost Test</title>
+  <title>Ghost Cursor</title>
   <style>
     body {
       margin: 0;
@@ -14,10 +14,10 @@
       position: absolute;
       width: 60px;
       height: 60px;
-      background: white; /* cercle blanc visible */
-      border-radius: 50%; /* rond */
+      background: url('https://upload.wikimedia.org/wikipedia/commons/0/0b/Ghost_icon.svg') no-repeat center/contain;
       pointer-events: none;
       transform: translate(-50%, -50%);
+      transition: left 0.1s ease-out, top 0.1s ease-out;
     }
   </style>
 </head>
