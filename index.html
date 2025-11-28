@@ -363,39 +363,59 @@
 }
     .cookie-banner {
     position: fixed;
-    bottom: 20px;
-    left: 20px;
-    right: 20px;
-    max-width: 600px;
-    background: #fff;
-    border: 1px solid #ddd;
-    border-radius: 10px;
-    box-shadow: 0 8px 30px rgba(0,0,0,0.15);
-    padding: 16px;
-    font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: #111; /* noir profond */
+    color: #eee;      /* texte clair */
+    padding: 20px;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
     z-index: 9999;
+    box-shadow: 0 -4px 20px rgba(0,0,0,0.6);
+    animation: slideUp 0.5s ease-out;
   }
+
+  @keyframes slideUp {
+    from { transform: translateY(100%); }
+    to   { transform: translateY(0); }
+  }
+
+  .cookie-text {
+    font-size: 16px;
+    font-weight: 500;
+  }
+
   .cookie-actions {
     display: flex;
-    gap: 10px;
+    gap: 12px;
   }
+
   .btn {
     border: none;
-    padding: 8px 14px;
+    padding: 10px 18px;
     border-radius: 6px;
     cursor: pointer;
     font-weight: 600;
+    transition: all 0.2s ease;
   }
-  .btn-primary {
-    background: #2b7cff;
+
+  .btn-accept {
+    background: #22c55e; /* vert stylé */
     color: #fff;
   }
-  .btn-secondary {
-    background: #f2f4f7;
-    color: #333;
+  .btn-accept:hover {
+    background: #16a34a;
+  }
+
+  .btn-reject {
+    background: #ef4444; /* rouge stylé */
+    color: #fff;
+  }
+  .btn-reject:hover {
+    background: #dc2626;
   }
     #community {
       text-align: center;
@@ -450,10 +470,10 @@
 </head>
 <body>
   <div id="cookieBanner" class="cookie-banner">
-  <p>Ce site utilise des cookies.</p>
+  <span class="cookie-text">Ce site utilise des cookies.</span>
   <div class="cookie-actions">
-    <button id="acceptCookies" class="btn btn-primary">Accepter</button>
-    <button id="rejectCookies" class="btn btn-secondary">Refuser</button>
+    <button id="acceptCookies" class="btn btn-accept">Accepter</button>
+    <button id="rejectCookies" class="btn btn-reject">Refuser</button>
   </div>
 </div>
   <!-- Progress bar -->
@@ -724,7 +744,7 @@ const banner = document.getElementById('cookieBanner');
 
   function closeBanner() {
     banner.style.display = 'none';
-    // tu peux aussi stocker le choix si tu veux :
+    // tu peux stocker le choix si tu veux :
     // localStorage.setItem('cookiesAccepted', 'true/false');
   }
 
