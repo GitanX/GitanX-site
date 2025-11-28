@@ -55,9 +55,13 @@
     let currentX = targetX;
     let currentY = targetY;
 
+    // Décalage voulu (par ex. 50px à droite et 30px en bas)
+    const offsetX = 50;
+    const offsetY = 30;
+
     document.addEventListener('mousemove', e => {
-      targetX = e.clientX;
-      targetY = e.clientY;
+      targetX = e.clientX + offsetX;
+      targetY = e.clientY + offsetY;
     });
 
     function animate() {
