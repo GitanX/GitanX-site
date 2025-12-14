@@ -1,19 +1,19 @@
 {
-  "keys": [
-    {
-      "key": "KEY-ABCD-1234-XYZW",
+  "keys": {
+    "KEY-ABCD-1234": {
       "valid": true,
+      "type": "premium",
       "expiry": "2025-12-31",
-      "uses": 5,
-      "usedCount": 0
+      "maxUses": 5,
+      "hwid": null
     },
-    {
-      "key": "KEY-EFGH-5678-UVWX",
+    "KEY-EFGH-5678": {
       "valid": true,
-      "expiry": "2025-12-31",
-      "uses": 3,
-      "usedCount": 0
+      "type": "standard",
+      "expiry": "2025-06-30",
+      "maxUses": 1,
+      "hwid": null
     }
-  ],
-  "version": "1.0"
+  },
+  "lastUpdate": "2024-12-14"
 }
