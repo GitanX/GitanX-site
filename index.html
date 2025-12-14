@@ -1,63 +1,155 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>GitanX — Premium Access</title>
+
+  <!-- Polices (locale fallback inclus) -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+
   <style>
     :root{
-      --bg:#0f1115; --panel:#161922; --panel2:#1c2030;
-      --accent:#67c1ff; --accent2:#9bd6ff;
-      --text:#e9eef6; --muted:#a8b3c7;
-      --hover:#23293a; --border:#263047;
-      --shadow:0 10px 30px rgba(0,0,0,0.35);
+      --bg:#0b0d12; --glass: rgba(255,255,255,0.04);
+      --card:#0f1420; --card-2:#121827;
+      --accent:#66c2ff; --accent-2:#9de1ff;
+      --muted:#9fb0c7; --success:#6fe48a;
+      --text:#eaf3ff; --shadow: 0 12px 30px rgba(2,6,23,0.6);
+      --glass-border: rgba(255,255,255,0.04);
+      --glass-glow: 0 6px 24px rgba(100,150,255,0.06);
+      --radius:14px;
     }
     *{box-sizing:border-box}
+    html,body{height:100%}
     body{
-      margin:0; background:var(--bg); color:var(--text);
-      font-family:Inter, Arial, sans-serif;
-      -webkit-font-smoothing:antialiased;
+      margin:0; font-family:Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      background:
+        radial-gradient(1200px 600px at 10% 10%, rgba(102,194,255,0.06), transparent 8%),
+        radial-gradient(900px 500px at 90% 90%, rgba(157,225,255,0.03), transparent 10%),
+        var(--bg);
+      color:var(--text);
+      -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale;
+      padding:32px;
     }
-    .center{
-      display:flex; justify-content:center; align-items:center;
-      height:100vh; text-align:center;
+
+    .wrap{
+      max-width:980px; margin:32px auto; display:grid; grid-template-columns: 1fr 380px; gap:28px;
     }
-    .error{
-      font-size:42px; color:red; font-weight:700;
+
+    /* Fallback single-column on small screens */
+    @media (max-width:960px){
+      .wrap{grid-template-columns: 1fr; padding:12px}
     }
-    .ui{
-      margin:40px auto; max-width:900px;
-      background:linear-gradient(180deg,var(--panel),var(--panel2));
-      border:1px solid var(--border); border-radius:14px;
-      box-shadow:var(--shadow); padding:24px;
+
+    .card{
+      background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+      border:1px solid var(--glass-border);
+      border-radius:var(--radius);
+      padding:22px;
+      box-shadow:var(--shadow);
+      backdrop-filter: blur(6px) saturate(120%);
     }
-    h1{color:var(--accent); font-size:28px; margin-bottom:16px;}
-    h2{color:var(--accent2); margin-top:24px;}
-    .key{
-      font-size:22px; font-weight:700; color:#fff;
-      background:#1a2033; border:1px solid #2a3554;
-      padding:12px; border-radius:10px; margin:20px auto;
-      width:max-content;
+
+    header.app-hero{
+      grid-column: 1 / -1;
+      display:flex; align-items:center; gap:20px; padding:18px 22px;
+      background: linear-gradient(90deg, rgba(102,194,255,0.06), rgba(157,214,255,0.04));
+      border-radius:calc(var(--radius) + 4px);
+      border:1px solid rgba(100,150,255,0.08);
     }
-    .discord{
-      margin-top:20px; font-size:18px; color:var(--muted);
+    .brand {
+      width:72px; height:72px; border-radius:12px;
+      background:linear-gradient(135deg,var(--accent),var(--accent-2));
+      display:flex; align-items:center; justify-content:center; color:#042033; font-weight:800;
+      font-size:20px; box-shadow: var(--glass-glow);
     }
-    .path-list{
-      display:flex; flex-direction:column; gap:10px;
-      max-height:300px; overflow:auto; margin-top:20px;
+    .hero-text h1{ margin:0; font-size:20px; color:var(--text); }
+    .hero-text p{ margin:4px 0 0; color:var(--muted); font-size:13px }
+
+    h2.section-title{
+      margin:0 0 12px; color:var(--accent-2); font-size:14px; letter-spacing:0.4px;
+    }
+
+    .intro{
+      color:var(--muted); font-size:14px; margin-bottom:12px;
+    }
+
+    /* Key area */
+    .key-row{ display:flex; gap:12px; align-items:center; flex-wrap:wrap; }
+    .key-badge{
+      background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+      border:1px solid rgba(255,255,255,0.03);
+      padding:12px 16px; border-radius:12px; font-weight:700; color:#fff;
+      font-size:18px; letter-spacing:0.6px; display:inline-flex; align-items:center; gap:10px;
+    }
+    .btn{
+      background:transparent; color:var(--accent); border:1px solid rgba(102,194,255,0.14);
+      padding:9px 12px; border-radius:10px; cursor:pointer; font-weight:600;
+      transition: all 160ms ease; font-size:13px;
+    }
+    .btn:active{ transform:translateY(1px) }
+    .btn.ghost{ background:transparent }
+    .btn.primary{
+      background: linear-gradient(90deg,var(--accent),var(--accent-2)); color:#042033; border:none;
+      box-shadow: 0 6px 18px rgba(102,194,255,0.08);
+    }
+
+    /* List of paths */
+    .paths{
+      display:flex; flex-direction:column; gap:12px; max-height:420px; overflow:auto; padding-right:6px;
     }
     .path{
-      background:#121524; border:1px solid #222a3e;
-      border-radius:10px; padding:12px;
-      transition:background 160ms ease;
+      display:flex; gap:12px; align-items:center; justify-content:space-between;
+      background: linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.005));
+      border:1px solid rgba(255,255,255,0.02); padding:12px; border-radius:10px;
+      transition: transform 160ms ease, box-shadow 160ms ease;
     }
-    .path:hover{background:#171c2e;}
+    .path:hover{ transform: translateY(-4px); box-shadow: 0 12px 30px rgba(2,6,23,0.4) }
+    .path .meta{ display:flex; gap:12px; align-items:center; min-width:0; }
+    .file {
+      display:flex; flex-direction:column; min-width:0;
+    }
+    .file .name{ font-weight:700; color:var(--text); font-size:14px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; max-width:380px }
+    .file .url{ color:var(--muted); font-size:13px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; max-width:380px }
+    .actions{ display:flex; gap:8px; align-items:center }
+
+    .small{
+      font-size:12px; padding:8px 10px; border-radius:9px; border:1px solid rgba(255,255,255,0.02);
+      background: rgba(255,255,255,0.01); color:var(--muted)
+    }
+
+    /* Sidebar */
+    aside.card.secondary{
+      position:sticky; top:28px; height:fit-content;
+      display:flex; flex-direction:column; gap:12px;
+    }
+    .discord-box{
+      padding:14px; border-radius:12px; background: linear-gradient(180deg, rgba(8,13,22,0.6), rgba(10,15,26,0.35));
+      border:1px solid rgba(255,255,255,0.02);
+    }
+    .discord-link{ color:var(--accent); font-weight:700; font-size:15px; }
+    .muted{ color:var(--muted) }
+
+    /* Copy toast */
+    .toast{
+      position:fixed; right:22px; bottom:22px; background:rgba(4,22,34,0.9); color:var(--text);
+      padding:10px 14px; border-radius:10px; box-shadow: 0 8px 30px rgba(3,8,20,0.6); font-size:13px;
+      transform-origin:100% 100%; opacity:0; pointer-events:none; transition: all 280ms ease;
+    }
+    .toast.show{ opacity:1; transform:translateY(-6px); pointer-events:auto }
+    /* 404 style (kept visually minimal) */
+    .center{ display:flex; justify-content:center; align-items:center; height:100vh; text-align:center; }
+    .error{ font-size:42px; color:#ff6b6b; font-weight:800; background: linear-gradient(90deg, rgba(255,107,107,0.06), transparent); padding:18px 26px; border-radius:12px; border:1px solid rgba(255,107,107,0.06) }
+
+    /* scrollbar styling for paths */
+    .paths::-webkit-scrollbar{ width:10px }
+    .paths::-webkit-scrollbar-thumb{ background: rgba(255,255,255,0.03); border-radius:10px; border:2px solid transparent; background-clip: padding-box }
   </style>
 </head>
 <body>
   <div id="app"></div>
 
-  <!-- Script officiel Linkvertise -->
+  <!-- Script officiel Linkvertise (inchangé) -->
   <script src="https://publisher.linkvertise.com/cdn/linkvertise.js"></script>
   <script>
     linkvertise(1461822, {whitelist: [], blacklist: [""]});
@@ -71,28 +163,187 @@
       // Erreur 404 si pas Linkvertise
       app.innerHTML = `<div class="center"><div class="error">404 - Accès refusé</div></div>`;
     } else {
-      // Page premium GitanX
+      // Page premium GitanX (contenu UI stylé)
       app.innerHTML = `
-        <div class="ui">
-          <h1>Bienvenue sur GitanX Premium</h1>
-          <p>Tu as passé Linkvertise, voici ton accès complet.</p>
+        <div class="wrap">
+          <header class="app-hero card" role="banner" aria-hidden="false">
+            <div class="brand" aria-hidden="true">GX</div>
+            <div class="hero-text">
+              <h1>Bienvenue sur GitanX Premium</h1>
+              <p>Accès validé via Linkvertise — voici ton espace premium, rapide et soigné.</p>
+            </div>
+            <div style="margin-left:auto; display:flex; gap:10px; align-items:center;">
+              <button class="btn ghost" id="open-discord">Rejoindre le Discord</button>
+              <button class="btn primary" id="copy-all">Copier toutes les URLs</button>
+            </div>
+          </header>
 
-          <h2>🔑 Clé de récupération :</h2>
-          <div class="key">GitanX</div>
+          <main class="card" role="main" aria-live="polite">
+            <div>
+              <h2 class="section-title">🔑 Clé de récupération</h2>
+              <div class="intro">Garde cette clé pour récupérer ou référencer ton accès.</div>
+              <div class="key-row" style="margin-bottom:16px">
+                <div class="key-badge" id="key">GitanX</div>
+                <div style="display:flex; gap:8px">
+                  <button class="btn" id="copy-key">Copier la clé</button>
+                  <button class="btn" id="reveal-key" title="Afficher / Masquer">Afficher</button>
+                </div>
+              </div>
 
-          <h2>📂 Chemins disponibles :</h2>
-          <div class="path-list">
-            <div class="path">Core/Init/Loader.lua — https://cdn.example.com/gitanx/Core/Init/Loader.lua</div>
-            <div class="path">UI/ZenRemoteUI/Main.lua — https://cdn.example.com/gitanx/UI/ZenRemoteUI/Main.lua</div>
-            <div class="path">Modules/Net/Remote.lua — https://cdn.example.com/gitanx/Modules/Net/Remote.lua</div>
-            <div class="path">Actions/Explorer/Scan.lua — https://cdn.example.com/gitanx/Actions/Explorer/Scan.lua</div>
-          </div>
+              <h2 class="section-title">📂 Chemins disponibles</h2>
+              <div class="intro">Clique sur une ligne pour ouvrir le fichier dans un nouvel onglet, ou copie l'URL.</div>
 
-          <h2>💬 Discord :</h2>
-          <div class="discord">Rejoins-nous sur Discord : <strong>discord.gg/gitanx</strong></div>
+              <div class="paths" id="paths">
+                <div class="path">
+                  <div class="meta">
+                    <div class="file">
+                      <div class="name">Core/Init/Loader.lua</div>
+                      <div class="url">https://cdn.example.com/gitanx/Core/Init/Loader.lua</div>
+                    </div>
+                  </div>
+                  <div class="actions">
+                    <button class="small" data-url="https://cdn.example.com/gitanx/Core/Init/Loader.lua" title="Ouvrir" onclick="window.open(this.dataset.url, '_blank', 'noopener')">Ouvrir</button>
+                    <button class="small" data-url="https://cdn.example.com/gitanx/Core/Init/Loader.lua" onclick="copyToClipboard(this.dataset.url)">Copier</button>
+                  </div>
+                </div>
+
+                <div class="path">
+                  <div class="meta">
+                    <div class="file">
+                      <div class="name">UI/ZenRemoteUI/Main.lua</div>
+                      <div class="url">https://cdn.example.com/gitanx/UI/ZenRemoteUI/Main.lua</div>
+                    </div>
+                  </div>
+                  <div class="actions">
+                    <button class="small" data-url="https://cdn.example.com/gitanx/UI/ZenRemoteUI/Main.lua" title="Ouvrir" onclick="window.open(this.dataset.url, '_blank', 'noopener')">Ouvrir</button>
+                    <button class="small" data-url="https://cdn.example.com/gitanx/UI/ZenRemoteUI/Main.lua" onclick="copyToClipboard(this.dataset.url)">Copier</button>
+                  </div>
+                </div>
+
+                <div class="path">
+                  <div class="meta">
+                    <div class="file">
+                      <div class="name">Modules/Net/Remote.lua</div>
+                      <div class="url">https://cdn.example.com/gitanx/Modules/Net/Remote.lua</div>
+                    </div>
+                  </div>
+                  <div class="actions">
+                    <button class="small" data-url="https://cdn.example.com/gitanx/Modules/Net/Remote.lua" title="Ouvrir" onclick="window.open(this.dataset.url, '_blank', 'noopener')">Ouvrir</button>
+                    <button class="small" data-url="https://cdn.example.com/gitanx/Modules/Net/Remote.lua" onclick="copyToClipboard(this.dataset.url)">Copier</button>
+                  </div>
+                </div>
+
+                <div class="path">
+                  <div class="meta">
+                    <div class="file">
+                      <div class="name">Actions/Explorer/Scan.lua</div>
+                      <div class="url">https://cdn.example.com/gitanx/Actions/Explorer/Scan.lua</div>
+                    </div>
+                  </div>
+                  <div class="actions">
+                    <button class="small" data-url="https://cdn.example.com/gitanx/Actions/Explorer/Scan.lua" title="Ouvrir" onclick="window.open(this.dataset.url, '_blank', 'noopener')">Ouvrir</button>
+                    <button class="small" data-url="https://cdn.example.com/gitanx/Actions/Explorer/Scan.lua" onclick="copyToClipboard(this.dataset.url)">Copier</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </main>
+
+          <aside class="card secondary" role="complementary">
+            <div class="discord-box">
+              <div style="display:flex; align-items:center; gap:12px">
+                <svg width="36" height="36" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M8.5 14.5c.79 0 1.43.72 1.43 1.6 0 .88-.64 1.6-1.43 1.6-.79 0-1.43-.72-1.43-1.6 0-.88.64-1.6 1.43-1.6zm7 0c.79 0 1.43.72 1.43 1.6 0 .88-.64 1.6-1.43 1.6-.79 0-1.43-.72-1.43-1.6 0-.88.64-1.6 1.43-1.6z" fill="white" opacity="0.95"/><path d="M21 3H3v14c0 1.1.9 2 2 2h2l1.3-1.6c.44-.54 1.22-.9 2-.9h5c.78 0 1.56.36 2 .9L17 19h2c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2z" fill="white" opacity="0.06"/></svg>
+                <div>
+                  <div style="font-weight:700; color:var(--text)">Rejoins-nous sur Discord</div>
+                  <div class="muted">Invite : <span class="discord-link" id="discord-invite">discord.gg/gitanx</span></div>
+                </div>
+              </div>
+
+              <div style="margin-top:12px; display:flex; gap:8px;">
+                <button class="btn" id="copy-discord">Copier le lien</button>
+                <a class="btn ghost" href="https://discord.gg/gitanx" target="_blank" rel="noopener noreferrer">Ouvrir Discord</a>
+              </div>
+            </div>
+
+            <div style="padding:12px; border-radius:10px; background:linear-gradient(180deg, rgba(255,255,255,0.01), transparent); border:1px solid rgba(255,255,255,0.02)">
+              <div style="font-weight:700; margin-bottom:8px">Informations</div>
+              <div class="muted" style="font-size:13px">Accès validé via Linkvertise. Cette page contient des raccourcis directs vers les fichiers listés.</div>
+            </div>
+          </aside>
         </div>
+
+        <div id="toast" class="toast" role="status" aria-live="polite"></div>
       `;
     }
+
+    /* Small utility functions (kept inline for portability) */
+    function copyToClipboard(text){
+      if(!text) return;
+      navigator.clipboard?.writeText(text).then(() => {
+        showToast('Copié dans le presse-papiers');
+      }).catch(() => {
+        // fallback
+        const ta = document.createElement('textarea');
+        ta.value = text; document.body.appendChild(ta); ta.select();
+        try { document.execCommand('copy'); showToast('Copié dans le presse-papiers'); } catch(e){ showToast('Échec de la copie') }
+        ta.remove();
+      });
+    }
+
+    function showToast(msg){
+      const t = document.getElementById('toast');
+      if(!t) return;
+      t.textContent = msg; t.classList.add('show');
+      clearTimeout(t._timeout);
+      t._timeout = setTimeout(()=> t.classList.remove('show'), 2100);
+    }
+
+    // Delegated event listeners (only if content exists)
+    document.addEventListener('click', function(e){
+      if(!document.body.contains(document.getElementById('paths'))) return;
+      const el = e.target;
+
+      if(el.id === 'copy-key'){
+        const key = document.getElementById('key')?.textContent || 'GitanX';
+        copyToClipboard(key);
+      }
+
+      if(el.id === 'reveal-key'){
+        const kb = document.getElementById('key');
+        if(!kb) return;
+        const btn = el;
+        if(kb.textContent === '••••••'){
+          kb.textContent = 'GitanX'; btn.textContent = 'Masquer';
+        } else {
+          kb.textContent = '••••••'; btn.textContent = 'Afficher';
+        }
+      }
+
+      if(el.id === 'copy-all'){
+        // gather all data-url buttons
+        const urls = Array.from(document.querySelectorAll('[data-url]')).map(b => b.dataset.url).filter(Boolean);
+        if(urls.length){
+          copyToClipboard(urls.join('\\n'));
+        } else showToast('Aucune URL trouvée');
+      }
+
+      if(el.id === 'open-discord'){
+        window.open('https://discord.gg/gitanx','_blank','noopener');
+      }
+
+      if(el.id === 'copy-discord'){
+        copyToClipboard('https://discord.gg/gitanx');
+      }
+    });
+
+    // Allow Ctrl/Cmd+K to copy key quickly
+    document.addEventListener('keydown', function(e){
+      if((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'k'){
+        e.preventDefault();
+        const key = document.getElementById('key')?.textContent || 'GitanX';
+        copyToClipboard(key);
+      }
+    });
   </script>
 </body>
 </html>
