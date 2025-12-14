@@ -370,10 +370,10 @@
       app.innerHTML = `
         <div class="error-container">
           <div class="error-code">404</div>
-          <div class="error-title">⚠️ Accès Refusé</div>
+          <div class="error-title">Dont have acces</div>
           <div class="error-message">
-            Cette page nécessite une autorisation spéciale.<br>
-            Veuillez passer par le lien officiel pour y accéder.
+            Use this page on linkvertise<br>
+            https://link-center.net/1461822/f0vRn54Ht7oR
           </div>
         </div>
       `;
@@ -381,8 +381,8 @@
       // Page Key Generator
       app.innerHTML = `
         <div class="key-container">
-          <div class="logo">🌟 GitanX Hub</div>
-          <div class="subtitle">Universal Script Key Generator</div>
+          <div class="logo">GitanX</div>
+          <div class="subtitle">GitanX Script Key Generator</div>
 
           <div class="step">
             <div class="step-title">
@@ -390,39 +390,39 @@
               Vérification Complétée
             </div>
             <div class="step-desc">
-              ✅ Vous avez passé la vérification Linkvertise avec succès
+              You use the linkvertise with succes
             </div>
           </div>
 
           <div class="step">
             <div class="step-title">
               <span class="step-number">2</span>
-              Génération de Key
+              Generate Key
             </div>
             <div class="step-desc">
-              Cliquez sur le bouton ci-dessous pour générer votre clé d'accès GitanX
+              Click for get the Key
             </div>
           </div>
 
           <button class="generate-btn" onclick="generateKey()">
-            🔑 Générer ma Key
+            Generate a Key
           </button>
 
           <div class="key-output" id="keyOutput">
-            <div class="key-label">Votre Key GitanX :</div>
-            <div class="key-value" id="keyValue">GitanX</div>
+            <div class="key-label">A Key GitanX :</div>
+            <div class="key-value" id="keyValue">GitanX_d56qs65qseze7d</div>
             <button class="copy-btn" onclick="copyKey()">
-              📋 Copier la Key
+              Copy the Key
             </button>
             <div class="success-message" id="successMsg">
-              ✅ Key copiée dans le presse-papier !
+              Copied
             </div>
           </div>
 
           <div class="footer">
             <p>© 2025 GitanX Hub</p>
             <p style="margin-top: 10px;">
-              Besoin d'aide ? <a href="#">Rejoignez notre Discord</a>
+              Besoin d'aide ? <a href="https://discord.gg/PAeMxdDCfh">Join Discord</a>
             </p>
           </div>
         </div>
@@ -434,16 +434,16 @@
       const generateBtn = document.querySelector(".generate-btn");
       
       // Animation du bouton
-      generateBtn.textContent = "⏳ Génération...";
+      generateBtn.textContent = "⏳ Loading...";
       generateBtn.disabled = true;
       
       setTimeout(() => {
         keyOutput.classList.add("show");
-        generateBtn.textContent = "✅ Key Générée !";
+        generateBtn.textContent = "✅ Key generate !";
         generateBtn.style.background = "linear-gradient(45deg, #4ade80, #22c55e)";
         
         setTimeout(() => {
-          generateBtn.textContent = "🔑 Générer une nouvelle Key";
+          generateBtn.textContent = "Generate a new";
           generateBtn.disabled = false;
           generateBtn.style.background = "linear-gradient(45deg, #8a2be2, #da70d6)";
         }, 2000);
