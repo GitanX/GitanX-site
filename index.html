@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>GitanX — ZenRemoteUI Premium</title>
+  <title>GitanX — Premium Access</title>
   <style>
     :root{
       --bg:#0f1115; --panel:#161922; --panel2:#1c2030;
@@ -16,103 +16,83 @@
     body{
       margin:0; background:var(--bg); color:var(--text);
       font-family:Inter, Arial, sans-serif;
-      display:flex; justify-content:center; align-items:center; height:100vh;
+      -webkit-font-smoothing:antialiased;
+    }
+    .center{
+      display:flex; justify-content:center; align-items:center;
+      height:100vh; text-align:center;
+    }
+    .error{
+      font-size:42px; color:red; font-weight:700;
     }
     .ui{
-      position:fixed; left:50%; top:15%; transform:translateX(-50%);
-      width:720px; max-width:calc(100% - 32px);
+      margin:40px auto; max-width:900px;
       background:linear-gradient(180deg,var(--panel),var(--panel2));
       border:1px solid var(--border); border-radius:14px;
-      box-shadow:var(--shadow); overflow:hidden;
+      box-shadow:var(--shadow); padding:24px;
     }
-    .ui-header{
-      display:flex; align-items:center; gap:12px;
-      padding:14px 16px; border-bottom:1px solid var(--border);
-      cursor:grab; user-select:none;
+    h1{color:var(--accent); font-size:28px; margin-bottom:16px;}
+    h2{color:var(--accent2); margin-top:24px;}
+    .key{
+      font-size:22px; font-weight:700; color:#fff;
+      background:#1a2033; border:1px solid #2a3554;
+      padding:12px; border-radius:10px; margin:20px auto;
+      width:max-content;
     }
-    .drag-handle{
-      width:16px; height:16px; border-radius:50%;
-      background:radial-gradient(circle at 40% 40%, var(--accent), var(--accent2));
-      box-shadow:0 0 0 1px rgba(103,193,255,0.25), 0 0 14px rgba(103,193,255,0.35) inset;
+    .discord{
+      margin-top:20px; font-size:18px; color:var(--muted);
     }
-    .title{font-weight:600; font-size:15px;}
-    .subtitle{margin-left:auto; font-size:12px; color:var(--muted);}
-    .content{display:grid; grid-template-columns:1.2fr 1fr; gap:12px; padding:12px;}
-    .card{background:#141826; border:1px solid var(--border); border-radius:12px; padding:12px;}
-    .card h3{margin:0 0 8px; font-size:14px; color:var(--accent);}
-    .path-list{display:flex; flex-direction:column; gap:8px; max-height:280px; overflow:auto;}
-    .path{display:flex; align-items:center; gap:10px; background:#121524; border:1px solid #222a3e;
-      border-radius:10px; padding:10px; transition:background 160ms ease;}
+    .path-list{
+      display:flex; flex-direction:column; gap:10px;
+      max-height:300px; overflow:auto; margin-top:20px;
+    }
+    .path{
+      background:#121524; border:1px solid #222a3e;
+      border-radius:10px; padding:12px;
+      transition:background 160ms ease;
+    }
     .path:hover{background:#171c2e;}
-    .path-name{flex:1; font-size:13px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;}
-    .btn{padding:8px 10px; font-size:12px; background:#1a2033; color:var(--text);
-      border:1px solid #2a3554; border-radius:8px; cursor:pointer;}
-    .btn:hover{background:#212843;}
-    .status{padding:10px 12px; border-top:1px solid var(--border); color:var(--muted); font-size:12px;}
   </style>
 </head>
 <body>
-  <div class="ui" id="ui">
-    <div class="ui-header" id="drag">
-      <div class="drag-handle"></div>
-      <div class="title">GitanX — ZenRemoteUI</div>
-      <div class="subtitle">Premium • Sobre • Lisible</div>
-    </div>
-    <div class="content">
-      <div class="card">
-        <h3>Chemins exécutables</h3>
-        <div class="path-list" id="pathList"></div>
-      </div>
-      <div class="card">
-        <h3>Actions rapides</h3>
-        <button class="btn" id="refreshBtn">Actualiser</button>
-        <button class="btn" id="copyAllBtn">Copier tout</button>
-      </div>
-    </div>
-    <div class="status" id="statusText">Prêt • 0 éléments</div>
-  </div>
+  <div id="app"></div>
 
-
+  <!-- Script officiel Linkvertise -->
+  <script src="https://publisher.linkvertise.com/cdn/linkvertise.js"></script>
+  <script>
+    linkvertise(1461822, {whitelist: [], blacklist: [""]});
+  </script>
 
   <script>
-    const PATHS = [
-      { name:"Core/Init/Loader.lua", path:"https://cdn.example.com/gitanx/Core/Init/Loader.lua" },
-      { name:"UI/ZenRemoteUI/Main.lua", path:"https://cdn.example.com/gitanx/UI/ZenRemoteUI/Main.lua" },
-      { name:"Modules/Net/Remote.lua", path:"https://cdn.example.com/gitanx/Modules/Net/Remote.lua" }
-    ];
-    const pathList=document.getElementById("pathList");
-    const statusText=document.getElementById("statusText");
-    function renderList(){
-      pathList.innerHTML="";
-      PATHS.forEach(item=>{
-        const row=document.createElement("div"); row.className="path";
-        row.innerHTML=`<div class="path-name">${item.name} — ${item.path}</div>
-          <button class="btn">Copier</button>
-          <button class="btn">Ouvrir</button>`;
-        row.querySelectorAll(".btn")[0].onclick=()=>navigator.clipboard.writeText(item.path);
-        row.querySelectorAll(".btn")[1].onclick=()=>window.open(item.path,"_blank");
-        pathList.appendChild(row);
-      });
-      statusText.textContent=`Prêt • ${PATHS.length} éléments`;
-    }
-    document.getElementById("refreshBtn").onclick=renderList;
-    document.getElementById("copyAllBtn").onclick=()=>navigator.clipboard.writeText(PATHS.map(p=>p.path).join("\n"));
-    renderList();
+    const ref = document.referrer;
+    const app = document.getElementById("app");
 
-    // Drag-to-move
-    const ui=document.getElementById("ui"), drag=document.getElementById("drag");
-    let sx=0,sy=0,left=0,top=0,dragging=false;
-    drag.onmousedown=e=>{
-      dragging=true; sx=e.clientX; sy=e.clientY;
-      const rect=ui.getBoundingClientRect(); left=rect.left; top=rect.top;
-      document.onmousemove=ev=>{
-        if(!dragging)return;
-        ui.style.left=(left+ev.clientX-sx)+"px";
-        ui.style.top=(top+ev.clientY-sy)+"px";
-        ui.style.transform="none";
-      };
-      document.onmouseup=()=>{dragging=false; document.onmousemove=null;};
-    };
+    if (!ref.includes("linkvertise.com")) {
+      // Erreur 404 si pas Linkvertise
+      app.innerHTML = `<div class="center"><div class="error">404 - Accès refusé</div></div>`;
+    } else {
+      // Page premium GitanX
+      app.innerHTML = `
+        <div class="ui">
+          <h1>Bienvenue sur GitanX Premium</h1>
+          <p>Tu as passé Linkvertise, voici ton accès complet.</p>
+
+          <h2>🔑 Clé de récupération :</h2>
+          <div class="key">GitanX</div>
+
+          <h2>📂 Chemins disponibles :</h2>
+          <div class="path-list">
+            <div class="path">Core/Init/Loader.lua — https://cdn.example.com/gitanx/Core/Init/Loader.lua</div>
+            <div class="path">UI/ZenRemoteUI/Main.lua — https://cdn.example.com/gitanx/UI/ZenRemoteUI/Main.lua</div>
+            <div class="path">Modules/Net/Remote.lua — https://cdn.example.com/gitanx/Modules/Net/Remote.lua</div>
+            <div class="path">Actions/Explorer/Scan.lua — https://cdn.example.com/gitanx/Actions/Explorer/Scan.lua</div>
+          </div>
+
+          <h2>💬 Discord :</h2>
+          <div class="discord">Rejoins-nous sur Discord : <strong>discord.gg/gitanx</strong></div>
+        </div>
+      `;
+    }
   </script>
 </body>
 </html>
