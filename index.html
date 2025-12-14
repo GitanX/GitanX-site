@@ -5,9 +5,9 @@
   <title>ZenRemoteUI - GitanX Secure</title>
   <style>
     body {
-      font-family: Arial, sans-serif;
       background: #111;
       color: #eee;
+      font-family: Arial, sans-serif;
       display: flex;
       justify-content: center;
       align-items: center;
@@ -18,33 +18,58 @@
       padding: 20px;
       border-radius: 8px;
       box-shadow: 0 0 12px rgba(0,0,0,0.6);
+      width: 400px;
     }
     .menu h1 {
-      margin: 0 0 10px;
-      font-size: 20px;
       color: #6cf;
+      font-size: 22px;
+      margin-bottom: 10px;
     }
-    .menu p {
-      font-size: 14px;
-      color: #ccc;
+    .menu ul {
+      list-style: none;
+      padding: 0;
+    }
+    .menu li {
+      padding: 8px;
+      margin: 4px 0;
+      background: #333;
+      border-radius: 4px;
+      transition: background 0.2s;
+    }
+    .menu li:hover {
+      background: #444;
+      cursor: pointer;
+    }
+    .error {
+      color: red;
+      font-size: 24px;
+      text-align: center;
     }
   </style>
 </head>
 <body>
-  <div class="menu">
-    <h1>ZenRemoteUI</h1>
-    <p>Chargement du menu sécurisé...</p>
-  </div>
+  <div id="app"></div>
 
   <script>
     // Vérifie si le visiteur vient de Linkvertise
     const ref = document.referrer;
+
     if (!ref.includes("linkvertise.com")) {
-        // Si pas Linkvertise → faux 404
-        document.body.innerHTML = "<h1 style='color:red;text-align:center;'>404 - Accès refusé</h1>";
+      // Faux 404 si pas Linkvertise
+      document.getElementById("app").innerHTML =
+        "<div class='error'>404 - Accès refusé</div>";
     } else {
-        // Si Linkvertise → charge ton vrai contenu GitanX
-        window.location.href = "/hidden/index.html"; 
+      // Contenu réel du site
+      document.getElementById("app").innerHTML = `
+        <div class="menu">
+          <h1>ZenRemoteUI</h1>
+          <ul>
+            <li>Option 1</li>
+            <li>Option 2</li>
+            <li>Option 3</li>
+          </ul>
+        </div>
+      `;
     }
   </script>
 </body>
