@@ -188,23 +188,22 @@
           <div class="error">404 - Accès refusé</div>
           <div class="error-footer">
             <p>You dont have permission use linkvertise for can use </p>
-            <a href="https://link-center.net/1461822/f0vRn54Ht7oR" target="_blank" rel="noopener noreferrer">https://gitanx.github.io/GitanX-site/</a>
+            <a href="https://link-center.net/1461822/f0vRn54Ht7oR" target="_blank" rel="noopener noreferrer">https://link-center.net/1461822/f0vRn54Ht7oR</a>
           </div>
         </div>
       `;
     } else {
-      // Page premium GitanX (contenu UI stylé)
+      
       app.innerHTML = `
         <div class="wrap">
           <header class="app-hero card" role="banner" aria-hidden="false">
             <div class="brand" aria-hidden="true">GX</div>
             <div class="hero-text">
-              <h1>Bienvenue sur GitanX Premium</h1>
-              <p>Accès validé via Linkvertise — voici ton espace premium, rapide et soigné.</p>
+              <h1>GitanX Key</h1>
+              <p>Acces autorized — Key feature</p>
             </div>
             <div style="margin-left:auto; display:flex; gap:10px; align-items:center;">
-              <button class="btn ghost" id="open-discord">Rejoindre le Discord</button>
-              <button class="btn primary" id="copy-all">Copier toutes les URLs</button>
+              <button class="btn ghost" id="open-discord">Join the discord</button>
             </div>
           </header>
 
@@ -215,69 +214,10 @@
               <div class="key-row" style="margin-bottom:16px">
                 <div class="key-badge" id="key">GitanX</div>
                 <div style="display:flex; gap:8px">
-                  <button class="btn" id="copy-key">Copier la clé</button>
-                  <button class="btn" id="reveal-key" title="Afficher / Masquer">Afficher</button>
+                  <button class="btn" id="copy-key">Copy key</button>
+                  <button class="btn" id="reveal-key" title="Afficher / Masquer">display</button>
                 </div>
               </div>
-
-              <h2 class="section-title">📂 Chemins disponibles</h2>
-              <div class="intro">Clique sur une ligne pour ouvrir le fichier dans un nouvel onglet, ou copie l'URL.</div>
-
-              <div class="paths" id="paths">
-                <div class="path">
-                  <div class="meta">
-                    <div class="file">
-                      <div class="name">Core/Init/Loader.lua</div>
-                      <div class="url">https://cdn.example.com/gitanx/Core/Init/Loader.lua</div>
-                    </div>
-                  </div>
-                  <div class="actions">
-                    <button class="small" data-url="https://cdn.example.com/gitanx/Core/Init/Loader.lua" title="Ouvrir" onclick="window.open(this.dataset.url, '_blank', 'noopener')">Ouvrir</button>
-                    <button class="small" data-url="https://cdn.example.com/gitanx/Core/Init/Loader.lua" onclick="copyToClipboard(this.dataset.url)">Copier</button>
-                  </div>
-                </div>
-
-                <div class="path">
-                  <div class="meta">
-                    <div class="file">
-                      <div class="name">UI/ZenRemoteUI/Main.lua</div>
-                      <div class="url">https://cdn.example.com/gitanx/UI/ZenRemoteUI/Main.lua</div>
-                    </div>
-                  </div>
-                  <div class="actions">
-                    <button class="small" data-url="https://cdn.example.com/gitanx/UI/ZenRemoteUI/Main.lua" title="Ouvrir" onclick="window.open(this.dataset.url, '_blank', 'noopener')">Ouvrir</button>
-                    <button class="small" data-url="https://cdn.example.com/gitanx/UI/ZenRemoteUI/Main.lua" onclick="copyToClipboard(this.dataset.url)">Copier</button>
-                  </div>
-                </div>
-
-                <div class="path">
-                  <div class="meta">
-                    <div class="file">
-                      <div class="name">Modules/Net/Remote.lua</div>
-                      <div class="url">https://cdn.example.com/gitanx/Modules/Net/Remote.lua</div>
-                    </div>
-                  </div>
-                  <div class="actions">
-                    <button class="small" data-url="https://cdn.example.com/gitanx/Modules/Net/Remote.lua" title="Ouvrir" onclick="window.open(this.dataset.url, '_blank', 'noopener')">Ouvrir</button>
-                    <button class="small" data-url="https://cdn.example.com/gitanx/Modules/Net/Remote.lua" onclick="copyToClipboard(this.dataset.url)">Copier</button>
-                  </div>
-                </div>
-
-                <div class="path">
-                  <div class="meta">
-                    <div class="file">
-                      <div class="name">Actions/Explorer/Scan.lua</div>
-                      <div class="url">https://cdn.example.com/gitanx/Actions/Explorer/Scan.lua</div>
-                    </div>
-                  </div>
-                  <div class="actions">
-                    <button class="small" data-url="https://cdn.example.com/gitanx/Actions/Explorer/Scan.lua" title="Ouvrir" onclick="window.open(this.dataset.url, '_blank', 'noopener')">Ouvrir</button>
-                    <button class="small" data-url="https://cdn.example.com/gitanx/Actions/Explorer/Scan.lua" onclick="copyToClipboard(this.dataset.url)">Copier</button>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </main>
 
           <aside class="card secondary" role="complementary">
             <div class="discord-box">
@@ -290,14 +230,14 @@
               </div>
 
               <div style="margin-top:12px; display:flex; gap:8px;">
-                <button class="btn" id="copy-discord">Copier le lien</button>
-                <a class="btn ghost" href="https://discord.gg/gitanx" target="_blank" rel="noopener noreferrer">Ouvrir Discord</a>
+                <button class="btn" id="copy-discord">Copy the Discord</button>
+                <a class="btn ghost" href="https://discord.gg/nqVTXUeDHk" target="_blank" rel="noopener noreferrer">Ouvrir Discord</a>
               </div>
             </div>
 
             <div style="padding:12px; border-radius:10px; background:linear-gradient(180deg, rgba(255,255,255,0.01), transparent); border:1px solid rgba(255,255,255,0.02)">
-              <div style="font-weight:700; margin-bottom:8px">Informations</div>
-              <div class="muted" style="font-size:13px">Accès validé via Linkvertise. Cette page contient des raccourcis directs vers les fichiers listés.</div>
+              <div style="font-weight:700; margin-bottom:8px">Info</div>
+              <div class="muted" style="font-size:13px">the page web can only use with linkvertise </div>
             </div>
           </aside>
         </div>
@@ -310,7 +250,7 @@
     function copyToClipboard(text){
       if(!text) return;
       navigator.clipboard?.writeText(text).then(() => {
-        showToast('Copié dans le presse-papiers');
+        showToast('Copy');
       }).catch(() => {
         // fallback
         const ta = document.createElement('textarea');
@@ -343,9 +283,9 @@
         if(!kb) return;
         const btn = el;
         if(kb.textContent === '••••••'){
-          kb.textContent = 'GitanX'; btn.textContent = 'Masquer';
+          kb.textContent = 'GitanX'; btn.textContent = 'hidden';
         } else {
-          kb.textContent = '••••••'; btn.textContent = 'Afficher';
+          kb.textContent = '••••••'; btn.textContent = 'display';
         }
       }
 
@@ -358,11 +298,11 @@
       }
 
       if(el.id === 'open-discord'){
-        window.open('https://discord.gg/gitanx','_blank','noopener');
+        window.open('https://discord.gg/nqVTXUeDHk','_blank','noopener');
       }
 
       if(el.id === 'copy-discord'){
-        copyToClipboard('https://discord.gg/gitanx');
+        copyToClipboard('https://discord.gg/nqVTXUeDHk');
       }
     });
 
