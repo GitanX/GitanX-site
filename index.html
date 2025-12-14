@@ -40,37 +40,22 @@
       background: #444;
       cursor: pointer;
     }
-    .error {
-      color: red;
-      font-size: 24px;
-      text-align: center;
-    }
   </style>
 </head>
 <body>
-  <div id="app"></div>
+  <div class="menu">
+    <h1>ZenRemoteUI</h1>
+    <ul>
+      <li>Option 1</li>
+      <li>Option 2</li>
+      <li>Option 3</li>
+    </ul>
+  </div>
 
+  <!-- Script officiel Linkvertise -->
+  <script src="https://publisher.linkvertise.com/cdn/linkvertise.js"></script>
   <script>
-    // Vérifie si le visiteur vient de Linkvertise
-    const ref = document.referrer;
-
-    if (!ref.includes("linkvertise.com")) {
-      // Faux 404 si pas Linkvertise
-      document.getElementById("app").innerHTML =
-        "<div class='error'>404 - Accès refusé</div>";
-    } else {
-      // Contenu réel du site
-      document.getElementById("app").innerHTML = `
-        <div class="menu">
-          <h1>ZenRemoteUI</h1>
-          <ul>
-            <li>Option 1</li>
-            <li>Option 2</li>
-            <li>Option 3</li>
-          </ul>
-        </div>
-      `;
-    }
+    linkvertise(1461822, {whitelist: [], blacklist: [""]});
   </script>
 </body>
 </html>
