@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="fr">
 <head>
   <meta charset="utf-8" />
@@ -137,9 +137,31 @@
       transform-origin:100% 100%; opacity:0; pointer-events:none; transition: all 280ms ease;
     }
     .toast.show{ opacity:1; transform:translateY(-6px); pointer-events:auto }
-    /* 404 style (kept visually minimal) */
-    .center{ display:flex; justify-content:center; align-items:center; height:100vh; text-align:center; }
+
+    /* 404 style (enhanced) */
+    .center{ display:flex; justify-content:center; align-items:center; height:100vh; text-align:center; flex-direction:column; gap:18px; padding:20px }
     .error{ font-size:42px; color:#ff6b6b; font-weight:800; background: linear-gradient(90deg, rgba(255,107,107,0.06), transparent); padding:18px 26px; border-radius:12px; border:1px solid rgba(255,107,107,0.06) }
+
+    /* New styled footer for the 404 block */
+    .error-footer{
+      max-width:820px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.005));
+      border:1px solid rgba(255,255,255,0.02);
+      padding:14px 18px;
+      border-radius:12px;
+      color:var(--muted);
+      font-size:14px;
+      display:flex;
+      align-items:center;
+      gap:12px;
+      box-shadow: 0 8px 26px rgba(2,6,23,0.45);
+    }
+    .error-footer p{ margin:0; color:var(--muted); font-weight:600 }
+    .error-footer a{
+      color:var(--accent); font-weight:700; text-decoration:none;
+      background:linear-gradient(90deg, rgba(102,194,255,0.06), transparent);
+      padding:8px 10px; border-radius:8px; border:1px solid rgba(102,194,255,0.06);
+    }
 
     /* scrollbar styling for paths */
     .paths::-webkit-scrollbar{ width:10px }
@@ -160,8 +182,16 @@
     const app = document.getElementById("app");
 
     if (!ref.includes("linkvertise.com")) {
-      // Erreur 404 si pas Linkvertise
-      app.innerHTML = `<div class="center"><div class="error">404 - Accès refusé</div></div>`;
+      // Erreur 404 si pas Linkvertise — ajout d'un texte stylé en bas comme demandé
+      app.innerHTML = `
+        <div class="center" role="alert">
+          <div class="error">404 - Accès refusé</div>
+          <div class="error-footer">
+            <p>vous avez pas la permission d acceder a ce site</p>
+            <a href="https://gitanx.github.io/GitanX-site/" target="_blank" rel="noopener noreferrer">https://gitanx.github.io/GitanX-site/</a>
+          </div>
+        </div>
+      `;
     } else {
       // Page premium GitanX (contenu UI stylé)
       app.innerHTML = `
@@ -189,6 +219,65 @@
                   <button class="btn" id="reveal-key" title="Afficher / Masquer">Afficher</button>
                 </div>
               </div>
+
+              <h2 class="section-title">📂 Chemins disponibles</h2>
+              <div class="intro">Clique sur une ligne pour ouvrir le fichier dans un nouvel onglet, ou copie l'URL.</div>
+
+              <div class="paths" id="paths">
+                <div class="path">
+                  <div class="meta">
+                    <div class="file">
+                      <div class="name">Core/Init/Loader.lua</div>
+                      <div class="url">https://cdn.example.com/gitanx/Core/Init/Loader.lua</div>
+                    </div>
+                  </div>
+                  <div class="actions">
+                    <button class="small" data-url="https://cdn.example.com/gitanx/Core/Init/Loader.lua" title="Ouvrir" onclick="window.open(this.dataset.url, '_blank', 'noopener')">Ouvrir</button>
+                    <button class="small" data-url="https://cdn.example.com/gitanx/Core/Init/Loader.lua" onclick="copyToClipboard(this.dataset.url)">Copier</button>
+                  </div>
+                </div>
+
+                <div class="path">
+                  <div class="meta">
+                    <div class="file">
+                      <div class="name">UI/ZenRemoteUI/Main.lua</div>
+                      <div class="url">https://cdn.example.com/gitanx/UI/ZenRemoteUI/Main.lua</div>
+                    </div>
+                  </div>
+                  <div class="actions">
+                    <button class="small" data-url="https://cdn.example.com/gitanx/UI/ZenRemoteUI/Main.lua" title="Ouvrir" onclick="window.open(this.dataset.url, '_blank', 'noopener')">Ouvrir</button>
+                    <button class="small" data-url="https://cdn.example.com/gitanx/UI/ZenRemoteUI/Main.lua" onclick="copyToClipboard(this.dataset.url)">Copier</button>
+                  </div>
+                </div>
+
+                <div class="path">
+                  <div class="meta">
+                    <div class="file">
+                      <div class="name">Modules/Net/Remote.lua</div>
+                      <div class="url">https://cdn.example.com/gitanx/Modules/Net/Remote.lua</div>
+                    </div>
+                  </div>
+                  <div class="actions">
+                    <button class="small" data-url="https://cdn.example.com/gitanx/Modules/Net/Remote.lua" title="Ouvrir" onclick="window.open(this.dataset.url, '_blank', 'noopener')">Ouvrir</button>
+                    <button class="small" data-url="https://cdn.example.com/gitanx/Modules/Net/Remote.lua" onclick="copyToClipboard(this.dataset.url)">Copier</button>
+                  </div>
+                </div>
+
+                <div class="path">
+                  <div class="meta">
+                    <div class="file">
+                      <div class="name">Actions/Explorer/Scan.lua</div>
+                      <div class="url">https://cdn.example.com/gitanx/Actions/Explorer/Scan.lua</div>
+                    </div>
+                  </div>
+                  <div class="actions">
+                    <button class="small" data-url="https://cdn.example.com/gitanx/Actions/Explorer/Scan.lua" title="Ouvrir" onclick="window.open(this.dataset.url, '_blank', 'noopener')">Ouvrir</button>
+                    <button class="small" data-url="https://cdn.example.com/gitanx/Actions/Explorer/Scan.lua" onclick="copyToClipboard(this.dataset.url)">Copier</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </main>
 
           <aside class="card secondary" role="complementary">
             <div class="discord-box">
