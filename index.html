@@ -360,20 +360,7 @@
   </script>
 
   <script>
-    // Vérifie si le visiteur vient de Linkvertise
-    const ref = document.referrer;
-    const app = document.getElementById("app");
 
-    if (!ref.includes("linkvertise.com")) {
-      // Page d'erreur si pas Linkvertise
-      app.innerHTML = `
-        <div class="error-page active">
-          <div class="error-code">404</div>
-          <div class="error-message">⚠️ Accès Refusé</div>
-          <p style="color: #888; font-size: 18px;">Cette page nécessite une autorisation spéciale</p>
-        </div>
-      `;
-    } else {
       // Contenu réel du site
       app.innerHTML = `
         <div class="container">
