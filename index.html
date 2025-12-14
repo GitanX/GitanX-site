@@ -2,53 +2,356 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
-  <title>ZenRemoteUI - GitanX Secure</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GitanX Hub - Universal Script</title>
   <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
     body {
-      background: #111;
-      color: #eee;
-      font-family: Arial, sans-serif;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
+      background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+      color: #fff;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      min-height: 100vh;
+      overflow-x: hidden;
     }
-    .menu {
-      background: #222;
+
+    /* Animated Background */
+    .bg-animation {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      z-index: -1;
+    }
+
+    .bg-animation span {
+      position: absolute;
+      display: block;
+      width: 20px;
+      height: 20px;
+      background: rgba(138, 43, 226, 0.3);
+      animation: animate 25s linear infinite;
+      bottom: -150px;
+    }
+
+    .bg-animation span:nth-child(1) {
+      left: 25%;
+      width: 80px;
+      height: 80px;
+      animation-delay: 0s;
+    }
+
+    .bg-animation span:nth-child(2) {
+      left: 10%;
+      width: 20px;
+      height: 20px;
+      animation-delay: 2s;
+      animation-duration: 12s;
+    }
+
+    .bg-animation span:nth-child(3) {
+      left: 70%;
+      width: 20px;
+      height: 20px;
+      animation-delay: 4s;
+    }
+
+    .bg-animation span:nth-child(4) {
+      left: 40%;
+      width: 60px;
+      height: 60px;
+      animation-delay: 0s;
+      animation-duration: 18s;
+    }
+
+    .bg-animation span:nth-child(5) {
+      left: 65%;
+      width: 20px;
+      height: 20px;
+      animation-delay: 0s;
+    }
+
+    @keyframes animate {
+      0% {
+        transform: translateY(0) rotate(0deg);
+        opacity: 1;
+        border-radius: 0;
+      }
+      100% {
+        transform: translateY(-1000px) rotate(720deg);
+        opacity: 0;
+        border-radius: 50%;
+      }
+    }
+
+    /* Container */
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
       padding: 20px;
-      border-radius: 8px;
-      box-shadow: 0 0 12px rgba(0,0,0,0.6);
-      width: 400px;
+      position: relative;
+      z-index: 1;
     }
-    .menu h1 {
-      color: #6cf;
-      font-size: 22px;
+
+    /* Header */
+    header {
+      text-align: center;
+      padding: 60px 20px;
+      animation: fadeInDown 1s ease;
+    }
+
+    .logo {
+      font-size: 48px;
+      font-weight: bold;
+      background: linear-gradient(45deg, #8a2be2, #da70d6);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 10px;
+      text-shadow: 0 0 30px rgba(138, 43, 226, 0.5);
+    }
+
+    .subtitle {
+      font-size: 18px;
+      color: #bbb;
+      margin-bottom: 30px;
+    }
+
+    /* Features Grid */
+    .features {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 30px;
+      margin: 60px 0;
+    }
+
+    .feature-card {
+      background: rgba(30, 30, 50, 0.8);
+      backdrop-filter: blur(10px);
+      border: 2px solid rgba(138, 43, 226, 0.3);
+      border-radius: 20px;
+      padding: 30px;
+      transition: all 0.3s ease;
+      animation: fadeInUp 1s ease;
+    }
+
+    .feature-card:hover {
+      transform: translateY(-10px);
+      border-color: rgba(138, 43, 226, 0.8);
+      box-shadow: 0 10px 40px rgba(138, 43, 226, 0.4);
+    }
+
+    .feature-icon {
+      font-size: 48px;
+      margin-bottom: 20px;
+    }
+
+    .feature-title {
+      font-size: 24px;
+      color: #8a2be2;
+      margin-bottom: 15px;
+    }
+
+    .feature-desc {
+      color: #ccc;
+      line-height: 1.6;
+    }
+
+    /* Download Section */
+    .download-section {
+      text-align: center;
+      padding: 60px 20px;
+      background: rgba(20, 20, 40, 0.6);
+      backdrop-filter: blur(10px);
+      border-radius: 20px;
+      margin: 40px 0;
+      border: 2px solid rgba(138, 43, 226, 0.3);
+      animation: fadeIn 1.5s ease;
+    }
+
+    .download-title {
+      font-size: 36px;
+      margin-bottom: 20px;
+      background: linear-gradient(45deg, #8a2be2, #da70d6);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .download-btn {
+      display: inline-block;
+      padding: 20px 50px;
+      background: linear-gradient(45deg, #8a2be2, #da70d6);
+      color: white;
+      text-decoration: none;
+      border-radius: 50px;
+      font-size: 20px;
+      font-weight: bold;
+      margin: 20px;
+      transition: all 0.3s ease;
+      box-shadow: 0 10px 30px rgba(138, 43, 226, 0.4);
+    }
+
+    .download-btn:hover {
+      transform: scale(1.1);
+      box-shadow: 0 15px 40px rgba(138, 43, 226, 0.6);
+    }
+
+    /* Stats */
+    .stats {
+      display: flex;
+      justify-content: space-around;
+      flex-wrap: wrap;
+      margin: 60px 0;
+      gap: 20px;
+    }
+
+    .stat-card {
+      background: rgba(30, 30, 50, 0.8);
+      backdrop-filter: blur(10px);
+      border: 2px solid rgba(138, 43, 226, 0.3);
+      border-radius: 15px;
+      padding: 30px;
+      text-align: center;
+      min-width: 200px;
+      animation: fadeInUp 1.2s ease;
+    }
+
+    .stat-number {
+      font-size: 48px;
+      font-weight: bold;
+      color: #8a2be2;
       margin-bottom: 10px;
     }
-    .menu ul {
-      list-style: none;
-      padding: 0;
+
+    .stat-label {
+      color: #ccc;
+      font-size: 16px;
     }
-    .menu li {
-      padding: 8px;
-      margin: 4px 0;
-      background: #333;
-      border-radius: 4px;
-      transition: background 0.2s;
-    }
-    .menu li:hover {
-      background: #444;
-      cursor: pointer;
-    }
-    .error {
-      color: red;
-      font-size: 24px;
+
+    /* Footer */
+    footer {
       text-align: center;
+      padding: 40px 20px;
+      color: #888;
+      border-top: 2px solid rgba(138, 43, 226, 0.2);
+      margin-top: 60px;
+    }
+
+    .social-links {
+      margin: 20px 0;
+    }
+
+    .social-links a {
+      display: inline-block;
+      margin: 0 15px;
+      color: #8a2be2;
+      text-decoration: none;
+      font-size: 24px;
+      transition: all 0.3s ease;
+    }
+
+    .social-links a:hover {
+      color: #da70d6;
+      transform: scale(1.2);
+    }
+
+    /* Error Page */
+    .error-page {
+      display: none;
+      text-align: center;
+      padding: 100px 20px;
+      animation: fadeIn 1s ease;
+    }
+
+    .error-page.active {
+      display: block;
+    }
+
+    .error-code {
+      font-size: 120px;
+      font-weight: bold;
+      color: #8a2be2;
+      margin-bottom: 20px;
+    }
+
+    .error-message {
+      font-size: 24px;
+      color: #ccc;
+      margin-bottom: 40px;
+    }
+
+    /* Animations */
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+      }
+    }
+
+    @keyframes fadeInDown {
+      from {
+        opacity: 0;
+        transform: translateY(-50px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(50px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .logo {
+        font-size: 36px;
+      }
+
+      .download-title {
+        font-size: 28px;
+      }
+
+      .download-btn {
+        padding: 15px 30px;
+        font-size: 16px;
+      }
+
+      .features {
+        grid-template-columns: 1fr;
+      }
     }
   </style>
 </head>
 <body>
-  <div id="app"></div>
+  <div class="bg-animation">
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+
+  <div id="app">
+    <!-- Contenu chargé par JavaScript -->
+  </div>
 
   <!-- Script officiel Linkvertise -->
   <script src="https://publisher.linkvertise.com/cdn/linkvertise.js"></script>
@@ -59,21 +362,103 @@
   <script>
     // Vérifie si le visiteur vient de Linkvertise
     const ref = document.referrer;
+    const app = document.getElementById("app");
 
     if (!ref.includes("linkvertise.com")) {
-      // Faux 404 si pas Linkvertise
-      document.getElementById("app").innerHTML =
-        "<div class='error'>404 - Accès refusé</div>";
+      // Page d'erreur si pas Linkvertise
+      app.innerHTML = `
+        <div class="error-page active">
+          <div class="error-code">404</div>
+          <div class="error-message">⚠️ Accès Refusé</div>
+          <p style="color: #888; font-size: 18px;">Cette page nécessite une autorisation spéciale</p>
+        </div>
+      `;
     } else {
       // Contenu réel du site
-      document.getElementById("app").innerHTML = `
-        <div class="menu">
-          <h1>ZenRemoteUI</h1>
-          <ul>
-            <li>Option 1</li>
-            <li>Option 2</li>
-            <li>Option 3</li>
-          </ul>
+      app.innerHTML = `
+        <div class="container">
+          <header>
+            <div class="logo">🌟 GitanX Hub</div>
+            <div class="subtitle">Universal Roblox Script - The Ultimate Experience</div>
+          </header>
+
+          <div class="stats">
+            <div class="stat-card">
+              <div class="stat-number">50K+</div>
+              <div class="stat-label">Active Users</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-number">100+</div>
+              <div class="stat-label">Games Supported</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-number">24/7</div>
+              <div class="stat-label">Online Support</div>
+            </div>
+          </div>
+
+          <div class="features">
+            <div class="feature-card">
+              <div class="feature-icon">🎯</div>
+              <div class="feature-title">Aimbot Premium</div>
+              <div class="feature-desc">Lock permanent sur les ennemis avec FOV réglable, smoothness et prédiction de mouvement pour une précision maximale.</div>
+            </div>
+
+            <div class="feature-card">
+              <div class="feature-icon">👁️</div>
+              <div class="feature-title">ESP Avancé</div>
+              <div class="feature-desc">Boxes, noms, santé, distance, tracers et skeleton ESP. Voyez tous les joueurs à travers les murs avec des couleurs personnalisables.</div>
+            </div>
+
+            <div class="feature-card">
+              <div class="feature-icon">🚀</div>
+              <div class="feature-title">Movement Hack</div>
+              <div class="feature-desc">Speed hack, fly, noclip, infinite jump et téléportation. Déplacez-vous librement dans tous les jeux Roblox.</div>
+            </div>
+
+            <div class="feature-card">
+              <div class="feature-icon">🔫</div>
+              <div class="feature-title">Gun Mods</div>
+              <div class="feature-desc">RapidFire, no reload, no recoil et silent aim. Dominez tous les shooters avec des modifications d'armes ultra puissantes.</div>
+            </div>
+
+            <div class="feature-card">
+              <div class="feature-icon">🎨</div>
+              <div class="feature-title">Visuals Premium</div>
+              <div class="feature-desc">FOV changer, fullbright, no fog, ghost mode avec effets et trails personnalisables. Interface moderne et élégante.</div>
+            </div>
+
+            <div class="feature-card">
+              <div class="feature-icon">⚙️</div>
+              <div class="feature-title">Universal Script</div>
+              <div class="feature-desc">Fonctionne sur TOUS les jeux Roblox. Optimisé pour des performances maximales sans lag. Mises à jour régulières.</div>
+            </div>
+          </div>
+
+          <div class="download-section">
+            <div class="download-title">✨ Prêt à Dominer ?</div>
+            <p style="color: #bbb; font-size: 18px; margin-bottom: 30px;">
+              Téléchargez GitanX Hub maintenant et devenez imbattable sur Roblox
+            </p>
+            <a href="#" class="download-btn" onclick="alert('🎮 Copiez le script depuis notre Discord !'); return false;">
+              📥 Télécharger Maintenant
+            </a>
+            <p style="color: #888; margin-top: 20px;">
+              ⚠️ Utilisez à vos risques - Ban permanent possible
+            </p>
+          </div>
+
+          <footer>
+            <div class="social-links">
+              <a href="#" title="Discord">💬</a>
+              <a href="#" title="Telegram">📱</a>
+              <a href="#" title="GitHub">💻</a>
+            </div>
+            <p>© 2025 GitanX Hub - Universal Roblox Script</p>
+            <p style="margin-top: 10px; font-size: 14px;">
+              Made with 💜 by GitanX Team
+            </p>
+          </footer>
         </div>
       `;
     }
