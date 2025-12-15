@@ -478,27 +478,145 @@
       box-shadow: 0 4px 12px rgba(251, 191, 36, 0.4);
     }
 
-    /* Responsive */
+    /* Responsive Mobile & Tablet */
     @media (max-width: 768px) {
+      body {
+        padding: 20px 0;
+      }
+
       .key-container {
-        padding: 35px 25px;
+        padding: 30px 20px;
+        max-width: 95%;
+        margin: 20px auto;
       }
 
       .logo {
-        font-size: 42px;
+        font-size: 38px;
+        letter-spacing: -1px;
       }
 
-      .error-code {
-        font-size: 100px;
+      .premium-badge {
+        display: block;
+        margin: 8px auto 0;
+        width: fit-content;
       }
 
-      .key-value {
-        font-size: 22px;
+      .subtitle {
+        font-size: 13px;
+        margin-bottom: 30px;
+      }
+
+      .step {
+        padding: 18px;
+      }
+
+      .step-header {
+        flex-direction: row;
+        align-items: center;
+      }
+
+      .step-number {
+        width: 32px;
+        height: 32px;
+        font-size: 14px;
+        flex-shrink: 0;
+      }
+
+      .step-title {
+        font-size: 16px;
       }
 
       .step-desc {
         padding-left: 0;
         margin-top: 10px;
+        font-size: 13px;
+      }
+
+      .generate-btn {
+        padding: 18px;
+        font-size: 16px;
+        margin-top: 20px;
+      }
+
+      .key-output {
+        padding: 20px;
+      }
+
+      .key-label {
+        font-size: 11px;
+      }
+
+      .key-value {
+        font-size: 20px;
+        letter-spacing: 1px;
+        line-height: 1.4;
+      }
+
+      .copy-btn {
+        padding: 12px 28px;
+        font-size: 14px;
+      }
+
+      .footer {
+        margin-top: 30px;
+        font-size: 12px;
+      }
+
+      .error-code {
+        font-size: 90px;
+      }
+
+      .error-title {
+        font-size: 32px;
+      }
+
+      .error-message {
+        font-size: 16px;
+        padding: 0 15px;
+      }
+
+      /* Optimisation particules sur mobile */
+      .particle {
+        width: 3px;
+        height: 3px;
+      }
+    }
+
+    /* Très petits écrans */
+    @media (max-width: 480px) {
+      .key-container {
+        padding: 25px 15px;
+      }
+
+      .logo {
+        font-size: 32px;
+      }
+
+      .step {
+        padding: 15px;
+      }
+
+      .key-value {
+        font-size: 18px;
+      }
+    }
+
+    /* Optimisation tactile */
+    @media (hover: none) and (pointer: coarse) {
+      .generate-btn,
+      .copy-btn,
+      .error-link {
+        min-height: 44px;
+        touch-action: manipulation;
+      }
+
+      .step:hover {
+        transform: none;
+      }
+
+      .generate-btn:hover::before,
+      .step:hover::before {
+        display: none;
       }
     }
   </style>
@@ -584,8 +702,8 @@
           </button>
 
           <div class="key-output" id="keyOutput">
-            <div class="key-label">GitanX_d56qs65qseze7d</div>
-            <div class="key-value" id="keyValue">GitanX</div>
+            <div class="key-label">Your GitanX Key</div>
+            <div class="key-value" id="keyValue">GitanX_d56qs65qseze7d</div>
             <button class="copy-btn" onclick="copyKey()">
               📋 Copy Key
             </button>
