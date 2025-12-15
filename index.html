@@ -478,6 +478,30 @@
       box-shadow: 0 4px 12px rgba(251, 191, 36, 0.4);
     }
 
+    /* Top menu (visible only on generator page) */
+    .top-menu {
+      position: absolute;
+      top: 18px;
+      right: 18px;
+      z-index: 20;
+      display: flex;
+      gap: 10px;
+      align-items: center;
+    }
+    .menu-btn {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(138,43,226,0.2);
+      color: #fff;
+      padding: 8px 12px;
+      border-radius: 10px;
+      cursor: pointer;
+      font-weight: 700;
+    }
+    .menu-btn:hover {
+      background: linear-gradient(135deg,#8a2be2,#da70d6);
+      color: #fff;
+    }
+
     /* Responsive Mobile & Tablet */
     @media (max-width: 768px) {
       body {
@@ -669,9 +693,13 @@
         </div>
       `;
     } else {
-      // Page Key Generator
+      // Page Key Generator (menu Executor ajouté ici — absent de la 404)
       app.innerHTML = `
         <div class="key-container">
+          <div class="top-menu">
+            <button class="menu-btn" onclick="window.open('index2.html', '_blank')">Executor</button>
+          </div>
+
           <div class="logo-container">
             <div class="logo">GitanX<span class="premium-badge">⚡ Pro</span></div>
           </div>
