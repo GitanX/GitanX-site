@@ -6,28 +6,292 @@
   <title>Executor - LC DEO</title>
   <style>
     * { box-sizing: border-box; margin:0; padding:0; }
-    body { font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; background:#0a0a0f; color:#fff; min-height:100vh; display:flex; align-items:center; justify-content:center; padding:20px; }
-    .card { width:100%; max-width:720px; background: rgba(15,15,25,0.9); border-radius:12px; border:1px solid rgba(138,43,226,0.2); padding:24px; box-shadow:0 30px 80px rgba(0,0,0,0.6); }
-    .header { font-size:20px; font-weight:800; background: linear-gradient(135deg,#8a2be2,#da70d6); -webkit-background-clip:text; -webkit-text-fill-color:transparent; margin-bottom:12px; }
-    .sub { color:#a0a0b0; margin-bottom:16px; }
-    .list { background:rgba(0,0,0,0.25); padding:14px; border-radius:8px; border:1px solid rgba(255,255,255,0.03); font-family: 'Courier New', monospace; color:#fff; }
-    .item { margin-bottom:8px; }
-    .item .label { color:#9be7ff; margin-right:8px; font-weight:700; }
-    .close { margin-top:16px; display:inline-block; background:linear-gradient(135deg,#8a2be2,#da70d6); color:#fff; padding:10px 14px; border-radius:8px; text-decoration:none; }
-    @media (max-width:480px) { .card { padding:16px } .header { font-size:18px } }
+    html,body { height:100%; }
+    body {
+      font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: radial-gradient(900px 450px at 10% 10%, rgba(98,60,190,0.06), transparent 8%), linear-gradient(180deg,#05040a 0%, #0b0710 100%);
+      color: #fff;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding:28px;
+    }
+
+    .wrap {
+      width:100%;
+      max-width:1100px;
+      display:grid;
+      grid-template-columns: 1fr 360px;
+      gap:24px;
+      align-items:start;
+    }
+
+    .panel {
+      background: linear-gradient(180deg, rgba(18,12,28,0.86), rgba(12,8,20,0.95));
+      border-radius:14px;
+      padding:18px;
+      border:1px solid rgba(138,43,226,0.06);
+      box-shadow: 0 30px 80px rgba(0,0,0,0.7);
+    }
+
+    .hero {
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      margin-bottom:12px;
+      padding:12px;
+      border-radius:10px;
+      background: linear-gradient(90deg, rgba(123,70,255,0.04), rgba(255,134,209,0.02));
+    }
+    .hero h1 { font-size:20px; font-weight:900; color:#f3e6ff; }
+    .hero p { color:#b9aee5; font-size:13px; }
+
+    .search { display:flex; gap:8px; margin-bottom:12px; }
+    .search input {
+      flex:1;
+      padding:10px 12px;
+      border-radius:10px;
+      border:1px solid rgba(255,255,255,0.03);
+      background: rgba(0,0,0,0.18);
+      color:#fff;
+    }
+    .search button {
+      padding:10px 12px;
+      border-radius:10px;
+      border:none;
+      background:linear-gradient(90deg,#7b46ff,#ff86d1);
+      color:#fff;
+      font-weight:800;
+      cursor:pointer;
+    }
+
+    .executors { display:flex; flex-direction:column; gap:12px; }
+
+    .executor {
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:12px;
+      padding:12px;
+      border-radius:12px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.005));
+      border:1px solid rgba(255,255,255,0.02);
+      transition: transform .12s ease, box-shadow .12s ease;
+    }
+    .executor:hover { transform: translateY(-6px); box-shadow: 0 20px 50px rgba(123,70,255,0.08); }
+
+    .left { display:flex; gap:12px; align-items:center; }
+    .avatar {
+      width:56px; height:56px; border-radius:12px; background: linear-gradient(135deg,#7b46ff,#ff86d1);
+      display:flex; align-items:center; justify-content:center; color:#fff; font-weight:900; font-size:20px;
+      box-shadow: 0 10px 30px rgba(123,70,255,0.12);
+    }
+    .meta { display:flex; flex-direction:column; gap:4px; max-width:520px; }
+    .meta .name { font-weight:900; color:#fff; font-size:16px; }
+    .meta .link { color:#fff; opacity:0.9; font-size:13px; text-decoration:underline; word-break:break-all; }
+
+    .status { text-align:right; min-width:120px; display:flex; flex-direction:column; gap:8px; align-items:flex-end; }
+    .percent {
+      font-weight:900;
+      color:#4ade80; /* green for 100% */
+      background: rgba(74,222,128,0.06);
+      padding:6px 12px;
+      border-radius:999px;
+      font-size:13px;
+      border:1px solid rgba(74,222,128,0.08);
+    }
+    .btns { display:flex; gap:8px; margin-top:6px; }
+    .btn {
+      padding:8px 12px;
+      border-radius:10px;
+      font-weight:800;
+      font-size:13px;
+      cursor:pointer;
+      border:none;
+      background: linear-gradient(90deg,#c17dff,#ff86d1);
+      color:#07050a;
+      box-shadow: 0 12px 36px rgba(193,125,255,0.08);
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      text-decoration:none;
+    }
+
+    /* Right column */
+    .panel-right { display:flex; flex-direction:column; gap:12px; }
+    .stat { padding:12px; border-radius:10px; background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.005)); border:1px solid rgba(255,255,255,0.02); color:#d9cfff; }
+    .stat h3 { margin-bottom:8px; font-size:13px; color:#fff; }
+    .stat p { font-size:13px; color:#b9aee5; }
+
+    .featured .big { font-weight:900; color:#fff; font-size:18px; }
+    .foot { margin-top:12px; color:#9b93a8; font-size:13px; }
+
+    @media (max-width:980px) {
+      .wrap { grid-template-columns: 1fr; }
+      .panel-right { order:2; }
+    }
+    @media (max-width:560px) {
+      .avatar { width:44px; height:44px; font-size:16px; }
+      .executor { padding:10px; }
+      .meta .link { font-size:12px; }
+    }
   </style>
 </head>
 <body>
-  <div class="card">
-    <div class="header">Executor - LC DEO</div>
-    <div class="sub">Onglet ouvert depuis le bouton "Executor" de la page principale.</div>
+  <div class="wrap">
+    <div class="panel">
+      <div class="hero">
+        <div>
+          <h1>Executor — LC DEO</h1>
+          <p>Catalogue d'executors stylés. Clique pour ouvrir ou copier le lien.</p>
+        </div>
+        <div style="text-align:right">
+          <div style="font-weight:900;color:#ffd9fb;font-size:15px;">Featured</div>
+          <div style="color:#c8b6ff;font-size:13px;">Fast • Styled • Verified</div>
+        </div>
+      </div>
 
-    <div class="list">
-      <div class="item"><span class="label">lc deo</span> — contenu: affiché ici</div>
-      <div class="item"><span class="label">xeno :</span> link 99%</div>
+      <div class="search">
+        <input id="searchInput" placeholder="Rechercher (ex: Xeno)"/>
+        <button id="clearSearch">Clear</button>
+      </div>
+
+      <div class="executors" id="executorsList">
+        <!-- Xeno (requested: bold white name, link white, 100% green) -->
+        <div class="executor" data-name="Xeno">
+          <div class="left">
+            <div class="avatar">X</div>
+            <div class="meta">
+              <div class="name">Xeno</div>
+              <div class="link" title="https://xeno.example/link">https://xeno.example/link</div>
+            </div>
+          </div>
+          <div class="status">
+            <div class="percent">100%</div>
+            <div class="btns">
+              <button class="btn copyLink">Copy</button>
+              <a class="btn" href="https://xeno.example/link" target="_blank" rel="noopener">Open</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Additional examples kept -->
+        <div class="executor" data-name="Nova">
+          <div class="left">
+            <div class="avatar">N</div>
+            <div class="meta">
+              <div class="name">Nova</div>
+              <div class="link" title="https://nova.example/link">https://nova.example/link</div>
+            </div>
+          </div>
+          <div class="status">
+            <div class="percent" style="color:#ffd36b;background:rgba(255,211,107,0.06);border-color:rgba(255,211,107,0.08);">95%</div>
+            <div class="btns">
+              <button class="btn copyLink">Copy</button>
+              <a class="btn" href="https://nova.example/link" target="_blank" rel="noopener">Open</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="executor" data-name="Aurora">
+          <div class="left">
+            <div class="avatar">A</div>
+            <div class="meta">
+              <div class="name">Aurora</div>
+              <div class="link" title="https://aurora.example/link">https://aurora.example/link</div>
+            </div>
+          </div>
+          <div class="status">
+            <div class="percent" style="color:#ff7b7b;background:rgba(255,123,123,0.04);border-color:rgba(255,123,123,0.08);">88%</div>
+            <div class="btns">
+              <button class="btn copyLink">Copy</button>
+              <a class="btn" href="https://aurora.example/link" target="_blank" rel="noopener">Open</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="foot">Tip: Click "Copy" to quickly copy the executor link.</div>
     </div>
 
-    <a class="close" href="javascript:window.close()">Fermer</a>
+    <div class="panel panel-right">
+      <div class="stat">
+        <h3>Featured Executor</h3>
+        <div class="featured">
+          <div style="flex:1">
+            <div class="big">Xeno</div>
+            <div style="color:#e6def8;margin-top:6px;">Link: <span style="color:#fff;font-weight:800;">https://xeno.example/link</span></div>
+            <div style="margin-top:8px;color:#9eeebb;font-weight:900;">Status: <span style="color:#4ade80;">100%</span></div>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:8px;align-items:flex-end;">
+            <button class="btn" id="copyFeatured">Copy Xeno Link</button>
+            <a class="btn" href="https://xeno.example/link" target="_blank" rel="noopener">Open Xeno</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="stat">
+        <h3>Statistics</h3>
+        <p>Executors verified: <strong style="color:#ffd9fb">3</strong></p>
+        <p>Uptime average: <strong style="color:#9eeebb">99.2%</strong></p>
+      </div>
+
+      <div class="stat">
+        <h3>Quick actions</h3>
+        <p><button class="btn" id="openAll">Open All (new tabs)</button></p>
+        <p style="margin-top:8px;color:#b9aee5;">You can open links in a new tab or copy them to clipboard for use in your tools.</p>
+      </div>
+    </div>
   </div>
+
+  <script>
+    // Copy buttons
+    document.querySelectorAll('.copyLink').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        const executor = e.target.closest('.executor');
+        const link = executor.querySelector('.link').textContent.trim();
+        navigator.clipboard.writeText(link).then(() => {
+          const old = btn.textContent;
+          btn.textContent = '✓ Copied';
+          setTimeout(()=> btn.textContent = old, 1400);
+        }).catch(() => {
+          const ta = document.createElement('textarea'); ta.value = link; document.body.appendChild(ta);
+          ta.select(); document.execCommand('copy'); document.body.removeChild(ta);
+          const old = btn.textContent; btn.textContent = '✓ Copied'; setTimeout(()=> btn.textContent = old, 1400);
+        });
+      });
+    });
+
+    // featured copy
+    document.getElementById('copyFeatured').addEventListener('click', () => {
+      const link = 'https://xeno.example/link';
+      navigator.clipboard.writeText(link).then(()=> {
+        const btn = document.getElementById('copyFeatured');
+        const old = btn.textContent;
+        btn.textContent = '✓ Copied';
+        setTimeout(()=> btn.textContent = old, 1300);
+      });
+    });
+
+    // open all
+    document.getElementById('openAll').addEventListener('click', () => {
+      document.querySelectorAll('.executor .link').forEach(l => {
+        window.open(l.textContent.trim(), '_blank', 'noopener');
+      });
+    });
+
+    // search
+    const searchInput = document.getElementById('searchInput');
+    document.getElementById('clearSearch').addEventListener('click', () => { searchInput.value=''; filterList(''); });
+    searchInput.addEventListener('input', (e) => { filterList(e.target.value); });
+    function filterList(q){
+      q = q.trim().toLowerCase();
+      document.querySelectorAll('.executor').forEach(el => {
+        const name = (el.dataset.name||'').toLowerCase();
+        const link = (el.querySelector('.link')?.textContent||'').toLowerCase();
+        el.style.display = (name.includes(q) || link.includes(q)) ? 'flex' : 'none';
+      });
+    }
+  </script>
 </body>
 </html>
