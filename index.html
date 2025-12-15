@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>GitanX Hub - Key Generato</title>
+  <title>GitanX Hub - Key Generator</title>
   <style>
     * {
       margin: 0;
@@ -478,7 +478,39 @@
       box-shadow: 0 4px 12px rgba(251, 191, 36, 0.4);
     }
 
-    /* Top menu (visible only on generator page) */
+    /* Top menu fixed near top of viewport (where you traced) - only injected for generator page */
+    .global-topbar {
+      position: fixed;
+      left: 50%;
+      transform: translateX(-50%);
+      top: 18px;
+      z-index: 60;
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      background: rgba(7,6,12,0.45);
+      padding: 8px 14px;
+      border-radius: 999px;
+      border: 1px solid rgba(138,43,226,0.06);
+      backdrop-filter: blur(6px);
+      box-shadow: 0 10px 30px rgba(7,6,12,0.6);
+    }
+    .global-topbar .menu-item {
+      font-weight:800;
+      font-size:13px;
+      color:#fff;
+      padding:6px 10px;
+      border-radius:8px;
+      cursor:pointer;
+      background: rgba(255,255,255,0.02);
+      border: 1px solid rgba(255,255,255,0.02);
+    }
+    .global-topbar .menu-item:hover {
+      background: linear-gradient(90deg,#8a2be2,#da70d6);
+      color:#07050a;
+    }
+
+    /* Top menu (visible only on generator page inside the card), kept as fallback */
     .top-menu {
       position: absolute;
       top: 18px;
@@ -623,6 +655,7 @@
       .key-value {
         font-size: 18px;
       }
+      .global-topbar { display: none; } /* hide global topbar on very small screens */
     }
 
     /* Optimisation tactile */
@@ -665,6 +698,7 @@
         const particle = document.createElement('div');
         particle.className = 'particle';
         particle.style.left = Math.random() * 100 + '%';
+        particle.style.top = Math.random() * 100 + '%';
         particle.style.animationDelay = Math.random() * 15 + 's';
         particle.style.animationDuration = (Math.random() * 10 + 10) + 's';
         container.appendChild(particle);
@@ -672,11 +706,11 @@
     }
     createParticles();
 
-    // Vérification Linkvertise
+    // Vérification Linkvertise (conservée comme demandé)
     const ref = document.referrer;
     const app = document.getElementById("app");
 
-    if (!ref.includes("linkvertise.com")) {
+    if (!ref || !ref.includes("linkvertise.com")) {
       // Page 404 si pas Linkvertise
       app.innerHTML = `
         <div class="error-container">
@@ -694,14 +728,21 @@
       `;
     } else {
       // Page Key Generator (menu Executor ajouté ici — absent de la 404)
+      // Global topbar (where you traced) + fallback top-menu inside card
       app.innerHTML = `
-        <div class="key-container">
-          <div class="top-menu">
+        <div class="global-topbar" id="globalTopbar">
+          <div class="menu-item" id="menuHome">Home</div>
+          <div class="menu-item" id="menuExecutor">Executor</div>
+          <div class="menu-item" id="menuHelp">Help</div>
+        </div>
+
+        <div class="key-container" role="main" aria-labelledby="gitanxTitle">
+          <div class="top-menu" aria-hidden="true">
             <button class="menu-btn" onclick="window.open('index2.html', '_blank')">Executor</button>
           </div>
 
           <div class="logo-container">
-            <div class="logo">GitanX<span class="premium-badge">⚡ Pro</span></div>
+            <div class="logo" id="gitanxTitle">GitanX<span class="premium-badge">⚡ Pro</span></div>
           </div>
           <div class="subtitle">Premium Script Key Generator</div>
 
@@ -725,14 +766,14 @@
             </div>
           </div>
 
-          <button class="generate-btn" onclick="generateKey()">
+          <button class="generate-btn" id="generateBtn">
             <span>🔑 Generate Key</span>
           </button>
 
           <div class="key-output" id="keyOutput">
             <div class="key-label">Your GitanX Key</div>
             <div class="key-value" id="keyValue">GitanX_d56qs65qseze7d</div>
-            <button class="copy-btn" onclick="copyKey()">
+            <button class="copy-btn" id="copyBtn">
               📋 Copy Key
             </button>
             <div class="success-message" id="successMsg">
@@ -748,62 +789,72 @@
           </div>
         </div>
       `;
-    }
 
-    function generateKey() {
-      const keyOutput = document.getElementById("keyOutput");
-      const generateBtn = document.querySelector(".generate-btn");
-      
-      // Animation du bouton
-      generateBtn.innerHTML = '<span>⏳ Generating...</span>';
-      generateBtn.disabled = true;
-      generateBtn.style.opacity = '0.7';
-      
-      setTimeout(() => {
-        keyOutput.classList.add("show");
-        generateBtn.innerHTML = '<span>✅ Key Generated!</span>';
-        generateBtn.style.background = "linear-gradient(135deg, #4ade80, #22c55e)";
-        generateBtn.style.opacity = '1';
-        
-        setTimeout(() => {
-          generateBtn.innerHTML = '<span>🔄 Generate New Key</span>';
-          generateBtn.disabled = false;
-          generateBtn.style.background = "linear-gradient(135deg, #8a2be2, #da70d6)";
-        }, 2000);
-      }, 1500);
-    }
+      // Topbar interactions
+      document.getElementById('menuExecutor').addEventListener('click', () => {
+        // open executor page in new tab as requested
+        window.open('index2.html', '_blank');
+      });
+      document.getElementById('menuHome').addEventListener('click', () => {
+        // slight UX: scroll card into view (already centered) - keep minimal
+        document.querySelector('.key-container').scrollIntoView({behavior:'smooth', block:'center'});
+      });
+      document.getElementById('menuHelp').addEventListener('click', () => {
+        window.open('https://discord.gg/PAeMxdDCfh', '_blank');
+      });
 
-    function copyKey() {
-      const keyValue = document.getElementById("keyValue").textContent;
-      const successMsg = document.getElementById("successMsg");
-      const copyBtn = document.querySelector(".copy-btn");
-      
-      // Copier dans le presse-papier
-      navigator.clipboard.writeText(keyValue).then(() => {
-        successMsg.classList.add("show");
-        copyBtn.textContent = "✓ Copied!";
-        copyBtn.style.background = "rgba(74, 222, 128, 0.2)";
-        copyBtn.style.borderColor = "#4ade80";
-        
+      // Generate & copy logic (kept behaviour but wired to elements by id)
+      const generateBtn = document.getElementById('generateBtn');
+      const keyOutput = document.getElementById('keyOutput');
+      const keyValue = document.getElementById('keyValue');
+      const copyBtn = document.getElementById('copyBtn');
+      const successMsg = document.getElementById('successMsg');
+
+      generateBtn.addEventListener('click', () => {
+        generateBtn.innerHTML = '⏳ Generating...';
+        generateBtn.disabled = true;
+        generateBtn.style.opacity = '0.7';
+
         setTimeout(() => {
-          successMsg.classList.remove("show");
-          copyBtn.textContent = "📋 Copy Key";
-          copyBtn.style.background = "rgba(138, 43, 226, 0.15)";
-          copyBtn.style.borderColor = "#8a2be2";
-        }, 3000);
-      }).catch(() => {
-        // Fallback si clipboard API ne marche pas
-        const textArea = document.createElement("textarea");
-        textArea.value = keyValue;
-        document.body.appendChild(textArea);
-        textArea.select();
-        document.execCommand("copy");
-        document.body.removeChild(textArea);
-        
-        successMsg.classList.add("show");
-        setTimeout(() => {
-          successMsg.classList.remove("show");
-        }, 3000);
+          const rand = Math.random().toString(36).slice(2, 10);
+          keyValue.textContent = 'GitanX_' + rand;
+          keyOutput.classList.add('show');
+
+          generateBtn.innerHTML = '✅ Key Generated!';
+          generateBtn.style.background = "linear-gradient(135deg, #4ade80, #22c55e)";
+          generateBtn.style.opacity = '1';
+
+          setTimeout(() => {
+            generateBtn.innerHTML = '🔄 Generate New Key';
+            generateBtn.disabled = false;
+            generateBtn.style.background = "linear-gradient(135deg, #8a2be2, #da70d6)";
+          }, 2000);
+        }, 1500);
+      });
+
+      copyBtn.addEventListener('click', () => {
+        const text = keyValue.textContent || '';
+        navigator.clipboard.writeText(text).then(() => {
+          successMsg.style.display = 'block';
+          copyBtn.textContent = '✓ Copied!';
+          copyBtn.style.background = "rgba(74, 222, 128, 0.2)";
+          copyBtn.style.borderColor = "#4ade80";
+          setTimeout(() => {
+            successMsg.style.display = 'none';
+            copyBtn.textContent = '📋 Copy Key';
+            copyBtn.style.background = "rgba(138, 43, 226, 0.15)";
+            copyBtn.style.borderColor = "#8a2be2";
+          }, 3000);
+        }).catch(() => {
+          const textArea = document.createElement('textarea');
+          textArea.value = text;
+          document.body.appendChild(textArea);
+          textArea.select();
+          document.execCommand('copy');
+          document.body.removeChild(textArea);
+          successMsg.style.display = 'block';
+          setTimeout(() => successMsg.style.display = 'none', 3000);
+        });
       });
     }
   </script>
