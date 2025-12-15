@@ -65,7 +65,28 @@
       cursor:pointer;
     }
 
-    .executors { display:flex; flex-direction:column; gap:12px; }
+    /* Make executors list sliding ("coulissant") */
+    .executors {
+      position: relative;
+      overflow: hidden;
+      /* Visible area height — tweak if needed */
+      max-height: 520px;
+    }
+
+    .scroll-track {
+      display: flex;
+      flex-direction: column;
+      /* animation controlled via JS for correct duration */
+      animation-name: scrollUp;
+      animation-timing-function: linear;
+      animation-iteration-count: infinite;
+      animation-play-state: running;
+    }
+
+    @keyframes scrollUp {
+      from { transform: translateY(0); }
+      to { transform: translateY(-50%); } /* because we duplicate content to 200% height */
+    }
 
     .executor {
       display:flex;
@@ -134,6 +155,7 @@
       .avatar { width:44px; height:44px; font-size:16px; }
       .executor { padding:10px; }
       .meta .link { font-size:12px; }
+      .executors { max-height: 60vh; }
     }
   </style>
 </head>
@@ -156,241 +178,245 @@
         <button id="clearSearch">Clear</button>
       </div>
 
+      <!-- executors list (kept content unchanged) -->
       <div class="executors" id="executorsList">
-        <!-- Xeno -->
-        <div class="executor" data-name="Xeno">
-          <div class="left">
-            <div class="avatar">X</div>
-            <div class="meta">
-              <div class="name">Xeno | PC</div>
-              <div class="link" title="https://discord.gg/xe-no">https://discord.gg/xe-no</div>
+        <div class="scroll-track" id="scrollTrack">
+          <!-- Xeno -->
+          <div class="executor" data-name="Xeno">
+            <div class="left">
+              <div class="avatar">X</div>
+              <div class="meta">
+                <div class="name">Xeno | PC</div>
+                <div class="link" title="https://discord.gg/xe-no">https://discord.gg/xe-no</div>
+              </div>
+            </div>
+            <div class="status">
+              <div class="percent">100%</div>
+              <div class="btns">
+                <button class="btn copyLink">Copy</button>
+                <a class="btn" href="https://discord.gg/xe-no" target="_blank" rel="noopener">Open</a>
+              </div>
             </div>
           </div>
-          <div class="status">
-            <div class="percent">100%</div>
-            <div class="btns">
-              <button class="btn copyLink">Copy</button>
-              <a class="btn" href="https://discord.gg/xe-no" target="_blank" rel="noopener">Open</a>
-            </div>
-          </div>
-        </div>
 
-        <!-- Hydrogen -->
-        <div class="executor" data-name="Hydrogen">
-          <div class="left">
-            <div class="avatar">H</div>
-            <div class="meta">
-              <div class="name">Hydrogen | phone</div>
-              <div class="link" title="https://discord.gg/hydrogen">https://discord.gg/hydrogen</div>
+          <!-- Hydrogen -->
+          <div class="executor" data-name="Hydrogen">
+            <div class="left">
+              <div class="avatar">H</div>
+              <div class="meta">
+                <div class="name">Hydrogen | phone</div>
+                <div class="link" title="https://discord.gg/hydrogen">https://discord.gg/hydrogen</div>
+              </div>
+            </div>
+            <div class="status">
+              <div class="percent">100%</div>
+              <div class="btns">
+                <button class="btn copyLink">Copy</button>
+                <a class="btn" href="https://discord.gg/hydrogen" target="_blank" rel="noopener">Open</a>
+              </div>
             </div>
           </div>
-          <div class="status">
-            <div class="percent">100%</div>
-            <div class="btns">
-              <button class="btn copyLink">Copy</button>
-              <a class="btn" href="https://discord.gg/hydrogen" target="_blank" rel="noopener">Open</a>
-            </div>
-          </div>
-        </div>
 
-        <!-- Vega X -->
-        <div class="executor" data-name="Vega X">
-          <div class="left">
-            <div class="avatar">V</div>
-            <div class="meta">
-              <div class="name">Vega X | phone</div>
-              <div class="link" title="https://discord.gg/vegasupport">https://discord.gg/vegasupport</div>
+          <!-- Vega X -->
+          <div class="executor" data-name="Vega X">
+            <div class="left">
+              <div class="avatar">V</div>
+              <div class="meta">
+                <div class="name">Vega X | phone</div>
+                <div class="link" title="https://discord.gg/vegasupport">https://discord.gg/vegasupport</div>
+              </div>
+            </div>
+            <div class="status">
+              <div class="percent">100%</div>
+              <div class="btns">
+                <button class="btn copyLink">Copy</button>
+                <a class="btn" href="https://discord.gg/vegasupport" target="_blank" rel="noopener">Open</a>
+              </div>
             </div>
           </div>
-          <div class="status">
-            <div class="percent">100%</div>
-            <div class="btns">
-              <button class="btn copyLink">Copy</button>
-              <a class="btn" href="https://discord.gg/vegasupport" target="_blank" rel="noopener">Open</a>
-            </div>
-          </div>
-        </div>
 
-        <!-- Arceus X Neo -->
-        <div class="executor" data-name="Arceus X Neo">
-          <div class="left">
-            <div class="avatar">A</div>
-            <div class="meta">
-              <div class="name">Arceus X Neo | phone</div>
-              <div class="link" title="https://discord.gg/lugia">https://discord.gg/lugia</div>
+          <!-- Arceus X Neo -->
+          <div class="executor" data-name="Arceus X Neo">
+            <div class="left">
+              <div class="avatar">A</div>
+              <div class="meta">
+                <div class="name">Arceus X Neo | phone</div>
+                <div class="link" title="https://discord.gg/lugia">https://discord.gg/lugia</div>
+              </div>
+            </div>
+            <div class="status">
+              <div class="percent">100%</div>
+              <div class="btns">
+                <button class="btn copyLink">Copy</button>
+                <a class="btn" href="https://discord.gg/lugia" target="_blank" rel="noopener">Open</a>
+              </div>
             </div>
           </div>
-          <div class="status">
-            <div class="percent">100%</div>
-            <div class="btns">
-              <button class="btn copyLink">Copy</button>
-              <a class="btn" href="https://discord.gg/lugia" target="_blank" rel="noopener">Open</a>
-            </div>
-          </div>
-        </div>
 
-        <!-- Codex -->
-        <div class="executor" data-name="Codex">
-          <div class="left">
-            <div class="avatar">C</div>
-            <div class="meta">
-              <div class="name">Codex | phone</div>
-              <div class="link" title="https://discord.gg/codexlol">https://discord.gg/codexlol</div>
+          <!-- Codex -->
+          <div class="executor" data-name="Codex">
+            <div class="left">
+              <div class="avatar">C</div>
+              <div class="meta">
+                <div class="name">Codex | phone</div>
+                <div class="link" title="https://discord.gg/codexlol">https://discord.gg/codexlol</div>
+              </div>
+            </div>
+            <div class="status">
+              <div class="percent">100%</div>
+              <div class="btns">
+                <button class="btn copyLink">Copy</button>
+                <a class="btn" href="https://discord.gg/codexlol" target="_blank" rel="noopener">Open</a>
+              </div>
             </div>
           </div>
-          <div class="status">
-            <div class="percent">100%</div>
-            <div class="btns">
-              <button class="btn copyLink">Copy</button>
-              <a class="btn" href="https://discord.gg/codexlol" target="_blank" rel="noopener">Open</a>
-            </div>
-          </div>
-        </div>
 
-        <!-- Delta -->
-        <div class="executor" data-name="Delta">
-          <div class="left">
-            <div class="avatar">D</div>
-            <div class="meta">
-              <div class="name">Delta | phone</div>
-              <div class="link" title="https://discord.gg/deltax">https://discord.gg/deltax</div>
+          <!-- Delta -->
+          <div class="executor" data-name="Delta">
+            <div class="left">
+              <div class="avatar">D</div>
+              <div class="meta">
+                <div class="name">Delta | phone</div>
+                <div class="link" title="https://discord.gg/deltax">https://discord.gg/deltax</div>
+              </div>
+            </div>
+            <div class="status">
+              <div class="percent">100%</div>
+              <div class="btns">
+                <button class="btn copyLink">Copy</button>
+                <a class="btn" href="https://discord.gg/deltax" target="_blank" rel="noopener">Open</a>
+              </div>
             </div>
           </div>
-          <div class="status">
-            <div class="percent">100%</div>
-            <div class="btns">
-              <button class="btn copyLink">Copy</button>
-              <a class="btn" href="https://discord.gg/deltax" target="_blank" rel="noopener">Open</a>
-            </div>
-          </div>
-        </div>
 
-        <!-- Krnl -->
-        <div class="executor" data-name="Krnl">
-          <div class="left">
-            <div class="avatar">K</div>
-            <div class="meta">
-              <div class="name">Krnl | phone</div>
-              <div class="link" title="https://discord.gg/getkrnl">https://discord.gg/getkrnl</div>
+          <!-- Krnl -->
+          <div class="executor" data-name="Krnl">
+            <div class="left">
+              <div class="avatar">K</div>
+              <div class="meta">
+                <div class="name">Krnl | phone</div>
+                <div class="link" title="https://discord.gg/getkrnl">https://discord.gg/getkrnl</div>
+              </div>
+            </div>
+            <div class="status">
+              <div class="percent">100%</div>
+              <div class="btns">
+                <button class="btn copyLink">Copy</button>
+                <a class="btn" href="https://discord.gg/getkrnl" target="_blank" rel="noopener">Open</a>
+              </div>
             </div>
           </div>
-          <div class="status">
-            <div class="percent">100%</div>
-            <div class="btns">
-              <button class="btn copyLink">Copy</button>
-              <a class="btn" href="https://discord.gg/getkrnl" target="_blank" rel="noopener">Open</a>
-            </div>
-          </div>
-        </div>
 
-        <!-- Wave -->
-        <div class="executor" data-name="Wave">
-          <div class="left">
-            <div class="avatar">W</div>
-            <div class="meta">
-              <div class="name">Wave | PC</div>
-              <div class="link" title="https://discord.gg/rARhPpN7fY">https://discord.gg/rARhPpN7fY</div>
+          <!-- Wave -->
+          <div class="executor" data-name="Wave">
+            <div class="left">
+              <div class="avatar">W</div>
+              <div class="meta">
+                <div class="name">Wave | PC</div>
+                <div class="link" title="https://discord.gg/rARhPpN7fY">https://discord.gg/rARhPpN7fY</div>
+              </div>
+            </div>
+            <div class="status">
+              <div class="percent">100%</div>
+              <div class="btns">
+                <button class="btn copyLink">Copy</button>
+                <a class="btn" href="https://discord.gg/rARhPpN7fY" target="_blank" rel="noopener">Open</a>
+              </div>
             </div>
           </div>
-          <div class="status">
-            <div class="percent">100%</div>
-            <div class="btns">
-              <button class="btn copyLink">Copy</button>
-              <a class="btn" href="https://discord.gg/rARhPpN7fY" target="_blank" rel="noopener">Open</a>
-            </div>
-          </div>
-        </div>
 
-        <!-- Zenith -->
-        <div class="executor" data-name="Zenith">
-          <div class="left">
-            <div class="avatar">Z</div>
-            <div class="meta">
-              <div class="name">Zenith | PC</div>
-              <div class="link" title="https://discord.gg/realzenith">https://discord.gg/realzenith</div>
+          <!-- Zenith -->
+          <div class="executor" data-name="Zenith">
+            <div class="left">
+              <div class="avatar">Z</div>
+              <div class="meta">
+                <div class="name">Zenith | PC</div>
+                <div class="link" title="https://discord.gg/realzenith">https://discord.gg/realzenith</div>
+              </div>
+            </div>
+            <div class="status">
+              <div class="percent">100%</div>
+              <div class="btns">
+                <button class="btn copyLink">Copy</button>
+                <a class="btn" href="https://discord.gg/realzenith" target="_blank" rel="noopener">Open</a>
+              </div>
             </div>
           </div>
-          <div class="status">
-            <div class="percent">100%</div>
-            <div class="btns">
-              <button class="btn copyLink">Copy</button>
-              <a class="btn" href="https://discord.gg/realzenith" target="_blank" rel="noopener">Open</a>
-            </div>
-          </div>
-        </div>
 
-        <!-- Seliware -->
-        <div class="executor" data-name="Seliware">
-          <div class="left">
-            <div class="avatar">S</div>
-            <div class="meta">
-              <div class="name">Seliware | PC</div>
-              <div class="link" title="https://discord.gg/b59W8k7tTM">https://discord.gg/b59W8k7tTM</div>
+          <!-- Seliware -->
+          <div class="executor" data-name="Seliware">
+            <div class="left">
+              <div class="avatar">S</div>
+              <div class="meta">
+                <div class="name">Seliware | PC</div>
+                <div class="link" title="https://discord.gg/b59W8k7tTM">https://discord.gg/b59W8k7tTM</div>
+              </div>
+            </div>
+            <div class="status">
+              <div class="percent">100%</div>
+              <div class="btns">
+                <button class="btn copyLink">Copy</button>
+                <a class="btn" href="https://discord.gg/b59W8k7tTM" target="_blank" rel="noopener">Open</a>
+              </div>
             </div>
           </div>
-          <div class="status">
-            <div class="percent">100%</div>
-            <div class="btns">
-              <button class="btn copyLink">Copy</button>
-              <a class="btn" href="https://discord.gg/b59W8k7tTM" target="_blank" rel="noopener">Open</a>
-            </div>
-          </div>
-        </div>
 
-        <!-- Bunni -->
-        <div class="executor" data-name="Bunni">
-          <div class="left">
-            <div class="avatar">B</div>
-            <div class="meta">
-              <div class="name">Bunni | PC</div>
-              <div class="link" title="https://discord.gg/bunnilol">https://discord.gg/bunnilol</div>
+          <!-- Bunni -->
+          <div class="executor" data-name="Bunni">
+            <div class="left">
+              <div class="avatar">B</div>
+              <div class="meta">
+                <div class="name">Bunni | PC</div>
+                <div class="link" title="https://discord.gg/bunnilol">https://discord.gg/bunnilol</div>
+              </div>
+            </div>
+            <div class="status">
+              <div class="percent">100%</div>
+              <div class="btns">
+                <button class="btn copyLink">Copy</button>
+                <a class="btn" href="https://discord.gg/bunnilol" target="_blank" rel="noopener">Open</a>
+              </div>
             </div>
           </div>
-          <div class="status">
-            <div class="percent">100%</div>
-            <div class="btns">
-              <button class="btn copyLink">Copy</button>
-              <a class="btn" href="https://discord.gg/bunnilol" target="_blank" rel="noopener">Open</a>
-            </div>
-          </div>
-        </div>
 
-        <!-- Volcano -->
-        <div class="executor" data-name="Volcano">
-          <div class="left">
-            <div class="avatar">V</div>
-            <div class="meta">
-              <div class="name">Volcano | PC</div>
-              <div class="link" title="https://discord.gg/pYJaAeDjdZ">https://discord.gg/pYJaAeDjdZ</div>
+          <!-- Volcano -->
+          <div class="executor" data-name="Volcano">
+            <div class="left">
+              <div class="avatar">V</div>
+              <div class="meta">
+                <div class="name">Volcano | PC</div>
+                <div class="link" title="https://discord.gg/pYJaAeDjdZ">https://discord.gg/pYJaAeDjdZ</div>
+              </div>
+            </div>
+            <div class="status">
+              <div class="percent">100%</div>
+              <div class="btns">
+                <button class="btn copyLink">Copy</button>
+                <a class="btn" href="https://discord.gg/pYJaAeDjdZ" target="_blank" rel="noopener">Open</a>
+              </div>
             </div>
           </div>
-          <div class="status">
-            <div class="percent">100%</div>
-            <div class="btns">
-              <button class="btn copyLink">Copy</button>
-              <a class="btn" href="https://discord.gg/pYJaAeDjdZ" target="_blank" rel="noopener">Open</a>
-            </div>
-          </div>
-        </div>
 
-        <!-- Potassium -->
-        <div class="executor" data-name="Potassium">
-          <div class="left">
-            <div class="avatar">P</div>
-            <div class="meta">
-              <div class="name">Potassium | PC</div>
-              <div class="link" title="https://discord.gg/potassium">https://discord.gg/potassium</div>
+          <!-- Potassium -->
+          <div class="executor" data-name="Potassium">
+            <div class="left">
+              <div class="avatar">P</div>
+              <div class="meta">
+                <div class="name">Potassium | PC</div>
+                <div class="link" title="https://discord.gg/potassium">https://discord.gg/potassium</div>
+              </div>
+            </div>
+            <div class="status">
+              <div class="percent">100%</div>
+              <div class="btns">
+                <button class="btn copyLink">Copy</button>
+                <a class="btn" href="https://discord.gg/potassium" target="_blank" rel="noopener">Open</a>
+              </div>
             </div>
           </div>
-          <div class="status">
-            <div class="percent">100%</div>
-            <div class="btns">
-              <button class="btn copyLink">Copy</button>
-              <a class="btn" href="https://discord.gg/potassium" target="_blank" rel="noopener">Open</a>
-            </div>
-          </div>
-        </div>
 
+          <!-- duplicate block for seamless scroll will be appended by JS -->
+        </div>
       </div>
 
       <div class="foot">Tip: Click "Copy" to quickly copy the executor link.</div>
@@ -427,10 +453,45 @@
   </div>
 
   <script>
+    // --- Make the list "coulissant" (smooth vertical continuous scroll) ---
+    (function setupSmoothScroll(){
+      const track = document.getElementById('scrollTrack');
+      // duplicate content for seamless loop
+      track.innerHTML = track.innerHTML + track.innerHTML;
+
+      // calculate height of one set (half of track)
+      // wait a tick for layout
+      requestAnimationFrame(() => {
+        const totalHeight = track.scrollHeight;
+        const oneSetHeight = totalHeight / 2;
+
+        // set animation duration based on content height (pixels / speed)
+        const speedPxPerSec = 30; // adjust speed: higher = faster
+        const durationSec = Math.max(10, Math.round(oneSetHeight / speedPxPerSec));
+
+        track.style.animationDuration = durationSec + 's';
+
+        // pause on hover of the wrapper
+        const wrapper = document.getElementById('executorsList');
+        if (wrapper) {
+          wrapper.addEventListener('mouseenter', () => {
+            track.style.animationPlayState = 'paused';
+          });
+          wrapper.addEventListener('mouseleave', () => {
+            track.style.animationPlayState = 'running';
+          });
+        }
+      });
+    })();
+
+    // --- Existing behaviors (unchanged logic) ---
+
     // Copy buttons
-    document.querySelectorAll('.copyLink').forEach(btn => {
-      btn.addEventListener('click', (e) => {
-        const executor = e.target.closest('.executor');
+    document.addEventListener('click', (e) => {
+      if (e.target.matches('.copyLink')) {
+        const btn = e.target;
+        const executor = btn.closest('.executor');
+        if (!executor) return;
         const link = executor.querySelector('.link').textContent.trim();
         navigator.clipboard.writeText(link).then(() => {
           const old = btn.textContent;
@@ -441,7 +502,7 @@
           ta.select(); document.execCommand('copy'); document.body.removeChild(ta);
           const old = btn.textContent; btn.textContent = '✓ Copied'; setTimeout(()=> btn.textContent = old, 1400);
         });
-      });
+      }
     });
 
     // featured copy
@@ -471,7 +532,7 @@
     // search
     const searchInput = document.getElementById('searchInput');
     const clearBtn = document.getElementById('clearSearch');
-    if (clearBtn) clearBtn.addEventListener('click', () => { searchInput.value=''; filterList(''); });
+    if (clearBtn) clearBtn.addEventListener('click', () => { if (searchInput) { searchInput.value=''; filterList(''); } });
     if (searchInput) searchInput.addEventListener('input', (e) => { filterList(e.target.value); });
     function filterList(q){
       q = (q||'').trim().toLowerCase();
