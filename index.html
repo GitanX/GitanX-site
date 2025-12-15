@@ -816,8 +816,8 @@
         generateBtn.style.opacity = '0.7';
 
         setTimeout(() => {
-          const rand = Math.random().toString(36).slice(2, 10);
-          keyValue.textContent = 'GitanX_' + rand;
+          // Fixed key as requested — no random generation
+          keyValue.textContent = 'GitanX_d56qs65qseze7d';
           keyOutput.classList.add('show');
 
           generateBtn.innerHTML = '✅ Key Generated!';
