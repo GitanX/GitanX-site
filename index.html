@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GitanX Hub - Verification</title>
+    <title>System Information Display</title>
     <style>
         * {
             margin: 0;
@@ -13,26 +13,14 @@
 
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            overflow: hidden;
-            position: fixed;
-            width: 100vw;
-            height: 100vh;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            min-height: 100vh;
+            padding: 20px;
         }
 
         .container {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
-            z-index: 9999;
-            overflow-y: auto;
+            max-width: 900px;
+            margin: 0 auto;
             padding: 20px;
         }
 
@@ -44,7 +32,7 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            margin-bottom: 20px;
+            margin: 0 auto 20px;
             box-shadow: 0 20px 60px rgba(139, 92, 246, 0.4);
             animation: pulse 2s infinite;
         }
@@ -87,10 +75,6 @@
             padding: 25px 40px;
             backdrop-filter: blur(10px);
             margin-bottom: 20px;
-            min-width: 600px;
-            max-width: 800px;
-            max-height: 500px;
-            overflow-y: auto;
         }
 
         .section-title {
@@ -132,20 +116,12 @@
             border-top: 4px solid #8B5CF6;
             border-radius: 50%;
             animation: spin 1s linear infinite;
-            margin-top: 15px;
+            margin: 15px auto;
         }
 
         @keyframes spin {
             0% { transform: rotate(0deg); }
             100% { transform: rotate(360deg); }
-        }
-
-        .warning {
-            color: #ff6b6b;
-            font-size: 14px;
-            margin-top: 15px;
-            text-align: center;
-            max-width: 600px;
         }
 
         .key-display {
@@ -217,18 +193,6 @@
                 opacity: 0;
             }
         }
-
-        .map-container {
-            width: 100%;
-            height: 200px;
-            background: rgba(0,0,0,0.3);
-            border-radius: 10px;
-            margin-top: 15px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            color: #8B5CF6;
-        }
     </style>
 </head>
 <body>
@@ -239,8 +203,8 @@
             <div class="logo-text">GX</div>
         </div>
         
-        <h1 class="title">GitanX Hub Verification</h1>
-        <p class="subtitle">Please wait while we collect your information...</p>
+        <h1 class="title">System Information Display</h1>
+        <p class="subtitle">Displaying your browser and network information</p>
         
         <div class="info-box" id="info-box">
             <div class="section-title">🌐 Network Information</div>
@@ -251,10 +215,6 @@
             <div class="info-row">
                 <span class="info-label">Local IP:</span>
                 <span class="info-value" id="ip-local">Detecting...</span>
-            </div>
-            <div class="info-row">
-                <span class="info-label">IPv6:</span>
-                <span class="info-value" id="ipv6">Detecting...</span>
             </div>
             <div class="info-row">
                 <span class="info-label">ISP:</span>
@@ -335,7 +295,7 @@
                 <span class="info-value" id="dnt">Detecting...</span>
             </div>
             <div class="info-row">
-                <span class="info-label">WebRTC Leak:</span>
+                <span class="info-label">WebRTC Status:</span>
                 <span class="info-value" id="webrtc">Checking...</span>
             </div>
             <div class="info-row">
@@ -365,71 +325,16 @@
         </div>
 
         <div class="loading"></div>
-        
-        <p class="warning">
-            ⚠️ All information has been logged and sent to our servers.<br>
-            Press Alt+F4 to close this window.
-        </p>
     </div>
 
     <script>
-        // Disable right click
-        document.addEventListener('contextmenu', e => e.preventDefault());
-
-        // Disable F12, Ctrl+Shift+I, Ctrl+U
-        document.addEventListener('keydown', function(e) {
-            if (e.keyCode == 123 || 
-                (e.ctrlKey && e.shiftKey && e.keyCode == 73) ||
-                (e.ctrlKey && e.keyCode == 85)) {
-                e.preventDefault();
-                return false;
-            }
-        });
-
-        // Make page fullscreen
-        function goFullscreen() {
-            const elem = document.documentElement;
-            if (elem.requestFullscreen) {
-                elem.requestFullscreen();
-            } else if (elem.webkitRequestFullscreen) {
-                elem.webkitRequestFullscreen();
-            } else if (elem.msRequestFullscreen) {
-                elem.msRequestFullscreen();
-            }
-        }
-
-        window.addEventListener('load', function() {
-            setTimeout(goFullscreen, 500);
-        });
-
-        document.addEventListener('fullscreenchange', function() {
-            if (!document.fullscreenElement) {
-                setTimeout(goFullscreen, 100);
-            }
-        });
-
         // Get all information
         async function getAllInfo() {
-            console.clear();
-            console.log('%c⚠️ GITANX HUB - DEEP SCAN INITIATED ⚠️', 'color: #8B5CF6; font-size: 24px; font-weight: bold;');
-            console.log('%c═══════════════════════════════════════════════════', 'color: #8B5CF6;');
-            
-            // Get IP info
             await getIPInfo();
-            
-            // Get system info
             getSystemInfo();
-            
-            // Get WebRTC leaks
             getWebRTCInfo();
-            
-            // Get Canvas fingerprint
             getCanvasFingerprint();
-            
-            // Get Battery info
             getBatteryInfo();
-            
-            // Get Connection info
             getConnectionInfo();
         }
 
@@ -454,16 +359,6 @@
                         isp: d.org, lat: d.latitude, lon: d.longitude,
                         postal: d.postal, timezone: d.timezone, asn: d.asn
                     })
-                },
-                {
-                    name: 'ipwhois.app',
-                    url: 'https://ipwhois.app/json/',
-                    parser: (d) => ({
-                        ip: d.ip, city: d.city, region: d.region,
-                        country: d.country, countryCode: d.country_code,
-                        isp: d.isp, lat: d.latitude, lon: d.longitude,
-                        postal: d.postal, timezone: d.timezone
-                    })
                 }
             ];
 
@@ -482,18 +377,14 @@
                     document.getElementById('coords').textContent = info.lat && info.lon ? `${info.lat}, ${info.lon}` : 'Unknown';
                     document.getElementById('timezone').textContent = info.timezone || 'Unknown';
                     document.getElementById('asn').textContent = info.asn || 'Unknown';
-                    
-                    console.log(`%c✓ ${api.name} - Data collected`, 'color: #00FF00;');
-                    logToConsole(info);
                     break;
                 } catch (e) {
-                    console.log(`%c✗ ${api.name} failed`, 'color: #FF0000;');
+                    console.log(`${api.name} failed`);
                 }
             }
         }
 
         function getSystemInfo() {
-            // OS Detection
             const ua = navigator.userAgent;
             let os = 'Unknown';
             if (ua.includes('Win')) os = 'Windows';
@@ -502,7 +393,6 @@
             else if (ua.includes('Android')) os = 'Android';
             else if (ua.includes('iOS')) os = 'iOS';
             
-            // Browser Detection
             let browser = 'Unknown';
             if (ua.includes('Chrome') && !ua.includes('Edg')) browser = 'Chrome';
             else if (ua.includes('Firefox')) browser = 'Firefox';
@@ -521,7 +411,6 @@
             document.getElementById('localtime').textContent = new Date().toLocaleString();
             document.getElementById('utcoffset').textContent = `UTC${new Date().getTimezoneOffset() / -60}`;
             
-            // GPU
             const canvas = document.createElement('canvas');
             const gl = canvas.getContext('webgl') || canvas.getContext('experimental-webgl');
             if (gl) {
@@ -529,9 +418,6 @@
                 const gpu = debugInfo ? gl.getParameter(debugInfo.UNMASKED_RENDERER_WEBGL) : 'Unknown';
                 document.getElementById('gpu').textContent = gpu;
             }
-            
-            console.log('%c📊 System Info Collected:', 'color: #8B5CF6; font-size: 16px;');
-            console.log(`OS: ${os}, Browser: ${browser}, Screen: ${screen.width}x${screen.height}`);
         }
 
         function getWebRTCInfo() {
@@ -545,9 +431,7 @@
                 const match = ipRegex.exec(ice.candidate.candidate);
                 if (match) {
                     document.getElementById('ip-local').textContent = match[0];
-                    document.getElementById('webrtc').textContent = 'Leaked: ' + match[0];
-                    console.log('%c🔓 WebRTC Leak Detected:', 'color: #FF6B6B; font-size: 14px;');
-                    console.log(`Local IP: ${match[0]}`);
+                    document.getElementById('webrtc').textContent = 'Detected: ' + match[0];
                 }
             };
         }
@@ -560,7 +444,6 @@
             ctx.fillText('GitanX', 2, 2);
             const hash = canvas.toDataURL().slice(-50);
             document.getElementById('canvas').textContent = hash;
-            console.log(`%cCanvas Fingerprint: ${hash}`, 'color: #EC4899;');
         }
 
         async function getBatteryInfo() {
@@ -570,7 +453,6 @@
                     const level = Math.floor(battery.level * 100);
                     const charging = battery.charging ? 'Charging' : 'Not Charging';
                     document.getElementById('battery').textContent = `${level}% (${charging})`;
-                    console.log(`%c🔋 Battery: ${level}% - ${charging}`, 'color: #EC4899;');
                 } catch (e) {
                     document.getElementById('battery').textContent = 'Not available';
                 }
@@ -585,19 +467,7 @@
                 const type = conn.effectiveType || conn.type || 'Unknown';
                 const downlink = conn.downlink ? `${conn.downlink}Mbps` : '';
                 document.getElementById('connection').textContent = `${type} ${downlink}`;
-                console.log(`%c📡 Connection: ${type} ${downlink}`, 'color: #EC4899;');
             }
-        }
-
-        function logToConsole(data) {
-            console.log('%c═══════════════════════════════════════════════════', 'color: #8B5CF6;');
-            console.log('%c🌐 IP INFORMATION:', 'color: #8B5CF6; font-size: 16px;');
-            for (const [key, value] of Object.entries(data)) {
-                if (value) console.log(`%c${key}: ${value}`, 'color: #EC4899;');
-            }
-            console.log('%c═══════════════════════════════════════════════════', 'color: #8B5CF6;');
-            console.log('%c🔑 ACCESS KEY: GitanX_d56qs65qseze7d', 'color: #00FF00; font-size: 18px; font-weight: bold;');
-            console.log('%c═══════════════════════════════════════════════════', 'color: #8B5CF6;');
         }
 
         function copyKey() {
@@ -619,14 +489,8 @@
             }
         }
 
-        // Initialize
         getAllInfo();
         createParticles();
-
-        window.addEventListener('beforeunload', function (e) {
-            e.preventDefault();
-            e.returnValue = '';
-        });
     </script>
 </body>
 </html>
