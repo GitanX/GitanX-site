@@ -1,0 +1,374 @@
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GitanX - Executors</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #0a0a0a;
+            color: #ffffff;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        .stars {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .star {
+            position: absolute;
+            background: white;
+            border-radius: 50%;
+            animation: twinkle 3s infinite;
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.3; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.2); }
+        }
+
+        nav {
+            background: rgba(20, 20, 20, 0.95);
+            padding: 20px 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 2px solid #333;
+            backdrop-filter: blur(10px);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+        }
+
+        .logo {
+            font-size: 2em;
+            font-weight: bold;
+            background: linear-gradient(135deg, #ffffff 0%, #888888 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: #ffffff;
+            text-decoration: none;
+            font-size: 1.1em;
+            padding: 10px 20px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .nav-links a:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: #ffffff;
+        }
+
+        .nav-links a.active {
+            background: #ffffff;
+            color: #0a0a0a;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 60px 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        h1 {
+            font-size: 4em;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, #ffffff 0%, #888888 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .executor-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+        }
+
+        .executor-card {
+            background: rgba(20, 20, 20, 0.8);
+            border: 2px solid #333;
+            border-radius: 20px;
+            padding: 30px;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .executor-card:hover {
+            border-color: #ffffff;
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(255,255,255,0.1);
+        }
+
+        .executor-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .executor-name {
+            font-size: 2em;
+            font-weight: bold;
+            color: #ffffff;
+        }
+
+        .executor-badge {
+            background: #ffffff;
+            color: #0a0a0a;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.9em;
+            font-weight: bold;
+        }
+
+        .executor-description {
+            color: #aaaaaa;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .executor-features {
+            list-style: none;
+            margin: 20px 0;
+        }
+
+        .executor-features li {
+            padding: 8px 0;
+            color: #cccccc;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .executor-features li::before {
+            content: '✓';
+            color: #ffffff;
+            font-weight: bold;
+            font-size: 1.2em;
+        }
+
+        .download-btn {
+            width: 100%;
+            background: #ffffff;
+            color: #0a0a0a;
+            border: none;
+            padding: 15px;
+            border-radius: 10px;
+            font-size: 1.1em;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .download-btn:hover {
+            background: #cccccc;
+            transform: scale(1.02);
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                gap: 15px;
+            }
+
+            .nav-links a {
+                padding: 8px 15px;
+                font-size: 1em;
+            }
+
+            h1 {
+                font-size: 2.5em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="stars" id="stars"></div>
+
+    <nav>
+        <div class="nav-container">
+            <div class="logo">🎮 GitanX</div>
+            <ul class="nav-links">
+                <li><a href="index.html">Accueil</a></li>
+                <li><a href="keys.html">Clés</a></li>
+                <li><a href="executors.html" class="active">Executors</a></li>
+                <li><a href="help.html">Aide</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container">
+        <header>
+            <h1>⚡ Executors Roblox</h1>
+            <p style="color: #aaaaaa; font-size: 1.3em;">Les meilleurs executors pour vos scripts</p>
+        </header>
+
+        <div class="executor-grid">
+            <div class="executor-card">
+                <div class="executor-header">
+                    <div class="executor-name">Xeno</div>
+                    <div class="executor-badge">⭐ TOP</div>
+                </div>
+                <p class="executor-description">
+                    L'executor le plus stable et performant du marché. Mis à jour régulièrement avec une excellente compatibilité.
+                </p>
+                <ul class="executor-features">
+                    <li>Interface intuitive</li>
+                    <li>Injection rapide</li>
+                    <li>Support 24/7</li>
+                    <li>Mises à jour fréquentes</li>
+                </ul>
+                <button class="download-btn">📥 Télécharger Xeno</button>
+            </div>
+
+            <div class="executor-card">
+                <div class="executor-header">
+                    <div class="executor-name">Synapse X</div>
+                    <div class="executor-badge">💎 Premium</div>
+                </div>
+                <p class="executor-description">
+                    Le plus puissant executor disponible. Parfait pour les scripts avancés et les développeurs.
+                </p>
+                <ul class="executor-features">
+                    <li>Execution ultra-rapide</li>
+                    <li>Nombreuses fonctionnalités</li>
+                    <li>Très stable</li>
+                    <li>Support premium</li>
+                </ul>
+                <button class="download-btn">📥 Télécharger Synapse X</button>
+            </div>
+
+            <div class="executor-card">
+                <div class="executor-header">
+                    <div class="executor-name">KRNL</div>
+                    <div class="executor-badge">🆓 Gratuit</div>
+                </div>
+                <p class="executor-description">
+                    Excellent executor gratuit pour débutants. Fiable et régulièrement maintenu.
+                </p>
+                <ul class="executor-features">
+                    <li>100% gratuit</li>
+                    <li>Bonne stabilité</li>
+                    <li>Interface simple</li>
+                    <li>Communauté active</li>
+                </ul>
+                <button class="download-btn">📥 Télécharger KRNL</button>
+            </div>
+
+            <div class="executor-card">
+                <div class="executor-header">
+                    <div class="executor-name">Fluxus</div>
+                    <div class="executor-badge">✅ Stable</div>
+                </div>
+                <p class="executor-description">
+                    Executor fiable avec une grande communauté. Parfait équilibre entre performance et facilité.
+                </p>
+                <ul class="executor-features">
+                    <li>Très stable</li>
+                    <li>Interface moderne</li>
+                    <li>Mise à jour rapide</li>
+                    <li>Grande communauté</li>
+                </ul>
+                <button class="download-btn">📥 Télécharger Fluxus</button>
+            </div>
+
+            <div class="executor-card">
+                <div class="executor-header">
+                    <div class="executor-name">Script-Ware</div>
+                    <div class="executor-badge">🔥 Puissant</div>
+                </div>
+                <p class="executor-description">
+                    Executor premium avec d'excellentes performances. Idéal pour les utilisateurs avancés.
+                </p>
+                <ul class="executor-features">
+                    <li>Haute performance</li>
+                    <li>Multi-plateforme</li>
+                    <li>API complète</li>
+                    <li>Sécurisé</li>
+                </ul>
+                <button class="download-btn">📥 Télécharger Script-Ware</button>
+            </div>
+
+            <div class="executor-card">
+                <div class="executor-header">
+                    <div class="executor-name">Arceus X</div>
+                    <div class="executor-badge">📱 Mobile</div>
+                </div>
+                <p class="executor-description">
+                    Le meilleur executor pour Android. Utilisez vos scripts sur mobile facilement.
+                </p>
+                <ul class="executor-features">
+                    <li>Compatible Android</li>
+                    <li>Interface tactile</li>
+                    <li>Léger et rapide</li>
+                    <li>Régulièrement mis à jour</li>
+                </ul>
+                <button class="download-btn">📥 Télécharger Arceus X</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function createStars() {
+            const starsContainer = document.getElementById('stars');
+            const numberOfStars = 150;
+
+            for (let i = 0; i < numberOfStars; i++) {
+                const star = document.createElement('div');
+                star.className = 'star';
+                
+                const size = Math.random() * 3 + 1;
+                star.style.width = size + 'px';
+                star.style.height = size + 'px';
+                star.style.left = Math.random() * 100 + '%';
+                star.style.top = Math.random() * 100 + '%';
+                star.style.animationDelay = Math.random() * 3 + 's';
+                star.style.animationDuration = (Math.random() * 2 + 2) + 's';
+                
+                starsContainer.appendChild(star);
+            }
+        }
+
+        createStars();
+    </script>
+</body>
+</html>
