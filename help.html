@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -342,4 +341,139 @@ game.StarterGui:SetCore("SendNotification", {
                     <ul>
                         <li>Interface simple et intuitive</li>
                         <li>Très stable et fiable</li>
-                        <li>Mises à jour fréquentes</
+                        <li>Mises à jour fréquentes</li>
+                        <li>Gratuit</li>
+                    </ul>
+
+                    <p style="margin-top: 15px;"><strong>🥈 Pour utilisateurs avancés : Synapse X</strong></p>
+                    <ul>
+                        <li>Le plus puissant du marché</li>
+                        <li>API complète pour développeurs</li>
+                        <li>Payant (~20$) mais en vaut la peine</li>
+                        <li>Support premium</li>
+                    </ul>
+
+                    <p style="margin-top: 15px;"><strong>🥉 Alternative gratuite : KRNL</strong></p>
+                    <ul>
+                        <li>100% gratuit</li>
+                        <li>Bonne performance</li>
+                        <li>Parfait pour commencer</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFAQ(this)">
+                    <span class="faq-question-text">💉 L'executor ne s'injecte pas</span>
+                    <span class="faq-arrow">▼</span>
+                </div>
+                <div class="faq-answer">
+                    <p><strong>Solutions possibles :</strong></p>
+                    <ol>
+                        <li><strong>Lancez l'executor en administrateur</strong><br>→ Clic droit sur l'executor > "Exécuter en tant qu'administrateur"</li>
+                        <li><strong>Désactivez complètement l'antivirus</strong><br>→ Windows Defender bloque souvent les executors</li>
+                        <li><strong>Rejoignez le jeu AVANT d'injecter</strong><br>→ L'executor doit s'attacher à un processus Roblox actif</li>
+                        <li><strong>Mettez à jour votre executor</strong><br>→ Téléchargez la dernière version</li>
+                        <li><strong>Redémarrez votre PC</strong><br>→ Parfois un simple redémarrage résout tout</li>
+                    </ol>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFAQ(this)">
+                    <span class="faq-question-text">🛡️ Est-ce sûr d'utiliser des executors ?</span>
+                    <span class="faq-arrow">▼</span>
+                </div>
+                <div class="faq-answer">
+                    <p><strong>Sécurité et risques :</strong></p>
+                    <p>Les executors recommandés sur GitanX (Xeno, Synapse X, KRNL) sont <strong>sûrs</strong> et largement utilisés par la communauté.</p>
+                    
+                    <p style="margin-top: 15px;"><strong>⚠️ Cependant, gardez en tête :</strong></p>
+                    <ul>
+                        <li>Votre compte Roblox peut être banni si vous êtes signalé</li>
+                        <li>Utilisez toujours un compte secondaire pour plus de sécurité</li>
+                        <li>Ne téléchargez que depuis des sources fiables</li>
+                        <li>Les antivirus détectent souvent les executors comme des virus (faux positifs)</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFAQ(this)">
+                    <span class="faq-question-text">📱 Puis-je utiliser des executors sur mobile ?</span>
+                    <span class="faq-arrow">▼</span>
+                </div>
+                <div class="faq-answer">
+                    <p><strong>Oui, c'est possible sur Android !</strong></p>
+                    
+                    <p style="margin-top: 15px;"><strong>📱 Executor mobile recommandé : Arceus X</strong></p>
+                    <ul>
+                        <li>Compatible avec Android uniquement</li>
+                        <li>Interface optimisée pour écran tactile</li>
+                        <li>Gratuit et régulièrement mis à jour</li>
+                        <li>Supporte la plupart des scripts</li>
+                    </ul>
+
+                    <p style="margin-top: 15px;"><strong>⚠️ Important :</strong></p>
+                    <ul>
+                        <li>iOS (iPhone/iPad) ne supporte PAS les executors</li>
+                        <li>Vous devrez installer un APK modifié</li>
+                        <li>Activez "Sources inconnues" dans les paramètres Android</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Génération des étoiles en arrière-plan
+        function createStars() {
+            const starsContainer = document.getElementById('stars');
+            const numberOfStars = 150;
+
+            for (let i = 0; i < numberOfStars; i++) {
+                const star = document.createElement('div');
+                star.className = 'star';
+                
+                const size = Math.random() * 3 + 1;
+                star.style.width = size + 'px';
+                star.style.height = size + 'px';
+                star.style.left = Math.random() * 100 + '%';
+                star.style.top = Math.random() * 100 + '%';
+                star.style.animationDelay = Math.random() * 3 + 's';
+                star.style.animationDuration = (Math.random() * 2 + 2) + 's';
+                
+                starsContainer.appendChild(star);
+            }
+        }
+
+        // Fonction pour ouvrir/fermer les menus FAQ
+        function toggleFAQ(element) {
+            const answer = element.nextElementSibling;
+            const arrow = element.querySelector('.faq-arrow');
+            const isActive = answer.classList.contains('active');
+            
+            // Fermer toutes les autres réponses
+            document.querySelectorAll('.faq-answer').forEach(ans => {
+                ans.classList.remove('active');
+            });
+            document.querySelectorAll('.faq-arrow').forEach(arr => {
+                arr.classList.remove('active');
+            });
+            document.querySelectorAll('.faq-question').forEach(q => {
+                q.classList.remove('active');
+            });
+            
+            // Ouvrir/fermer la réponse cliquée
+            if (!isActive) {
+                answer.classList.add('active');
+                arrow.classList.add('active');
+                element.classList.add('active');
+            }
+        }
+
+        // Initialiser les étoiles au chargement de la page
+        createStars();
+    </script>
+</body>
+</html>
