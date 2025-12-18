@@ -1,0 +1,345 @@
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GitanX - Aide</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #0a0a0a;
+            color: #ffffff;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        .stars {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .star {
+            position: absolute;
+            background: white;
+            border-radius: 50%;
+            animation: twinkle 3s infinite;
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.3; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.2); }
+        }
+
+        nav {
+            background: rgba(20, 20, 20, 0.95);
+            padding: 20px 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 2px solid #333;
+            backdrop-filter: blur(10px);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+        }
+
+        .logo {
+            font-size: 2em;
+            font-weight: bold;
+            background: linear-gradient(135deg, #ffffff 0%, #888888 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: #ffffff;
+            text-decoration: none;
+            font-size: 1.1em;
+            padding: 10px 20px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .nav-links a:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: #ffffff;
+        }
+
+        .nav-links a.active {
+            background: #ffffff;
+            color: #0a0a0a;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 60px 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        h1 {
+            font-size: 4em;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, #ffffff 0%, #888888 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .help-section {
+            background: rgba(20, 20, 20, 0.8);
+            border: 2px solid #333;
+            border-radius: 20px;
+            padding: 40px;
+            backdrop-filter: blur(10px);
+        }
+
+        .faq-item {
+            margin-bottom: 20px;
+            border-bottom: 1px solid #333;
+            padding-bottom: 20px;
+        }
+
+        .faq-item:last-child {
+            border-bottom: none;
+        }
+
+        .faq-question {
+            background: rgba(40, 40, 40, 0.8);
+            padding: 20px;
+            border-radius: 10px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.3s ease;
+            border: 2px solid #444;
+        }
+
+        .faq-question:hover {
+            background: rgba(50, 50, 50, 0.8);
+            border-color: #666;
+        }
+
+        .faq-question.active {
+            border-color: #ffffff;
+        }
+
+        .faq-question-text {
+            font-size: 1.3em;
+            font-weight: bold;
+        }
+
+        .faq-arrow {
+            font-size: 1.2em;
+            transition: transform 0.3s ease;
+        }
+
+        .faq-arrow.active {
+            transform: rotate(180deg);
+        }
+
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease;
+            padding: 0 20px;
+        }
+
+        .faq-answer.active {
+            max-height: 1000px;
+            padding: 20px;
+        }
+
+        .faq-answer p {
+            color: #aaaaaa;
+            line-height: 1.8;
+            margin-bottom: 15px;
+        }
+
+        .faq-answer strong {
+            color: #ffffff;
+        }
+
+        .faq-answer pre {
+            background: rgba(0, 0, 0, 0.5);
+            color: #ffffff;
+            padding: 20px;
+            border-radius: 10px;
+            overflow-x: auto;
+            margin: 15px 0;
+            border-left: 4px solid #ffffff;
+            font-family: 'Courier New', monospace;
+        }
+
+        .faq-answer ul, .faq-answer ol {
+            margin-left: 30px;
+            margin-top: 10px;
+            color: #aaaaaa;
+        }
+
+        .faq-answer li {
+            margin-bottom: 8px;
+            line-height: 1.6;
+        }
+
+        .faq-answer code {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 3px 8px;
+            border-radius: 5px;
+            font-family: 'Courier New', monospace;
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                gap: 15px;
+            }
+
+            .nav-links a {
+                padding: 8px 15px;
+                font-size: 1em;
+            }
+
+            h1 {
+                font-size: 2.5em;
+            }
+
+            .help-section {
+                padding: 20px;
+            }
+
+            .faq-question-text {
+                font-size: 1.1em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="stars" id="stars"></div>
+
+    <nav>
+        <div class="nav-container">
+            <div class="logo">🎮 GitanX</div>
+            <ul class="nav-links">
+                <li><a href="index.html">Accueil</a></li>
+                <li><a href="keys.html">Clés</a></li>
+                <li><a href="executors.html">Executors</a></li>
+                <li><a href="help.html" class="active">Aide</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container">
+        <header>
+            <h1>❓ Centre d'Aide</h1>
+            <p style="color: #aaaaaa; font-size: 1.3em;">Toutes les réponses à vos questions</p>
+        </header>
+
+        <div class="help-section">
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFAQ(this)">
+                    <span class="faq-question-text">❌ Je ne trouve pas le script</span>
+                    <span class="faq-arrow">▼</span>
+                </div>
+                <div class="faq-answer">
+                    <p><strong>Solution :</strong></p>
+                    <p>Voici le script pour 99 Night in the Forest. Copiez-collez ce code dans votre executor :</p>
+                    <pre>loadstring(game:HttpGet("https://raw.githubusercontent.com/GitanX/scripts/main/99nightforest.lua"))()</pre>
+                    <p><strong>Script alternatif :</strong></p>
+                    <pre>local key = "GitanX"
+print("Clé activée: " .. key)
+
+-- Votre script continue ici
+game.StarterGui:SetCore("SendNotification", {
+    Title = "GitanX";
+    Text = "Script chargé avec succès !";
+    Duration = 5;
+})</pre>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFAQ(this)">
+                    <span class="faq-question-text">⚙️ Comment utiliser un executor ?</span>
+                    <span class="faq-arrow">▼</span>
+                </div>
+                <div class="faq-answer">
+                    <p><strong>Guide étape par étape :</strong></p>
+                    <ol>
+                        <li><strong>Téléchargez</strong> un executor (Xeno recommandé)</li>
+                        <li><strong>Désactivez</strong> votre antivirus temporairement</li>
+                        <li><strong>Extrayez</strong> le fichier ZIP téléchargé</li>
+                        <li><strong>Lancez</strong> Roblox et rejoignez un jeu</li>
+                        <li><strong>Ouvrez</strong> l'executor en mode administrateur</li>
+                        <li><strong>Cliquez</strong> sur "Inject" ou "Attach"</li>
+                        <li><strong>Copiez-collez</strong> le script dans l'executor</li>
+                        <li><strong>Appuyez</strong> sur "Execute" ou "Run"</li>
+                    </ol>
+                    <p style="margin-top: 15px;"><strong>⚠️ Important :</strong> Toujours lancer l'executor APRÈS avoir rejoint le jeu Roblox !</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFAQ(this)">
+                    <span class="faq-question-text">🔑 La clé ne fonctionne pas</span>
+                    <span class="faq-arrow">▼</span>
+                </div>
+                <div class="faq-answer">
+                    <p><strong>Vérifications à faire :</strong></p>
+                    <ul>
+                        <li>✓ Copiez la clé exactement : <code>GitanX</code></li>
+                        <li>✓ Pas d'espaces avant ou après la clé</li>
+                        <li>✓ Respectez les majuscules (G majuscule, X majuscule)</li>
+                        <li>✓ Vérifiez que vous êtes dans le bon jeu</li>
+                        <li>✓ Assurez-vous que l'executor est bien injecté</li>
+                        <li>✓ Essayez de redémarrer Roblox et l'executor</li>
+                    </ul>
+                    <p style="margin-top: 15px;"><strong>💡 Astuce :</strong> Si la clé ne marche toujours pas, essayez de l'entrer en minuscules : <code>gitanx</code></p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFAQ(this)">
+                    <span class="faq-question-text">🎯 Quel executor choisir ?</span>
+                    <span class="faq-arrow">▼</span>
+                </div>
+                <div class="faq-answer">
+                    <p><strong>Recommandations selon votre profil :</strong></p>
+                    
+                    <p style="margin-top: 15px;"><strong>🥇 Pour débutants : Xeno</strong></p>
+                    <ul>
+                        <li>Interface simple et intuitive</li>
+                        <li>Très stable et fiable</li>
+                        <li>Mises à jour fréquentes</
