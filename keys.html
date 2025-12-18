@@ -1,0 +1,402 @@
+<!-- ==================== KEYS.HTML (PAGE DES CLÉS) ==================== -->
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GitanX - Clés</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #0a0a0a;
+            color: #ffffff;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        .stars {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .star {
+            position: absolute;
+            background: white;
+            border-radius: 50%;
+            animation: twinkle 3s infinite;
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.3; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.2); }
+        }
+
+        nav {
+            background: rgba(20, 20, 20, 0.95);
+            padding: 20px 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 2px solid #333;
+            backdrop-filter: blur(10px);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+        }
+
+        .logo {
+            font-size: 2em;
+            font-weight: bold;
+            background: linear-gradient(135deg, #ffffff 0%, #888888 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: #ffffff;
+            text-decoration: none;
+            font-size: 1.1em;
+            padding: 10px 20px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .nav-links a:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: #ffffff;
+        }
+
+        .nav-links a.active {
+            background: #ffffff;
+            color: #0a0a0a;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 60px 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        h1 {
+            font-size: 4em;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, #ffffff 0%, #888888 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .keys-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+        }
+
+        .key-card {
+            background: rgba(20, 20, 20, 0.8);
+            border: 2px solid #333;
+            border-radius: 20px;
+            padding: 30px;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .key-card:hover {
+            border-color: #ffffff;
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(255,255,255,0.1);
+        }
+
+        .key-header {
+            margin-bottom: 20px;
+        }
+
+        .key-game {
+            font-size: 1.8em;
+            font-weight: bold;
+            color: #ffffff;
+            margin-bottom: 10px;
+        }
+
+        .key-status {
+            display: inline-block;
+            background: #4CAF50;
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.9em;
+        }
+
+        .key-display {
+            background: rgba(0, 0, 0, 0.5);
+            padding: 20px;
+            border-radius: 10px;
+            border-left: 4px solid #ffffff;
+            margin: 20px 0;
+        }
+
+        .key-label {
+            color: #aaaaaa;
+            font-size: 0.9em;
+            margin-bottom: 10px;
+        }
+
+        .key-value {
+            font-family: 'Courier New', monospace;
+            font-size: 1.5em;
+            color: #ffffff;
+            letter-spacing: 2px;
+            word-break: break-all;
+        }
+
+        .copy-btn {
+            width: 100%;
+            background: #ffffff;
+            color: #0a0a0a;
+            border: none;
+            padding: 15px;
+            border-radius: 10px;
+            font-size: 1.1em;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .copy-btn:hover {
+            background: #cccccc;
+            transform: scale(1.02);
+        }
+
+        .key-info {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 15px;
+            color: #aaaaaa;
+            font-size: 0.9em;
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                gap: 15px;
+            }
+
+            .nav-links a {
+                padding: 8px 15px;
+                font-size: 1em;
+            }
+
+            h1 {
+                font-size: 2.5em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="stars" id="stars"></div>
+
+    <nav>
+        <div class="nav-container">
+            <div class="logo">🎮 GitanX</div>
+            <ul class="nav-links">
+                <li><a href="index.html">Accueil</a></li>
+                <li><a href="keys.html" class="active">Clés</a></li>
+                <li><a href="executors.html">Executors</a></li>
+                <li><a href="help.html">Aide</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container">
+        <header>
+            <h1>🔑 Clés de Scripts</h1>
+            <p class="subtitle" style="color: #aaaaaa; font-size: 1.3em;">Toutes les clés mises à jour quotidiennement</p>
+        </header>
+
+        <div class="keys-grid">
+            <div class="key-card">
+                <div class="key-header">
+                    <div class="key-game">🌲 99 Night in the Forest</div>
+                    <span class="key-status">✓ Active</span>
+                </div>
+                
+                <div class="key-display">
+                    <div class="key-label">Clé :</div>
+                    <div class="key-value">GitanX</div>
+                </div>
+
+                <button class="copy-btn" onclick="copyKey(this, 'GitanX')">📋 Copier la clé</button>
+
+                <div class="key-info">
+                    📅 Mise à jour : Aujourd'hui<br>
+                    ⏰ Expiration : Jamais
+                </div>
+            </div>
+
+            <div class="key-card">
+                <div class="key-header">
+                    <div class="key-game">⚔️ Blox Fruits</div>
+                    <span class="key-status">✓ Active</span>
+                </div>
+                
+                <div class="key-display">
+                    <div class="key-label">Clé :</div>
+                    <div class="key-value">GitanX2024</div>
+                </div>
+
+                <button class="copy-btn" onclick="copyKey(this, 'GitanX2024')">📋 Copier la clé</button>
+
+                <div class="key-info">
+                    📅 Mise à jour : Aujourd'hui<br>
+                    ⏰ Expiration : 7 jours
+                </div>
+            </div>
+
+            <div class="key-card">
+                <div class="key-header">
+                    <div class="key-game">🏃 Arsenal</div>
+                    <span class="key-status">✓ Active</span>
+                </div>
+                
+                <div class="key-display">
+                    <div class="key-label">Clé :</div>
+                    <div class="key-value">ARSENALGX</div>
+                </div>
+
+                <button class="copy-btn" onclick="copyKey(this, 'ARSENALGX')">📋 Copier la clé</button>
+
+                <div class="key-info">
+                    📅 Mise à jour : Aujourd'hui<br>
+                    ⏰ Expiration : 30 jours
+                </div>
+            </div>
+
+            <div class="key-card">
+                <div class="key-header">
+                    <div class="key-game">🎭 Murder Mystery 2</div>
+                    <span class="key-status">✓ Active</span>
+                </div>
+                
+                <div class="key-display">
+                    <div class="key-label">Clé :</div>
+                    <div class="key-value">MM2-GitanX</div>
+                </div>
+
+                <button class="copy-btn" onclick="copyKey(this, 'MM2-GitanX')">📋 Copier la clé</button>
+
+                <div class="key-info">
+                    📅 Mise à jour : Aujourd'hui<br>
+                    ⏰ Expiration : 14 jours
+                </div>
+            </div>
+
+            <div class="key-card">
+                <div class="key-header">
+                    <div class="key-game">🐝 Bee Swarm Simulator</div>
+                    <span class="key-status">✓ Active</span>
+                </div>
+                
+                <div class="key-display">
+                    <div class="key-label">Clé :</div>
+                    <div class="key-value">BEE-GitanX</div>
+                </div>
+
+                <button class="copy-btn" onclick="copyKey(this, 'BEE-GitanX')">📋 Copier la clé</button>
+
+                <div class="key-info">
+                    📅 Mise à jour : Aujourd'hui<br>
+                    ⏰ Expiration : 21 jours
+                </div>
+            </div>
+
+            <div class="key-card">
+                <div class="key-header">
+                    <div class="key-game">🏠 Adopt Me</div>
+                    <span class="key-status">✓ Active</span>
+                </div>
+                
+                <div class="key-display">
+                    <div class="key-label">Clé :</div>
+                    <div class="key-value">ADOPT-GX24</div>
+                </div>
+
+                <button class="copy-btn" onclick="copyKey(this, 'ADOPT-GX24')">📋 Copier la clé</button>
+
+                <div class="key-info">
+                    📅 Mise à jour : Aujourd'hui<br>
+                    ⏰ Expiration : 10 jours
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function createStars() {
+            const starsContainer = document.getElementById('stars');
+            const numberOfStars = 150;
+
+            for (let i = 0; i < numberOfStars; i++) {
+                const star = document.createElement('div');
+                star.className = 'star';
+                
+                const size = Math.random() * 3 + 1;
+                star.style.width = size + 'px';
+                star.style.height = size + 'px';
+                star.style.left = Math.random() * 100 + '%';
+                star.style.top = Math.random() * 100 + '%';
+                star.style.animationDelay = Math.random() * 3 + 's';
+                star.style.animationDuration = (Math.random() * 2 + 2) + 's';
+                
+                starsContainer.appendChild(star);
+            }
+        }
+
+        function copyKey(button, keyValue) {
+            navigator.clipboard.writeText(keyValue).then(() => {
+                const originalText = button.textContent;
+                button.textContent = '✓ Copié !';
+                button.style.background = '#4CAF50';
+                
+                setTimeout(() => {
+                    button.textContent = originalText;
+                    button.style.background = '#ffffff';
+                }, 2000);
+            });
+        }
+
+        createStars();
+    </script>
+</body>
+</html>
