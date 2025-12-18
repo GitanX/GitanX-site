@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -97,7 +96,7 @@
         }
 
         .container {
-            max-width: 1200px;
+            max-width: 1400px;
             margin: 0 auto;
             padding: 60px 20px;
             position: relative;
@@ -118,10 +117,18 @@
             background-clip: text;
         }
 
+        .section-title {
+            font-size: 2.5em;
+            margin: 60px 0 30px 0;
+            text-align: center;
+            color: #ffffff;
+        }
+
         .executor-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
             gap: 30px;
+            margin-bottom: 40px;
         }
 
         .executor-card {
@@ -152,13 +159,47 @@
             color: #ffffff;
         }
 
+        .executor-badges {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
         .executor-badge {
-            background: #ffffff;
-            color: #0a0a0a;
-            padding: 8px 16px;
-            border-radius: 20px;
-            font-size: 0.9em;
+            padding: 6px 12px;
+            border-radius: 15px;
+            font-size: 0.85em;
             font-weight: bold;
+        }
+
+        .badge-top {
+            background: linear-gradient(135deg, #FFD700, #FFA500);
+            color: #000;
+        }
+
+        .badge-free {
+            background: #00ff00;
+            color: #000;
+        }
+
+        .badge-paid {
+            background: #ff0000;
+            color: #fff;
+        }
+
+        .badge-mobile {
+            background: #00bfff;
+            color: #000;
+        }
+
+        .badge-pc {
+            background: #9370db;
+            color: #fff;
+        }
+
+        .badge-discontinued {
+            background: #666;
+            color: #fff;
         }
 
         .executor-description {
@@ -187,10 +228,8 @@
             font-size: 1.2em;
         }
 
-        .download-btn {
+        .action-btn {
             width: 100%;
-            background: #ffffff;
-            color: #0a0a0a;
             border: none;
             padding: 15px;
             border-radius: 10px;
@@ -200,9 +239,34 @@
             transition: all 0.3s ease;
         }
 
-        .download-btn:hover {
-            background: #cccccc;
+        .btn-visit {
+            background: #4CAF50;
+            color: white;
+        }
+
+        .btn-visit:hover {
+            background: #45a049;
             transform: scale(1.02);
+        }
+
+        .btn-discord {
+            background: #5865F2;
+            color: white;
+        }
+
+        .btn-discord:hover {
+            background: #4752C4;
+            transform: scale(1.02);
+        }
+
+        .btn-disabled {
+            background: #666;
+            color: #aaa;
+            cursor: not-allowed;
+        }
+
+        .btn-disabled:hover {
+            transform: none;
         }
 
         @media (max-width: 768px) {
@@ -217,6 +281,10 @@
 
             h1 {
                 font-size: 2.5em;
+            }
+
+            .section-title {
+                font-size: 2em;
             }
         }
     </style>
@@ -239,111 +307,431 @@
     <div class="container">
         <header>
             <h1>⚡ Executors Roblox</h1>
-            <p style="color: #aaaaaa; font-size: 1.3em;">Les meilleurs executors pour vos scripts</p>
+            <p style="color: #aaaaaa; font-size: 1.3em;">Tous les executors PC et Mobile - Gratuits et Payants</p>
         </header>
 
+        <h2 class="section-title">🖥️ Executors PC - Top Tier</h2>
         <div class="executor-grid">
             <div class="executor-card">
                 <div class="executor-header">
                     <div class="executor-name">Xeno</div>
-                    <div class="executor-badge">⭐ TOP</div>
+                    <div class="executor-badges">
+                        <div class="executor-badge badge-top">⭐ MEILLEUR</div>
+                        <div class="executor-badge badge-free">🆓 Gratuit</div>
+                        <div class="executor-badge badge-pc">💻 PC</div>
+                    </div>
                 </div>
                 <p class="executor-description">
-                    L'executor le plus stable et performant du marché. Mis à jour régulièrement avec une excellente compatibilité.
+                    L'executor N°1 actuellement. Ultra stable, rapide, interface moderne et mis à jour constamment. Le meilleur choix en 2024.
                 </p>
                 <ul class="executor-features">
-                    <li>Interface intuitive</li>
-                    <li>Injection rapide</li>
-                    <li>Support 24/7</li>
-                    <li>Mises à jour fréquentes</li>
+                    <li>Interface intuitive et moderne</li>
+                    <li>Injection ultra-rapide</li>
+                    <li>Support de tous les scripts</li>
+                    <li>Mises à jour instantanées</li>
                 </ul>
-                <button class="download-btn">📥 Télécharger Xeno</button>
+                <button class="action-btn btn-visit" onclick="window.open('https://xeno.vip', '_blank')">🌐 Visiter le site</button>
             </div>
 
             <div class="executor-card">
                 <div class="executor-header">
-                    <div class="executor-name">Synapse X</div>
-                    <div class="executor-badge">💎 Premium</div>
+                    <div class="executor-name">Solara</div>
+                    <div class="executor-badges">
+                        <div class="executor-badge badge-free">🆓 Gratuit</div>
+                        <div class="executor-badge badge-pc">💻 PC</div>
+                    </div>
                 </div>
                 <p class="executor-description">
-                    Le plus puissant executor disponible. Parfait pour les scripts avancés et les développeurs.
+                    Executor récent très performant. Excellente alternative à Xeno avec une communauté grandissante.
                 </p>
                 <ul class="executor-features">
-                    <li>Execution ultra-rapide</li>
-                    <li>Nombreuses fonctionnalités</li>
-                    <li>Très stable</li>
-                    <li>Support premium</li>
+                    <li>Très stable et sécurisé</li>
+                    <li>Interface clean</li>
+                    <li>Pas de système de clés</li>
+                    <li>Communauté active</li>
                 </ul>
-                <button class="download-btn">📥 Télécharger Synapse X</button>
+                <button class="action-btn btn-visit" onclick="window.open('https://getsolara.dev', '_blank')">🌐 Visiter le site</button>
             </div>
 
+            <div class="executor-card">
+                <div class="executor-header">
+                    <div class="executor-name">Wave</div>
+                    <div class="executor-badges">
+                        <div class="executor-badge badge-free">🆓 Gratuit</div>
+                        <div class="executor-badge badge-pc">💻 PC</div>
+                    </div>
+                </div>
+                <p class="executor-description">
+                    Executor gratuit fiable et performant. Bonne option pour les débutants et utilisateurs avancés.
+                </p>
+                <ul class="executor-features">
+                    <li>Installation simple</li>
+                    <li>Bonne compatibilité</li>
+                    <li>Mises à jour régulières</li>
+                    <li>Support communautaire</li>
+                </ul>
+                <button class="action-btn btn-visit" onclick="window.open('https://wave.gg', '_blank')">🌐 Visiter le site</button>
+            </div>
+        </div>
+
+        <h2 class="section-title">💻 Executors PC - Populaires</h2>
+        <div class="executor-grid">
             <div class="executor-card">
                 <div class="executor-header">
                     <div class="executor-name">KRNL</div>
-                    <div class="executor-badge">🆓 Gratuit</div>
+                    <div class="executor-badges">
+                        <div class="executor-badge badge-free">🆓 Gratuit</div>
+                        <div class="executor-badge badge-pc">💻 PC</div>
+                    </div>
                 </div>
                 <p class="executor-description">
-                    Excellent executor gratuit pour débutants. Fiable et régulièrement maintenu.
+                    Un des plus anciens executors gratuits encore actif. Système de clés mais très stable.
                 </p>
                 <ul class="executor-features">
-                    <li>100% gratuit</li>
-                    <li>Bonne stabilité</li>
-                    <li>Interface simple</li>
-                    <li>Communauté active</li>
+                    <li>Très connu et testé</li>
+                    <li>Grande communauté</li>
+                    <li>API complète</li>
+                    <li>Support Discord actif</li>
                 </ul>
-                <button class="download-btn">📥 Télécharger KRNL</button>
+                <button class="action-btn btn-visit" onclick="window.open('https://krnl.place', '_blank')">🌐 Visiter le site</button>
             </div>
 
             <div class="executor-card">
                 <div class="executor-header">
                     <div class="executor-name">Fluxus</div>
-                    <div class="executor-badge">✅ Stable</div>
+                    <div class="executor-badges">
+                        <div class="executor-badge badge-free">🆓 Gratuit</div>
+                        <div class="executor-badge badge-pc">💻 PC</div>
+                    </div>
                 </div>
                 <p class="executor-description">
-                    Executor fiable avec une grande communauté. Parfait équilibre entre performance et facilité.
+                    Executor gratuit populaire avec interface moderne. Bon équilibre entre fonctionnalités et stabilité.
                 </p>
                 <ul class="executor-features">
-                    <li>Très stable</li>
-                    <li>Interface moderne</li>
-                    <li>Mise à jour rapide</li>
-                    <li>Grande communauté</li>
+                    <li>Interface attractive</li>
+                    <li>Bonne performance</li>
+                    <li>Mises à jour fréquentes</li>
+                    <li>Facile à utiliser</li>
                 </ul>
-                <button class="download-btn">📥 Télécharger Fluxus</button>
+                <button class="action-btn btn-visit" onclick="window.open('https://fluxteam.net', '_blank')">🌐 Visiter le site</button>
+            </div>
+
+            <div class="executor-card">
+                <div class="executor-header">
+                    <div class="executor-name">Evon</div>
+                    <div class="executor-badges">
+                        <div class="executor-badge badge-free">🆓 Gratuit</div>
+                        <div class="executor-badge badge-pc">💻 PC</div>
+                    </div>
+                </div>
+                <p class="executor-description">
+                    Executor gratuit stable et léger. Parfait pour débuter avec des scripts simples.
+                </p>
+                <ul class="executor-features">
+                    <li>Léger et rapide</li>
+                    <li>Interface simple</li>
+                    <li>Pas de lag</li>
+                    <li>Bon pour débutants</li>
+                </ul>
+                <button class="action-btn btn-discord">💬 Rejoindre Discord</button>
+            </div>
+
+            <div class="executor-card">
+                <div class="executor-header">
+                    <div class="executor-name">Oxygen U</div>
+                    <div class="executor-badges">
+                        <div class="executor-badge badge-free">🆓 Gratuit</div>
+                        <div class="executor-badge badge-pc">💻 PC</div>
+                    </div>
+                </div>
+                <p class="executor-description">
+                    Executor gratuit avec de bonnes performances. Interface utilisateur agréable.
+                </p>
+                <ul class="executor-features">
+                    <li>Bonne stabilité</li>
+                    <li>UI moderne</li>
+                    <li>Support scripts avancés</li>
+                    <li>Communauté active</li>
+                </ul>
+                <button class="action-btn btn-visit" onclick="window.open('https://oxygenu.xyz', '_blank')">🌐 Visiter le site</button>
+            </div>
+
+            <div class="executor-card">
+                <div class="executor-header">
+                    <div class="executor-name">Trigon</div>
+                    <div class="executor-badges">
+                        <div class="executor-badge badge-free">🆓 Gratuit</div>
+                        <div class="executor-badge badge-pc">💻 PC</div>
+                    </div>
+                </div>
+                <p class="executor-description">
+                    Executor gratuit performant avec interface épurée. Mise à jour régulière.
+                </p>
+                <ul class="executor-features">
+                    <li>Design moderne</li>
+                    <li>Stable et rapide</li>
+                    <li>Pas de virus</li>
+                    <li>Bonne compatibilité</li>
+                </ul>
+                <button class="action-btn btn-discord">💬 Rejoindre Discord</button>
+            </div>
+
+            <div class="executor-card">
+                <div class="executor-header">
+                    <div class="executor-name">Nezur</div>
+                    <div class="executor-badges">
+                        <div class="executor-badge badge-free">🆓 Gratuit</div>
+                        <div class="executor-badge badge-pc">💻 PC</div>
+                    </div>
+                </div>
+                <p class="executor-description">
+                    Executor simple et efficace. Bon choix pour les utilisateurs recherchant la simplicité.
+                </p>
+                <ul class="executor-features">
+                    <li>Interface minimaliste</li>
+                    <li>Léger sur le PC</li>
+                    <li>Facile d'utilisation</li>
+                    <li>Régulièrement mis à jour</li>
+                </ul>
+                <button class="action-btn btn-discord">💬 Rejoindre Discord</button>
+            </div>
+
+            <div class="executor-card">
+                <div class="executor-header">
+                    <div class="executor-name">Comet</div>
+                    <div class="executor-badges">
+                        <div class="executor-badge badge-free">🆓 Gratuit</div>
+                        <div class="executor-badge badge-pc">💻 PC</div>
+                    </div>
+                </div>
+                <p class="executor-description">
+                    Executor avec bonne réputation. Interface agréable et performances correctes.
+                </p>
+                <ul class="executor-features">
+                    <li>Bonne stabilité</li>
+                    <li>Interface propre</li>
+                    <li>Support Discord</li>
+                    <li>Mises à jour suivies</li>
+                </ul>
+                <button class="action-btn btn-discord">💬 Rejoindre Discord</button>
+            </div>
+
+            <div class="executor-card">
+                <div class="executor-header">
+                    <div class="executor-name">Valyse</div>
+                    <div class="executor-badges">
+                        <div class="executor-badge badge-free">🆓 Gratuit</div>
+                        <div class="executor-badge badge-pc">💻 PC</div>
+                    </div>
+                </div>
+                <p class="executor-description">
+                    Executor gratuit avec interface moderne. Bon pour scripts moyennement complexes.
+                </p>
+                <ul class="executor-features">
+                    <li>Design attrayant</li>
+                    <li>Bonne performance</li>
+                    <li>Pas de bloatware</li>
+                    <li>Communauté sympathique</li>
+                </ul>
+                <button class="action-btn btn-discord">💬 Rejoindre Discord</button>
+            </div>
+
+            <div class="executor-card">
+                <div class="executor-header">
+                    <div class="executor-name">Hydrogen</div>
+                    <div class="executor-badges">
+                        <div class="executor-badge badge-free">🆓 Gratuit</div>
+                        <div class="executor-badge badge-pc">💻 PC</div>
+                    </div>
+                </div>
+                <p class="executor-description">
+                    Executor léger et rapide. Idéal pour les PC avec ressources limitées.
+                </p>
+                <ul class="executor-features">
+                    <li>Très léger</li>
+                    <li>Consommation RAM faible</li>
+                    <li>Interface basique</li>
+                    <li>Rapide à charger</li>
+                </ul>
+                <button class="action-btn btn-discord">💬 Rejoindre Discord</button>
+            </div>
+        </div>
+
+        <h2 class="section-title">💎 Executors PC - Payants / Discontinués</h2>
+        <div class="executor-grid">
+            <div class="executor-card">
+                <div class="executor-header">
+                    <div class="executor-name">Synapse X</div>
+                    <div class="executor-badges">
+                        <div class="executor-badge badge-discontinued">❌ Fermé</div>
+                        <div class="executor-badge badge-paid">💰 Était payant</div>
+                        <div class="executor-badge badge-pc">💻 PC</div>
+                    </div>
+                </div>
+                <p class="executor-description">
+                    Le légendaire executor payant. Fermé en 2023 après rachat par Roblox. Le plus puissant de son époque.
+                </p>
+                <ul class="executor-features">
+                    <li>N'existe plus officiellement</li>
+                    <li>Était le meilleur</li>
+                    <li>Rachat Roblox 2023</li>
+                    <li>Ne plus utiliser</li>
+                </ul>
+                <button class="action-btn btn-disabled" disabled>❌ Discontinué</button>
             </div>
 
             <div class="executor-card">
                 <div class="executor-header">
                     <div class="executor-name">Script-Ware</div>
-                    <div class="executor-badge">🔥 Puissant</div>
+                    <div class="executor-badges">
+                        <div class="executor-badge badge-discontinued">❌ Fermé</div>
+                        <div class="executor-badge badge-paid">💰 Était payant</div>
+                        <div class="executor-badge badge-pc">💻 PC</div>
+                    </div>
                 </div>
                 <p class="executor-description">
-                    Executor premium avec d'excellentes performances. Idéal pour les utilisateurs avancés.
+                    Excellent executor payant. Fermé également en 2023. Était connu pour sa stabilité exceptionnelle.
                 </p>
                 <ul class="executor-features">
-                    <li>Haute performance</li>
+                    <li>N'existe plus</li>
+                    <li>Était très stable</li>
                     <li>Multi-plateforme</li>
-                    <li>API complète</li>
-                    <li>Sécurisé</li>
+                    <li>Ne plus utiliser</li>
                 </ul>
-                <button class="download-btn">📥 Télécharger Script-Ware</button>
+                <button class="action-btn btn-disabled" disabled>❌ Discontinué</button>
             </div>
 
             <div class="executor-card">
                 <div class="executor-header">
-                    <div class="executor-name">Arceus X</div>
-                    <div class="executor-badge">📱 Mobile</div>
+                    <div class="executor-name">Sentinel</div>
+                    <div class="executor-badges">
+                        <div class="executor-badge badge-paid">💰 Payant</div>
+                        <div class="executor-badge badge-pc">💻 PC</div>
+                    </div>
                 </div>
                 <p class="executor-description">
-                    Le meilleur executor pour Android. Utilisez vos scripts sur mobile facilement.
+                    Executor payant encore disponible. Bonne alternative aux executors gratuits pour ceux qui veulent investir.
                 </p>
                 <ul class="executor-features">
-                    <li>Compatible Android</li>
+                    <li>Support premium</li>
+                    <li>Très stable</li>
+                    <li>Mises à jour rapides</li>
+                    <li>API complète</li>
+                </ul>
+                <button class="action-btn btn-visit" onclick="window.open('https://sentinel.to', '_blank')">🌐 Visiter le site</button>
+            </div>
+
+            <div class="executor-card">
+                <div class="executor-header">
+                    <div class="executor-name">Sirhurt</div>
+                    <div class="executor-badges">
+                        <div class="executor-badge badge-paid">💰 Payant</div>
+                        <div class="executor-badge badge-pc">💻 PC</div>
+                    </div>
+                </div>
+                <p class="executor-description">
+                    Executor payant avec bonne réputation. Interface unique et performances solides.
+                </p>
+                <ul class="executor-features">
+                    <li>Interface originale</li>
+                    <li>Bonne stabilité</li>
+                    <li>Support client</li>
+                    <li>Mises à jour régulières</li>
+                </ul>
+                <button class="action-btn btn-visit" onclick="window.open('https://sirhurt.net', '_blank')">🌐 Visiter le site</button>
+            </div>
+        </div>
+
+        <h2 class="section-title">📱 Executors Mobile</h2>
+        <div class="executor-grid">
+            <div class="executor-card">
+                <div class="executor-header">
+                    <div class="executor-name">Arceus X</div>
+                    <div class="executor-badges">
+                        <div class="executor-badge badge-free">🆓 Gratuit</div>
+                        <div class="executor-badge badge-mobile">📱 Android</div>
+                    </div>
+                </div>
+                <p class="executor-description">
+                    Le meilleur executor pour Android. Interface tactile optimisée et très stable sur mobile.
+                </p>
+                <ul class="executor-features">
+                    <li>N°1 sur Android</li>
                     <li>Interface tactile</li>
                     <li>Léger et rapide</li>
-                    <li>Régulièrement mis à jour</li>
+                    <li>Mises à jour fréquentes</li>
                 </ul>
-                <button class="download-btn">📥 Télécharger Arceus X</button>
+                <button class="action-btn btn-visit" onclick="window.open('https://arceusx.com', '_blank')">🌐 Visiter le site</button>
             </div>
+
+            <div class="executor-card">
+                <div class="executor-header">
+                    <div class="executor-name">Codex</div>
+                    <div class="executor-badges">
+                        <div class="executor-badge badge-free">🆓 Gratuit</div>
+                        <div class="executor-badge badge-mobile">📱 Android/iOS</div>
+                    </div>
+                </div>
+                <p class="executor-description">
+                    Executor mobile multi-plateforme. Fonctionne sur Android et iOS avec bonne compatibilité.
+                </p>
+                <ul class="executor-features">
+                    <li>Android et iOS</li>
+                    <li>Interface moderne</li>
+                    <li>Bonne stabilité</li>
+                    <li>Support multi-script</li>
+                </ul>
+                <button class="action-btn btn-discord">💬 Rejoindre Discord</button>
+            </div>
+
+            <div class="executor-card">
+                <div class="executor-header">
+                    <div class="executor-name">Delta</div>
+                    <div class="executor-badges">
+                        <div class="executor-badge badge-free">🆓 Gratuit</div>
+                        <div class="executor-badge badge-mobile">📱 iOS</div>
+                    </div>
+                </div>
+                <p class="executor-description">
+                    Executor spécialisé pour iOS. Bonne option pour les utilisateurs iPhone/iPad.
+                </p>
+                <ul class="executor-features">
+                    <li>Optimisé iOS</li>
+                    <li>Installation simple</li>
+                    <li>Interface tactile</li>
+                    <li>Support scripts mobiles</li>
+                </ul>
+                <button class="action-btn btn-discord">💬 Rejoindre Discord</button>
+            </div>
+
+            <div class="executor-card">
+                <div class="executor-header">
+                    <div class="executor-name">Fluxus Mobile</div>
+                    <div class="executor-badges">
+                        <div class="executor-badge badge-free">🆓 Gratuit</div>
+                        <div class="executor-badge badge-mobile">📱 Android</div>
+                    </div>
+                </div>
+                <p class="executor-description">
+                    Version mobile de Fluxus PC. Même qualité adaptée pour smartphones Android.
+                </p>
+                <ul class="executor-features">
+                    <li>Version mobile Fluxus</li>
+                    <li>Bonne performance</li>
+                    <li>Optimisé tactile</li>
+                    <li>Mises à jour synchro</li>
+                </ul>
+                <button class="action-btn btn-visit" onclick="window.open('https://fluxteam.net', '_blank')">🌐 Visiter le site</button>
+            </div>
+        </div>
+
+        <div style="text-align: center; margin-top: 60px; padding: 40px; background: rgba(255,0,0,0.1); border: 2px solid #ff0000; border-radius: 20px;">
+            <h2 style="color: #ff5555; margin-bottom: 20px;">⚠️ Avertissement Important</h2>
+            <p style="color: #cccccc; line-height: 1.8; max-width: 800px; margin: 0 auto;">
+                L'utilisation d'executors viole les conditions d'utilisation de Roblox et peut entraîner un bannissement permanent de votre compte. 
+                Ces outils peuvent également contenir des malwares ou compromettre la sécurité de votre appareil. 
+                Utilisez-les à vos risques et périls. GitanX ne peut être tenu responsable des conséquences de leur utilisation.
+            </p>
         </div>
     </div>
 
