@@ -69,6 +69,34 @@
             background-clip: text;
         }
 
+        /* Menu Hamburger */
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            gap: 5px;
+        }
+
+        .menu-toggle span {
+            width: 30px;
+            height: 3px;
+            background: #ffffff;
+            transition: all 0.3s ease;
+            border-radius: 3px;
+        }
+
+        .menu-toggle.active span:nth-child(1) {
+            transform: rotate(45deg) translate(8px, 8px);
+        }
+
+        .menu-toggle.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .menu-toggle.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(8px, -8px);
+        }
+
         .nav-links {
             display: flex;
             gap: 30px;
@@ -221,14 +249,40 @@
             font-family: 'Courier New', monospace;
         }
 
+        /* Responsive Mobile */
         @media (max-width: 768px) {
+            .menu-toggle {
+                display: flex;
+            }
+
             .nav-links {
-                gap: 15px;
+                position: fixed;
+                top: 78px;
+                right: -100%;
+                width: 70%;
+                max-width: 300px;
+                height: calc(100vh - 78px);
+                background: rgba(20, 20, 20, 0.98);
+                flex-direction: column;
+                padding: 30px 20px;
+                gap: 0;
+                transition: right 0.3s ease;
+                border-left: 2px solid #333;
+            }
+
+            .nav-links.active {
+                right: 0;
             }
 
             .nav-links a {
-                padding: 8px 15px;
-                font-size: 1em;
+                width: 100%;
+                padding: 15px 20px;
+                font-size: 1.2em;
+                margin-bottom: 10px;
+            }
+
+            .logo {
+                font-size: 1.5em;
             }
 
             h1 {
@@ -242,6 +296,28 @@
             .faq-question-text {
                 font-size: 1.1em;
             }
+
+            .container {
+                padding: 40px 15px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .logo {
+                font-size: 1.3em;
+            }
+
+            h1 {
+                font-size: 2em;
+            }
+
+            .faq-question {
+                padding: 15px;
+            }
+
+            .faq-question-text {
+                font-size: 1em;
+            }
         }
     </style>
 </head>
@@ -251,12 +327,17 @@
     <nav>
         <div class="nav-container">
             <div class="logo">🎮 GitanX</div>
-            <ul class="nav-links">
+            <div class="menu-toggle" onclick="toggleMenu()">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <ul class="nav-links" id="navLinks">
                 <li><a href="index.html">Home</a></li>
                 <li><a href="keys.html">Key</a></li>
                 <li><a href="executors.html">Executors</a></li>
                 <li><a href="help.html" class="active">Help</a></li>
-                <li><a href="credits.html" class="active">Credits</a></li>
+                <li><a href="credits.html">Credits</a></li>
             </ul>
         </div>
     </nav>
@@ -314,7 +395,6 @@
     </div>
 
     <script>
-        // Génération des étoiles en arrière-plan
         function createStars() {
             const starsContainer = document.getElementById('stars');
             const numberOfStars = 150;
@@ -335,13 +415,11 @@
             }
         }
 
-        // Fonction pour ouvrir/fermer les menus FAQ
         function toggleFAQ(element) {
             const answer = element.nextElementSibling;
             const arrow = element.querySelector('.faq-arrow');
             const isActive = answer.classList.contains('active');
             
-            // Fermer toutes les autres réponses
             document.querySelectorAll('.faq-answer').forEach(ans => {
                 ans.classList.remove('active');
             });
@@ -352,7 +430,6 @@
                 q.classList.remove('active');
             });
             
-            // Ouvrir/fermer la réponse cliquée
             if (!isActive) {
                 answer.classList.add('active');
                 arrow.classList.add('active');
@@ -360,7 +437,33 @@
             }
         }
 
-        // Initialiser les étoiles au chargement de la page
+        function toggleMenu() {
+            const navLinks = document.getElementById('navLinks');
+            const menuToggle = document.querySelector('.menu-toggle');
+            navLinks.classList.toggle('active');
+            menuToggle.classList.toggle('active');
+        }
+
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                const navLinks = document.getElementById('navLinks');
+                const menuToggle = document.querySelector('.menu-toggle');
+                navLinks.classList.remove('active');
+                menuToggle.classList.remove('active');
+            });
+        });
+
+        document.addEventListener('click', (e) => {
+            const navLinks = document.getElementById('navLinks');
+            const menuToggle = document.querySelector('.menu-toggle');
+            const nav = document.querySelector('nav');
+            
+            if (!nav.contains(e.target) && navLinks.classList.contains('active')) {
+                navLinks.classList.remove('active');
+                menuToggle.classList.remove('active');
+            }
+        });
+
         createStars();
     </script>
 </body>
