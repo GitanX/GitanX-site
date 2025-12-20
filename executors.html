@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -67,6 +68,34 @@
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
+        }
+
+        /* Menu Hamburger */
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            gap: 5px;
+        }
+
+        .menu-toggle span {
+            width: 30px;
+            height: 3px;
+            background: #ffffff;
+            transition: all 0.3s ease;
+            border-radius: 3px;
+        }
+
+        .menu-toggle.active span:nth-child(1) {
+            transform: rotate(45deg) translate(8px, 8px);
+        }
+
+        .menu-toggle.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .menu-toggle.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(8px, -8px);
         }
 
         .nav-links {
@@ -269,14 +298,40 @@
             transform: none;
         }
 
+        /* Responsive Mobile */
         @media (max-width: 768px) {
+            .menu-toggle {
+                display: flex;
+            }
+
             .nav-links {
-                gap: 15px;
+                position: fixed;
+                top: 78px;
+                right: -100%;
+                width: 70%;
+                max-width: 300px;
+                height: calc(100vh - 78px);
+                background: rgba(20, 20, 20, 0.98);
+                flex-direction: column;
+                padding: 30px 20px;
+                gap: 0;
+                transition: right 0.3s ease;
+                border-left: 2px solid #333;
+            }
+
+            .nav-links.active {
+                right: 0;
             }
 
             .nav-links a {
-                padding: 8px 15px;
-                font-size: 1em;
+                width: 100%;
+                padding: 15px 20px;
+                font-size: 1.2em;
+                margin-bottom: 10px;
+            }
+
+            .logo {
+                font-size: 1.5em;
             }
 
             h1 {
@@ -285,6 +340,38 @@
 
             .section-title {
                 font-size: 2em;
+            }
+
+            .executor-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .executor-card {
+                padding: 25px;
+            }
+
+            .executor-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px;
+            }
+
+            .container {
+                padding: 40px 15px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .logo {
+                font-size: 1.3em;
+            }
+
+            h1 {
+                font-size: 2em;
+            }
+
+            .executor-name {
+                font-size: 1.5em;
             }
         }
     </style>
@@ -295,12 +382,17 @@
     <nav>
         <div class="nav-container">
             <div class="logo">🎮 GitanX</div>
-            <ul class="nav-links">
+            <div class="menu-toggle" onclick="toggleMenu()">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <ul class="nav-links" id="navLinks">
                 <li><a href="index.html">Home</a></li>
                 <li><a href="keys.html">Key</a></li>
                 <li><a href="executors.html" class="active">Executors</a></li>
                 <li><a href="help.html">Help</a></li>
-                <li><a href="credits.html" class="active">Credits</a></li>
+                <li><a href="credits.html">Credits</a></li>
             </ul>
         </div>
     </nav>
