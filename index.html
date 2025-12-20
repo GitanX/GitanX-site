@@ -69,6 +69,34 @@
             background-clip: text;
         }
 
+        /* Menu Hamburger */
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            gap: 5px;
+        }
+
+        .menu-toggle span {
+            width: 30px;
+            height: 3px;
+            background: #ffffff;
+            transition: all 0.3s ease;
+            border-radius: 3px;
+        }
+
+        .menu-toggle.active span:nth-child(1) {
+            transform: rotate(45deg) translate(8px, 8px);
+        }
+
+        .menu-toggle.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .menu-toggle.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(8px, -8px);
+        }
+
         .nav-links {
             display: flex;
             gap: 30px;
@@ -161,9 +189,9 @@
             cursor: pointer;
         }
 
-        .games-section:hover {
-            max-height: 2000px;
-            padding: 50px;
+        .games-section.expanded {
+            max-height: 3000px;
+            padding: 50px 30px;
             border-color: #ffffff;
             box-shadow: 0 20px 80px rgba(255,255,255,0.3);
         }
@@ -186,7 +214,7 @@
             transition: opacity 0.3s ease;
         }
 
-        .games-section:hover .games-hint {
+        .games-section.expanded .games-hint {
             opacity: 0;
         }
 
@@ -200,7 +228,7 @@
             transition: all 0.5s ease;
         }
 
-        .games-section:hover .games-grid {
+        .games-section.expanded .games-grid {
             opacity: 1;
             transform: translateY(0);
         }
@@ -266,26 +294,112 @@
             color: #aaaaaa;
         }
 
+        /* Responsive Mobile */
         @media (max-width: 768px) {
+            .menu-toggle {
+                display: flex;
+            }
+
             .nav-links {
-                gap: 15px;
+                position: fixed;
+                top: 78px;
+                right: -100%;
+                width: 70%;
+                max-width: 300px;
+                height: calc(100vh - 78px);
+                background: rgba(20, 20, 20, 0.98);
+                flex-direction: column;
+                padding: 30px 20px;
+                gap: 0;
+                transition: right 0.3s ease;
+                border-left: 2px solid #333;
+            }
+
+            .nav-links.active {
+                right: 0;
             }
 
             .nav-links a {
-                padding: 8px 15px;
-                font-size: 1em;
+                width: 100%;
+                padding: 15px 20px;
+                font-size: 1.2em;
+                margin-bottom: 10px;
+            }
+
+            .logo {
+                font-size: 1.5em;
             }
 
             h1 {
                 font-size: 2.5em;
             }
 
+            .welcome-section h2 {
+                font-size: 2em;
+            }
+
+            .games-section h2 {
+                font-size: 2em;
+            }
+
             .welcome-section, .games-section {
                 padding: 30px 20px;
             }
 
+            .games-section.expanded {
+                padding: 40px 20px;
+            }
+
             .games-grid {
                 grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+                gap: 15px;
+            }
+
+            .game-icon {
+                font-size: 2em;
+            }
+
+            .game-title {
+                font-size: 0.9em;
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .feature-card {
+                padding: 25px;
+            }
+
+            .container {
+                padding: 40px 15px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .logo {
+                font-size: 1.3em;
+            }
+
+            h1 {
+                font-size: 2em;
+            }
+
+            .subtitle {
+                font-size: 1.1em;
+            }
+
+            .welcome-section h2 {
+                font-size: 1.7em;
+            }
+
+            .welcome-section p {
+                font-size: 1em;
+            }
+
+            .games-grid {
+                grid-template-columns: repeat(2, 1fr);
             }
         }
     </style>
@@ -296,12 +410,17 @@
     <nav>
         <div class="nav-container">
             <div class="logo">🎮 GitanX</div>
-            <ul class="nav-links">
+            <div class="menu-toggle" onclick="toggleMenu()">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <ul class="nav-links" id="navLinks">
                 <li><a href="index.html" class="active">Home</a></li>
                 <li><a href="keys.html">Key</a></li>
                 <li><a href="executors.html">Executors</a></li>
                 <li><a href="help.html">Help</a></li>
-                <li><a href="credits.html" class="active">Credits</a></li>
+                <li><a href="credits.html">Credits</a></li>
             </ul>
         </div>
     </nav>
@@ -319,7 +438,7 @@
             </p>
         </div>
 
-        <div class="games-section">
+        <div class="games-section" id="gamesSection" onclick="toggleGames()">
             <h2>🎮 Supported Games</h2>
             <p class="games-hint">look all scirpt click ✨</p>
             
@@ -399,6 +518,40 @@
             `;
             
             gamesGrid.appendChild(card);
+        });
+
+        function toggleGames() {
+            const section = document.getElementById('gamesSection');
+            section.classList.toggle('expanded');
+        }
+
+        function toggleMenu() {
+            const navLinks = document.getElementById('navLinks');
+            const menuToggle = document.querySelector('.menu-toggle');
+            navLinks.classList.toggle('active');
+            menuToggle.classList.toggle('active');
+        }
+
+        // Fermer le menu mobile quand on clique sur un lien
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                const navLinks = document.getElementById('navLinks');
+                const menuToggle = document.querySelector('.menu-toggle');
+                navLinks.classList.remove('active');
+                menuToggle.classList.remove('active');
+            });
+        });
+
+        // Fermer le menu mobile quand on clique en dehors
+        document.addEventListener('click', (e) => {
+            const navLinks = document.getElementById('navLinks');
+            const menuToggle = document.querySelector('.menu-toggle');
+            const nav = document.querySelector('nav');
+            
+            if (!nav.contains(e.target) && navLinks.classList.contains('active')) {
+                navLinks.classList.remove('active');
+                menuToggle.classList.remove('active');
+            }
         });
 
         function createStars() {
