@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -43,51 +42,85 @@
         }
 
         nav {
-            background: rgba(20, 20, 20, 0.95);
-            padding: 20px 0;
-            position: sticky;
+            background: rgba(10, 10, 10, 0.95);
+            padding: 0;
+            position: fixed;
             top: 0;
+            left: 0;
+            right: 0;
             z-index: 1000;
-            border-bottom: 2px solid #333;
-            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
         }
 
         .nav-container {
-            max-width: 1200px;
+            max-width: 1400px;
             margin: 0 auto;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 0 20px;
+            padding: 0 40px;
+            height: 70px;
         }
 
         .logo {
-            font-size: 2em;
-            font-weight: bold;
-            background: linear-gradient(135deg, #ffffff 0%, #888888 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+            font-size: 1.5em;
+            font-weight: 700;
+            color: #ffffff;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            letter-spacing: -0.5px;
         }
 
-        /* Menu Hamburger */
+        .nav-links {
+            display: flex;
+            gap: 5px;
+            list-style: none;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            font-size: 0.95em;
+            padding: 8px 16px;
+            border-radius: 8px;
+            transition: all 0.2s ease;
+            font-weight: 500;
+        }
+
+        .nav-links a:hover {
+            color: #ffffff;
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .nav-links a.active {
+            color: #ffffff;
+            background: rgba(255, 255, 255, 0.1);
+        }
+
         .menu-toggle {
             display: none;
+            width: 30px;
+            height: 30px;
             flex-direction: column;
-            cursor: pointer;
+            justify-content: center;
             gap: 5px;
+            cursor: pointer;
+            padding: 5px;
         }
 
         .menu-toggle span {
-            width: 30px;
-            height: 3px;
+            width: 100%;
+            height: 2px;
             background: #ffffff;
             transition: all 0.3s ease;
-            border-radius: 3px;
+            border-radius: 2px;
         }
 
         .menu-toggle.active span:nth-child(1) {
-            transform: rotate(45deg) translate(8px, 8px);
+            transform: rotate(45deg) translate(5px, 5px);
         }
 
         .menu-toggle.active span:nth-child(2) {
@@ -95,46 +128,20 @@
         }
 
         .menu-toggle.active span:nth-child(3) {
-            transform: rotate(-45deg) translate(8px, -8px);
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 30px;
-            list-style: none;
-        }
-
-        .nav-links a {
-            color: #ffffff;
-            text-decoration: none;
-            font-size: 1.1em;
-            padding: 10px 20px;
-            border-radius: 8px;
-            transition: all 0.3s ease;
-            border: 2px solid transparent;
-        }
-
-        .nav-links a:hover {
-            background: rgba(255, 255, 255, 0.1);
-            border-color: #ffffff;
-        }
-
-        .nav-links a.active {
-            background: #ffffff;
-            color: #0a0a0a;
+            transform: rotate(-45deg) translate(7px, -7px);
         }
 
         .container {
             max-width: 1400px;
             margin: 0 auto;
-            padding: 60px 20px;
+            padding: 120px 40px 60px 40px;
             position: relative;
             z-index: 1;
         }
 
         header {
             text-align: center;
-            margin-bottom: 60px;
+            margin-bottom: 80px;
         }
 
         h1 {
@@ -144,6 +151,14 @@
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
+            font-weight: 700;
+            letter-spacing: -2px;
+        }
+
+        .subtitle {
+            font-size: 1.3em;
+            color: rgba(255, 255, 255, 0.6);
+            font-weight: 400;
         }
 
         .section-title {
@@ -151,6 +166,7 @@
             margin: 60px 0 30px 0;
             text-align: center;
             color: #ffffff;
+            font-weight: 600;
         }
 
         .executor-grid {
@@ -161,18 +177,18 @@
         }
 
         .executor-card {
-            background: rgba(20, 20, 20, 0.8);
-            border: 2px solid #333;
-            border-radius: 20px;
+            background: rgba(20, 20, 20, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
             padding: 30px;
             transition: all 0.3s ease;
             backdrop-filter: blur(10px);
         }
 
         .executor-card:hover {
-            border-color: #ffffff;
-            transform: translateY(-10px);
-            box-shadow: 0 15px 40px rgba(255,255,255,0.1);
+            border-color: rgba(255, 255, 255, 0.3);
+            transform: translateY(-5px);
+            background: rgba(30, 30, 30, 0.6);
         }
 
         .executor-header {
@@ -180,11 +196,13 @@
             justify-content: space-between;
             align-items: center;
             margin-bottom: 20px;
+            flex-wrap: wrap;
+            gap: 10px;
         }
 
         .executor-name {
             font-size: 2em;
-            font-weight: bold;
+            font-weight: 600;
             color: #ffffff;
         }
 
@@ -198,7 +216,7 @@
             padding: 6px 12px;
             border-radius: 15px;
             font-size: 0.85em;
-            font-weight: bold;
+            font-weight: 600;
         }
 
         .badge-top {
@@ -232,7 +250,7 @@
         }
 
         .executor-description {
-            color: #aaaaaa;
+            color: rgba(255, 255, 255, 0.7);
             line-height: 1.6;
             margin-bottom: 20px;
         }
@@ -244,7 +262,7 @@
 
         .executor-features li {
             padding: 8px 0;
-            color: #cccccc;
+            color: rgba(255, 255, 255, 0.8);
             display: flex;
             align-items: center;
             gap: 10px;
@@ -263,9 +281,9 @@
             padding: 15px;
             border-radius: 10px;
             font-size: 1.1em;
-            font-weight: bold;
+            font-weight: 600;
             cursor: pointer;
-            transition: all 0.3s ease;
+            transition: all 0.2s ease;
         }
 
         .btn-visit {
@@ -298,25 +316,53 @@
             transform: none;
         }
 
-        /* Responsive Mobile */
+        .warning-box {
+            text-align: center;
+            margin-top: 60px;
+            padding: 40px;
+            background: rgba(255, 0, 0, 0.1);
+            border: 1px solid rgba(255, 0, 0, 0.3);
+            border-radius: 16px;
+        }
+
+        .warning-box h2 {
+            color: #ff5555;
+            margin-bottom: 20px;
+            font-size: 2em;
+            font-weight: 600;
+        }
+
+        .warning-box p {
+            color: rgba(255, 255, 255, 0.8);
+            line-height: 1.8;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
         @media (max-width: 768px) {
+            .nav-container {
+                padding: 0 20px;
+                height: 60px;
+            }
+
             .menu-toggle {
                 display: flex;
             }
 
             .nav-links {
                 position: fixed;
-                top: 78px;
+                top: 60px;
                 right: -100%;
-                width: 70%;
+                width: 100%;
                 max-width: 300px;
-                height: calc(100vh - 78px);
-                background: rgba(20, 20, 20, 0.98);
+                height: calc(100vh - 60px);
+                background: rgba(10, 10, 10, 0.98);
                 flex-direction: column;
                 padding: 30px 20px;
                 gap: 0;
                 transition: right 0.3s ease;
-                border-left: 2px solid #333;
+                border-left: 1px solid rgba(255, 255, 255, 0.1);
+                align-items: stretch;
             }
 
             .nav-links.active {
@@ -326,16 +372,21 @@
             .nav-links a {
                 width: 100%;
                 padding: 15px 20px;
-                font-size: 1.2em;
-                margin-bottom: 10px;
+                font-size: 1.1em;
+                margin-bottom: 5px;
+                text-align: left;
             }
 
             .logo {
-                font-size: 1.5em;
+                font-size: 1.3em;
             }
 
             h1 {
                 font-size: 2.5em;
+            }
+
+            .container {
+                padding: 100px 20px 40px 20px;
             }
 
             .section-title {
@@ -353,21 +404,13 @@
             .executor-header {
                 flex-direction: column;
                 align-items: flex-start;
-                gap: 10px;
-            }
-
-            .container {
-                padding: 40px 15px;
             }
         }
 
         @media (max-width: 480px) {
-            .logo {
-                font-size: 1.3em;
-            }
-
             h1 {
                 font-size: 2em;
+                letter-spacing: -1px;
             }
 
             .executor-name {
@@ -400,7 +443,7 @@
     <div class="container">
         <header>
             <h1>⚡ Executors Roblox</h1>
-            <p style="color: #aaaaaa; font-size: 1.3em;">This dont work for now coming soon</p>
+            <p class="subtitle">This dont work for now coming soon</p>
         </header>
 
         <h2 class="section-title">🖥️ Executors PC - Top Tier</h2>
@@ -467,274 +510,6 @@
             </div>
         </div>
 
-        <h2 class="section-title">💻 Executors PC - Populaires</h2>
-        <div class="executor-grid">
-            <div class="executor-card">
-                <div class="executor-header">
-                    <div class="executor-name">KRNL</div>
-                    <div class="executor-badges">
-                        <div class="executor-badge badge-free">🆓 Gratuit</div>
-                        <div class="executor-badge badge-pc">💻 PC</div>
-                    </div>
-                </div>
-                <p class="executor-description">
-                    Un des plus anciens executors gratuits encore actif. Système de clés mais très stable.
-                </p>
-                <ul class="executor-features">
-                    <li>Très connu et testé</li>
-                    <li>Grande communauté</li>
-                    <li>API complète</li>
-                    <li>Support Discord actif</li>
-                </ul>
-                <button class="action-btn btn-visit" onclick="window.open('https://krnl.place', '_blank')">🌐 Visiter le site</button>
-            </div>
-
-            <div class="executor-card">
-                <div class="executor-header">
-                    <div class="executor-name">Fluxus</div>
-                    <div class="executor-badges">
-                        <div class="executor-badge badge-free">🆓 Gratuit</div>
-                        <div class="executor-badge badge-pc">💻 PC</div>
-                    </div>
-                </div>
-                <p class="executor-description">
-                    Executor gratuit populaire avec interface moderne. Bon équilibre entre fonctionnalités et stabilité.
-                </p>
-                <ul class="executor-features">
-                    <li>Interface attractive</li>
-                    <li>Bonne performance</li>
-                    <li>Mises à jour fréquentes</li>
-                    <li>Facile à utiliser</li>
-                </ul>
-                <button class="action-btn btn-visit" onclick="window.open('https://fluxteam.net', '_blank')">🌐 Visiter le site</button>
-            </div>
-
-            <div class="executor-card">
-                <div class="executor-header">
-                    <div class="executor-name">Evon</div>
-                    <div class="executor-badges">
-                        <div class="executor-badge badge-free">🆓 Gratuit</div>
-                        <div class="executor-badge badge-pc">💻 PC</div>
-                    </div>
-                </div>
-                <p class="executor-description">
-                    Executor gratuit stable et léger. Parfait pour débuter avec des scripts simples.
-                </p>
-                <ul class="executor-features">
-                    <li>Léger et rapide</li>
-                    <li>Interface simple</li>
-                    <li>Pas de lag</li>
-                    <li>Bon pour débutants</li>
-                </ul>
-                <button class="action-btn btn-discord">💬 Rejoindre Discord</button>
-            </div>
-
-            <div class="executor-card">
-                <div class="executor-header">
-                    <div class="executor-name">Oxygen U</div>
-                    <div class="executor-badges">
-                        <div class="executor-badge badge-free">🆓 Gratuit</div>
-                        <div class="executor-badge badge-pc">💻 PC</div>
-                    </div>
-                </div>
-                <p class="executor-description">
-                    Executor gratuit avec de bonnes performances. Interface utilisateur agréable.
-                </p>
-                <ul class="executor-features">
-                    <li>Bonne stabilité</li>
-                    <li>UI moderne</li>
-                    <li>Support scripts avancés</li>
-                    <li>Communauté active</li>
-                </ul>
-                <button class="action-btn btn-visit" onclick="window.open('https://oxygenu.xyz', '_blank')">🌐 Visiter le site</button>
-            </div>
-
-            <div class="executor-card">
-                <div class="executor-header">
-                    <div class="executor-name">Trigon</div>
-                    <div class="executor-badges">
-                        <div class="executor-badge badge-free">🆓 Gratuit</div>
-                        <div class="executor-badge badge-pc">💻 PC</div>
-                    </div>
-                </div>
-                <p class="executor-description">
-                    Executor gratuit performant avec interface épurée. Mise à jour régulière.
-                </p>
-                <ul class="executor-features">
-                    <li>Design moderne</li>
-                    <li>Stable et rapide</li>
-                    <li>Pas de virus</li>
-                    <li>Bonne compatibilité</li>
-                </ul>
-                <button class="action-btn btn-discord">💬 Rejoindre Discord</button>
-            </div>
-
-            <div class="executor-card">
-                <div class="executor-header">
-                    <div class="executor-name">Nezur</div>
-                    <div class="executor-badges">
-                        <div class="executor-badge badge-free">🆓 Gratuit</div>
-                        <div class="executor-badge badge-pc">💻 PC</div>
-                    </div>
-                </div>
-                <p class="executor-description">
-                    Executor simple et efficace. Bon choix pour les utilisateurs recherchant la simplicité.
-                </p>
-                <ul class="executor-features">
-                    <li>Interface minimaliste</li>
-                    <li>Léger sur le PC</li>
-                    <li>Facile d'utilisation</li>
-                    <li>Régulièrement mis à jour</li>
-                </ul>
-                <button class="action-btn btn-discord">💬 Rejoindre Discord</button>
-            </div>
-
-            <div class="executor-card">
-                <div class="executor-header">
-                    <div class="executor-name">Comet</div>
-                    <div class="executor-badges">
-                        <div class="executor-badge badge-free">🆓 Gratuit</div>
-                        <div class="executor-badge badge-pc">💻 PC</div>
-                    </div>
-                </div>
-                <p class="executor-description">
-                    Executor avec bonne réputation. Interface agréable et performances correctes.
-                </p>
-                <ul class="executor-features">
-                    <li>Bonne stabilité</li>
-                    <li>Interface propre</li>
-                    <li>Support Discord</li>
-                    <li>Mises à jour suivies</li>
-                </ul>
-                <button class="action-btn btn-discord">💬 Rejoindre Discord</button>
-            </div>
-
-            <div class="executor-card">
-                <div class="executor-header">
-                    <div class="executor-name">Valyse</div>
-                    <div class="executor-badges">
-                        <div class="executor-badge badge-free">🆓 Gratuit</div>
-                        <div class="executor-badge badge-pc">💻 PC</div>
-                    </div>
-                </div>
-                <p class="executor-description">
-                    Executor gratuit avec interface moderne. Bon pour scripts moyennement complexes.
-                </p>
-                <ul class="executor-features">
-                    <li>Design attrayant</li>
-                    <li>Bonne performance</li>
-                    <li>Pas de bloatware</li>
-                    <li>Communauté sympathique</li>
-                </ul>
-                <button class="action-btn btn-discord">💬 Rejoindre Discord</button>
-            </div>
-
-            <div class="executor-card">
-                <div class="executor-header">
-                    <div class="executor-name">Hydrogen</div>
-                    <div class="executor-badges">
-                        <div class="executor-badge badge-free">🆓 Gratuit</div>
-                        <div class="executor-badge badge-pc">💻 PC</div>
-                    </div>
-                </div>
-                <p class="executor-description">
-                    Executor léger et rapide. Idéal pour les PC avec ressources limitées.
-                </p>
-                <ul class="executor-features">
-                    <li>Très léger</li>
-                    <li>Consommation RAM faible</li>
-                    <li>Interface basique</li>
-                    <li>Rapide à charger</li>
-                </ul>
-                <button class="action-btn btn-discord">💬 Rejoindre Discord</button>
-            </div>
-        </div>
-
-        <h2 class="section-title">💎 Executors PC - Payants / Discontinués</h2>
-        <div class="executor-grid">
-            <div class="executor-card">
-                <div class="executor-header">
-                    <div class="executor-name">Synapse X</div>
-                    <div class="executor-badges">
-                        <div class="executor-badge badge-discontinued">❌ Fermé</div>
-                        <div class="executor-badge badge-paid">💰 Était payant</div>
-                        <div class="executor-badge badge-pc">💻 PC</div>
-                    </div>
-                </div>
-                <p class="executor-description">
-                    Le légendaire executor payant. Fermé en 2023 après rachat par Roblox. Le plus puissant de son époque.
-                </p>
-                <ul class="executor-features">
-                    <li>N'existe plus officiellement</li>
-                    <li>Était le meilleur</li>
-                    <li>Rachat Roblox 2023</li>
-                    <li>Ne plus utiliser</li>
-                </ul>
-                <button class="action-btn btn-disabled" disabled>❌ Discontinué</button>
-            </div>
-
-            <div class="executor-card">
-                <div class="executor-header">
-                    <div class="executor-name">Script-Ware</div>
-                    <div class="executor-badges">
-                        <div class="executor-badge badge-discontinued">❌ Fermé</div>
-                        <div class="executor-badge badge-paid">💰 Était payant</div>
-                        <div class="executor-badge badge-pc">💻 PC</div>
-                    </div>
-                </div>
-                <p class="executor-description">
-                    Excellent executor payant. Fermé également en 2023. Était connu pour sa stabilité exceptionnelle.
-                </p>
-                <ul class="executor-features">
-                    <li>N'existe plus</li>
-                    <li>Était très stable</li>
-                    <li>Multi-plateforme</li>
-                    <li>Ne plus utiliser</li>
-                </ul>
-                <button class="action-btn btn-disabled" disabled>❌ Discontinué</button>
-            </div>
-
-            <div class="executor-card">
-                <div class="executor-header">
-                    <div class="executor-name">Sentinel</div>
-                    <div class="executor-badges">
-                        <div class="executor-badge badge-paid">💰 Payant</div>
-                        <div class="executor-badge badge-pc">💻 PC</div>
-                    </div>
-                </div>
-                <p class="executor-description">
-                    Executor payant encore disponible. Bonne alternative aux executors gratuits pour ceux qui veulent investir.
-                </p>
-                <ul class="executor-features">
-                    <li>Support premium</li>
-                    <li>Très stable</li>
-                    <li>Mises à jour rapides</li>
-                    <li>API complète</li>
-                </ul>
-                <button class="action-btn btn-visit" onclick="window.open('https://sentinel.to', '_blank')">🌐 Visiter le site</button>
-            </div>
-
-            <div class="executor-card">
-                <div class="executor-header">
-                    <div class="executor-name">Sirhurt</div>
-                    <div class="executor-badges">
-                        <div class="executor-badge badge-paid">💰 Payant</div>
-                        <div class="executor-badge badge-pc">💻 PC</div>
-                    </div>
-                </div>
-                <p class="executor-description">
-                    Executor payant avec bonne réputation. Interface unique et performances solides.
-                </p>
-                <ul class="executor-features">
-                    <li>Interface originale</li>
-                    <li>Bonne stabilité</li>
-                    <li>Support client</li>
-                    <li>Mises à jour régulières</li>
-                </ul>
-                <button class="action-btn btn-visit" onclick="window.open('https://sirhurt.net', '_blank')">🌐 Visiter le site</button>
-            </div>
-        </div>
-
         <h2 class="section-title">📱 Executors Mobile</h2>
         <div class="executor-grid">
             <div class="executor-card">
@@ -776,51 +551,11 @@
                 </ul>
                 <button class="action-btn btn-discord">💬 Rejoindre Discord</button>
             </div>
-
-            <div class="executor-card">
-                <div class="executor-header">
-                    <div class="executor-name">Delta</div>
-                    <div class="executor-badges">
-                        <div class="executor-badge badge-free">🆓 Gratuit</div>
-                        <div class="executor-badge badge-mobile">📱 iOS</div>
-                    </div>
-                </div>
-                <p class="executor-description">
-                    Executor spécialisé pour iOS. Bonne option pour les utilisateurs iPhone/iPad.
-                </p>
-                <ul class="executor-features">
-                    <li>Optimisé iOS</li>
-                    <li>Installation simple</li>
-                    <li>Interface tactile</li>
-                    <li>Support scripts mobiles</li>
-                </ul>
-                <button class="action-btn btn-discord">💬 Rejoindre Discord</button>
-            </div>
-
-            <div class="executor-card">
-                <div class="executor-header">
-                    <div class="executor-name">Fluxus Mobile</div>
-                    <div class="executor-badges">
-                        <div class="executor-badge badge-free">🆓 Gratuit</div>
-                        <div class="executor-badge badge-mobile">📱 Android</div>
-                    </div>
-                </div>
-                <p class="executor-description">
-                    Version mobile de Fluxus PC. Même qualité adaptée pour smartphones Android.
-                </p>
-                <ul class="executor-features">
-                    <li>Version mobile Fluxus</li>
-                    <li>Bonne performance</li>
-                    <li>Optimisé tactile</li>
-                    <li>Mises à jour synchro</li>
-                </ul>
-                <button class="action-btn btn-visit" onclick="window.open('https://fluxteam.net', '_blank')">🌐 Visiter le site</button>
-            </div>
         </div>
 
-        <div style="text-align: center; margin-top: 60px; padding: 40px; background: rgba(255,0,0,0.1); border: 2px solid #ff0000; border-radius: 20px;">
-            <h2 style="color: #ff5555; margin-bottom: 20px;">⚠️ Avertissement Important</h2>
-            <p style="color: #cccccc; line-height: 1.8; max-width: 800px; margin: 0 auto;">
+        <div class="warning-box">
+            <h2>⚠️ Avertissement Important</h2>
+            <p>
                 L'utilisation d'executors viole les conditions d'utilisation de Roblox et peut entraîner un bannissement permanent de votre compte. 
                 Ces outils peuvent également contenir des malwares ou compromettre la sécurité de votre appareil. 
                 Utilisez-les à vos risques et périls. GitanX ne peut être tenu responsable des conséquences de leur utilisation.
@@ -831,12 +566,9 @@
     <script>
         function createStars() {
             const starsContainer = document.getElementById('stars');
-            const numberOfStars = 150;
-
-            for (let i = 0; i < numberOfStars; i++) {
+            for (let i = 0; i < 150; i++) {
                 const star = document.createElement('div');
                 star.className = 'star';
-                
                 const size = Math.random() * 3 + 1;
                 star.style.width = size + 'px';
                 star.style.height = size + 'px';
@@ -844,10 +576,30 @@
                 star.style.top = Math.random() * 100 + '%';
                 star.style.animationDelay = Math.random() * 3 + 's';
                 star.style.animationDuration = (Math.random() * 2 + 2) + 's';
-                
                 starsContainer.appendChild(star);
             }
         }
+
+        function toggleMenu() {
+            document.getElementById('navLinks').classList.toggle('active');
+            document.querySelector('.menu-toggle').classList.toggle('active');
+        }
+
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                document.getElementById('navLinks').classList.remove('active');
+                document.querySelector('.menu-toggle').classList.remove('active');
+            });
+        });
+
+        document.addEventListener('click', (e) => {
+            const nav = document.querySelector('nav');
+            const navLinks = document.getElementById('navLinks');
+            if (!nav.contains(e.target) && navLinks.classList.contains('active')) {
+                navLinks.classList.remove('active');
+                document.querySelector('.menu-toggle').classList.remove('active');
+            }
+        });
 
         createStars();
     </script>
