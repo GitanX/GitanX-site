@@ -42,51 +42,85 @@
         }
 
         nav {
-            background: rgba(20, 20, 20, 0.95);
-            padding: 20px 0;
-            position: sticky;
+            background: rgba(10, 10, 10, 0.95);
+            padding: 0;
+            position: fixed;
             top: 0;
+            left: 0;
+            right: 0;
             z-index: 1000;
-            border-bottom: 2px solid #333;
-            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
         }
 
         .nav-container {
-            max-width: 1200px;
+            max-width: 1400px;
             margin: 0 auto;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 0 20px;
+            padding: 0 40px;
+            height: 70px;
         }
 
         .logo {
-            font-size: 2em;
-            font-weight: bold;
-            background: linear-gradient(135deg, #ffffff 0%, #888888 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+            font-size: 1.5em;
+            font-weight: 700;
+            color: #ffffff;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            letter-spacing: -0.5px;
         }
 
-        /* Menu Hamburger */
+        .nav-links {
+            display: flex;
+            gap: 5px;
+            list-style: none;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            font-size: 0.95em;
+            padding: 8px 16px;
+            border-radius: 8px;
+            transition: all 0.2s ease;
+            font-weight: 500;
+        }
+
+        .nav-links a:hover {
+            color: #ffffff;
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .nav-links a.active {
+            color: #ffffff;
+            background: rgba(255, 255, 255, 0.1);
+        }
+
         .menu-toggle {
             display: none;
+            width: 30px;
+            height: 30px;
             flex-direction: column;
-            cursor: pointer;
+            justify-content: center;
             gap: 5px;
+            cursor: pointer;
+            padding: 5px;
         }
 
         .menu-toggle span {
-            width: 30px;
-            height: 3px;
+            width: 100%;
+            height: 2px;
             background: #ffffff;
             transition: all 0.3s ease;
-            border-radius: 3px;
+            border-radius: 2px;
         }
 
         .menu-toggle.active span:nth-child(1) {
-            transform: rotate(45deg) translate(8px, 8px);
+            transform: rotate(45deg) translate(5px, 5px);
         }
 
         .menu-toggle.active span:nth-child(2) {
@@ -94,46 +128,20 @@
         }
 
         .menu-toggle.active span:nth-child(3) {
-            transform: rotate(-45deg) translate(8px, -8px);
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 30px;
-            list-style: none;
-        }
-
-        .nav-links a {
-            color: #ffffff;
-            text-decoration: none;
-            font-size: 1.1em;
-            padding: 10px 20px;
-            border-radius: 8px;
-            transition: all 0.3s ease;
-            border: 2px solid transparent;
-        }
-
-        .nav-links a:hover {
-            background: rgba(255, 255, 255, 0.1);
-            border-color: #ffffff;
-        }
-
-        .nav-links a.active {
-            background: #ffffff;
-            color: #0a0a0a;
+            transform: rotate(-45deg) translate(7px, -7px);
         }
 
         .container {
-            max-width: 1200px;
+            max-width: 1400px;
             margin: 0 auto;
-            padding: 60px 20px;
+            padding: 120px 40px 60px 40px;
             position: relative;
             z-index: 1;
         }
 
         header {
             text-align: center;
-            margin-bottom: 60px;
+            margin-bottom: 80px;
         }
 
         h1 {
@@ -143,21 +151,22 @@
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
-            text-shadow: 0 0 30px rgba(255,255,255,0.3);
+            font-weight: 700;
+            letter-spacing: -2px;
         }
 
         .subtitle {
             font-size: 1.3em;
-            color: #aaaaaa;
+            color: rgba(255, 255, 255, 0.6);
+            font-weight: 400;
         }
 
         .welcome-section {
-            background: rgba(20, 20, 20, 0.8);
-            border: 2px solid #333;
-            border-radius: 20px;
+            background: rgba(20, 20, 20, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
             padding: 50px;
             backdrop-filter: blur(10px);
-            box-shadow: 0 10px 50px rgba(0,0,0,0.5);
             text-align: center;
             margin-bottom: 40px;
         }
@@ -165,23 +174,23 @@
         .welcome-section h2 {
             font-size: 2.5em;
             margin-bottom: 20px;
+            font-weight: 600;
         }
 
         .welcome-section p {
             font-size: 1.2em;
-            color: #aaaaaa;
+            color: rgba(255, 255, 255, 0.7);
             line-height: 1.8;
             max-width: 800px;
             margin: 0 auto;
         }
 
         .games-section {
-            background: rgba(20, 20, 20, 0.8);
-            border: 2px solid #333;
-            border-radius: 20px;
+            background: rgba(20, 20, 20, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
             padding: 30px;
             backdrop-filter: blur(10px);
-            box-shadow: 0 10px 50px rgba(0,0,0,0.5);
             margin-bottom: 40px;
             max-height: 200px;
             overflow: hidden;
@@ -192,23 +201,19 @@
         .games-section.expanded {
             max-height: 3000px;
             padding: 50px 30px;
-            border-color: #ffffff;
-            box-shadow: 0 20px 80px rgba(255,255,255,0.3);
+            border-color: rgba(255, 255, 255, 0.2);
         }
 
         .games-section h2 {
             font-size: 2.5em;
             margin-bottom: 10px;
             text-align: center;
-            background: linear-gradient(135deg, #ffffff 0%, #888888 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+            font-weight: 600;
         }
 
         .games-hint {
             text-align: center;
-            color: #aaaaaa;
+            color: rgba(255, 255, 255, 0.5);
             font-size: 1.1em;
             margin-bottom: 20px;
             transition: opacity 0.3s ease;
@@ -234,8 +239,8 @@
         }
 
         .game-card {
-            background: rgba(40, 40, 40, 0.8);
-            border: 2px solid #444;
+            background: rgba(40, 40, 40, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.1);
             border-radius: 12px;
             padding: 20px;
             text-align: center;
@@ -244,8 +249,8 @@
 
         .game-card:hover {
             transform: translateY(-5px);
-            border-color: #ffffff;
-            box-shadow: 0 10px 30px rgba(255,255,255,0.2);
+            border-color: rgba(255, 255, 255, 0.3);
+            background: rgba(50, 50, 50, 0.6);
         }
 
         .game-icon {
@@ -255,7 +260,7 @@
 
         .game-title {
             font-size: 1em;
-            font-weight: bold;
+            font-weight: 500;
         }
 
         .features-grid {
@@ -266,18 +271,18 @@
         }
 
         .feature-card {
-            background: rgba(40, 40, 40, 0.8);
-            border: 2px solid #444;
-            border-radius: 15px;
+            background: rgba(40, 40, 40, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
             padding: 30px;
             text-align: center;
             transition: all 0.3s ease;
         }
 
         .feature-card:hover {
-            border-color: #ffffff;
+            border-color: rgba(255, 255, 255, 0.3);
             transform: translateY(-5px);
-            box-shadow: 0 10px 30px rgba(255,255,255,0.1);
+            background: rgba(50, 50, 50, 0.6);
         }
 
         .feature-icon {
@@ -288,31 +293,38 @@
         .feature-card h3 {
             font-size: 1.5em;
             margin-bottom: 10px;
+            font-weight: 600;
         }
 
         .feature-card p {
-            color: #aaaaaa;
+            color: rgba(255, 255, 255, 0.7);
+            line-height: 1.6;
         }
 
-        /* Responsive Mobile */
         @media (max-width: 768px) {
+            .nav-container {
+                padding: 0 20px;
+                height: 60px;
+            }
+
             .menu-toggle {
                 display: flex;
             }
 
             .nav-links {
                 position: fixed;
-                top: 78px;
+                top: 60px;
                 right: -100%;
-                width: 70%;
+                width: 100%;
                 max-width: 300px;
-                height: calc(100vh - 78px);
-                background: rgba(20, 20, 20, 0.98);
+                height: calc(100vh - 60px);
+                background: rgba(10, 10, 10, 0.98);
                 flex-direction: column;
                 padding: 30px 20px;
                 gap: 0;
                 transition: right 0.3s ease;
-                border-left: 2px solid #333;
+                border-left: 1px solid rgba(255, 255, 255, 0.1);
+                align-items: stretch;
             }
 
             .nav-links.active {
@@ -322,24 +334,21 @@
             .nav-links a {
                 width: 100%;
                 padding: 15px 20px;
-                font-size: 1.2em;
-                margin-bottom: 10px;
+                font-size: 1.1em;
+                margin-bottom: 5px;
+                text-align: left;
             }
 
             .logo {
-                font-size: 1.5em;
+                font-size: 1.3em;
             }
 
             h1 {
                 font-size: 2.5em;
             }
 
-            .welcome-section h2 {
-                font-size: 2em;
-            }
-
-            .games-section h2 {
-                font-size: 2em;
+            .container {
+                padding: 100px 20px 40px 20px;
             }
 
             .welcome-section, .games-section {
@@ -355,47 +364,15 @@
                 gap: 15px;
             }
 
-            .game-icon {
-                font-size: 2em;
-            }
-
-            .game-title {
-                font-size: 0.9em;
-            }
-
             .features-grid {
                 grid-template-columns: 1fr;
-                gap: 20px;
-            }
-
-            .feature-card {
-                padding: 25px;
-            }
-
-            .container {
-                padding: 40px 15px;
             }
         }
 
         @media (max-width: 480px) {
-            .logo {
-                font-size: 1.3em;
-            }
-
             h1 {
                 font-size: 2em;
-            }
-
-            .subtitle {
-                font-size: 1.1em;
-            }
-
-            .welcome-section h2 {
-                font-size: 1.7em;
-            }
-
-            .welcome-section p {
-                font-size: 1em;
+                letter-spacing: -1px;
             }
 
             .games-grid {
@@ -442,9 +419,7 @@
             <h2>🎮 Supported Games</h2>
             <p class="games-hint">look all scirpt click ✨</p>
             
-            <div class="games-grid" id="gamesGrid">
-                <!-- Les jeux seront ajoutés ici par JavaScript -->
-            </div>
+            <div class="games-grid" id="gamesGrid"></div>
         </div>
 
         <div class="features-grid">
@@ -508,60 +483,43 @@
         ];
 
         const gamesGrid = document.getElementById('gamesGrid');
-
         games.forEach((game) => {
             const card = document.createElement('div');
             card.className = 'game-card';
-            card.innerHTML = `
-                <div class="game-icon">${game.icon}</div>
-                <div class="game-title">${game.title}</div>
-            `;
-            
+            card.innerHTML = `<div class="game-icon">${game.icon}</div><div class="game-title">${game.title}</div>`;
             gamesGrid.appendChild(card);
         });
 
         function toggleGames() {
-            const section = document.getElementById('gamesSection');
-            section.classList.toggle('expanded');
+            document.getElementById('gamesSection').classList.toggle('expanded');
         }
 
         function toggleMenu() {
-            const navLinks = document.getElementById('navLinks');
-            const menuToggle = document.querySelector('.menu-toggle');
-            navLinks.classList.toggle('active');
-            menuToggle.classList.toggle('active');
+            document.getElementById('navLinks').classList.toggle('active');
+            document.querySelector('.menu-toggle').classList.toggle('active');
         }
 
-        // Fermer le menu mobile quand on clique sur un lien
         document.querySelectorAll('.nav-links a').forEach(link => {
             link.addEventListener('click', () => {
-                const navLinks = document.getElementById('navLinks');
-                const menuToggle = document.querySelector('.menu-toggle');
-                navLinks.classList.remove('active');
-                menuToggle.classList.remove('active');
+                document.getElementById('navLinks').classList.remove('active');
+                document.querySelector('.menu-toggle').classList.remove('active');
             });
         });
 
-        // Fermer le menu mobile quand on clique en dehors
         document.addEventListener('click', (e) => {
-            const navLinks = document.getElementById('navLinks');
-            const menuToggle = document.querySelector('.menu-toggle');
             const nav = document.querySelector('nav');
-            
+            const navLinks = document.getElementById('navLinks');
             if (!nav.contains(e.target) && navLinks.classList.contains('active')) {
                 navLinks.classList.remove('active');
-                menuToggle.classList.remove('active');
+                document.querySelector('.menu-toggle').classList.remove('active');
             }
         });
 
         function createStars() {
             const starsContainer = document.getElementById('stars');
-            const numberOfStars = 150;
-
-            for (let i = 0; i < numberOfStars; i++) {
+            for (let i = 0; i < 150; i++) {
                 const star = document.createElement('div');
                 star.className = 'star';
-                
                 const size = Math.random() * 3 + 1;
                 star.style.width = size + 'px';
                 star.style.height = size + 'px';
@@ -569,7 +527,6 @@
                 star.style.top = Math.random() * 100 + '%';
                 star.style.animationDelay = Math.random() * 3 + 's';
                 star.style.animationDuration = (Math.random() * 2 + 2) + 's';
-                
                 starsContainer.appendChild(star);
             }
         }
