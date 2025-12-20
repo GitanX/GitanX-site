@@ -425,6 +425,30 @@
     </div>
 
     <script>
+        // Vérification du référent
+        function checkAccess() {
+            const referrer = document.referrer.toLowerCase();
+            const isFromLinkvertise = referrer.includes('linkvertise.com') || referrer.includes('link-center.net');
+            
+            // Pour les tests en local, décommentez cette ligne :
+            // return true;
+            
+            if (!isFromLinkvertise && referrer !== '') {
+                document.body.innerHTML = `
+                    <div style="display: flex; justify-content: center; align-items: center; min-height: 100vh; background: #0a0a0a; color: white; text-align: center; font-family: 'Segoe UI', sans-serif;">
+                        <div>
+                            <h1 style="font-size: 4em; margin-bottom: 20px;">🚫</h1>
+                            <h2 style="font-size: 2em; margin-bottom: 10px;">Accès Non Autorisé</h2>
+                            <p style="color: rgba(255,255,255,0.6); font-size: 1.2em;">Vous devez passer par le système de vérification pour accéder aux clés.</p>
+                            <a href="index.html" style="display: inline-block; margin-top: 30px; padding: 15px 30px; background: #4CAF50; color: white; text-decoration: none; border-radius: 10px; font-weight: 600;">Retour à l'accueil</a>
+                        </div>
+                    </div>
+                `;
+                return false;
+            }
+            return true;
+        }
+
         function createStars() {
             const starsContainer = document.getElementById('stars');
             for (let i = 0; i < 150; i++) {
@@ -477,7 +501,10 @@
             }
         });
 
-        createStars();
+        // Vérifier l'accès au chargement de la page
+        if (checkAccess()) {
+            createStars();
+        }
     </script>
 </body>
 </html>
