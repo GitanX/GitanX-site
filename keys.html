@@ -41,6 +41,119 @@
             50% { opacity: 1; transform: scale(1.2); }
         }
 
+        /* Page d'accès refusé */
+        .access-denied {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: #0a0a0a;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .denied-content {
+            text-align: center;
+            position: relative;
+            z-index: 10;
+            padding: 40px;
+            background: rgba(20, 20, 20, 0.8);
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            max-width: 600px;
+            animation: fadeIn 0.5s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .denied-logo {
+            font-size: 5em;
+            margin-bottom: 30px;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+
+        .denied-title {
+            font-size: 3em;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, #ff4444 0%, #cc0000 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: 700;
+        }
+
+        .denied-subtitle {
+            font-size: 1.3em;
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 30px;
+            line-height: 1.6;
+        }
+
+        .denied-info {
+            background: rgba(255, 68, 68, 0.1);
+            border-left: 4px solid #ff4444;
+            padding: 20px;
+            margin: 30px 0;
+            text-align: left;
+            border-radius: 8px;
+        }
+
+        .denied-info p {
+            color: rgba(255, 255, 255, 0.8);
+            line-height: 1.8;
+            margin-bottom: 10px;
+        }
+
+        .denied-buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 30px;
+        }
+
+        .btn-home, .btn-verify {
+            padding: 15px 40px;
+            border-radius: 10px;
+            font-size: 1.1em;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn-home {
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .btn-home:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+        }
+
+        .btn-verify {
+            background: #4CAF50;
+            color: white;
+        }
+
+        .btn-verify:hover {
+            background: #45a049;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(76, 175, 80, 0.4);
+        }
+
         nav {
             background: rgba(10, 10, 10, 0.95);
             padding: 0;
@@ -336,6 +449,27 @@
             .key-value {
                 font-size: 1.2em;
             }
+
+            .denied-content {
+                margin: 20px;
+                padding: 30px 20px;
+            }
+
+            .denied-logo {
+                font-size: 3.5em;
+            }
+
+            .denied-title {
+                font-size: 2em;
+            }
+
+            .denied-buttons {
+                flex-direction: column;
+            }
+
+            .btn-home, .btn-verify {
+                width: 100%;
+            }
         }
 
         @media (max-width: 480px) {
@@ -425,32 +559,69 @@
     </div>
 
     <script>
-        // Vérification du référent
+        // Vérification stricte du référent
         function checkAccess() {
             const referrer = document.referrer.toLowerCase();
-            const isFromLinkvertise = referrer.includes('linkvertise.com') || referrer.includes('link-center.net');
             
             // Pour les tests en local, décommentez cette ligne :
             // return true;
             
-            if (!isFromLinkvertise && referrer !== '') {
-                document.body.innerHTML = `
-                    <div style="display: flex; justify-content: center; align-items: center; min-height: 100vh; background: #0a0a0a; color: white; text-align: center; font-family: 'Segoe UI', sans-serif;">
-                        <div>
-                            <h1 style="font-size: 4em; margin-bottom: 20px;">🚫</h1>
-                            <h2 style="font-size: 2em; margin-bottom: 10px;">Accès Non Autorisé</h2>
-                            <p style="color: rgba(255,255,255,0.6); font-size: 1.2em;">Vous devez passer par le système de vérification pour accéder aux clés.</p>
-                            <a href="index.html" style="display: inline-block; margin-top: 30px; padding: 15px 30px; background: #4CAF50; color: white; text-decoration: none; border-radius: 10px; font-weight: 600;">Retour à l'accueil</a>
-                        </div>
-                    </div>
-                `;
+            // Vérifier si le référent contient linkvertise.com ou link-center.net
+            const isFromLinkvertise = referrer.includes('linkvertise.com') || referrer.includes('link-center.net');
+            
+            // Bloquer l'accès si pas de référent OU si le référent n'est pas linkvertise
+            if (!isFromLinkvertise) {
+                showAccessDenied();
                 return false;
             }
             return true;
         }
 
+        function showAccessDenied() {
+            document.body.innerHTML = `
+                <div class="access-denied">
+                    <div class="stars" id="deniedStars"></div>
+                    <div class="denied-content">
+                        <div class="denied-logo">🔒</div>
+                        <h1 class="denied-title">🎮 GitanX</h1>
+                        <h2 class="denied-title">Accès Refusé</h2>
+                        <p class="denied-subtitle">Vous devez passer par le système de vérification pour accéder aux clés.</p>
+                        
+                        <div class="denied-info">
+                            <p><strong>⚠️ Pourquoi cet écran ?</strong></p>
+                            <p>• Vous avez essayé d'accéder directement à cette page</p>
+                            <p>• Vous devez passer par le lien de vérification Linkvertise</p>
+                            <p>• Cela permet de soutenir le projet GitanX</p>
+                        </div>
+
+                        <div class="denied-buttons">
+                            <a href="index.html" class="btn-home">🏠 Retour à l'accueil</a>
+                            <a href="https://link-center.net/1461822/P7AIjLW5nnxI" class="btn-verify">✓ Passer la vérification</a>
+                        </div>
+                    </div>
+                </div>
+            `;
+            
+            // Créer les étoiles pour la page d'accès refusé
+            const starsContainer = document.getElementById('deniedStars');
+            for (let i = 0; i < 150; i++) {
+                const star = document.createElement('div');
+                star.className = 'star';
+                const size = Math.random() * 3 + 1;
+                star.style.width = size + 'px';
+                star.style.height = size + 'px';
+                star.style.left = Math.random() * 100 + '%';
+                star.style.top = Math.random() * 100 + '%';
+                star.style.animationDelay = Math.random() * 3 + 's';
+                star.style.animationDuration = (Math.random() * 2 + 2) + 's';
+                starsContainer.appendChild(star);
+            }
+        }
+
         function createStars() {
             const starsContainer = document.getElementById('stars');
+            if (!starsContainer) return;
+            
             for (let i = 0; i < 150; i++) {
                 const star = document.createElement('div');
                 star.className = 'star';
@@ -481,21 +652,29 @@
         }
 
         function toggleMenu() {
-            document.getElementById('navLinks').classList.toggle('active');
-            document.querySelector('.menu-toggle').classList.toggle('active');
+            const navLinks = document.getElementById('navLinks');
+            const menuToggle = document.querySelector('.menu-toggle');
+            if (navLinks && menuToggle) {
+                navLinks.classList.toggle('active');
+                menuToggle.classList.toggle('active');
+            }
         }
 
         document.querySelectorAll('.nav-links a').forEach(link => {
             link.addEventListener('click', () => {
-                document.getElementById('navLinks').classList.remove('active');
-                document.querySelector('.menu-toggle').classList.remove('active');
+                const navLinks = document.getElementById('navLinks');
+                const menuToggle = document.querySelector('.menu-toggle');
+                if (navLinks && menuToggle) {
+                    navLinks.classList.remove('active');
+                    menuToggle.classList.remove('active');
+                }
             });
         });
 
         document.addEventListener('click', (e) => {
             const nav = document.querySelector('nav');
             const navLinks = document.getElementById('navLinks');
-            if (!nav.contains(e.target) && navLinks.classList.contains('active')) {
+            if (nav && navLinks && !nav.contains(e.target) && navLinks.classList.contains('active')) {
                 navLinks.classList.remove('active');
                 document.querySelector('.menu-toggle').classList.remove('active');
             }
