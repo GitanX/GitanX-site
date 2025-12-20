@@ -73,6 +73,11 @@
             letter-spacing: -0.5px;
         }
 
+        .logo svg {
+            width: 32px;
+            height: 32px;
+        }
+
         .nav-links {
             display: flex;
             gap: 5px;
@@ -184,6 +189,15 @@
             margin-bottom: 25px;
             font-weight: 700;
             letter-spacing: -1px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        .welcome-section h2 svg {
+            width: 50px;
+            height: 50px;
         }
 
         .welcome-section p {
@@ -194,7 +208,6 @@
             margin: 0 auto;
         }
 
-        /* Section Statistiques COMPACTE avec cercle rotatif */
         .stats-section {
             background: rgba(20, 20, 20, 0.6);
             border: 1px solid rgba(255, 255, 255, 0.1);
@@ -222,6 +235,15 @@
             letter-spacing: -1px;
             position: relative;
             z-index: 2;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        .stats-section h2 svg {
+            width: 40px;
+            height: 40px;
         }
 
         .stats-container {
@@ -234,7 +256,6 @@
             z-index: 2;
         }
 
-        /* Cercle rotatif central COMPACT */
         .rotating-circle-container {
             position: relative;
             width: 250px;
@@ -309,7 +330,6 @@
             letter-spacing: 1.5px;
         }
 
-        /* Grille de stats autour COMPACTE */
         .stats-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
@@ -353,9 +373,13 @@
         }
 
         .stat-icon {
-            font-size: 2.2em;
             margin-bottom: 10px;
             filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.3));
+        }
+
+        .stat-icon svg {
+            width: 50px;
+            height: 50px;
         }
 
         .stat-value {
@@ -367,6 +391,7 @@
             -webkit-text-fill-color: transparent;
             background-clip: text;
             letter-spacing: -1px;
+            animation: countUp 0.8s ease-out;
         }
 
         .stat-label {
@@ -384,7 +409,6 @@
             line-height: 1.4;
         }
 
-        /* Animation des chiffres */
         @keyframes countUp {
             from {
                 opacity: 0;
@@ -394,10 +418,6 @@
                 opacity: 1;
                 transform: translateY(0);
             }
-        }
-
-        .stat-value {
-            animation: countUp 0.8s ease-out;
         }
 
         .games-section {
@@ -430,6 +450,15 @@
             text-align: center;
             font-weight: 700;
             letter-spacing: -1px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        .games-section h2 svg {
+            width: 50px;
+            height: 50px;
         }
 
         .games-hint {
@@ -477,8 +506,12 @@
         }
 
         .game-icon {
-            font-size: 2.5em;
             margin-bottom: 10px;
+        }
+
+        .game-icon svg {
+            width: 45px;
+            height: 45px;
         }
 
         .game-title {
@@ -529,9 +562,13 @@
         }
 
         .feature-icon {
-            font-size: 3.5em;
             margin-bottom: 20px;
             filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.3));
+        }
+
+        .feature-icon svg {
+            width: 70px;
+            height: 70px;
         }
 
         .feature-card h3 {
@@ -656,10 +693,6 @@
             .stat-value {
                 font-size: 1.5em;
             }
-
-            .stat-icon {
-                font-size: 2em;
-            }
         }
 
         @media (max-width: 480px) {
@@ -674,10 +707,14 @@
 
             .welcome-section h2, .games-section h2 {
                 font-size: 2em;
+                flex-direction: column;
+                gap: 10px;
             }
 
             .stats-section h2 {
                 font-size: 1.6em;
+                flex-direction: column;
+                gap: 10px;
             }
 
             .rotating-circle-container {
@@ -705,7 +742,16 @@
 
     <nav>
         <div class="nav-container">
-            <div class="logo">🎮 GitanX</div>
+            <div class="logo">
+                <svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg">
+                    <rect fill="#1a1a1a" x="0" y="0" width="80" height="80" rx="12"/>
+                    <path fill="#ffffff" d="M25,30 L25,50 L35,50 L35,60 L55,60 L55,50 L65,50 L65,30 Q65,20 55,20 L45,20 Q35,20 25,30 Z"/>
+                    <circle fill="#cccccc" cx="35" cy="40" r="3"/>
+                    <circle fill="#cccccc" cx="50" cy="35" r="2"/>
+                    <circle fill="#cccccc" cx="55" cy="40" r="2"/>
+                </svg>
+                GitanX
+            </div>
             <div class="menu-toggle" onclick="toggleMenu()">
                 <span></span>
                 <span></span>
@@ -728,67 +774,28 @@
         </header>
 
         <div class="welcome-section">
-            <h2>🌟 GitanX on TOP</h2>
+            <h2>
+                <svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg">
+                    <rect fill="#1a1a1a" x="0" y="0" width="80" height="80" rx="12"/>
+                    <polygon fill="#ffffff" points="40,10 32,32 10,35 25,50 20,72 40,60 60,72 55,50 70,35 48,32"/>
+                </svg>
+                GitanX on TOP
+            </h2>
             <p>
                 GitanX are free nothing is paid, only the key system but its same free, GitanX have some script like Steal a brainrot, 99 night, fisch and more !
             </p>
         </div>
 
-        <!-- Section Statistiques COMPACTE avec cercle rotatif -->
-        <div class="stats-section">
-            <h2>⚡ Performance Statistics</h2>
-            <div class="stats-container">
-                <!-- Cercle rotatif central -->
-                <div class="rotating-circle-container">
-                    <div class="rotating-circle">
-                        <div class="circle-dot"></div>
-                        <div class="circle-dot"></div>
-                        <div class="circle-dot"></div>
-                        <div class="circle-dot"></div>
-                    </div>
-                    <div class="center-logo">
-                        <div class="center-logo-inner">
-                            <div class="center-logo-text">GitanX</div>
-                            <div class="center-logo-subtitle">HUB</div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Grille de stats -->
-                <div class="stats-grid">
-                    <div class="stat-card">
-                        <div class="stat-icon">⚡</div>
-                        <div class="stat-value">99%</div>
-                        <div class="stat-label">Speed</div>
-                        <div class="stat-description">Ultra-fast execution</div>
-                    </div>
-
-                    <div class="stat-card">
-                        <div class="stat-icon">🛡️</div>
-                        <div class="stat-value">100%</div>
-                        <div class="stat-label">Security</div>
-                        <div class="stat-description">Anti-detection</div>
-                    </div>
-
-                    <div class="stat-card">
-                        <div class="stat-icon">🎮</div>
-                        <div class="stat-value">30+</div>
-                        <div class="stat-label">Games</div>
-                        <div class="stat-description">Supported games</div>
-                    </div>
-
-                    <div class="stat-card">
-                        <div class="stat-icon">👥</div>
-                        <div class="stat-value">10K+</div>
-                        <div class="stat-label">Users</div>
-                        <div class="stat-description">Active community</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
         <div class="games-section" id="gamesSection" onclick="toggleGames()">
-            <h2>🎮 Supported Games</h2>
+            <h2>
+                <svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg">
+                    <rect fill="#1a1a1a" x="0" y="0" width="80" height="80" rx="12"/>
+                    <path fill="#ffffff" d="M25,30 L25,50 L35,50 L35,60 L55,60 L55,50 L65,50 L65,30 Q65,20 55,20 L45,20 Q35,20 25,30 Z"/>
+                    <circle fill="#cccccc" cx="35" cy="40" r="3"/>
+                    <circle fill="#cccccc" cx="50" cy="35" r="2"/>
+                </svg>
+                Supported Games
+            </h2>
             <p class="games-hint">look all scirpt click ✨</p>
             
             <div class="games-grid" id="gamesGrid"></div>
@@ -796,25 +803,53 @@
 
         <div class="features-grid">
             <div class="feature-card">
-                <div class="feature-icon">🔑</div>
+                <div class="feature-icon">
+                    <svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg">
+                        <rect fill="#1a1a1a" x="0" y="0" width="80" height="80" rx="12"/>
+                        <circle fill="#ffffff" cx="28" cy="40" r="8"/>
+                        <rect fill="#ffffff" x="36" y="38" width="20" height="4"/>
+                        <rect fill="#ffffff" x="52" y="34" width="3" height="6"/>
+                        <rect fill="#ffffff" x="48" y="34" width="3" height="6"/>
+                    </svg>
+                </div>
                 <h3>Free key</h3>
                 <p>Get all key for free and its eazt !</p>
             </div>
 
             <div class="feature-card">
-                <div class="feature-icon">⚡</div>
+                <div class="feature-icon">
+                    <svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg">
+                        <rect fill="#1a1a1a" x="0" y="0" width="80" height="80" rx="12"/>
+                        <path fill="#ffffff" d="M45,15 L35,45 L40,45 L35,65 L55,35 L50,35 Z"/>
+                    </svg>
+                </div>
                 <h3>Executor</h3>
                 <p>We code on Xeno but its work with all executor !</p>
             </div>
 
             <div class="feature-card">
-                <div class="feature-icon">🔄</div>
+                <div class="feature-icon">
+                    <svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg">
+                        <rect fill="#1a1a1a" x="0" y="0" width="80" height="80" rx="12"/>
+                        <path fill="#ffffff" d="M55,40 A15,15 0 1,0 40,25 L45,30 M25,40 A15,15 0 1,0 40,55 L35,50"/>
+                        <polygon fill="#ffffff" points="45,25 50,30 40,30"/>
+                        <polygon fill="#ffffff" points="35,55 30,50 40,50"/>
+                    </svg>
+                </div>
                 <h3>Update</h3>
                 <p>We change the key GitanX every day but other key for 99 night its lifetime</p>
             </div>
 
             <div class="feature-card">
-                <div class="feature-icon">💬</div>
+                <div class="feature-icon">
+                    <svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg">
+                        <rect fill="#1a1a1a" x="0" y="0" width="80" height="80" rx="12"/>
+                        <rect fill="#ffffff" x="22" y="25" width="36" height="25" rx="5"/>
+                        <polygon fill="#ffffff" points="35,50 40,58 45,50"/>
+                        <line fill="none" stroke="#ffffff" stroke-width="2" x1="30" y1="32" x2="50" y2="32"/>
+                        <line fill="none" stroke="#ffffff" stroke-width="2" x1="30" y1="40" x2="50" y2="40"/>
+                    </svg>
+                </div>
                 <h3>Support Actif</h3>
                 <p>good community with raid bot and more : https://discord.gg/ygfKAUGRuS</p>
             </div>
@@ -822,43 +857,73 @@
     </div>
 
     <script>
+        const iconSVGs = {
+            brain: '<svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg"><rect fill="#1a1a1a" x="0" y="0" width="80" height="80" rx="12"/><path fill="#ffffff" d="M35,22 Q25,22 25,32 Q25,45 30,50 Q35,55 40,55 Q45,55 50,50 Q55,45 55,32 Q55,22 45,22 Q40,25 35,22 Z"/><path fill="none" stroke="#ffffff" stroke-width="2" d="M32,30 Q35,33 40,30 Q45,33 48,30"/><path fill="none" stroke="#ffffff" stroke-width="2" d="M32,40 Q35,43 40,40 Q45,43 48,40"/></svg>',
+            fish: '<svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg"><rect fill="#1a1a1a" x="0" y="0" width="80" height="80" rx="12"/><line fill="none" stroke="#ffffff" stroke-width="2" x1="25" y1="20" x2="45" y2="55"/><circle fill="#cccccc" cx="48" cy="60" r="3"/><path fill="none" stroke="#ffffff" stroke-width="2" d="M45,55 Q50,58 48,60"/></svg>',
+            fishSwim: '<svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg"><rect fill="#1a1a1a" x="0" y="0" width="80" height="80" rx="12"/><ellipse fill="#ffffff" cx="40" cy="40" rx="18" ry="10"/><polygon fill="#ffffff" points="55,40 65,32 65,48"/><circle fill="#1a1a1a" cx="32" cy="37" r="2"/></svg>',
+            sword: '<svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg"><rect fill="#1a1a1a" x="0" y="0" width="80" height="80" rx="12"/><rect fill="#ffffff" x="38" y="18" width="4" height="35" transform="rotate(-20 40 40)"/><rect fill="#ffffff" x="38" y="18" width="4" height="35" transform="rotate(20 40 40)"/><rect fill="#ffffff" x="30" y="15" width="20" height="3" transform="rotate(-20 40 40)"/><rect fill="#ffffff" x="30" y="15" width="20" height="3" transform="rotate(20 40 40)"/></svg>',
+            train: '<svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg"><rect fill="#1a1a1a" x="0" y="0" width="80" height="80" rx="12"/><rect fill="#ffffff" x="25" y="30" width="30" height="20" rx="3"/><rect fill="#1a1a1a" x="30" y="35" width="8" height="8"/><rect fill="#1a1a1a" x="42" y="35" width="8" height="8"/><circle fill="#ffffff" cx="32" cy="55" r="4"/><circle fill="#ffffff" cx="48" cy="55" r="4"/></svg>',
+            tree: '<svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg"><rect fill="#1a1a1a" x="0" y="0" width="80" height="80" rx="12"/><polygon fill="#ffffff" points="40,20 30,35 33,35 28,45 32,45 27,55 53,55 48,45 52,45 47,35 50,35"/><rect fill="#ffffff" x="37" y="55" width="6" height="8"/></svg>',
+            box: '<svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg"><rect fill="#1a1a1a" x="0" y="0" width="80" height="80" rx="12"/><path fill="#ffffff" d="M25,30 L40,22 L55,30 L55,50 L40,58 L25,50 Z"/><line fill="none" stroke="#1a1a1a" stroke-width="2" x1="40" y1="22" x2="40" y2="58"/><line fill="none" stroke="#1a1a1a" stroke-width="2" x1="25" y1="30" x2="55" y2="50"/><line fill="none" stroke="#1a1a1a" stroke-width="2" x1="55" y1="30" x2="25" y2="50"/></svg>',
+            gun: '<svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg"><rect fill="#1a1a1a" x="0" y="0" width="80" height="80" rx="12"/><rect fill="#ffffff" x="35" y="37" width="20" height="6"/><rect fill="#ffffff" x="30" y="32" width="8" height="16" rx="2"/><rect fill="#ffffff" x="32" y="48" width="4" height="6"/></svg>',
+            houses: '<svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg"><rect fill="#1a1a1a" x="0" y="0" width="80" height="80" rx="12"/><polygon fill="#ffffff" points="25,45 25,58 35,58 35,45 30,35"/><polygon fill="#ffffff" points="45,40 45,58 55,58 55,40 50,32"/><rect fill="#1a1a1a" x="28" y="50" width="4" height="8"/><rect fill="#1a1a1a" x="48" y="48" width="4" height="6"/></svg>',
+            chain: '<svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg"><rect fill="#1a1a1a" x="0" y="0" width="80" height="80" rx="12"/><ellipse fill="none" stroke="#ffffff" stroke-width="2" cx="32" cy="35" rx="6" ry="10" transform="rotate(-45 32 35)"/><ellipse fill="none" stroke="#ffffff" stroke-width="2" cx="48" cy="45" rx="6" ry="10" transform="rotate(-45 48 45)"/><ellipse fill="none" stroke="#ffffff" stroke-width="2" cx="40" cy="40" rx="6" ry="10" transform="rotate(45 40 40)"/></svg>',
+            knife: '<svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg"><rect fill="#1a1a1a" x="0" y="0" width="80" height="80" rx="12"/><polygon fill="#ffffff" points="45,20 50,25 30,50 25,45"/><rect fill="#ffffff" x="28" y="48" width="8" height="12" rx="2" transform="rotate(-45 32 54)"/></svg>',
+            building: '<svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg"><rect fill="#1a1a1a" x="0" y="0" width="80" height="80" rx="12"/><polygon fill="#ffffff" points="22,55 58,55 58,58 22,58"/><rect fill="#ffffff" x="25" y="40" width="4" height="15"/><rect fill="#ffffff" x="35" y="40" width="4" height="15"/><rect fill="#ffffff" x="45" y="40" width="4" height="15"/><polygon fill="#ffffff" points="22,40 40,25 58,40"/></svg>',
+            joystick: '<svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg"><rect fill="#1a1a1a" x="0" y="0" width="80" height="80" rx="12"/><rect fill="#ffffff" x="25" y="50" width="30" height="10" rx="2"/><rect fill="#ffffff" x="37" y="25" width="6" height="25"/><circle fill="#ffffff" cx="40" cy="22" r="6"/></svg>',
+            skull: '<svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg"><rect fill="#1a1a1a" x="0" y="0" width="80" height="80" rx="12"/><ellipse fill="#ffffff" cx="40" cy="35" rx="15" ry="18"/><rect fill="#ffffff" x="28" y="50" width="24" height="8" rx="4"/><circle fill="#1a1a1a" cx="34" cy="32" r="4"/><circle fill="#1a1a1a" cx="46" cy="32" r="4"/><polygon fill="#1a1a1a" points="40,42 37,48 43,48"/></svg>',
+            wave: '<svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg"><rect fill="#1a1a1a" x="0" y="0" width="80" height="80" rx="12"/><path fill="#ffffff" d="M20,40 Q25,32 30,40 Q35,48 40,40 Q45,32 50,40 Q55,48 60,40 L60,60 L20,60 Z"/><path fill="#cccccc" d="M20,32 Q25,25 30,32 Q35,40 40,32 Q45,25 50,32 Q55,40 60,32"/></svg>',
+            piano: '<svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg"><rect fill="#1a1a1a" x="0" y="0" width="80" height="80" rx="12"/><rect fill="#ffffff" x="22" y="30" width="36" height="20" rx="2"/><rect fill="#1a1a1a" x="25" y="30" width="4" height="12"/><rect fill="#1a1a1a" x="33" y="30" width="4" height="12"/><rect fill="#1a1a1a" x="41" y="30" width="4" height="12"/><rect fill="#1a1a1a" x="49" y="30" width="4" height="12"/></svg>',
+            spiral: '<svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg"><rect fill="#1a1a1a" x="0" y="0" width="80" height="80" rx="12"/><path fill="none" stroke="#ffffff" stroke-width="3" d="M40,40 Q45,40 45,45 Q45,52 37,52 Q28,52 28,43 Q28,32 40,32 Q55,32 55,48 Q55,60 40,60"/></svg>',
+            city: '<svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg"><rect fill="#1a1a1a" x="0" y="0" width="80" height="80" rx="12"/><rect fill="#ffffff" x="22" y="35" width="10" height="23"/><rect fill="#ffffff" x="35" y="25" width="8" height="33"/><rect fill="#ffffff" x="46" y="40" width="12" height="18"/><rect fill="#1a1a1a" x="24" y="38" width="2" height="3"/><rect fill="#1a1a1a" x="28" y="38" width="2" height="3"/><rect fill="#1a1a1a" x="37" y="28" width="2" height="3"/><rect fill="#1a1a1a" x="37" y="34" width="2" height="3"/></svg>',
+            siren: '<svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg"><rect fill="#1a1a1a" x="0" y="0" width="80" height="80" rx="12"/><ellipse fill="#ffffff" cx="40" cy="50" rx="18" ry="8"/><path fill="#ffffff" d="M28,50 L32,30 L48,30 L52,50"/><circle fill="#ffffff" cx="40" cy="25" r="6"/><path fill="none" stroke="#cccccc" stroke-width="2" d="M25,25 L15,15 M55,25 L65,15"/></svg>',
+            explosion: '<svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg"><rect fill="#1a1a1a" x="0" y="0" width="80" height="80" rx="12"/><polygon fill="#ffffff" points="40,20 35,35 20,32 32,38 25,52 40,40 55,52 48,38 60,32 45,35"/></svg>',
+            car: '<svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg"><rect fill="#1a1a1a" x="0" y="0" width="80" height="80" rx="12"/><path fill="#ffffff" d="M22,45 L28,35 L48,35 L55,45 L55,52 L22,52 Z"/><rect fill="#ffffff" x="30" y="30" width="12" height="5" rx="2"/><circle fill="#cccccc" cx="30" cy="55" r="4"/><circle fill="#cccccc" cx="50" cy="55" r="4"/></svg>',
+            road: '<svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg"><rect fill="#1a1a1a" x="0" y="0" width="80" height="80" rx="12"/><rect fill="#ffffff" x="32" y="15" width="16" height="50" rx="2"/><rect fill="#1a1a1a" x="38" y="20" width="4" height="8"/><rect fill="#1a1a1a" x="38" y="32" width="4" height="8"/><rect fill="#1a1a1a" x="38" y="44" width="4" height="8"/><rect fill="#1a1a1a" x="38" y="56" width="4" height="8"/></svg>',
+            shoe: '<svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg"><rect fill="#1a1a1a" x="0" y="0" width="80" height="80" rx="12"/><path fill="#ffffff" d="M25,45 L30,35 L50,37 L55,48 L50,52 L25,52 Z"/><ellipse fill="#cccccc" cx="40" cy="40" rx="8" ry="5"/><line fill="none" stroke="#ffffff" stroke-width="2" x1="32" y1="48" x2="48" y2="48"/></svg>',
+            muscle: '<svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg"><rect fill="#1a1a1a" x="0" y="0" width="80" height="80" rx="12"/><path fill="#ffffff" d="M35,25 Q28,25 25,32 L25,48 Q25,55 32,55 L40,55 Q45,55 48,50 Q50,45 50,40 L50,30 Q50,25 45,25 Z"/><ellipse fill="#cccccc" cx="32" cy="35" rx="5" ry="7"/></svg>',
+            beer: '<svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg"><rect fill="#1a1a1a" x="0" y="0" width="80" height="80" rx="12"/><rect fill="#ffffff" x="32" y="28" width="16" height="28" rx="2"/><rect fill="#ffffff" x="48" y="35" width="6" height="12" rx="3"/><ellipse fill="#cccccc" cx="40" cy="32" rx="10" ry="4"/></svg>',
+            climb: '<svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg"><rect fill="#1a1a1a" x="0" y="0" width="80" height="80" rx="12"/><circle fill="#ffffff" cx="40" cy="25" r="5"/><path fill="#ffffff" d="M40,30 L38,40 L32,45 L35,48 L40,43 L45,48 L48,45 L42,40 Z"/><line fill="#ffffff" stroke-width="3" x1="40" y1="43" x2="37" y2="55"/><line fill="#ffffff" stroke-width="3" x1="40" y1="43" x2="43" y2="55"/></svg>',
+            devil: '<svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg"><rect fill="#1a1a1a" x="0" y="0" width="80" height="80" rx="12"/><circle fill="#ffffff" cx="40" cy="40" r="15"/><polygon fill="#ffffff" points="28,25 25,30 30,28"/><polygon fill="#ffffff" points="52,25 55,30 50,28"/><circle fill="#1a1a1a" cx="35" cy="38" r="2"/><circle fill="#1a1a1a" cx="45" cy="38" r="2"/><path fill="none" stroke="#1a1a1a" stroke-width="2" d="M35,45 Q40,48 45,45"/></svg>'
+        };
+
         const games = [
-            { icon: '🧠', title: 'Steal a brainrot !' },
-            { icon: '🎣', title: 'Fisch' },
-            { icon: '🐟', title: 'Fish it' },
-            { icon: '⚔️', title: 'Rival !' },
-            { icon: '🚂', title: 'Dead rail !' },
-            { icon: '🌲', title: '99 night in the forest !' },
-            { icon: '📦', title: '99 night - bring item' },
-            { icon: '🔫', title: 'Blind shoot' },
-            { icon: '🏘️', title: 'Brookhaven' },
-            { icon: '⛓️', title: 'Prison Life' },
-            { icon: '🔪', title: 'Murder Mystery 2' },
-            { icon: '🏛️', title: 'Mega Mansion Tycoon' },
-            { icon: '🕹️', title: 'Arcade' },
-            { icon: '💀', title: 'Sans' },
-            { icon: '🌊', title: 'Natural Disaster' },
-            { icon: '🎹', title: 'Digital Piano' },
-            { icon: '🔫', title: 'Arsenal' },
-            { icon: '🌀', title: 'Labyrinthe d\'argent' },
-            { icon: '🏙️', title: 'Street Life Remastered' },
-            { icon: '⚔️', title: 'Blade Ball' },
-            { icon: '🚨', title: 'Emergency Hamburg' },
-            { icon: '💥', title: 'War Chicago Realistic' },
-            { icon: '🏎️', title: 'Legend of Speed' },
-            { icon: '🛣️', title: 'Highway Legend' },
-            { icon: '👟', title: '+1 Speed per Step' },
-            { icon: '💪', title: 'Gym' },
-            { icon: '🍺', title: 'Bar Simulator' },
-            { icon: '🧗', title: 'Wallhop Universe' },
-            { icon: '😈', title: 'Menu for Troll' }
+            { iconKey: 'brain', title: 'Steal a brainrot !' },
+            { iconKey: 'fish', title: 'Fisch' },
+            { iconKey: 'fishSwim', title: 'Fish it' },
+            { iconKey: 'sword', title: 'Rival !' },
+            { iconKey: 'train', title: 'Dead rail !' },
+            { iconKey: 'tree', title: '99 night in the forest !' },
+            { iconKey: 'box', title: '99 night - bring item' },
+            { iconKey: 'gun', title: 'Blind shoot' },
+            { iconKey: 'houses', title: 'Brookhaven' },
+            { iconKey: 'chain', title: 'Prison Life' },
+            { iconKey: 'knife', title: 'Murder Mystery 2' },
+            { iconKey: 'building', title: 'Mega Mansion Tycoon' },
+            { iconKey: 'joystick', title: 'Arcade' },
+            { iconKey: 'skull', title: 'Sans' },
+            { iconKey: 'wave', title: 'Natural Disaster' },
+            { iconKey: 'piano', title: 'Digital Piano' },
+            { iconKey: 'gun', title: 'Arsenal' },
+            { iconKey: 'spiral', title: 'Labyrinthe d\'argent' },
+            { iconKey: 'city', title: 'Street Life Remastered' },
+            { iconKey: 'sword', title: 'Blade Ball' },
+            { iconKey: 'siren', title: 'Emergency Hamburg' },
+            { iconKey: 'explosion', title: 'War Chicago Realistic' },
+            { iconKey: 'car', title: 'Legend of Speed' },
+            { iconKey: 'road', title: 'Highway Legend' },
+            { iconKey: 'shoe', title: '+1 Speed per Step' },
+            { iconKey: 'muscle', title: 'Gym' },
+            { iconKey: 'beer', title: 'Bar Simulator' },
+            { iconKey: 'climb', title: 'Wallhop Universe' },
+            { iconKey: 'devil', title: 'Menu for Troll' }
         ];
 
         const gamesGrid = document.getElementById('gamesGrid');
         games.forEach((game) => {
             const card = document.createElement('div');
             card.className = 'game-card';
-            card.innerHTML = `<div class="game-icon">${game.icon}</div><div class="game-title">${game.title}</div>`;
+            card.innerHTML = `<div class="game-icon">${iconSVGs[game.iconKey]}</div><div class="game-title">${game.title}</div>`;
             gamesGrid.appendChild(card);
         });
 
@@ -905,6 +970,88 @@
         }
 
         createStars();
-        </script>
+    </script>
 </body>
-</html>
+</html><div class="stats-section">
+            <h2>
+                <svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg">
+                    <rect fill="#1a1a1a" x="0" y="0" width="80" height="80" rx="12"/>
+                    <path fill="#ffffff" d="M45,15 L35,45 L40,45 L35,65 L55,35 L50,35 Z"/>
+                </svg>
+                Performance Statistics
+            </h2>
+            <div class="stats-container">
+                <div class="rotating-circle-container">
+                    <div class="rotating-circle">
+                        <div class="circle-dot"></div>
+                        <div class="circle-dot"></div>
+                        <div class="circle-dot"></div>
+                        <div class="circle-dot"></div>
+                    </div>
+                    <div class="center-logo">
+                        <div class="center-logo-inner">
+                            <div class="center-logo-text">GitanX</div>
+                            <div class="center-logo-subtitle">HUB</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg">
+                                <rect fill="#1a1a1a" x="0" y="0" width="80" height="80" rx="12"/>
+                                <path fill="#ffffff" d="M45,15 L35,45 L40,45 L35,65 L55,35 L50,35 Z"/>
+                            </svg>
+                        </div>
+                        <div class="stat-value">99%</div>
+                        <div class="stat-label">Speed</div>
+                        <div class="stat-description">Ultra-fast execution</div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg">
+                                <rect fill="#1a1a1a" x="0" y="0" width="80" height="80" rx="12"/>
+                                <path fill="#ffffff" d="M40,20 L25,25 L25,45 Q25,60 40,65 Q55,60 55,45 L55,25 Z"/>
+                                <path fill="none" stroke="#ffffff" stroke-width="2" d="M32,30 L40,40 L48,25"/>
+                            </svg>
+                        </div>
+                        <div class="stat-value">100%</div>
+                        <div class="stat-label">Security</div>
+                        <div class="stat-description">Anti-detection</div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg">
+                                <rect fill="#1a1a1a" x="0" y="0" width="80" height="80" rx="12"/>
+                                <path fill="#ffffff" d="M25,30 L25,50 L35,50 L35,60 L55,60 L55,50 L65,50 L65,30 Q65,20 55,20 L45,20 Q35,20 25,30 Z"/>
+                                <circle fill="#cccccc" cx="35" cy="40" r="3"/>
+                                <circle fill="#cccccc" cx="50" cy="35" r="2"/>
+                            </svg>
+                        </div>
+                        <div class="stat-value">30+</div>
+                        <div class="stat-label">Games</div>
+                        <div class="stat-description">Supported games</div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg">
+                                <rect fill="#1a1a1a" x="0" y="0" width="80" height="80" rx="12"/>
+                                <circle fill="#ffffff" cx="32" cy="30" r="6"/>
+                                <circle fill="#ffffff" cx="48" cy="30" r="6"/>
+                                <ellipse fill="#ffffff" cx="32" cy="48" rx="10" ry="12"/>
+                                <ellipse fill="#ffffff" cx="48" cy="48" rx="10" ry="12"/>
+                            </svg>
+                        </div>
+                        <div class="stat-value">10K+</div>
+                        <div class="stat-label">Users</div>
+                        <div class="stat-description">Active community</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        
