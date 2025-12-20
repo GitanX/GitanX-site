@@ -559,22 +559,48 @@
     </div>
 
     <script>
-        // Vérification stricte du référent
+        // Vérification stricte du référent avec sécurité maximale
         function checkAccess() {
-            const referrer = document.referrer.toLowerCase();
+            const referrer = document.referrer;
             
             // Pour les tests en local, décommentez cette ligne :
             // return true;
             
-            // Vérifier si le référent contient linkvertise.com ou link-center.net
-            const isFromLinkvertise = referrer.includes('linkvertise.com') || referrer.includes('link-center.net');
-            
-            // Bloquer l'accès si pas de référent OU si le référent n'est pas linkvertise
-            if (!isFromLinkvertise) {
+            // Bloquer TOUT accès sans référent (accès direct)
+            if (!referrer || referrer === '') {
                 showAccessDenied();
                 return false;
             }
-            return true;
+            
+            // Vérifier strictement que le référent vient UNIQUEMENT de linkvertise.com ou link-center.net
+            try {
+                const referrerUrl = new URL(referrer.toLowerCase());
+                const hostname = referrerUrl.hostname;
+                
+                // Liste blanche stricte des domaines autorisés
+                const allowedDomains = [
+                    'linkvertise.com',
+                    'link-center.net',
+                    'link-target.net',
+                    'file-link.net'
+                ];
+                
+                // Vérifier si le hostname est exactement un domaine autorisé ou un sous-domaine
+                const isAllowed = allowedDomains.some(domain => {
+                    return hostname === domain || hostname.endsWith('.' + domain);
+                });
+                
+                if (!isAllowed) {
+                    showAccessDenied();
+                    return false;
+                }
+                
+                return true;
+            } catch (e) {
+                // Si l'URL est invalide, bloquer l'accès
+                showAccessDenied();
+                return false;
+            }
         }
 
         function showAccessDenied() {
