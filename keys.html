@@ -13,7 +13,7 @@
 
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: #0a0a0a;
+            background: #000000;
             color: #ffffff;
             min-height: 100vh;
             overflow-x: hidden;
@@ -37,12 +37,12 @@
         }
 
         @keyframes twinkle {
-            0%, 100% { opacity: 0.3; transform: scale(1); }
-            50% { opacity: 1; transform: scale(1.2); }
+            0%, 100% { opacity: 0.2; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.3); }
         }
 
         nav {
-            background: rgba(10, 10, 10, 0.95);
+            background: rgba(0, 0, 0, 0.95);
             padding: 0;
             position: fixed;
             top: 0;
@@ -83,7 +83,7 @@
         }
 
         .nav-links a {
-            color: rgba(255, 255, 255, 0.7);
+            color: rgba(255, 255, 255, 0.6);
             text-decoration: none;
             font-size: 0.95em;
             padding: 8px 16px;
@@ -145,7 +145,7 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background: rgba(0, 0, 0, 0.5);
+            background: rgba(0, 0, 0, 0.7);
             z-index: 999;
             opacity: 0;
             transition: opacity 0.3s ease;
@@ -162,7 +162,7 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background: rgba(10, 10, 10, 0.98);
+            background: rgba(0, 0, 0, 0.98);
             z-index: 900;
             display: flex;
             justify-content: center;
@@ -174,14 +174,14 @@
             text-align: center;
             position: relative;
             z-index: 10;
-            padding: 40px;
-            background: rgba(20, 20, 20, 0.9);
-            border-radius: 20px;
-            border: 1px solid rgba(255, 68, 68, 0.3);
+            padding: 50px;
+            background: rgba(0, 0, 0, 0.9);
+            border-radius: 24px;
+            border: 2px solid rgba(255, 255, 255, 0.2);
             backdrop-filter: blur(10px);
             max-width: 600px;
             animation: fadeInScale 0.5s ease;
-            box-shadow: 0 20px 60px rgba(255, 68, 68, 0.2);
+            box-shadow: 0 30px 80px rgba(255, 255, 255, 0.05);
         }
 
         @keyframes fadeInScale {
@@ -193,7 +193,7 @@
             font-size: 5em;
             margin-bottom: 30px;
             animation: bounce 2s infinite;
-            filter: drop-shadow(0 0 20px rgba(255, 68, 68, 0.5));
+            filter: drop-shadow(0 0 30px rgba(255, 255, 255, 0.3));
         }
 
         @keyframes bounce {
@@ -204,23 +204,21 @@
         .denied-title {
             font-size: 2.5em;
             margin-bottom: 20px;
-            background: linear-gradient(135deg, #ff4444 0%, #cc0000 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+            color: #ffffff;
             font-weight: 700;
+            text-shadow: 0 0 30px rgba(255, 255, 255, 0.3);
         }
 
         .denied-subtitle {
             font-size: 1.2em;
-            color: rgba(255, 255, 255, 0.7);
+            color: rgba(255, 255, 255, 0.6);
             margin-bottom: 30px;
             line-height: 1.6;
         }
 
         .denied-info {
-            background: rgba(255, 68, 68, 0.1);
-            border-left: 4px solid #ff4444;
+            background: rgba(255, 255, 255, 0.05);
+            border-left: 4px solid #ffffff;
             padding: 20px;
             margin: 30px 0;
             text-align: left;
@@ -242,37 +240,39 @@
         }
 
         .btn-home, .btn-verify {
-            padding: 15px 40px;
-            border-radius: 10px;
+            padding: 16px 45px;
+            border-radius: 12px;
             font-size: 1.1em;
             font-weight: 600;
             text-decoration: none;
             transition: all 0.3s ease;
-            border: none;
+            border: 2px solid;
             cursor: pointer;
             display: inline-block;
         }
 
         .btn-home {
-            background: rgba(255, 255, 255, 0.1);
+            background: transparent;
             color: white;
-            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-color: rgba(255, 255, 255, 0.3);
         }
 
         .btn-home:hover {
-            background: rgba(255, 255, 255, 0.2);
+            background: rgba(255, 255, 255, 0.1);
+            border-color: rgba(255, 255, 255, 0.6);
             transform: translateY(-2px);
         }
 
         .btn-verify {
-            background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%);
-            color: white;
+            background: #ffffff;
+            color: #000000;
+            border-color: #ffffff;
         }
 
         .btn-verify:hover {
-            background: linear-gradient(135deg, #45a049 0%, #3d8b40 100%);
+            background: rgba(255, 255, 255, 0.9);
             transform: translateY(-2px);
-            box-shadow: 0 5px 20px rgba(76, 175, 80, 0.4);
+            box-shadow: 0 10px 30px rgba(255, 255, 255, 0.3);
         }
 
         .container {
@@ -289,166 +289,143 @@
         }
 
         h1 {
-            font-size: 4.5em;
+            font-size: 5em;
             margin-bottom: 20px;
-            background: linear-gradient(135deg, #ffffff 0%, #888888 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+            color: #ffffff;
             font-weight: 700;
-            letter-spacing: -2px;
-            text-shadow: 0 0 40px rgba(255, 255, 255, 0.1);
+            letter-spacing: -3px;
+            text-shadow: 0 0 50px rgba(255, 255, 255, 0.2);
         }
 
         .subtitle {
-            font-size: 1.4em;
-            color: rgba(255, 255, 255, 0.6);
+            font-size: 1.5em;
+            color: rgba(255, 255, 255, 0.5);
             font-weight: 400;
+            letter-spacing: 1px;
         }
 
         .key-card {
-            background: linear-gradient(135deg, rgba(30, 30, 30, 0.9) 0%, rgba(20, 20, 20, 0.9) 100%);
-            border: 2px solid transparent;
-            background-clip: padding-box;
-            border-radius: 24px;
-            padding: 50px;
+            background: rgba(0, 0, 0, 0.8);
+            border: 2px solid rgba(255, 255, 255, 0.15);
+            border-radius: 28px;
+            padding: 60px;
             transition: all 0.4s ease;
             backdrop-filter: blur(20px);
             position: relative;
             overflow: hidden;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.5);
         }
 
         .key-card::before {
-            content: '';
-            position: absolute;
-            top: -2px;
-            left: -2px;
-            right: -2px;
-            bottom: -2px;
-            background: linear-gradient(135deg, #4CAF50 0%, #2196F3 50%, #9C27B0 100%);
-            border-radius: 24px;
-            z-index: -1;
-            opacity: 0;
-            transition: opacity 0.4s ease;
-        }
-
-        .key-card:hover::before {
-            opacity: 1;
-        }
-
-        .key-card:hover {
-            transform: translateY(-10px) scale(1.02);
-            box-shadow: 0 30px 80px rgba(76, 175, 80, 0.3);
-        }
-
-        .key-card.locked {
-            filter: blur(3px);
-            pointer-events: none;
-            opacity: 0.6;
-        }
-
-        .key-header {
-            margin-bottom: 30px;
-            text-align: center;
-        }
-
-        .key-icon {
-            font-size: 4em;
-            margin-bottom: 20px;
-            animation: float 3s ease-in-out infinite;
-            filter: drop-shadow(0 0 20px rgba(76, 175, 80, 0.5));
-        }
-
-        @keyframes float {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-15px); }
-        }
-
-        .key-game {
-            font-size: 2.5em;
-            font-weight: 700;
-            background: linear-gradient(135deg, #4CAF50 0%, #2196F3 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            margin-bottom: 15px;
-            letter-spacing: -1px;
-        }
-
-        .key-status {
-            display: inline-block;
-            background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%);
-            color: white;
-            padding: 8px 20px;
-            border-radius: 25px;
-            font-size: 1em;
-            font-weight: 600;
-            box-shadow: 0 5px 20px rgba(76, 175, 80, 0.3);
-        }
-
-        .key-status.locked {
-            background: linear-gradient(135deg, #ff4444 0%, #cc0000 100%);
-            box-shadow: 0 5px 20px rgba(255, 68, 68, 0.3);
-        }
-
-        .key-display {
-            background: rgba(0, 0, 0, 0.6);
-            padding: 30px;
-            border-radius: 15px;
-            border: 2px solid rgba(76, 175, 80, 0.3);
-            margin: 30px 0;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .key-display::before {
             content: '';
             position: absolute;
             top: 0;
             left: -100%;
             width: 100%;
             height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(76, 175, 80, 0.2), transparent);
-            animation: shimmer 3s infinite;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.05), transparent);
+            animation: slide 4s infinite;
         }
 
-        @keyframes shimmer {
+        @keyframes slide {
             0% { left: -100%; }
             100% { left: 100%; }
         }
 
+        .key-card:hover {
+            transform: translateY(-15px) scale(1.02);
+            border-color: rgba(255, 255, 255, 0.4);
+            box-shadow: 0 40px 100px rgba(255, 255, 255, 0.1);
+        }
+
+        .key-card.locked {
+            filter: blur(3px);
+            pointer-events: none;
+            opacity: 0.5;
+        }
+
+        .key-header {
+            margin-bottom: 40px;
+            text-align: center;
+        }
+
+        .key-icon {
+            font-size: 5em;
+            margin-bottom: 25px;
+            animation: float 3s ease-in-out infinite;
+            filter: drop-shadow(0 0 30px rgba(255, 255, 255, 0.3));
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+
+        .key-game {
+            font-size: 2.8em;
+            font-weight: 700;
+            color: #ffffff;
+            margin-bottom: 20px;
+            letter-spacing: -2px;
+            text-shadow: 0 0 40px rgba(255, 255, 255, 0.2);
+        }
+
+        .key-status {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.15);
+            color: white;
+            padding: 10px 25px;
+            border-radius: 30px;
+            font-size: 1.1em;
+            font-weight: 600;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .key-status.locked {
+            background: rgba(255, 255, 255, 0.05);
+            border-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .key-display {
+            background: rgba(255, 255, 255, 0.03);
+            padding: 35px;
+            border-radius: 18px;
+            border: 2px solid rgba(255, 255, 255, 0.15);
+            margin: 35px 0;
+            position: relative;
+        }
+
         .key-label {
-            color: rgba(255, 255, 255, 0.7);
-            font-size: 1em;
-            margin-bottom: 15px;
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 1.1em;
+            margin-bottom: 18px;
             text-transform: uppercase;
-            letter-spacing: 2px;
+            letter-spacing: 3px;
             font-weight: 600;
         }
 
         .key-value {
             font-family: 'Courier New', monospace;
-            font-size: 1.8em;
-            color: #4CAF50;
-            letter-spacing: 3px;
+            font-size: 2em;
+            color: #ffffff;
+            letter-spacing: 4px;
             word-break: break-all;
             font-weight: 700;
-            text-shadow: 0 0 10px rgba(76, 175, 80, 0.5);
+            text-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
         }
 
         .copy-btn {
             width: 100%;
-            background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%);
-            color: white;
+            background: #ffffff;
+            color: #000000;
             border: none;
-            padding: 20px;
-            border-radius: 15px;
-            font-size: 1.3em;
+            padding: 22px;
+            border-radius: 16px;
+            font-size: 1.4em;
             font-weight: 700;
             cursor: pointer;
             transition: all 0.3s ease;
-            box-shadow: 0 10px 30px rgba(76, 175, 80, 0.3);
+            box-shadow: 0 15px 40px rgba(255, 255, 255, 0.2);
             position: relative;
             overflow: hidden;
         }
@@ -461,19 +438,19 @@
             width: 0;
             height: 0;
             border-radius: 50%;
-            background: rgba(255, 255, 255, 0.3);
+            background: rgba(0, 0, 0, 0.1);
             transform: translate(-50%, -50%);
             transition: width 0.6s, height 0.6s;
         }
 
         .copy-btn:hover::before {
-            width: 300px;
-            height: 300px;
+            width: 400px;
+            height: 400px;
         }
 
         .copy-btn:hover {
             transform: scale(1.05);
-            box-shadow: 0 15px 40px rgba(76, 175, 80, 0.5);
+            box-shadow: 0 20px 50px rgba(255, 255, 255, 0.3);
         }
 
         .copy-btn:active {
@@ -481,22 +458,26 @@
         }
 
         .key-info {
-            background: rgba(255, 255, 255, 0.05);
-            padding: 20px;
-            border-radius: 12px;
-            margin-top: 25px;
-            color: rgba(255, 255, 255, 0.7);
-            font-size: 1em;
-            line-height: 1.8;
+            background: rgba(255, 255, 255, 0.03);
+            padding: 25px;
+            border-radius: 14px;
+            margin-top: 30px;
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 1.05em;
+            line-height: 2;
             border: 1px solid rgba(255, 255, 255, 0.1);
         }
 
         .key-info p {
-            margin-bottom: 8px;
+            margin-bottom: 10px;
         }
 
         .key-info p:last-child {
             margin-bottom: 0;
+        }
+
+        .key-info strong {
+            color: rgba(255, 255, 255, 0.9);
         }
 
         @media (max-width: 768px) {
@@ -519,7 +500,7 @@
                 right: -100%;
                 width: 100%;
                 height: calc(100vh - 70px);
-                background: rgba(10, 10, 10, 0.98);
+                background: rgba(0, 0, 0, 0.98);
                 flex-direction: column;
                 padding: 40px 20px;
                 gap: 0;
@@ -550,12 +531,13 @@
             }
 
             .nav-links a:active {
-                background: rgba(255, 255, 255, 0.15);
+                background: rgba(255, 255, 255, 0.1);
                 transform: scale(0.98);
             }
 
             h1 {
-                font-size: 2.8em;
+                font-size: 3em;
+                letter-spacing: -2px;
             }
 
             .container {
@@ -563,30 +545,30 @@
             }
 
             .key-card {
-                padding: 30px;
+                padding: 35px;
             }
 
             .key-icon {
-                font-size: 3em;
+                font-size: 3.5em;
             }
 
             .key-game {
-                font-size: 2em;
+                font-size: 2.2em;
             }
 
             .key-value {
-                font-size: 1.3em;
+                font-size: 1.4em;
                 letter-spacing: 2px;
             }
 
             .copy-btn {
-                font-size: 1.1em;
-                padding: 18px;
+                font-size: 1.2em;
+                padding: 20px;
             }
 
             .denied-content {
                 margin: 20px;
-                padding: 30px 20px;
+                padding: 35px 25px;
             }
 
             .denied-logo {
@@ -608,16 +590,16 @@
 
         @media (max-width: 480px) {
             h1 {
-                font-size: 2.2em;
+                font-size: 2.5em;
                 letter-spacing: -1px;
             }
 
             .key-game {
-                font-size: 1.6em;
+                font-size: 1.8em;
             }
 
             .key-value {
-                font-size: 1.1em;
+                font-size: 1.2em;
                 letter-spacing: 1px;
             }
 
@@ -680,7 +662,7 @@
 
         <div class="key-card" id="protectedKeyCard">
             <div class="key-header">
-                <div class="key-icon">🎮</div>
+                <div class="key-icon">⚡</div>
                 <div class="key-game">GitanX Premium</div>
                 <span class="key-status" id="keyStatus">🔒 Locked</span>
             </div>
@@ -815,16 +797,16 @@
             const starsContainer = document.getElementById('stars');
             if (!starsContainer) return;
             
-            for (let i = 0; i < 200; i++) {
+            for (let i = 0; i < 300; i++) {
                 const star = document.createElement('div');
                 star.className = 'star';
-                const size = Math.random() * 3 + 1;
+                const size = Math.random() * 3 + 0.5;
                 star.style.width = size + 'px';
                 star.style.height = size + 'px';
                 star.style.left = Math.random() * 100 + '%';
                 star.style.top = Math.random() * 100 + '%';
                 star.style.animationDelay = Math.random() * 3 + 's';
-                star.style.animationDuration = (Math.random() * 2 + 2) + 's';
+                star.style.animationDuration = (Math.random() * 3 + 2) + 's';
                 starsContainer.appendChild(star);
             }
         }
@@ -835,11 +817,11 @@
             navigator.clipboard.writeText(keyValue).then(() => {
                 const originalHTML = button.innerHTML;
                 button.innerHTML = '<span style="position: relative; z-index: 1;">✓ Copied!</span>';
-                button.style.background = 'linear-gradient(135deg, #2196F3 0%, #1976D2 100%)';
+                button.style.background = 'rgba(255, 255, 255, 0.9)';
                 
                 setTimeout(() => {
                     button.innerHTML = originalHTML;
-                    button.style.background = 'linear-gradient(135deg, #4CAF50 0%, #45a049 100%)';
+                    button.style.background = '#ffffff';
                 }, 2000);
             }).catch(err => {
                 console.error('Failed to copy:', err);
