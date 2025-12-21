@@ -19,13 +19,6 @@
             overflow-x: hidden;
         }
 
-        /* class to lock scroll when menu open */
-        .no-scroll {
-            height: 100%;
-            overflow: hidden;
-            touch-action: none;
-        }
-
         .stars {
             position: fixed;
             top: 0;
@@ -654,81 +647,28 @@
             font-size: 1em;
         }
 
-        /* BOTTOM CTA: GitanX Future */
-        .bottom-cta {
-            position: fixed;
-            left: 50%;
-            bottom: 26px;
-            transform: translateX(-50%) translateY(120%);
-            background: linear-gradient(180deg, rgba(30,30,30,0.96), rgba(18,18,18,0.95));
-            border: 1px solid rgba(255,255,255,0.08);
-            padding: 10px 16px;
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            z-index: 1100;
-            box-shadow: 0 8px 30px rgba(0,0,0,0.6);
-            transition: transform 0.35s cubic-bezier(.2,.8,.2,1), opacity 0.35s ease;
-            opacity: 0;
-            pointer-events: none;
-            backdrop-filter: blur(6px);
-            user-select: none;
+        @media (max-width: 1200px) {
+            .stats-container {
+                flex-direction: column;
+                gap: 35px;
+            }
+
+            .rotating-circle-container {
+                width: 220px;
+                height: 220px;
+            }
+
+            .center-logo {
+                width: 160px;
+                height: 160px;
+            }
+
+            .center-logo-text {
+                font-size: 2.2em;
+            }
         }
 
-        .bottom-cta.show {
-            transform: translateX(-50%) translateY(0);
-            opacity: 1;
-            pointer-events: auto;
-        }
-
-        .bottom-cta .cta-text {
-            font-weight: 700;
-            font-size: 1rem;
-            color: #fff;
-            letter-spacing: 0.2px;
-        }
-
-        .bottom-cta .cta-icons {
-            display: flex;
-            gap: 8px;
-            align-items: center;
-        }
-
-        .bottom-cta .cta-icons a {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            width: 36px;
-            height: 36px;
-            border-radius: 8px;
-            background: rgba(255,255,255,0.03);
-            transition: transform 0.15s ease, background 0.15s ease;
-            text-decoration: none;
-            color: inherit;
-        }
-
-        .bottom-cta .cta-icons a:hover {
-            transform: translateY(-3px);
-            background: rgba(255,255,255,0.06);
-        }
-
-        .cta-close {
-            background: transparent;
-            border: none;
-            color: rgba(255,255,255,0.7);
-            font-size: 18px;
-            margin-left: 8px;
-            cursor: pointer;
-            padding: 6px;
-            border-radius: 6px;
-        }
-
-        .cta-close:hover {
-            color: #fff;
-            background: rgba(255,255,255,0.04);
-        }
-
+        /* MODIFICATIONS MOBILE AMÉLIORÉES */
         @media (max-width: 768px) {
             .nav-container {
                 padding: 0 20px;
@@ -830,58 +770,6 @@
             .stat-value {
                 font-size: 1.5em;
             }
-
-            .bottom-cta {
-                left: 12px;
-                right: 12px;
-                bottom: 16px;
-                transform: translateY(120%);
-                width: auto;
-                justify-content: space-between;
-                padding: 10px 12px;
-            }
-
-            .bottom-cta.show {
-                transform: translateY(0);
-            }
-
-            /* Overrides to make mobile menu GPU-friendly and add close button */
-            /* More specific selectors so they override previous rules */
-            .nav-container .nav-links {
-                width: 86vw;
-                max-width: 420px;
-                right: auto;
-                transform: translateX(100%);
-                transition: transform 0.35s cubic-bezier(0.2, 0, 0.2, 1);
-                box-shadow: -20px 0 60px rgba(0,0,0,0.6);
-                will-change: transform;
-                z-index: 1005;
-            }
-            .nav-container .nav-links.active {
-                transform: translateX(0);
-            }
-            /* close button inside menu */
-            .nav-container .menu-close {
-                position: absolute;
-                top: 12px;
-                right: 12px;
-                width: 44px;
-                height: 44px;
-                display: inline-flex;
-                align-items: center;
-                justify-content: center;
-                background: transparent;
-                border: none;
-                color: rgba(255,255,255,0.8);
-                font-size: 22px;
-                border-radius: 10px;
-                cursor: pointer;
-                z-index: 1010;
-            }
-            .nav-container .menu-close:focus {
-                outline: 2px solid rgba(255,255,255,0.14);
-                outline-offset: 2px;
-            }
         }
 
         @media (max-width: 480px) {
@@ -951,24 +839,22 @@
                 </svg>
                 GitanX
             </div>
-            <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="navLinks">
+            <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu">
                 <span></span>
                 <span></span>
                 <span></span>
             </button>
-            <ul class="nav-links" id="navLinks" role="menu" aria-hidden="true">
-                <!-- close button added inside menu for mobile -->
-                <button class="menu-close" id="menuClose" aria-label="Fermer le menu" title="Fermer">✕</button>
-                <li><a href="index.html" class="active" role="menuitem">Home</a></li>
-                <li><a href="keys.html" role="menuitem">Key</a></li>
-                <li><a href="executors.html" role="menuitem">Executors</a></li>
-                <li><a href="help.html" role="menuitem">Help</a></li>
-                <li><a href="credits.html" role="menuitem">Credits</a></li>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="index.html" class="active">Home</a></li>
+                <li><a href="keys.html">Key</a></li>
+                <li><a href="executors.html">Executors</a></li>
+                <li><a href="help.html">Help</a></li>
+                <li><a href="credits.html">Credits</a></li>
             </ul>
         </div>
     </nav>
 
-    <div class="nav-overlay" id="navOverlay" tabindex="-1" aria-hidden="true"></div>
+    <div class="nav-overlay" id="navOverlay"></div>
 
     <div class="container">
         <header>
@@ -1144,141 +1030,50 @@
         </div>
     </div>
 
-    <!-- BOTTOM CTA: appears when you scroll near bottom -->
-    <div class="bottom-cta" id="bottomCta" aria-hidden="true">
-        <div class="cta-text">GitanX Future</div>
-        <div class="cta-icons" role="navigation" aria-label="Liens GitanX Future">
-            <!-- Remplace les href par tes liens réels -->
-            <a href="https://discord.gg/ygfKAUGRuS" target="_blank" rel="noopener noreferrer" aria-label="Discord (ouvre dans un nouvel onglet)">
-                <!-- Discord SVG -->
-                <svg viewBox="0 0 24 24" width="18" height="18" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                    <path fill="#5865F2" d="M20.317 4.369A19.791 19.791 0 0016.5 3.2a13.12 13.12 0 00-.61 1.312 17.888 17.888 0 00-4.78 0A13.12 13.12 0 0010.5 3.2a19.792 19.792 0 00-3.818 1.169C3.5 9.062 2.4 13.469 3 17.717a20.058 20.058 0 005.51 2.815c.42-.6.8-1.24 1.14-1.92a12.287 12.287 0 01-1.94-.92c.17-.12.35-.24.52-.36 3.3 1.5 6.86 1.5 10.16 0 .17.12.35.24.52.36-.65.34-1.34.62-2.06.84.35.63.74 1.24 1.14 1.92a20.057 20.057 0 005.51-2.815c.6-4.248-.5-8.655-3.682-13.348z"/>
-                </svg>
-            </a>
-
-            <a href="https://www.tiktok.com/" target="_blank" rel="noopener noreferrer" aria-label="TikTok (ouvre dans un nouvel onglet)">
-                <!-- TikTok SVG -->
-                <svg viewBox="0 0 24 24" width="18" height="18" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                    <path fill="#00f2ea" d="M9.5 3v9.6A4.9 4.9 0 1014.4 17V9.7h2.3V7.2A7.5 7.5 0 019.5 3z"/>
-                    <path fill="#ff0050" d="M16 5.4V9.7h-1.6V5.4h1.6z"/>
-                </svg>
-            </a>
-        </div>
-        <button class="cta-close" id="ctaClose" aria-label="Fermer">✕</button>
-    </div>
-
     <script>
-        // --- Menu & Accessibility improvements (mobile) ---
         const menuToggle = document.getElementById('menuToggle');
         const navLinks = document.getElementById('navLinks');
         const navOverlay = document.getElementById('navOverlay');
-        const menuClose = document.getElementById('menuClose');
-
-        let previousFocus = null;
-        const focusableSelector = 'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])';
-
-        function openMenu() {
-            previousFocus = document.activeElement;
-            menuToggle.classList.add('active');
-            navLinks.classList.add('active');
-            navOverlay.classList.add('active');
-
-            // ARIA
-            menuToggle.setAttribute('aria-expanded', 'true');
-            navLinks.setAttribute('aria-hidden', 'false');
-            navOverlay.setAttribute('aria-hidden', 'false');
-
-            // lock scroll
-            document.body.classList.add('no-scroll');
-
-            // focus first link in menu
-            const firstItem = navLinks.querySelector('a[role="menuitem"], a[href]');
-            if (firstItem) firstItem.focus();
-
-            document.addEventListener('keydown', handleKeyDownTrap);
-        }
-
-        function closeMenu(returnFocus = true) {
-            menuToggle.classList.remove('active');
-            navLinks.classList.remove('active');
-            navOverlay.classList.remove('active');
-
-            // ARIA
-            menuToggle.setAttribute('aria-expanded', 'false');
-            navLinks.setAttribute('aria-hidden', 'true');
-            navOverlay.setAttribute('aria-hidden', 'true');
-
-            // unlock scroll
-            document.body.classList.remove('no-scroll');
-
-            document.removeEventListener('keydown', handleKeyDownTrap);
-
-            if (returnFocus && previousFocus) {
-                try { previousFocus.focus(); } catch (e) {}
-                previousFocus = null;
-            }
-        }
 
         function toggleMenu(e) {
             if (e) e.stopPropagation();
-            const isOpen = navLinks.classList.contains('active');
-            if (isOpen) closeMenu();
-            else openMenu();
+            menuToggle.classList.toggle('active');
+            navLinks.classList.toggle('active');
+            navOverlay.classList.toggle('active');
+            
+            if (navLinks.classList.contains('active')) {
+                document.body.style.overflow = 'hidden';
+            } else {
+                document.body.style.overflow = '';
+            }
         }
 
-        function handleKeyDownTrap(e) {
-            if (e.key === 'Escape') {
-                if (navLinks.classList.contains('active')) {
-                    e.preventDefault();
-                    closeMenu(true);
-                }
-                return;
-            }
-
-            if (e.key === 'Tab' && navLinks.classList.contains('active')) {
-                const focusables = Array.from(navLinks.querySelectorAll(focusableSelector)).filter(el => el.offsetParent !== null);
-                if (focusables.length === 0) return;
-                const first = focusables[0];
-                const last = focusables[focusables.length - 1];
-                if (e.shiftKey) {
-                    if (document.activeElement === first) {
-                        e.preventDefault();
-                        last.focus();
-                    }
-                } else {
-                    if (document.activeElement === last) {
-                        e.preventDefault();
-                        first.focus();
-                    }
-                }
-            }
+        function closeMenu() {
+            menuToggle.classList.remove('active');
+            navLinks.classList.remove('active');
+            navOverlay.classList.remove('active');
+            document.body.style.overflow = '';
         }
 
         menuToggle.addEventListener('click', toggleMenu);
-        menuClose.addEventListener('click', (e) => { e.stopPropagation(); closeMenu(true); });
-        navOverlay.addEventListener('click', (e) => { e.stopPropagation(); closeMenu(true); });
+        navOverlay.addEventListener('click', closeMenu);
 
-        // Close on navigation item click (original behavior preserved but immediate close)
         document.querySelectorAll('.nav-links a').forEach(link => {
             link.addEventListener('click', () => {
-                // keep immediate close for mobile; for desktop nav stays visible (no transform)
-                closeMenu(false);
+                setTimeout(closeMenu, 150);
             });
         });
 
-        // Prevent clicks inside menu from bubbling
-        navLinks.addEventListener('click', (e) => {
-            e.stopPropagation();
-        });
-
-        // keep Escape global fallback (original behavior)
         document.addEventListener('keydown', (e) => {
             if (e.key === 'Escape' && navLinks.classList.contains('active')) {
                 closeMenu();
             }
         });
 
-        // --- Animated word (unchanged) ---
+        navLinks.addEventListener('click', (e) => {
+            e.stopPropagation();
+        });
+
         const words = ['FREE', 'Best', 'TOP'];
         let currentWordIndex = 0;
         const animatedWordElement = document.getElementById('animatedWord');
@@ -1294,7 +1089,6 @@
 
         setInterval(changeWord, 2000);
 
-        // --- Games grid icons & population (unchanged) ---
         const iconSVGs = {
             brain: '<svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg"><rect fill="#1a1a1a" x="0" y="0" width="80" height="80" rx="12"/><path fill="#ffffff" d="M35,22 Q25,22 25,32 Q25,45 30,50 Q35,55 40,55 Q45,55 50,50 Q55,45 55,32 Q55,22 45,22 Q40,25 35,22 Z"/></svg>',
             fish: '<svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg"><rect fill="#1a1a1a" x="0" y="0" width="80" height="80" rx="12"/><line fill="none" stroke="#ffffff" stroke-width="2" x1="25" y1="20" x2="45" y2="55"/></svg>'
@@ -1318,7 +1112,7 @@
             { iconKey: 'fish', title: 'Natural Disaster' },
             { iconKey: 'brain', title: 'Digital Piano' },
             { iconKey: 'fish', title: 'Arsenal' },
-            { iconKey: 'brain', title: 'Labyrinthe d\\'argent' },
+            { iconKey: 'brain', title: 'Labyrinthe d\'argent' },
             { iconKey: 'fish', title: 'Street Life Remastered' },
             { iconKey: 'brain', title: 'Blade Ball' },
             { iconKey: 'fish', title: 'Emergency Hamburg' },
@@ -1361,75 +1155,6 @@
         }
 
         createStars();
-
-        // ---------- BOTTOM CTA SCROLL LOGIC ----------
-        const bottomCta = document.getElementById('bottomCta');
-        const ctaClose = document.getElementById('ctaClose');
-
-        let previousScrollY = window.scrollY || 0;
-        let ctaHiddenManually = false; // si l'utilisateur ferme manuellement, ne pas rouvrir avant refresh
-
-        function checkBottomCta() {
-            const scrollY = window.scrollY || 0;
-            const windowHeight = window.innerHeight || document.documentElement.clientHeight;
-            const docHeight = Math.max(
-                document.body.scrollHeight, document.documentElement.scrollHeight,
-                document.body.offsetHeight, document.documentElement.offsetHeight,
-                document.body.clientHeight, document.documentElement.clientHeight
-            );
-
-            // seuil pour considérer "près du bas"
-            const nearBottom = (windowHeight + scrollY) >= (docHeight - 140);
-
-            // si on est près du bas ET qu'on descend (scrollY > previousScrollY) et que l'utilisateur n'a pas fermé manuellement
-            if (nearBottom && scrollY > previousScrollY && !ctaHiddenManually) {
-                bottomCta.classList.add('show');
-                bottomCta.setAttribute('aria-hidden', 'false');
-            } else {
-                // si on remonte, on cache
-                if (scrollY < previousScrollY) {
-                    bottomCta.classList.remove('show');
-                    bottomCta.setAttribute('aria-hidden', 'true');
-                } else if (!nearBottom) {
-                    // si on n'est plus près du bas, cache aussi
-                    bottomCta.classList.remove('show');
-                    bottomCta.setAttribute('aria-hidden', 'true');
-                }
-            }
-
-            previousScrollY = scrollY;
-        }
-
-        // throttle léger pour optimisation
-        let ticking = false;
-        window.addEventListener('scroll', () => {
-            if (!ticking) {
-                window.requestAnimationFrame(() => {
-                    checkBottomCta();
-                    ticking = false;
-                });
-                ticking = true;
-            }
-        }, { passive: true });
-
-        // bouton fermer: cache et empêche la réouverture jusqu'au refresh
-        ctaClose.addEventListener('click', (e) => {
-            e.stopPropagation();
-            bottomCta.classList.remove('show');
-            bottomCta.setAttribute('aria-hidden', 'true');
-            ctaHiddenManually = true;
-        });
-
-        // si on redimensionne, recalculer (ex: mobile changes)
-        window.addEventListener('resize', () => {
-            checkBottomCta();
-        });
-
-        // initial check au chargement
-        window.addEventListener('load', () => {
-            previousScrollY = window.scrollY || 0;
-            checkBottomCta();
-        });
     </script>
 </body>
 </html>
