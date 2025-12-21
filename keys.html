@@ -156,7 +156,6 @@
             opacity: 1;
         }
 
-        /* Styles pour la page de blocage */
         .access-denied-overlay {
             position: fixed;
             top: 70px;
@@ -178,22 +177,23 @@
             padding: 40px;
             background: rgba(20, 20, 20, 0.9);
             border-radius: 20px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 68, 68, 0.3);
             backdrop-filter: blur(10px);
             max-width: 600px;
-            animation: fadeIn 0.5s ease;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+            animation: fadeInScale 0.5s ease;
+            box-shadow: 0 20px 60px rgba(255, 68, 68, 0.2);
         }
 
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
+        @keyframes fadeInScale {
+            from { opacity: 0; transform: scale(0.9) translateY(20px); }
+            to { opacity: 1; transform: scale(1) translateY(0); }
         }
 
         .denied-logo {
             font-size: 5em;
             margin-bottom: 30px;
             animation: bounce 2s infinite;
+            filter: drop-shadow(0 0 20px rgba(255, 68, 68, 0.5));
         }
 
         @keyframes bounce {
@@ -202,7 +202,7 @@
         }
 
         .denied-title {
-            font-size: 3em;
+            font-size: 2.5em;
             margin-bottom: 20px;
             background: linear-gradient(135deg, #ff4444 0%, #cc0000 100%);
             -webkit-background-clip: text;
@@ -212,7 +212,7 @@
         }
 
         .denied-subtitle {
-            font-size: 1.3em;
+            font-size: 1.2em;
             color: rgba(255, 255, 255, 0.7);
             margin-bottom: 30px;
             line-height: 1.6;
@@ -265,31 +265,31 @@
         }
 
         .btn-verify {
-            background: #4CAF50;
+            background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%);
             color: white;
         }
 
         .btn-verify:hover {
-            background: #45a049;
+            background: linear-gradient(135deg, #45a049 0%, #3d8b40 100%);
             transform: translateY(-2px);
             box-shadow: 0 5px 20px rgba(76, 175, 80, 0.4);
         }
 
         .container {
-            max-width: 1400px;
+            max-width: 900px;
             margin: 0 auto;
-            padding: 120px 40px 60px 40px;
+            padding: 140px 40px 60px 40px;
             position: relative;
             z-index: 1;
         }
 
         header {
             text-align: center;
-            margin-bottom: 80px;
+            margin-bottom: 60px;
         }
 
         h1 {
-            font-size: 4em;
+            font-size: 4.5em;
             margin-bottom: 20px;
             background: linear-gradient(135deg, #ffffff 0%, #888888 100%);
             -webkit-background-clip: text;
@@ -297,136 +297,208 @@
             background-clip: text;
             font-weight: 700;
             letter-spacing: -2px;
+            text-shadow: 0 0 40px rgba(255, 255, 255, 0.1);
         }
 
         .subtitle {
-            font-size: 1.3em;
+            font-size: 1.4em;
             color: rgba(255, 255, 255, 0.6);
             font-weight: 400;
         }
 
-        .keys-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 30px;
+        .key-card {
+            background: linear-gradient(135deg, rgba(30, 30, 30, 0.9) 0%, rgba(20, 20, 20, 0.9) 100%);
+            border: 2px solid transparent;
+            background-clip: padding-box;
+            border-radius: 24px;
+            padding: 50px;
+            transition: all 0.4s ease;
+            backdrop-filter: blur(20px);
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
         }
 
-        .key-card {
-            background: rgba(20, 20, 20, 0.6);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 16px;
-            padding: 30px;
-            transition: all 0.3s ease;
-            backdrop-filter: blur(10px);
+        .key-card::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(135deg, #4CAF50 0%, #2196F3 50%, #9C27B0 100%);
+            border-radius: 24px;
+            z-index: -1;
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+
+        .key-card:hover::before {
+            opacity: 1;
         }
 
         .key-card:hover {
-            border-color: rgba(255, 255, 255, 0.3);
-            transform: translateY(-5px);
-            background: rgba(30, 30, 30, 0.6);
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 30px 80px rgba(76, 175, 80, 0.3);
         }
 
         .key-card.locked {
-            position: relative;
-            filter: blur(2px);
+            filter: blur(3px);
             pointer-events: none;
-            opacity: 0.5;
+            opacity: 0.6;
         }
 
         .key-header {
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .key-icon {
+            font-size: 4em;
             margin-bottom: 20px;
+            animation: float 3s ease-in-out infinite;
+            filter: drop-shadow(0 0 20px rgba(76, 175, 80, 0.5));
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-15px); }
         }
 
         .key-game {
-            font-size: 1.8em;
-            font-weight: 600;
-            color: #ffffff;
-            margin-bottom: 10px;
+            font-size: 2.5em;
+            font-weight: 700;
+            background: linear-gradient(135deg, #4CAF50 0%, #2196F3 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 15px;
+            letter-spacing: -1px;
         }
 
         .key-status {
             display: inline-block;
-            background: #4CAF50;
+            background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%);
             color: white;
-            padding: 5px 15px;
-            border-radius: 20px;
-            font-size: 0.9em;
-            font-weight: 500;
+            padding: 8px 20px;
+            border-radius: 25px;
+            font-size: 1em;
+            font-weight: 600;
+            box-shadow: 0 5px 20px rgba(76, 175, 80, 0.3);
         }
 
         .key-status.locked {
-            background: #ff4444;
+            background: linear-gradient(135deg, #ff4444 0%, #cc0000 100%);
+            box-shadow: 0 5px 20px rgba(255, 68, 68, 0.3);
         }
 
         .key-display {
-            background: rgba(0, 0, 0, 0.5);
-            padding: 20px;
-            border-radius: 10px;
-            border-left: 4px solid rgba(255, 255, 255, 0.5);
-            margin: 20px 0;
+            background: rgba(0, 0, 0, 0.6);
+            padding: 30px;
+            border-radius: 15px;
+            border: 2px solid rgba(76, 175, 80, 0.3);
+            margin: 30px 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .key-display::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(76, 175, 80, 0.2), transparent);
+            animation: shimmer 3s infinite;
+        }
+
+        @keyframes shimmer {
+            0% { left: -100%; }
+            100% { left: 100%; }
         }
 
         .key-label {
-            color: rgba(255, 255, 255, 0.6);
-            font-size: 0.9em;
-            margin-bottom: 10px;
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 1em;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: 600;
         }
 
         .key-value {
             font-family: 'Courier New', monospace;
-            font-size: 1.5em;
-            color: #ffffff;
-            letter-spacing: 2px;
+            font-size: 1.8em;
+            color: #4CAF50;
+            letter-spacing: 3px;
             word-break: break-all;
+            font-weight: 700;
+            text-shadow: 0 0 10px rgba(76, 175, 80, 0.5);
         }
 
         .copy-btn {
             width: 100%;
-            background: #ffffff;
-            color: #0a0a0a;
+            background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%);
+            color: white;
             border: none;
-            padding: 15px;
-            border-radius: 10px;
-            font-size: 1.1em;
-            font-weight: 600;
+            padding: 20px;
+            border-radius: 15px;
+            font-size: 1.3em;
+            font-weight: 700;
             cursor: pointer;
-            transition: all 0.2s ease;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(76, 175, 80, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .copy-btn::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.3);
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
+
+        .copy-btn:hover::before {
+            width: 300px;
+            height: 300px;
         }
 
         .copy-btn:hover {
-            background: rgba(255, 255, 255, 0.9);
-            transform: scale(1.02);
+            transform: scale(1.05);
+            box-shadow: 0 15px 40px rgba(76, 175, 80, 0.5);
         }
 
-        .get-key-btn {
-            width: 100%;
-            background: #4CAF50;
-            color: white;
-            border: none;
-            padding: 15px;
-            border-radius: 10px;
-            font-size: 1.1em;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.2s ease;
-        }
-
-        .get-key-btn:hover {
-            background: #45a049;
-            transform: scale(1.02);
+        .copy-btn:active {
+            transform: scale(0.98);
         }
 
         .key-info {
             background: rgba(255, 255, 255, 0.05);
-            padding: 15px;
-            border-radius: 8px;
-            margin-top: 15px;
+            padding: 20px;
+            border-radius: 12px;
+            margin-top: 25px;
             color: rgba(255, 255, 255, 0.7);
-            font-size: 0.9em;
-            line-height: 1.6;
+            font-size: 1em;
+            line-height: 1.8;
+            border: 1px solid rgba(255, 255, 255, 0.1);
         }
 
-        /* MODIFICATIONS MOBILE AMÉLIORÉES */
+        .key-info p {
+            margin-bottom: 8px;
+        }
+
+        .key-info p:last-child {
+            margin-bottom: 0;
+        }
+
         @media (max-width: 768px) {
             .nav-container {
                 padding: 0 20px;
@@ -483,27 +555,33 @@
             }
 
             h1 {
-                font-size: 2.5em;
+                font-size: 2.8em;
             }
 
             .container {
-                padding: 100px 20px 40px 20px;
-            }
-
-            .keys-grid {
-                grid-template-columns: 1fr;
+                padding: 110px 20px 40px 20px;
             }
 
             .key-card {
-                padding: 25px;
+                padding: 30px;
+            }
+
+            .key-icon {
+                font-size: 3em;
             }
 
             .key-game {
-                font-size: 1.5em;
+                font-size: 2em;
             }
 
             .key-value {
-                font-size: 1.2em;
+                font-size: 1.3em;
+                letter-spacing: 2px;
+            }
+
+            .copy-btn {
+                font-size: 1.1em;
+                padding: 18px;
             }
 
             .denied-content {
@@ -530,16 +608,16 @@
 
         @media (max-width: 480px) {
             h1 {
-                font-size: 2em;
+                font-size: 2.2em;
                 letter-spacing: -1px;
             }
 
             .key-game {
-                font-size: 1.3em;
+                font-size: 1.6em;
             }
 
             .key-value {
-                font-size: 1em;
+                font-size: 1.1em;
                 letter-spacing: 1px;
             }
 
@@ -574,12 +652,10 @@
 
     <div class="nav-overlay" id="navOverlay"></div>
 
-    <!-- Overlay de blocage qui apparaît par-dessus le contenu -->
     <div class="access-denied-overlay" id="accessDeniedOverlay" style="display: none;">
         <div class="denied-content">
             <div class="denied-logo">🔒</div>
-            <h1 class="denied-title">GitanX</h1>
-            <h2 class="denied-title">Access Denied</h2>
+            <h1 class="denied-title">Access Denied</h1>
             <p class="denied-subtitle">Don't try to bypass the key system... You need to use the Linkvertise URL</p>
             
             <div class="denied-info">
@@ -598,68 +674,31 @@
 
     <div class="container">
         <header>
-            <h1>🔑 Key GitanX HUB</h1>
-            <p class="subtitle">All Keys for GitanX HUB</p>
+            <h1>🔑 GitanX Key</h1>
+            <p class="subtitle">Premium Access Key</p>
         </header>
 
-        <div class="keys-grid">
-            <div class="key-card" id="protectedKeyCard">
-                <div class="key-header">
-                    <div class="key-game">🎮 GitanX Premium</div>
-                    <span class="key-status" id="keyStatus">🔒 Locked</span>
-                </div>
-                
-                <div class="key-display">
-                    <div class="key-label">Key :</div>
-                    <div class="key-value" id="keyValue">••••••••••••••••</div>
-                </div>
-
-                <button class="copy-btn" id="copyBtn" onclick="copyKey(this, 'GitanX_fd4h4hfhty46')">📋 Copy Key</button>
-
-                <div class="key-info">
-                    📅 Update : Today<br>
-                    ⏰ Validity : Lifetime<br>
-                    🔐 Access via Linkvertise required
-                </div>
+        <div class="key-card" id="protectedKeyCard">
+            <div class="key-header">
+                <div class="key-icon">🎮</div>
+                <div class="key-game">GitanX Premium</div>
+                <span class="key-status" id="keyStatus">🔒 Locked</span>
+            </div>
+            
+            <div class="key-display">
+                <div class="key-label">🔐 Premium Key</div>
+                <div class="key-value" id="keyValue">••••••••••••••••</div>
             </div>
 
-            <div class="key-card">
-                <div class="key-header">
-                    <div class="key-game">🌲 99 Night in the Forest</div>
-                    <span class="key-status">✓ Active</span>
-                </div>
-                
-                <div class="key-display">
-                    <div class="key-label">Key :</div>
-                    <div class="key-value">GitanX_99night45f5dd</div>
-                </div>
+            <button class="copy-btn" id="copyBtn" onclick="copyKey(this, 'GitanX_fd4h4hfhty46')">
+                <span style="position: relative; z-index: 1;">📋 Copy Key</span>
+            </button>
 
-                <button class="copy-btn" onclick="copyKey(this, 'GitanX_99night45f5dd')">📋 Copy Key</button>
-
-                <div class="key-info">
-                    📅 Update : Today<br>
-                    ⏰ Validity : Lifetime
-                </div>
-            </div>
-
-            <div class="key-card">
-                <div class="key-header">
-                    <div class="key-game">🧠 Steal a Brainrot</div>
-                    <span class="key-status">✓ Active</span>
-                </div>
-                
-                <div class="key-display">
-                    <div class="key-label">Key :</div>
-                    <div class="key-value">Click on Get Key</div>
-                </div>
-
-                <button class="get-key-btn" onclick="window.open('https://link-center.net/1461822/P7AIjLW5nnxI', '_blank')">🔑 Get Key</button>
-
-                <div class="key-info">
-                    📅 Update : Today<br>
-                    ⏰ Validity : Lifetime<br>
-                    💡 Click on Get Key to obtain the key
-                </div>
+            <div class="key-info">
+                <p>📅 <strong>Last Update:</strong> Today</p>
+                <p>⏰ <strong>Validity:</strong> Lifetime Access</p>
+                <p>🔐 <strong>Status:</strong> Access via Linkvertise required</p>
+                <p>⚡ <strong>Features:</strong> Full Premium Access</p>
             </div>
         </div>
     </div>
@@ -704,10 +743,8 @@
         });
 
         document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape') {
-                if (navLinks.classList.contains('active')) {
-                    closeMenu();
-                }
+            if (e.key === 'Escape' && navLinks.classList.contains('active')) {
+                closeMenu();
             }
         });
 
@@ -718,7 +755,6 @@
         function checkAccess() {
             const referrer = document.referrer;
             
-            // Si pas de referrer, bloquer
             if (!referrer || referrer === '') {
                 showAccessDenied();
                 return false;
@@ -752,10 +788,7 @@
         }
 
         function showAccessDenied() {
-            // Afficher l'overlay de blocage
             accessDeniedOverlay.style.display = 'flex';
-            
-            // Verrouiller la carte protégée
             protectedKeyCard.classList.add('locked');
             keyStatus.textContent = '🔒 Locked';
             keyStatus.classList.add('locked');
@@ -763,16 +796,11 @@
             copyBtn.disabled = true;
             copyBtn.style.opacity = '0.5';
             copyBtn.style.cursor = 'not-allowed';
-            
-            // Empêcher le scroll
             document.body.style.overflow = 'hidden';
         }
 
         function unlockAccess() {
-            // Masquer l'overlay
             accessDeniedOverlay.style.display = 'none';
-            
-            // Déverrouiller la carte
             protectedKeyCard.classList.remove('locked');
             keyStatus.textContent = '✓ Active';
             keyStatus.classList.remove('locked');
@@ -780,8 +808,6 @@
             copyBtn.disabled = false;
             copyBtn.style.opacity = '1';
             copyBtn.style.cursor = 'pointer';
-            
-            // Réactiver le scroll
             document.body.style.overflow = '';
         }
 
@@ -789,7 +815,7 @@
             const starsContainer = document.getElementById('stars');
             if (!starsContainer) return;
             
-            for (let i = 0; i < 150; i++) {
+            for (let i = 0; i < 200; i++) {
                 const star = document.createElement('div');
                 star.className = 'star';
                 const size = Math.random() * 3 + 1;
@@ -807,29 +833,25 @@
             if (button.disabled) return;
             
             navigator.clipboard.writeText(keyValue).then(() => {
-                const originalText = button.textContent;
-                button.textContent = '✓ Copied!';
-                button.style.background = '#4CAF50';
-                button.style.color = '#ffffff';
+                const originalHTML = button.innerHTML;
+                button.innerHTML = '<span style="position: relative; z-index: 1;">✓ Copied!</span>';
+                button.style.background = 'linear-gradient(135deg, #2196F3 0%, #1976D2 100%)';
                 
                 setTimeout(() => {
-                    button.textContent = originalText;
-                    button.style.background = '#ffffff';
-                    button.style.color = '#0a0a0a';
+                    button.innerHTML = originalHTML;
+                    button.style.background = 'linear-gradient(135deg, #4CAF50 0%, #45a049 100%)';
                 }, 2000);
             }).catch(err => {
                 console.error('Failed to copy:', err);
-                button.textContent = '❌ Error';
+                button.innerHTML = '<span style="position: relative; z-index: 1;">❌ Error</span>';
                 setTimeout(() => {
-                    button.textContent = '📋 Copy Key';
+                    button.innerHTML = '<span style="position: relative; z-index: 1;">📋 Copy Key</span>';
                 }, 2000);
             });
         }
 
-        // Initialisation
         createStars();
         
-        // Vérifier l'accès au chargement
         if (!checkAccess()) {
             console.log('Access denied - showing overlay');
         } else {
