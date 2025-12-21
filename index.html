@@ -19,6 +19,13 @@
             overflow-x: hidden;
         }
 
+        /* class to lock scroll when menu open */
+        .no-scroll {
+            height: 100%;
+            overflow: hidden;
+            touch-action: none;
+        }
+
         .stars {
             position: fixed;
             top: 0;
@@ -837,6 +844,44 @@
             .bottom-cta.show {
                 transform: translateY(0);
             }
+
+            /* Overrides to make mobile menu GPU-friendly and add close button */
+            /* More specific selectors so they override previous rules */
+            .nav-container .nav-links {
+                width: 86vw;
+                max-width: 420px;
+                right: auto;
+                transform: translateX(100%);
+                transition: transform 0.35s cubic-bezier(0.2, 0, 0.2, 1);
+                box-shadow: -20px 0 60px rgba(0,0,0,0.6);
+                will-change: transform;
+                z-index: 1005;
+            }
+            .nav-container .nav-links.active {
+                transform: translateX(0);
+            }
+            /* close button inside menu */
+            .nav-container .menu-close {
+                position: absolute;
+                top: 12px;
+                right: 12px;
+                width: 44px;
+                height: 44px;
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+                background: transparent;
+                border: none;
+                color: rgba(255,255,255,0.8);
+                font-size: 22px;
+                border-radius: 10px;
+                cursor: pointer;
+                z-index: 1010;
+            }
+            .nav-container .menu-close:focus {
+                outline: 2px solid rgba(255,255,255,0.14);
+                outline-offset: 2px;
+            }
         }
 
         @media (max-width: 480px) {
@@ -906,22 +951,24 @@
                 </svg>
                 GitanX
             </div>
-            <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu">
+            <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="navLinks">
                 <span></span>
                 <span></span>
                 <span></span>
             </button>
-            <ul class="nav-links" id="navLinks">
-                <li><a href="index.html" class="active">Home</a></li>
-                <li><a href="keys.html">Key</a></li>
-                <li><a href="executors.html">Executors</a></li>
-                <li><a href="help.html">Help</a></li>
-                <li><a href="credits.html">Credits</a></li>
+            <ul class="nav-links" id="navLinks" role="menu" aria-hidden="true">
+                <!-- close button added inside menu for mobile -->
+                <button class="menu-close" id="menuClose" aria-label="Fermer le menu" title="Fermer">✕</button>
+                <li><a href="index.html" class="active" role="menuitem">Home</a></li>
+                <li><a href="keys.html" role="menuitem">Key</a></li>
+                <li><a href="executors.html" role="menuitem">Executors</a></li>
+                <li><a href="help.html" role="menuitem">Help</a></li>
+                <li><a href="credits.html" role="menuitem">Credits</a></li>
             </ul>
         </div>
     </nav>
 
-    <div class="nav-overlay" id="navOverlay"></div>
+    <div class="nav-overlay" id="navOverlay" tabindex="-1" aria-hidden="true"></div>
 
     <div class="container">
         <header>
@@ -1121,49 +1168,117 @@
     </div>
 
     <script>
+        // --- Menu & Accessibility improvements (mobile) ---
         const menuToggle = document.getElementById('menuToggle');
         const navLinks = document.getElementById('navLinks');
         const navOverlay = document.getElementById('navOverlay');
+        const menuClose = document.getElementById('menuClose');
 
-        function toggleMenu(e) {
-            if (e) e.stopPropagation();
-            menuToggle.classList.toggle('active');
-            navLinks.classList.toggle('active');
-            navOverlay.classList.toggle('active');
-            
-            if (navLinks.classList.contains('active')) {
-                document.body.style.overflow = 'hidden';
-            } else {
-                document.body.style.overflow = '';
-            }
+        let previousFocus = null;
+        const focusableSelector = 'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])';
+
+        function openMenu() {
+            previousFocus = document.activeElement;
+            menuToggle.classList.add('active');
+            navLinks.classList.add('active');
+            navOverlay.classList.add('active');
+
+            // ARIA
+            menuToggle.setAttribute('aria-expanded', 'true');
+            navLinks.setAttribute('aria-hidden', 'false');
+            navOverlay.setAttribute('aria-hidden', 'false');
+
+            // lock scroll
+            document.body.classList.add('no-scroll');
+
+            // focus first link in menu
+            const firstItem = navLinks.querySelector('a[role="menuitem"], a[href]');
+            if (firstItem) firstItem.focus();
+
+            document.addEventListener('keydown', handleKeyDownTrap);
         }
 
-        function closeMenu() {
+        function closeMenu(returnFocus = true) {
             menuToggle.classList.remove('active');
             navLinks.classList.remove('active');
             navOverlay.classList.remove('active');
-            document.body.style.overflow = '';
+
+            // ARIA
+            menuToggle.setAttribute('aria-expanded', 'false');
+            navLinks.setAttribute('aria-hidden', 'true');
+            navOverlay.setAttribute('aria-hidden', 'true');
+
+            // unlock scroll
+            document.body.classList.remove('no-scroll');
+
+            document.removeEventListener('keydown', handleKeyDownTrap);
+
+            if (returnFocus && previousFocus) {
+                try { previousFocus.focus(); } catch (e) {}
+                previousFocus = null;
+            }
+        }
+
+        function toggleMenu(e) {
+            if (e) e.stopPropagation();
+            const isOpen = navLinks.classList.contains('active');
+            if (isOpen) closeMenu();
+            else openMenu();
+        }
+
+        function handleKeyDownTrap(e) {
+            if (e.key === 'Escape') {
+                if (navLinks.classList.contains('active')) {
+                    e.preventDefault();
+                    closeMenu(true);
+                }
+                return;
+            }
+
+            if (e.key === 'Tab' && navLinks.classList.contains('active')) {
+                const focusables = Array.from(navLinks.querySelectorAll(focusableSelector)).filter(el => el.offsetParent !== null);
+                if (focusables.length === 0) return;
+                const first = focusables[0];
+                const last = focusables[focusables.length - 1];
+                if (e.shiftKey) {
+                    if (document.activeElement === first) {
+                        e.preventDefault();
+                        last.focus();
+                    }
+                } else {
+                    if (document.activeElement === last) {
+                        e.preventDefault();
+                        first.focus();
+                    }
+                }
+            }
         }
 
         menuToggle.addEventListener('click', toggleMenu);
-        navOverlay.addEventListener('click', closeMenu);
+        menuClose.addEventListener('click', (e) => { e.stopPropagation(); closeMenu(true); });
+        navOverlay.addEventListener('click', (e) => { e.stopPropagation(); closeMenu(true); });
 
+        // Close on navigation item click (original behavior preserved but immediate close)
         document.querySelectorAll('.nav-links a').forEach(link => {
             link.addEventListener('click', () => {
-                setTimeout(closeMenu, 150);
+                // keep immediate close for mobile; for desktop nav stays visible (no transform)
+                closeMenu(false);
             });
         });
 
+        // Prevent clicks inside menu from bubbling
+        navLinks.addEventListener('click', (e) => {
+            e.stopPropagation();
+        });
+
+        // keep Escape global fallback (original behavior)
         document.addEventListener('keydown', (e) => {
             if (e.key === 'Escape' && navLinks.classList.contains('active')) {
                 closeMenu();
             }
         });
 
-        navLinks.addEventListener('click', (e) => {
-            e.stopPropagation();
-        });
-
+        // --- Animated word (unchanged) ---
         const words = ['FREE', 'Best', 'TOP'];
         let currentWordIndex = 0;
         const animatedWordElement = document.getElementById('animatedWord');
@@ -1179,6 +1294,7 @@
 
         setInterval(changeWord, 2000);
 
+        // --- Games grid icons & population (unchanged) ---
         const iconSVGs = {
             brain: '<svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg"><rect fill="#1a1a1a" x="0" y="0" width="80" height="80" rx="12"/><path fill="#ffffff" d="M35,22 Q25,22 25,32 Q25,45 30,50 Q35,55 40,55 Q45,55 50,50 Q55,45 55,32 Q55,22 45,22 Q40,25 35,22 Z"/></svg>',
             fish: '<svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg"><rect fill="#1a1a1a" x="0" y="0" width="80" height="80" rx="12"/><line fill="none" stroke="#ffffff" stroke-width="2" x1="25" y1="20" x2="45" y2="55"/></svg>'
@@ -1202,7 +1318,7 @@
             { iconKey: 'fish', title: 'Natural Disaster' },
             { iconKey: 'brain', title: 'Digital Piano' },
             { iconKey: 'fish', title: 'Arsenal' },
-            { iconKey: 'brain', title: 'Labyrinthe d\'argent' },
+            { iconKey: 'brain', title: 'Labyrinthe d\\'argent' },
             { iconKey: 'fish', title: 'Street Life Remastered' },
             { iconKey: 'brain', title: 'Blade Ball' },
             { iconKey: 'fish', title: 'Emergency Hamburg' },
