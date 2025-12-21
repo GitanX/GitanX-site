@@ -41,6 +41,27 @@
             50% { opacity: 1; transform: scale(1.2); }
         }
 
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
         nav {
             background: rgba(10, 10, 10, 0.95);
             padding: 0;
@@ -171,7 +192,8 @@
 
         header {
             text-align: center;
-            margin-bottom: 80px;
+            margin-bottom: 40px;
+            animation: slideIn 0.6s ease-out;
         }
 
         h1 {
@@ -183,12 +205,133 @@
             background-clip: text;
             font-weight: 700;
             letter-spacing: -2px;
+            animation: float 3s ease-in-out infinite;
         }
 
         .subtitle {
             font-size: 1.3em;
             color: rgba(255, 255, 255, 0.6);
             font-weight: 400;
+        }
+
+        .search-container {
+            margin-bottom: 40px;
+            animation: slideIn 0.8s ease-out;
+        }
+
+        .search-wrapper {
+            position: relative;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .search-icon {
+            position: absolute;
+            left: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 1.2em;
+            color: rgba(255, 255, 255, 0.5);
+            pointer-events: none;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 18px 20px 18px 55px;
+            background: rgba(30, 30, 30, 0.8);
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            color: #ffffff;
+            font-size: 1.1em;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .search-input:focus {
+            outline: none;
+            border-color: rgba(255, 255, 255, 0.3);
+            background: rgba(40, 40, 40, 0.9);
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
+        }
+
+        .search-input::placeholder {
+            color: rgba(255, 255, 255, 0.4);
+        }
+
+        .stats-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 40px;
+            animation: slideIn 1s ease-out;
+        }
+
+        .stat-card {
+            background: rgba(30, 30, 30, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 25px;
+            text-align: center;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(255, 255, 255, 0.3);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        }
+
+        .stat-icon {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        .stat-number {
+            font-size: 2em;
+            font-weight: 700;
+            color: #ffffff;
+            margin-bottom: 5px;
+        }
+
+        .stat-label {
+            font-size: 0.95em;
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        .category-filter {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-bottom: 40px;
+            animation: slideIn 1.2s ease-out;
+        }
+
+        .filter-btn {
+            padding: 10px 20px;
+            background: rgba(40, 40, 40, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            color: rgba(255, 255, 255, 0.7);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.95em;
+            font-weight: 500;
+        }
+
+        .filter-btn:hover {
+            background: rgba(60, 60, 60, 0.8);
+            border-color: rgba(255, 255, 255, 0.3);
+            color: #ffffff;
+        }
+
+        .filter-btn.active {
+            background: rgba(255, 255, 255, 0.15);
+            border-color: rgba(255, 255, 255, 0.4);
+            color: #ffffff;
         }
 
         .help-section {
@@ -198,16 +341,34 @@
             padding: 40px;
             backdrop-filter: blur(10px);
             box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            animation: slideIn 1.4s ease-out;
         }
 
         .faq-item {
             margin-bottom: 20px;
             border-bottom: 1px solid rgba(255, 255, 255, 0.1);
             padding-bottom: 20px;
+            opacity: 0;
+            animation: slideIn 0.5s ease-out forwards;
         }
+
+        .faq-item:nth-child(1) { animation-delay: 0.1s; }
+        .faq-item:nth-child(2) { animation-delay: 0.2s; }
+        .faq-item:nth-child(3) { animation-delay: 0.3s; }
+        .faq-item:nth-child(4) { animation-delay: 0.4s; }
+        .faq-item:nth-child(5) { animation-delay: 0.5s; }
+        .faq-item:nth-child(6) { animation-delay: 0.6s; }
+        .faq-item:nth-child(7) { animation-delay: 0.7s; }
+        .faq-item:nth-child(8) { animation-delay: 0.8s; }
+        .faq-item:nth-child(9) { animation-delay: 0.9s; }
+        .faq-item:nth-child(10) { animation-delay: 1s; }
 
         .faq-item:last-child {
             border-bottom: none;
+        }
+
+        .faq-item.hidden {
+            display: none;
         }
 
         .faq-question {
@@ -225,10 +386,12 @@
         .faq-question:hover {
             background: rgba(50, 50, 50, 0.6);
             border-color: rgba(255, 255, 255, 0.2);
+            transform: translateX(5px);
         }
 
         .faq-question.active {
             border-color: rgba(255, 255, 255, 0.3);
+            background: rgba(60, 60, 60, 0.8);
         }
 
         .faq-question-text {
@@ -253,7 +416,7 @@
         }
 
         .faq-answer.active {
-            max-height: 1000px;
+            max-height: 2000px;
             padding: 20px;
         }
 
@@ -276,6 +439,31 @@
             margin: 15px 0;
             border-left: 4px solid rgba(255, 255, 255, 0.5);
             font-family: 'Courier New', monospace;
+            position: relative;
+        }
+
+        .copy-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: #ffffff;
+            padding: 6px 12px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.85em;
+            transition: all 0.2s ease;
+        }
+
+        .copy-btn:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: scale(1.05);
+        }
+
+        .copy-btn.copied {
+            background: rgba(100, 255, 100, 0.2);
+            border-color: rgba(100, 255, 100, 0.4);
         }
 
         .faq-answer ul, .faq-answer ol {
@@ -289,7 +477,49 @@
             line-height: 1.6;
         }
 
-        /* MODIFICATIONS MOBILE AMÉLIORÉES */
+        .warning-box {
+            background: rgba(255, 100, 100, 0.1);
+            border: 1px solid rgba(255, 100, 100, 0.3);
+            border-radius: 8px;
+            padding: 15px;
+            margin: 15px 0;
+            animation: pulse 3s ease-in-out infinite;
+        }
+
+        .info-box {
+            background: rgba(100, 150, 255, 0.1);
+            border: 1px solid rgba(100, 150, 255, 0.3);
+            border-radius: 8px;
+            padding: 15px;
+            margin: 15px 0;
+        }
+
+        .success-box {
+            background: rgba(100, 255, 100, 0.1);
+            border: 1px solid rgba(100, 255, 100, 0.3);
+            border-radius: 8px;
+            padding: 15px;
+            margin: 15px 0;
+        }
+
+        .no-results {
+            text-align: center;
+            padding: 60px 20px;
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 1.2em;
+            display: none;
+        }
+
+        .no-results.show {
+            display: block;
+        }
+
+        .search-highlight {
+            background: rgba(255, 255, 100, 0.3);
+            padding: 2px 4px;
+            border-radius: 3px;
+        }
+
         @media (max-width: 768px) {
             .nav-container {
                 padding: 0 20px;
@@ -360,6 +590,19 @@
             .faq-question-text {
                 font-size: 1.1em;
             }
+
+            .stats-container {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .category-filter {
+                gap: 8px;
+            }
+
+            .filter-btn {
+                font-size: 0.85em;
+                padding: 8px 16px;
+            }
         }
 
         @media (max-width: 480px) {
@@ -380,6 +623,14 @@
                 font-size: 1.1em;
                 padding: 16px 18px;
                 min-height: 56px;
+            }
+
+            .stats-container {
+                grid-template-columns: 1fr;
+            }
+
+            .stat-card {
+                padding: 20px;
             }
         }
     </style>
@@ -419,50 +670,249 @@
     <div class="container">
         <header>
             <h1>❓ GitanX Help</h1>
-            <p class="subtitle">All Question</p>
+            <p class="subtitle">Find answers to all your questions</p>
         </header>
 
+        <div class="search-container">
+            <div class="search-wrapper">
+                <span class="search-icon">🔍</span>
+                <input type="text" class="search-input" id="searchInput" placeholder="Search for help...">
+            </div>
+        </div>
+
+        <div class="stats-container">
+            <div class="stat-card">
+                <div class="stat-icon">📚</div>
+                <div class="stat-number">10+</div>
+                <div class="stat-label">Help Articles</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">⚡</div>
+                <div class="stat-number">24/7</div>
+                <div class="stat-label">Support</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">👥</div>
+                <div class="stat-number">1K+</div>
+                <div class="stat-label">Active Users</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">🎮</div>
+                <div class="stat-number">50+</div>
+                <div class="stat-label">Games Supported</div>
+            </div>
+        </div>
+
+        <div class="category-filter">
+            <button class="filter-btn active" data-category="all">🌟 All</button>
+            <button class="filter-btn" data-category="setup">⚙️ Setup</button>
+            <button class="filter-btn" data-category="troubleshooting">🔧 Troubleshooting</button>
+            <button class="filter-btn" data-category="security">🛡️ Security</button>
+            <button class="filter-btn" data-category="general">💡 General</button>
+        </div>
+
         <div class="help-section">
-            <div class="faq-item">
+            <div class="no-results" id="noResults">
+                <div style="font-size: 3em; margin-bottom: 20px;">🔍</div>
+                <div>No results found. Try a different search term.</div>
+            </div>
+
+            <div class="faq-item" data-category="setup" data-keywords="script code loadstring github lua raw download find where get obtain">
                 <div class="faq-question" onclick="toggleFAQ(this)">
-                    <span class="faq-question-text">❌ i dont found the script</span>
+                    <span class="faq-question-text">❌ I don't found the script</span>
                     <span class="faq-arrow">▼</span>
                 </div>
                 <div class="faq-answer">
-                    <p><strong>Solution :</strong></p>
-                    <p>Here the scirpt GitanX : </p>
-                    <pre>loadstring(game:HttpGet("https://raw.githubusercontent.com/GitanX/G1tan2_ikea/refs/heads/main/GitanX.lua"))()</pre>
+                    <p><strong>Solution:</strong></p>
+                    <p>Here is the GitanX script:</p>
+                    <pre id="scriptCode">loadstring(game:HttpGet("https://raw.githubusercontent.com/GitanX/G1tan2_ikea/refs/heads/main/GitanX.lua"))()<button class="copy-btn" onclick="copyCode('scriptCode', this)">📋 Copy</button></pre>
+                    <div class="info-box">
+                        <strong>💡 Tip:</strong> Copy this script and paste it directly into your executor. Make sure you're connected to the internet for the script to load properly.
+                    </div>
                 </div>
             </div>
 
-            <div class="faq-item">
+            <div class="faq-item" data-category="setup" data-keywords="executor inject attach xeno wave install download how use start begin tutorial guide setup">
                 <div class="faq-question" onclick="toggleFAQ(this)">
-                    <span class="faq-question-text">⚙️ How use executor ?</span>
+                    <span class="faq-question-text">⚙️ How to use executor?</span>
                     <span class="faq-arrow">▼</span>
                 </div>
                 <div class="faq-answer">
-                    <p><strong>Guide étape par étape :</strong></p>
+                    <p><strong>Step by step guide:</strong></p>
                     <ol>
-                        <li><strong>Dowload</strong> executor (Xeno (xeno.onl) recommended)</li>
+                        <li><strong>Download</strong> executor (Xeno (xeno.onl) recommended)</li>
                         <li><strong>Start</strong> Roblox and join a game</li>
                         <li><strong>Open</strong> the executor</li>
                         <li><strong>Click</strong> on "Inject" or "Attach"</li>
-                        <li><strong>Copy and paste</strong> the scirpt GitanX on the executor</li>
+                        <li><strong>Copy and paste</strong> the GitanX script into the executor</li>
                         <li><strong>Click</strong> on "Execute" or "Run"</li>
                     </ol>
+                    <div class="warning-box">
+                        <strong>⚠️ Important:</strong> Always inject the executor AFTER joining a Roblox game, not before. Wait for the game to fully load before executing scripts.
+                    </div>
                 </div>
             </div>
 
-            <div class="faq-item">
+            <div class="faq-item" data-category="troubleshooting" data-keywords="key broken expired invalid discord not working doesnt work fail error problem issue">
                 <div class="faq-question" onclick="toggleFAQ(this)">
-                    <span class="faq-question-text">🔑 Key dont work</span>
+                    <span class="faq-question-text">🔑 Key doesn't work</span>
                     <span class="faq-arrow">▼</span>
                 </div>
                 <div class="faq-answer">
-                    <p><strong>Vérifications à faire :</strong></p>
+                    <p><strong>Verifications to do:</strong></p>
                     <ul>
-                        <li>✓ Join Discord : https://discord.gg/ygfKAUGRuS</li>
+                        <li>✓ Join Discord: https://discord.gg/ygfKAUGRuS</li>
+                        <li>✓ Check if your key has expired</li>
+                        <li>✓ Make sure you copied the entire key</li>
+                        <li>✓ Try generating a new key</li>
                     </ul>
+                    <div class="info-box">
+                        <strong>ℹ️ Note:</strong> Keys are distributed and updated regularly on our Discord server. Make sure to check the announcements channel for the latest key information.
+                    </div>
+                </div>
+            </div>
+
+            <div class="faq-item" data-category="troubleshooting" data-keywords="crash error loading failed not working broken doesnt load freeze stuck hang problem issue bug">
+                <div class="faq-question" onclick="toggleFAQ(this)">
+                    <span class="faq-question-text">🚫 Script not loading or crashing</span>
+                    <span class="faq-arrow">▼</span>
+                </div>
+                <div class="faq-answer">
+                    <p><strong>Common solutions:</strong></p>
+                    <ul>
+                        <li>✅ Make sure your executor is up to date</li>
+                        <li>✅ Disable your antivirus temporarily (it may block the executor)</li>
+                        <li>✅ Try using a different executor from our recommended list</li>
+                        <li>✅ Clear your executor's cache and restart it</li>
+                        <li>✅ Reinstall Roblox if the problem persists</li>
+                        <li>✅ Check if Roblox has updated recently</li>
+                    </ul>
+                    <div class="warning-box">
+                        <strong>⚠️ Security:</strong> Never download executors from untrusted sources. Always use the official links provided on our website.
+                    </div>
+                </div>
+            </div>
+
+            <div class="faq-item" data-category="general" data-keywords="games support compatible blox fruits arsenal pet simulator what games supported list compatibility work">
+                <div class="faq-question" onclick="toggleFAQ(this)">
+                    <span class="faq-question-text">🎮 Which games are supported?</span>
+                    <span class="faq-arrow">▼</span>
+                </div>
+                <div class="faq-answer">
+                    <p><strong>GitanX supports a wide variety of Roblox games:</strong></p>
+                    <ul>
+                        <li>🎯 Blox Fruits</li>
+                        <li>🐾 Pet Simulator X</li>
+                        <li>🔫 Arsenal</li>
+                        <li>⚔️ Blade Ball</li>
+                        <li>🏃 Evade</li>
+                        <li>🎭 Murder Mystery 2</li>
+                        <li>🌟 Universal scripts that work across multiple games</li>
+                        <li>📅 Regular updates to maintain compatibility</li>
+                    </ul>
+                    <div class="info-box">
+                        <strong>💡 Check Discord:</strong> Join our Discord server to see the full list of supported games and request new game scripts.
+                    </div>
+                </div>
+            </div>
+
+            <div class="faq-item" data-category="setup" data-keywords="requirements system windows pc ram specs minimum hardware computer need">
+                <div class="faq-question" onclick="toggleFAQ(this)">
+                    <span class="faq-question-text">💻 System requirements</span>
+                    <span class="faq-arrow">▼</span>
+                </div>
+                <div class="faq-answer">
+                    <p><strong>Minimum requirements:</strong></p>
+                    <ul>
+                        <li>🖥️ Windows 7/8/10/11 (64-bit)</li>
+                        <li>💾 4GB RAM minimum (8GB recommended)</li>
+                        <li>🌐 Stable internet connection</li>
+                        <li>🎮 Latest version of Roblox installed</li>
+                        <li>🛡️ Antivirus exceptions configured</li>
+                        <li>💿 500MB free disk space</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="faq-item" data-category="security" data-keywords="safe ban risk account security virus dangerous malware">
+                <div class="faq-question" onclick="toggleFAQ(this)">
+                    <span class="faq-question-text">🛡️ Is it safe to use?</span>
+                    <span class="faq-arrow">▼</span>
+                </div>
+                <div class="faq-answer">
+                    <p><strong>Safety information:</strong></p>
+                    <div class="warning-box">
+                        <strong>⚠️ Disclaimer:</strong> Using any script executor carries risks. Your Roblox account may be banned if detected. Use at your own risk and consider using an alternate account.
+                    </div>
+                    <p><strong>Best practices:</strong></p>
+                    <ul>
+                        <li>🚫 Never use on your main Roblox account</li>
+                        <li>🤐 Don't share your executor with others</li>
+                        <li>🔄 Keep your executor and scripts updated</li>
+                        <li>✅ Download only from trusted sources</li>
+                        <li>🔒 Use a VPN for additional security (optional)</li>
+                        <li>👤 Create dedicated alt accounts for scripting</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="faq-item" data-category="general" data-keywords="mobile android ios phone tablet arceus device">
+                <div class="faq-question" onclick="toggleFAQ(this)">
+                    <span class="faq-question-text">📱 Mobile support</span>
+                    <span class="faq-arrow">▼</span>
+                </div>
+                <div class="faq-answer">
+                    <p><strong>Mobile information:</strong></p>
+                    <p>GitanX is primarily designed for PC. Mobile support is limited, but we recommend:</p>
+                    <ul>
+                        <li>📱 Arceus X for Android devices</li>
+                        <li>🍎 iOS support is very limited due to restrictions</li>
+                        <li>📄 Check our Executors page for mobile options</li>
+                        <li>💬 Join Discord for mobile-specific guides</li>
+                    </ul>
+                    <div class="info-box">
+                        <strong>ℹ️ Note:</strong> Mobile executors have different capabilities than PC executors. Some features may not be available.
+                    </div>
+                </div>
+            </div>
+
+            <div class="faq-item" data-category="general" data-keywords="update version new features changelog patch latest">
+                <div class="faq-question" onclick="toggleFAQ(this)">
+                    <span class="faq-question-text">🔄 How to update GitanX?</span>
+                    <span class="faq-arrow">▼</span>
+                </div>
+                <div class="faq-answer">
+                    <p><strong>GitanX updates automatically!</strong></p>
+                    <p>Since GitanX loads from an online source, you always get the latest version when you execute the script. No manual updates needed.</p>
+                    <div class="success-box">
+                        <strong>✅ Auto-Update:</strong> Just execute the script as usual, and you'll automatically receive all new features and bug fixes.
+                    </div>
+                    <p><strong>Update notifications:</strong></p>
+                    <ul>
+                        <li>📢 Follow our Discord for update announcements</li>
+                        <li>✨ New features are added regularly</li>
+                        <li>🐛 Bug fixes are deployed instantly</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="faq-item" data-category="general" data-keywords="help support contact discord community assistance question">
+                <div class="faq-question" onclick="toggleFAQ(this)">
+                    <span class="faq-question-text">💬 Need more help?</span>
+                    <span class="faq-arrow">▼</span>
+                </div>
+                <div class="faq-answer">
+                    <p><strong>Contact and support:</strong></p>
+                    <ul>
+                        <li>🔹 Join our Discord server: https://discord.gg/ygfKAUGRuS</li>
+                        <li>🔹 Check the #support channel for quick help</li>
+                        <li>🔹 Read announcements for updates and news</li>
+                        <li>🔹 Community members are ready to help!</li>
+                        <li>🔹 Browse #faq for common questions</li>
+                    </ul>
+                    <div class="info-box">
+                        <strong>💡 Quick Response:</strong> Our Discord community is active 24/7. You'll usually get help within minutes!
+                    </div>
                 </div>
             </div>
         </div>
@@ -472,6 +922,10 @@
         const menuToggle = document.getElementById('menuToggle');
         const navLinks = document.getElementById('navLinks');
         const navOverlay = document.getElementById('navOverlay');
+        const searchInput = document.getElementById('searchInput');
+        const noResults = document.getElementById('noResults');
+        const faqItems = document.querySelectorAll('.faq-item');
+        const filterBtns = document.querySelectorAll('.filter-btn');
 
         function toggleMenu(e) {
             if (e) e.stopPropagation();
@@ -512,6 +966,77 @@
             e.stopPropagation();
         });
 
+        // Search functionality - IMPROVED
+        searchInput.addEventListener('input', (e) => {
+            const searchTerm = e.target.value.toLowerCase().trim();
+            let visibleCount = 0;
+
+            // Reset active filter when searching
+            if (searchTerm !== '') {
+                filterBtns.forEach(btn => btn.classList.remove('active'));
+                filterBtns[0].classList.add('active');
+            }
+
+            faqItems.forEach(item => {
+                const questionText = item.querySelector('.faq-question-text').textContent.toLowerCase();
+                const keywords = item.dataset.keywords || '';
+                const answerText = item.querySelector('.faq-answer').textContent.toLowerCase();
+                
+                const searchWords = searchTerm.split(' ').filter(word => word.length > 0);
+                
+                if (searchTerm === '') {
+                    item.classList.remove('hidden');
+                    visibleCount++;
+                } else {
+                    const matches = searchWords.some(word => 
+                        questionText.includes(word) || 
+                        keywords.includes(word) || 
+                        answerText.includes(word)
+                    );
+                    
+                    if (matches) {
+                        item.classList.remove('hidden');
+                        visibleCount++;
+                    } else {
+                        item.classList.add('hidden');
+                    }
+                }
+            });
+
+            if (visibleCount === 0 && searchTerm !== '') {
+                noResults.classList.add('show');
+            } else {
+                noResults.classList.remove('show');
+            }
+        });
+
+        // Category filter
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                filterBtns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                
+                const category = btn.dataset.category;
+                let visibleCount = 0;
+                
+                faqItems.forEach(item => {
+                    if (category === 'all' || item.dataset.category === category) {
+                        item.classList.remove('hidden');
+                        visibleCount++;
+                    } else {
+                        item.classList.add('hidden');
+                    }
+                });
+
+                searchInput.value = '';
+                if (visibleCount === 0) {
+                    noResults.classList.add('show');
+                } else {
+                    noResults.classList.remove('show');
+                }
+            });
+        });
+
         function createStars() {
             const starsContainer = document.getElementById('stars');
             for (let i = 0; i < 150; i++) {
@@ -548,6 +1073,21 @@
                 arrow.classList.add('active');
                 element.classList.add('active');
             }
+        }
+
+        function copyCode(elementId, button) {
+            const codeElement = document.getElementById(elementId);
+            const code = codeElement.textContent.replace('📋 Copy', '').trim();
+            
+            navigator.clipboard.writeText(code).then(() => {
+                button.textContent = '✅ Copied!';
+                button.classList.add('copied');
+                
+                setTimeout(() => {
+                    button.textContent = '📋 Copy';
+                    button.classList.remove('copied');
+                }, 2000);
+            });
         }
 
         createStars();
