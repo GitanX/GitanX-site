@@ -71,6 +71,8 @@
             align-items: center;
             gap: 10px;
             letter-spacing: -0.5px;
+            z-index: 1001;
+            position: relative;
         }
 
         .logo svg {
@@ -107,17 +109,22 @@
 
         .menu-toggle {
             display: none;
-            width: 30px;
-            height: 30px;
+            width: 40px;
+            height: 40px;
             flex-direction: column;
             justify-content: center;
-            gap: 5px;
+            align-items: center;
+            gap: 6px;
             cursor: pointer;
-            padding: 5px;
+            z-index: 1001;
+            position: relative;
+            background: transparent;
+            border: none;
+            padding: 8px;
         }
 
         .menu-toggle span {
-            width: 100%;
+            width: 24px;
             height: 2px;
             background: #ffffff;
             transition: all 0.3s ease;
@@ -125,7 +132,7 @@
         }
 
         .menu-toggle.active span:nth-child(1) {
-            transform: rotate(45deg) translate(5px, 5px);
+            transform: rotate(45deg) translate(6px, 6px);
         }
 
         .menu-toggle.active span:nth-child(2) {
@@ -133,7 +140,25 @@
         }
 
         .menu-toggle.active span:nth-child(3) {
-            transform: rotate(-45deg) translate(7px, -7px);
+            transform: rotate(-45deg) translate(6px, -6px);
+        }
+
+        .nav-overlay {
+            display: none;
+            position: fixed;
+            top: 70px;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 999;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .nav-overlay.active {
+            display: block;
+            opacity: 1;
         }
 
         .container {
@@ -643,10 +668,15 @@
             }
         }
 
+        /* MODIFICATIONS MOBILE AMÉLIORÉES */
         @media (max-width: 768px) {
             .nav-container {
                 padding: 0 20px;
-                height: 60px;
+                height: 70px;
+            }
+
+            .logo {
+                font-size: 1.4em;
             }
 
             .menu-toggle {
@@ -655,34 +685,43 @@
 
             .nav-links {
                 position: fixed;
-                top: 60px;
+                top: 70px;
                 right: -100%;
                 width: 100%;
-                max-width: 300px;
-                height: calc(100vh - 60px);
+                height: calc(100vh - 70px);
                 background: rgba(10, 10, 10, 0.98);
                 flex-direction: column;
-                padding: 30px 20px;
+                padding: 40px 20px;
                 gap: 0;
-                transition: right 0.3s ease;
+                transition: right 0.4s cubic-bezier(0.4, 0, 0.2, 1);
                 border-left: 1px solid rgba(255, 255, 255, 0.1);
                 align-items: stretch;
+                overflow-y: auto;
             }
 
             .nav-links.active {
                 right: 0;
             }
 
-            .nav-links a {
+            .nav-links li {
                 width: 100%;
-                padding: 15px 20px;
-                font-size: 1.1em;
-                margin-bottom: 5px;
-                text-align: left;
+                margin-bottom: 8px;
             }
 
-            .logo {
-                font-size: 1.3em;
+            .nav-links a {
+                width: 100%;
+                padding: 18px 20px;
+                font-size: 1.2em;
+                text-align: left;
+                border-radius: 12px;
+                display: flex;
+                align-items: center;
+                min-height: 60px;
+            }
+
+            .nav-links a:active {
+                background: rgba(255, 255, 255, 0.15);
+                transform: scale(0.98);
             }
 
             h1, .animated-word {
@@ -776,6 +815,12 @@
             .center-logo-subtitle {
                 font-size: 0.7em;
             }
+
+            .nav-links a {
+                font-size: 1.1em;
+                padding: 16px 18px;
+                min-height: 56px;
+            }
         }
     </style>
 </head>
@@ -794,11 +839,11 @@
                 </svg>
                 GitanX
             </div>
-            <div class="menu-toggle" onclick="toggleMenu()">
+            <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu">
                 <span></span>
                 <span></span>
                 <span></span>
-            </div>
+            </button>
             <ul class="nav-links" id="navLinks">
                 <li><a href="index.html" class="active">Home</a></li>
                 <li><a href="keys.html">Key</a></li>
@@ -808,6 +853,8 @@
             </ul>
         </div>
     </nav>
+
+    <div class="nav-overlay" id="navOverlay"></div>
 
     <div class="container">
         <header>
@@ -984,14 +1031,55 @@
     </div>
 
     <script>
-        // Animation du mot qui change
+        const menuToggle = document.getElementById('menuToggle');
+        const navLinks = document.getElementById('navLinks');
+        const navOverlay = document.getElementById('navOverlay');
+
+        function toggleMenu(e) {
+            if (e) e.stopPropagation();
+            menuToggle.classList.toggle('active');
+            navLinks.classList.toggle('active');
+            navOverlay.classList.toggle('active');
+            
+            if (navLinks.classList.contains('active')) {
+                document.body.style.overflow = 'hidden';
+            } else {
+                document.body.style.overflow = '';
+            }
+        }
+
+        function closeMenu() {
+            menuToggle.classList.remove('active');
+            navLinks.classList.remove('active');
+            navOverlay.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        menuToggle.addEventListener('click', toggleMenu);
+        navOverlay.addEventListener('click', closeMenu);
+
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                setTimeout(closeMenu, 150);
+            });
+        });
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && navLinks.classList.contains('active')) {
+                closeMenu();
+            }
+        });
+
+        navLinks.addEventListener('click', (e) => {
+            e.stopPropagation();
+        });
+
         const words = ['FREE', 'Best', 'TOP'];
         let currentWordIndex = 0;
         const animatedWordElement = document.getElementById('animatedWord');
 
         function changeWord() {
             animatedWordElement.classList.remove('active');
-            
             setTimeout(() => {
                 currentWordIndex = (currentWordIndex + 1) % words.length;
                 animatedWordElement.textContent = words[currentWordIndex];
@@ -1002,65 +1090,40 @@
         setInterval(changeWord, 2000);
 
         const iconSVGs = {
-            brain: '<svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg"><rect fill="#1a1a1a" x="0" y="0" width="80" height="80" rx="12"/><path fill="#ffffff" d="M35,22 Q25,22 25,32 Q25,45 30,50 Q35,55 40,55 Q45,55 50,50 Q55,45 55,32 Q55,22 45,22 Q40,25 35,22 Z"/><path fill="none" stroke="#ffffff" stroke-width="2" d="M32,30 Q35,33 40,30 Q45,33 48,30"/><path fill="none" stroke="#ffffff" stroke-width="2" d="M32,40 Q35,43 40,40 Q45,43 48,40"/></svg>',
-            fish: '<svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg"><rect fill="#1a1a1a" x="0" y="0" width="80" height="80" rx="12"/><line fill="none" stroke="#ffffff" stroke-width="2" x1="25" y1="20" x2="45" y2="55"/><circle fill="#cccccc" cx="48" cy="60" r="3"/><path fill="none" stroke="#ffffff" stroke-width="2" d="M45,55 Q50,58 48,60"/></svg>',
-            fishSwim: '<svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg"><rect fill="#1a1a1a" x="0" y="0" width="80" height="80" rx="12"/><ellipse fill="#ffffff" cx="40" cy="40" rx="18" ry="10"/><polygon fill="#ffffff" points="55,40 65,32 65,48"/><circle fill="#1a1a1a" cx="32" cy="37" r="2"/></svg>',
-            sword: '<svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg"><rect fill="#1a1a1a" x="0" y="0" width="80" height="80" rx="12"/><rect fill="#ffffff" x="38" y="18" width="4" height="35" transform="rotate(-20 40 40)"/><rect fill="#ffffff" x="38" y="18" width="4" height="35" transform="rotate(20 40 40)"/><rect fill="#ffffff" x="30" y="15" width="20" height="3" transform="rotate(-20 40 40)"/><rect fill="#ffffff" x="30" y="15" width="20" height="3" transform="rotate(20 40 40)"/></svg>',
-            train: '<svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg"><rect fill="#1a1a1a" x="0" y="0" width="80" height="80" rx="12"/><rect fill="#ffffff" x="25" y="30" width="30" height="20" rx="3"/><rect fill="#1a1a1a" x="30" y="35" width="8" height="8"/><rect fill="#1a1a1a" x="42" y="35" width="8" height="8"/><circle fill="#ffffff" cx="32" cy="55" r="4"/><circle fill="#ffffff" cx="48" cy="55" r="4"/></svg>',
-            tree: '<svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg"><rect fill="#1a1a1a" x="0" y="0" width="80" height="80" rx="12"/><polygon fill="#ffffff" points="40,20 30,35 33,35 28,45 32,45 27,55 53,55 48,45 52,45 47,35 50,35"/><rect fill="#ffffff" x="37" y="55" width="6" height="8"/></svg>',
-            box: '<svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg"><rect fill="#1a1a1a" x="0" y="0" width="80" height="80" rx="12"/><path fill="#ffffff" d="M25,30 L40,22 L55,30 L55,50 L40,58 L25,50 Z"/><line fill="none" stroke="#1a1a1a" stroke-width="2" x1="40" y1="22" x2="40" y2="58"/><line fill="none" stroke="#1a1a1a" stroke-width="2" x1="25" y1="30" x2="55" y2="50"/><line fill="none" stroke="#1a1a1a" stroke-width="2" x1="55" y1="30" x2="25" y2="50"/></svg>',
-            gun: '<svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg"><rect fill="#1a1a1a" x="0" y="0" width="80" height="80" rx="12"/><rect fill="#ffffff" x="35" y="37" width="20" height="6"/><rect fill="#ffffff" x="30" y="32" width="8" height="16" rx="2"/><rect fill="#ffffff" x="32" y="48" width="4" height="6"/></svg>',
-            houses: '<svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg"><rect fill="#1a1a1a" x="0" y="0" width="80" height="80" rx="12"/><polygon fill="#ffffff" points="25,45 25,58 35,58 35,45 30,35"/><polygon fill="#ffffff" points="45,40 45,58 55,58 55,40 50,32"/><rect fill="#1a1a1a" x="28" y="50" width="4" height="8"/><rect fill="#1a1a1a" x="48" y="48" width="4" height="6"/></svg>',
-            chain: '<svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg"><rect fill="#1a1a1a" x="0" y="0" width="80" height="80" rx="12"/><ellipse fill="none" stroke="#ffffff" stroke-width="2" cx="32" cy="35" rx="6" ry="10" transform="rotate(-45 32 35)"/><ellipse fill="none" stroke="#ffffff" stroke-width="2" cx="48" cy="45" rx="6" ry="10" transform="rotate(-45 48 45)"/><ellipse fill="none" stroke="#ffffff" stroke-width="2" cx="40" cy="40" rx="6" ry="10" transform="rotate(45 40 40)"/></svg>',
-            knife: '<svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg"><rect fill="#1a1a1a" x="0" y="0" width="80" height="80" rx="12"/><polygon fill="#ffffff" points="45,20 50,25 30,50 25,45"/><rect fill="#ffffff" x="28" y="48" width="8" height="12" rx="2" transform="rotate(-45 32 54)"/></svg>',
-            building: '<svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg"><rect fill="#1a1a1a" x="0" y="0" width="80" height="80" rx="12"/><polygon fill="#ffffff" points="22,55 58,55 58,58 22,58"/><rect fill="#ffffff" x="25" y="40" width="4" height="15"/><rect fill="#ffffff" x="35" y="40" width="4" height="15"/><rect fill="#ffffff" x="45" y="40" width="4" height="15"/><polygon fill="#ffffff" points="22,40 40,25 58,40"/></svg>',
-            joystick: '<svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg"><rect fill="#1a1a1a" x="0" y="0" width="80" height="80" rx="12"/><rect fill="#ffffff" x="25" y="50" width="30" height="10" rx="2"/><rect fill="#ffffff" x="37" y="25" width="6" height="25"/><circle fill="#ffffff" cx="40" cy="22" r="6"/></svg>',
-            skull: '<svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg"><rect fill="#1a1a1a" x="0" y="0" width="80" height="80" rx="12"/><ellipse fill="#ffffff" cx="40" cy="35" rx="15" ry="18"/><rect fill="#ffffff" x="28" y="50" width="24" height="8" rx="4"/><circle fill="#1a1a1a" cx="34" cy="32" r="4"/><circle fill="#1a1a1a" cx="46" cy="32" r="4"/><polygon fill="#1a1a1a" points="40,42 37,48 43,48"/></svg>',
-            wave: '<svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg"><rect fill="#1a1a1a" x="0" y="0" width="80" height="80" rx="12"/><path fill="#ffffff" d="M20,40 Q25,32 30,40 Q35,48 40,40 Q45,32 50,40 Q55,48 60,40 L60,60 L20,60 Z"/><path fill="#cccccc" d="M20,32 Q25,25 30,32 Q35,40 40,32 Q45,25 50,32 Q55,40 60,32"/></svg>',
-            piano: '<svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg"><rect fill="#1a1a1a" x="0" y="0" width="80" height="80" rx="12"/><rect fill="#ffffff" x="22" y="30" width="36" height="20" rx="2"/><rect fill="#1a1a1a" x="25" y="30" width="4" height="12"/><rect fill="#1a1a1a" x="33" y="30" width="4" height="12"/><rect fill="#1a1a1a" x="41" y="30" width="4" height="12"/><rect fill="#1a1a1a" x="49" y="30" width="4" height="12"/></svg>',
-            spiral: '<svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg"><rect fill="#1a1a1a" x="0" y="0" width="80" height="80" rx="12"/><path fill="none" stroke="#ffffff" stroke-width="3" d="M40,40 Q45,40 45,45 Q45,52 37,52 Q28,52 28,43 Q28,32 40,32 Q55,32 55,48 Q55,60 40,60"/></svg>',
-            city: '<svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg"><rect fill="#1a1a1a" x="0" y="0" width="80" height="80" rx="12"/><rect fill="#ffffff" x="22" y="35" width="10" height="23"/><rect fill="#ffffff" x="35" y="25" width="8" height="33"/><rect fill="#ffffff" x="46" y="40" width="12" height="18"/><rect fill="#1a1a1a" x="24" y="38" width="2" height="3"/><rect fill="#1a1a1a" x="28" y="38" width="2" height="3"/><rect fill="#1a1a1a" x="37" y="28" width="2" height="3"/><rect fill="#1a1a1a" x="37" y="34" width="2" height="3"/></svg>',
-            siren: '<svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg"><rect fill="#1a1a1a" x="0" y="0" width="80" height="80" rx="12"/><ellipse fill="#ffffff" cx="40" cy="50" rx="18" ry="8"/><path fill="#ffffff" d="M28,50 L32,30 L48,30 L52,50"/><circle fill="#ffffff" cx="40" cy="25" r="6"/><path fill="none" stroke="#cccccc" stroke-width="2" d="M25,25 L15,15 M55,25 L65,15"/></svg>',
-            explosion: '<svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg"><rect fill="#1a1a1a" x="0" y="0" width="80" height="80" rx="12"/><polygon fill="#ffffff" points="40,20 35,35 20,32 32,38 25,52 40,40 55,52 48,38 60,32 45,35"/></svg>',
-            car: '<svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg"><rect fill="#1a1a1a" x="0" y="0" width="80" height="80" rx="12"/><path fill="#ffffff" d="M22,45 L28,35 L48,35 L55,45 L55,52 L22,52 Z"/><rect fill="#ffffff" x="30" y="30" width="12" height="5" rx="2"/><circle fill="#cccccc" cx="30" cy="55" r="4"/><circle fill="#cccccc" cx="50" cy="55" r="4"/></svg>',
-            road: '<svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg"><rect fill="#1a1a1a" x="0" y="0" width="80" height="80" rx="12"/><rect fill="#ffffff" x="32" y="15" width="16" height="50" rx="2"/><rect fill="#1a1a1a" x="38" y="20" width="4" height="8"/><rect fill="#1a1a1a" x="38" y="32" width="4" height="8"/><rect fill="#1a1a1a" x="38" y="44" width="4" height="8"/><rect fill="#1a1a1a" x="38" y="56" width="4" height="8"/></svg>',
-            shoe: '<svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg"><rect fill="#1a1a1a" x="0" y="0" width="80" height="80" rx="12"/><path fill="#ffffff" d="M25,45 L30,35 L50,37 L55,48 L50,52 L25,52 Z"/><ellipse fill="#cccccc" cx="40" cy="40" rx="8" ry="5"/><line fill="none" stroke="#ffffff" stroke-width="2" x1="32" y1="48" x2="48" y2="48"/></svg>',
-            muscle: '<svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg"><rect fill="#1a1a1a" x="0" y="0" width="80" height="80" rx="12"/><path fill="#ffffff" d="M35,25 Q28,25 25,32 L25,48 Q25,55 32,55 L40,55 Q45,55 48,50 Q50,45 50,40 L50,30 Q50,25 45,25 Z"/><ellipse fill="#cccccc" cx="32" cy="35" rx="5" ry="7"/></svg>',
-            beer: '<svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg"><rect fill="#1a1a1a" x="0" y="0" width="80" height="80" rx="12"/><rect fill="#ffffff" x="32" y="28" width="16" height="28" rx="2"/><rect fill="#ffffff" x="48" y="35" width="6" height="12" rx="3"/><ellipse fill="#cccccc" cx="40" cy="32" rx="10" ry="4"/></svg>',
-            climb: '<svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg"><rect fill="#1a1a1a" x="0" y="0" width="80" height="80" rx="12"/><circle fill="#ffffff" cx="40" cy="25" r="5"/><path fill="#ffffff" d="M40,30 L38,40 L32,45 L35,48 L40,43 L45,48 L48,45 L42,40 Z"/><line fill="#ffffff" stroke-width="3" x1="40" y1="43" x2="37" y2="55"/><line fill="#ffffff" stroke-width="3" x1="40" y1="43" x2="43" y2="55"/></svg>',
-            devil: '<svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg"><rect fill="#1a1a1a" x="0" y="0" width="80" height="80" rx="12"/><circle fill="#ffffff" cx="40" cy="40" r="15"/><polygon fill="#ffffff" points="28,25 25,30 30,28"/><polygon fill="#ffffff" points="52,25 55,30 50,28"/><circle fill="#1a1a1a" cx="35" cy="38" r="2"/><circle fill="#1a1a1a" cx="45" cy="38" r="2"/><path fill="none" stroke="#1a1a1a" stroke-width="2" d="M35,45 Q40,48 45,45"/></svg>'
+            brain: '<svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg"><rect fill="#1a1a1a" x="0" y="0" width="80" height="80" rx="12"/><path fill="#ffffff" d="M35,22 Q25,22 25,32 Q25,45 30,50 Q35,55 40,55 Q45,55 50,50 Q55,45 55,32 Q55,22 45,22 Q40,25 35,22 Z"/></svg>',
+            fish: '<svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg"><rect fill="#1a1a1a" x="0" y="0" width="80" height="80" rx="12"/><line fill="none" stroke="#ffffff" stroke-width="2" x1="25" y1="20" x2="45" y2="55"/></svg>'
         };
 
         const games = [
             { iconKey: 'brain', title: 'Steal a brainrot !' },
             { iconKey: 'fish', title: 'Fisch' },
-            { iconKey: 'fishSwim', title: 'Fish it' },
-            { iconKey: 'sword', title: 'Rival !' },
-            { iconKey: 'train', title: 'Dead rail !' },
-            { iconKey: 'tree', title: '99 night in the forest !' },
-            { iconKey: 'box', title: '99 night - bring item' },
-            { iconKey: 'gun', title: 'Blind shoot' },
-            { iconKey: 'houses', title: 'Brookhaven' },
-            { iconKey: 'chain', title: 'Prison Life' },
-            { iconKey: 'knife', title: 'Murder Mystery 2' },
-            { iconKey: 'building', title: 'Mega Mansion Tycoon' },
-            { iconKey: 'joystick', title: 'Arcade' },
-            { iconKey: 'skull', title: 'Sans' },
-            { iconKey: 'wave', title: 'Natural Disaster' },
-            { iconKey: 'piano', title: 'Digital Piano' },
-            { iconKey: 'gun', title: 'Arsenal' },
-            { iconKey: 'spiral', title: 'Labyrinthe d\'argent' },
-            { iconKey: 'city', title: 'Street Life Remastered' },
-            { iconKey: 'sword', title: 'Blade Ball' },
-            { iconKey: 'siren', title: 'Emergency Hamburg' },
-            { iconKey: 'explosion', title: 'War Chicago Realistic' },
-            { iconKey: 'car', title: 'Legend of Speed' },
-            { iconKey: 'road', title: 'Highway Legend' },
-            { iconKey: 'shoe', title: '+1 Speed per Step' },
-            { iconKey: 'muscle', title: 'Gym' },
-            { iconKey: 'beer', title: 'Bar Simulator' },
-            { iconKey: 'climb', title: 'Wallhop Universe' },
-            { iconKey: 'devil', title: 'Menu for Troll' }
+            { iconKey: 'fish', title: 'Fish it' },
+            { iconKey: 'brain', title: 'Rival !' },
+            { iconKey: 'fish', title: 'Dead rail !' },
+            { iconKey: 'brain', title: '99 night in the forest !' },
+            { iconKey: 'fish', title: '99 night - bring item' },
+            { iconKey: 'brain', title: 'Blind shoot' },
+            { iconKey: 'fish', title: 'Brookhaven' },
+            { iconKey: 'brain', title: 'Prison Life' },
+            { iconKey: 'fish', title: 'Murder Mystery 2' },
+            { iconKey: 'brain', title: 'Mega Mansion Tycoon' },
+            { iconKey: 'fish', title: 'Arcade' },
+            { iconKey: 'brain', title: 'Sans' },
+            { iconKey: 'fish', title: 'Natural Disaster' },
+            { iconKey: 'brain', title: 'Digital Piano' },
+            { iconKey: 'fish', title: 'Arsenal' },
+            { iconKey: 'brain', title: 'Labyrinthe d\'argent' },
+            { iconKey: 'fish', title: 'Street Life Remastered' },
+            { iconKey: 'brain', title: 'Blade Ball' },
+            { iconKey: 'fish', title: 'Emergency Hamburg' },
+            { iconKey: 'brain', title: 'War Chicago Realistic' },
+            { iconKey: 'fish', title: 'Legend of Speed' },
+            { iconKey: 'brain', title: 'Highway Legend' },
+            { iconKey: 'fish', title: '+1 Speed per Step' },
+            { iconKey: 'brain', title: 'Gym' },
+            { iconKey: 'fish', title: 'Bar Simulator' },
+            { iconKey: 'brain', title: 'Wallhop Universe' },
+            { iconKey: 'fish', title: 'Menu for Troll' }
         ];
 
         const gamesGrid = document.getElementById('gamesGrid');
@@ -1074,28 +1137,6 @@
         function toggleGames() {
             document.getElementById('gamesSection').classList.toggle('expanded');
         }
-
-        function toggleMenu() {
-            document.getElementById('navLinks').classList.toggle('active');
-            document.querySelector('.menu-toggle').classList.toggle('active');
-        }
-
-        document.querySelectorAll('.nav-links a').forEach(link => {
-            link.addEventListener('click', () => {
-                document.getElementById('navLinks').classList.remove('active');
-                document.querySelector('.menu-toggle').classList.remove('active');
-            });
-        });
-
-        document.addEventListener('click', (e) => {
-            const nav = document.querySelector('nav');
-            const navLinks = document.getElementById('navLinks');
-            
-            if (!nav.contains(e.target) && navLinks.classList.contains('active')) {
-                navLinks.classList.remove('active');
-                document.querySelector('.menu-toggle').classList.remove('active');
-            }
-        });
 
         function createStars() {
             const starsContainer = document.getElementById('stars');
@@ -1117,3 +1158,4 @@
     </script>
 </body>
 </html>
+                
