@@ -339,12 +339,12 @@
 <body>
     <div id="stars"></div>
     
-    <a href="index.html" class="back-btn">← RETOUR</a>
+    <a href="index.html" class="back-btn">← Back</a>
     
     <div class="container">
         <header>
             <h1>GAME COLLECTION</h1>
-            <p class="subtitle">EXPLOREZ TOUS LES JEUX DISPONIBLES</p>
+            <p class="subtitle">GitanX game</p>
         </header>
 
         <div class="search-container">
@@ -355,11 +355,11 @@
         </div>
 
         <div class="filter-container">
-            <button class="filter-btn active" data-filter="all">TOUS</button>
+            <button class="filter-btn active" data-filter="all">ALL</button>
             <button class="filter-btn" data-filter="action">ACTION</button>
             <button class="filter-btn" data-filter="simulation">SIMULATION</button>
             <button class="filter-btn" data-filter="tycoon">TYCOON</button>
-            <button class="filter-btn" data-filter="troll">TROLL</button>
+            <button class="filter-btn" data-filter="troll">Other</button>
         </div>
 
         <div class="games-count" id="gamesCount"></div>
@@ -388,6 +388,7 @@
             { name: "Rival!", category: "action" },
             { name: "Dead Rail!", category: "action" },
             { name: "99 Nights in the Forest!", category: "action" },
+            { name: "Evade", category: "action" },
             { name: "God Mode", category: "troll" },
             { name: "Murder Mystery 2", category: "action" },
             { name: "Mega Mansion Tycoon", category: "tycoon" },
@@ -406,7 +407,7 @@
             { name: "+1 Speed Per Step", category: "simulation" },
             { name: "Gym", category: "simulation" },
             { name: "Bar Simulator", category: "simulation" },
-            { name: "Wallhop Universe", category: "action" }
+            { name: "Wallhop Universe", category: "troll" }
         ];
 
         let currentFilter = 'all';
