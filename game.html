@@ -174,15 +174,16 @@
         }
 
         .game-card {
-            background: rgba(255,255,255,0.03);
-            backdrop-filter: blur(10px);
-            border-radius: 20px;
-            padding: 30px;
-            transition: all 0.4s ease;
+            background: linear-gradient(135deg, rgba(255,255,255,0.05), rgba(255,255,255,0.01));
+            backdrop-filter: blur(15px);
+            border-radius: 25px;
+            padding: 35px;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
             border: 2px solid rgba(255,255,255,0.08);
             cursor: pointer;
             position: relative;
             overflow: hidden;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.3);
         }
 
         .game-card::before {
@@ -201,22 +202,34 @@
         }
 
         .game-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 20px 60px rgba(255,255,255,0.15);
-            background: rgba(255,255,255,0.08);
-            border-color: rgba(255,255,255,0.2);
+            transform: translateY(-12px) scale(1.02);
+            box-shadow: 0 25px 70px rgba(255,255,255,0.2);
+            background: linear-gradient(135deg, rgba(255,255,255,0.12), rgba(255,255,255,0.06));
+            border-color: rgba(255,255,255,0.3);
         }
 
-        .game-icon {
-            font-size: 3.5em;
-            margin-bottom: 20px;
-            display: block;
-            filter: grayscale(0);
-            transition: transform 0.3s ease;
+        .game-number {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 50px;
+            height: 50px;
+            background: rgba(255,255,255,0.1);
+            border: 2px solid rgba(255,255,255,0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.2em;
+            color: #888;
+            transition: all 0.3s ease;
         }
 
-        .game-card:hover .game-icon {
-            transform: scale(1.2) rotate(5deg);
+        .game-card:hover .game-number {
+            background: white;
+            color: black;
+            transform: rotate(360deg);
         }
 
         .game-title {
@@ -423,11 +436,11 @@
                 return;
             }
             
-            filteredGames.forEach(game => {
+            filteredGames.forEach((game, index) => {
                 const card = document.createElement('div');
                 card.className = 'game-card';
                 card.innerHTML = `
-                    <span class="game-icon">${game.icon}</span>
+                    <div class="game-number">${index + 1}</div>
                     <div class="game-title">${game.name}</div>
                     <span class="game-category">${game.category}</span>
                     <button class="play-btn">JOUER MAINTENANT</button>
