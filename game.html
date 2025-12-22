@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Games Collection</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #000000;
+            min-height: 100vh;
+            color: white;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        #stars {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+
+        .star {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: white;
+            border-radius: 50%;
+            animation: twinkle 3s infinite;
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 1; }
+        }
+
+        .container {
+            position: relative;
+            z-index: 1;
+            max-width: 1600px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            text-align: center;
+            padding: 60px 20px 40px;
+            animation: fadeInDown 0.8s ease;
+        }
+
+        h1 {
+            font-size: 4em;
+            margin-bottom: 15px;
+            font-weight: 900;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            background: linear-gradient(45deg, #ffffff, #888888, #ffffff);
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: shine 3s linear infinite;
+        }
+
+        @keyframes shine {
+            to { background-position: 200% center; }
+        }
+
+        .subtitle {
+            font-size: 1.3em;
+            color: #999;
+            letter-spacing: 1px;
+        }
+
+        .search-container {
+            max-width: 600px;
+            margin: 0 auto 50px;
+            animation: fadeIn 1s ease;
+        }
+
+        .search-box {
+            position: relative;
+        }
+
+        #searchInput {
+            width: 100%;
+            padding: 18px 50px 18px 25px;
+            background: rgba(255,255,255,0.05);
+            border: 2px solid rgba(255,255,255,0.1);
+            border-radius: 50px;
+            color: white;
+            font-size: 1.1em;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        #searchInput:focus {
+            outline: none;
+            border-color: rgba(255,255,255,0.3);
+            background: rgba(255,255,255,0.08);
+            box-shadow: 0 0 30px rgba(255,255,255,0.1);
+        }
+
+        #searchInput::placeholder {
+            color: #666;
+        }
+
+        .search-icon {
+            position: absolute;
+            right: 25px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 1.3em;
+            color: #666;
+        }
+
+        .filter-container {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 50px;
+            flex-wrap: wrap;
+            animation: fadeIn 1.2s ease;
+        }
+
+        .filter-btn {
+            padding: 12px 30px;
+            background: rgba(255,255,255,0.05);
+            border: 2px solid rgba(255,255,255,0.1);
+            border-radius: 30px;
+            color: #999;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 1em;
+            font-weight: 600;
+            letter-spacing: 1px;
+        }
+
+        .filter-btn:hover {
+            background: rgba(255,255,255,0.1);
+            border-color: rgba(255,255,255,0.3);
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        .filter-btn.active {
+            background: white;
+            color: black;
+            border-color: white;
+        }
+
+        .games-count {
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 1.1em;
+            color: #666;
+            animation: fadeIn 1.4s ease;
+        }
+
+        .games-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 30px;
+            animation: fadeInUp 1s ease;
+        }
+
+        .game-card {
+            background: rgba(255,255,255,0.03);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 30px;
+            transition: all 0.4s ease;
+            border: 2px solid rgba(255,255,255,0.08);
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .game-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .game-card:hover::before {
+            left: 100%;
+        }
+
+        .game-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 60px rgba(255,255,255,0.15);
+            background: rgba(255,255,255,0.08);
+            border-color: rgba(255,255,255,0.2);
+        }
+
+        .game-icon {
+            font-size: 3.5em;
+            margin-bottom: 20px;
+            display: block;
+            filter: grayscale(0);
+            transition: transform 0.3s ease;
+        }
+
+        .game-card:hover .game-icon {
+            transform: scale(1.2) rotate(5deg);
+        }
+
+        .game-title {
+            font-size: 1.6em;
+            font-weight: bold;
+            margin-bottom: 15px;
+            color: white;
+        }
+
+        .game-category {
+            display: inline-block;
+            padding: 6px 18px;
+            background: rgba(255,255,255,0.1);
+            border: 1px solid rgba(255,255,255,0.2);
+            border-radius: 20px;
+            font-size: 0.85em;
+            margin-bottom: 15px;
+            color: #ccc;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .play-btn {
+            margin-top: 20px;
+            padding: 14px 25px;
+            background: white;
+            border: none;
+            border-radius: 30px;
+            color: black;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+            font-size: 1.05em;
+            letter-spacing: 1px;
+        }
+
+        .play-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 30px rgba(255,255,255,0.3);
+        }
+
+        .back-btn {
+            position: fixed;
+            top: 30px;
+            left: 30px;
+            padding: 14px 28px;
+            background: rgba(255,255,255,0.05);
+            border: 2px solid rgba(255,255,255,0.1);
+            border-radius: 30px;
+            color: white;
+            text-decoration: none;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+            font-weight: bold;
+            z-index: 100;
+            letter-spacing: 1px;
+        }
+
+        .back-btn:hover {
+            background: white;
+            color: black;
+            transform: translateX(-5px);
+        }
+
+        .no-results {
+            text-align: center;
+            padding: 60px 20px;
+            color: #666;
+            font-size: 1.3em;
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @media (max-width: 768px) {
+            h1 { font-size: 2.5em; }
+            .games-grid { grid-template-columns: 1fr; }
+            .back-btn { top: 15px; left: 15px; }
+        }
+    </style>
+</head>
+<body>
+    <div id="stars"></div>
+    
+    <a href="index.html" class="back-btn">← RETOUR</a>
+    
+    <div class="container">
+        <header>
+            <h1>🎮 GAME COLLECTION</h1>
+            <p class="subtitle">EXPLOREZ TOUS LES JEUX DISPONIBLES</p>
+        </header>
+
+        <div class="search-container">
+            <div class="search-box">
+                <input type="text" id="searchInput" placeholder="Rechercher un jeu...">
+                <span class="search-icon">🔍</span>
+            </div>
+        </div>
+
+        <div class="filter-container">
+            <button class="filter-btn active" data-filter="all">TOUS</button>
+            <button class="filter-btn" data-filter="action">ACTION</button>
+            <button class="filter-btn" data-filter="simulation">SIMULATION</button>
+            <button class="filter-btn" data-filter="tycoon">TYCOON</button>
+            <button class="filter-btn" data-filter="troll">TROLL</button>
+        </div>
+
+        <div class="games-count" id="gamesCount"></div>
+
+        <div class="games-grid" id="gamesGrid"></div>
+    </div>
+
+    <script>
+        // Créer les étoiles
+        function createStars() {
+            const starsContainer = document.getElementById('stars');
+            for (let i = 0; i < 200; i++) {
+                const star = document.createElement('div');
+                star.className = 'star';
+                star.style.left = Math.random() * 100 + '%';
+                star.style.top = Math.random() * 100 + '%';
+                star.style.animationDelay = Math.random() * 3 + 's';
+                star.style.animationDuration = (Math.random() * 2 + 2) + 's';
+                starsContainer.appendChild(star);
+            }
+        }
+
+        const games = [
+            { name: "Steal a Brainrot!", icon: "🧠", category: "action" },
+            { name: "Fisch Fish It", icon: "🎣", category: "simulation" },
+            { name: "Rival!", icon: "⚔️", category: "action" },
+            { name: "Dead Rail!", icon: "🚂", category: "action" },
+            { name: "99 Nights in the Forest!", icon: "🌲", category: "action" },
+            { name: "God Mode", icon: "⚡", category: "troll" },
+            { name: "Murder Mystery 2", icon: "🔪", category: "action" },
+            { name: "Mega Mansion Tycoon", icon: "🏰", category: "tycoon" },
+            { name: "Arcade", icon: "🕹️", category: "action" },
+            { name: "Sans Porter", icon: "🎵", category: "simulation" },
+            { name: "Natural Disaster", icon: "🌪️", category: "simulation" },
+            { name: "Digital Piano", icon: "🎹", category: "simulation" },
+            { name: "Arsenal", icon: "🔫", category: "action" },
+            { name: "Labyrinthe d'Argent", icon: "🏛️", category: "action" },
+            { name: "Street Life Remastered", icon: "🏙️", category: "simulation" },
+            { name: "Blade Ball", icon: "⚽", category: "action" },
+            { name: "Emergency Hamburg", icon: "🚑", category: "simulation" },
+            { name: "War Chicago Realistic", icon: "💣", category: "action" },
+            { name: "Legend of Speed", icon: "🏎️", category: "action" },
+            { name: "Highway Legend", icon: "🛣️", category: "action" },
+            { name: "+1 Speed Per Step", icon: "👟", category: "simulation" },
+            { name: "Gym", icon: "💪", category: "simulation" },
+            { name: "Bar Simulator", icon: "🍺", category: "simulation" },
+            { name: "Wallhop Universe", icon: "🧗", category: "action" }
+        ];
+
+        let currentFilter = 'all';
+        let searchTerm = '';
+
+        function renderGames() {
+            const grid = document.getElementById('gamesGrid');
+            const countEl = document.getElementById('gamesCount');
+            grid.innerHTML = '';
+            
+            let filteredGames = games;
+            
+            if (currentFilter !== 'all') {
+                filteredGames = filteredGames.filter(g => g.category === currentFilter);
+            }
+            
+            if (searchTerm) {
+                filteredGames = filteredGames.filter(g => 
+                    g.name.toLowerCase().includes(searchTerm.toLowerCase())
+                );
+            }
+            
+            countEl.textContent = `${filteredGames.length} jeu${filteredGames.length > 1 ? 'x' : ''} trouvé${filteredGames.length > 1 ? 's' : ''}`;
+            
+            if (filteredGames.length === 0) {
+                grid.innerHTML = '<div class="no-results">Aucun jeu trouvé 😢</div>';
+                return;
+            }
+            
+            filteredGames.forEach(game => {
+                const card = document.createElement('div');
+                card.className = 'game-card';
+                card.innerHTML = `
+                    <span class="game-icon">${game.icon}</span>
+                    <div class="game-title">${game.name}</div>
+                    <span class="game-category">${game.category}</span>
+                    <button class="play-btn">JOUER MAINTENANT</button>
+                `;
+                grid.appendChild(card);
+            });
+        }
+
+        document.querySelectorAll('.filter-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+                currentFilter = this.dataset.filter;
+                renderGames();
+            });
+        });
+
+        document.getElementById('searchInput').addEventListener('input', function(e) {
+            searchTerm = e.target.value;
+            renderGames();
+        });
+
+        createStars();
+        renderGames();
+    </script>
+</body>
+</html>
