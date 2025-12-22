@@ -48,20 +48,20 @@
             z-index: 1;
             max-width: 1600px;
             margin: 0 auto;
-            padding: 20px;
+            padding: 15px;
         }
 
         header {
             text-align: center;
-            padding: 60px 20px 40px;
+            padding: 80px 15px 30px;
             animation: fadeInDown 0.8s ease;
         }
 
         h1 {
-            font-size: 4em;
+            font-size: 2.5em;
             margin-bottom: 15px;
             font-weight: 900;
-            letter-spacing: 3px;
+            letter-spacing: 2px;
             text-transform: uppercase;
             background: linear-gradient(45deg, #ffffff, #888888, #ffffff);
             background-size: 200% auto;
@@ -76,15 +76,16 @@
         }
 
         .subtitle {
-            font-size: 1.3em;
+            font-size: 1.1em;
             color: #999;
             letter-spacing: 1px;
         }
 
         .search-container {
-            max-width: 600px;
-            margin: 0 auto 50px;
+            max-width: 100%;
+            margin: 0 auto 30px;
             animation: fadeIn 1s ease;
+            padding: 0 5px;
         }
 
         .search-box {
@@ -93,12 +94,12 @@
 
         #searchInput {
             width: 100%;
-            padding: 18px 50px 18px 25px;
+            padding: 15px 50px 15px 20px;
             background: rgba(255,255,255,0.05);
             border: 2px solid rgba(255,255,255,0.1);
             border-radius: 50px;
             color: white;
-            font-size: 1.1em;
+            font-size: 1em;
             transition: all 0.3s ease;
             backdrop-filter: blur(10px);
         }
@@ -116,40 +117,41 @@
 
         .search-icon {
             position: absolute;
-            right: 25px;
+            right: 20px;
             top: 50%;
             transform: translateY(-50%);
-            font-size: 1.3em;
+            font-size: 1.2em;
             color: #666;
+            pointer-events: none;
         }
 
         .filter-container {
             display: flex;
             justify-content: center;
-            gap: 15px;
-            margin-bottom: 50px;
+            gap: 10px;
+            margin-bottom: 30px;
             flex-wrap: wrap;
             animation: fadeIn 1.2s ease;
+            padding: 0 5px;
         }
 
         .filter-btn {
-            padding: 12px 30px;
+            padding: 10px 20px;
             background: rgba(255,255,255,0.05);
             border: 2px solid rgba(255,255,255,0.1);
             border-radius: 30px;
             color: #999;
             cursor: pointer;
             transition: all 0.3s ease;
-            font-size: 1em;
+            font-size: 0.9em;
             font-weight: 600;
             letter-spacing: 1px;
+            -webkit-tap-highlight-color: transparent;
+            touch-action: manipulation;
         }
 
-        .filter-btn:hover {
-            background: rgba(255,255,255,0.1);
-            border-color: rgba(255,255,255,0.3);
-            color: white;
-            transform: translateY(-2px);
+        .filter-btn:active {
+            transform: scale(0.95);
         }
 
         .filter-btn.active {
@@ -160,30 +162,31 @@
 
         .games-count {
             text-align: center;
-            margin-bottom: 30px;
-            font-size: 1.1em;
+            margin-bottom: 25px;
+            font-size: 1em;
             color: #666;
             animation: fadeIn 1.4s ease;
         }
 
         .games-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-            gap: 30px;
+            grid-template-columns: 1fr;
+            gap: 20px;
             animation: fadeInUp 1s ease;
+            padding: 0 5px;
         }
 
         .game-card {
             background: linear-gradient(135deg, rgba(255,255,255,0.05), rgba(255,255,255,0.01));
             backdrop-filter: blur(15px);
-            border-radius: 25px;
-            padding: 35px;
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            border-radius: 20px;
+            padding: 25px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             border: 2px solid rgba(255,255,255,0.08);
-            cursor: pointer;
             position: relative;
             overflow: hidden;
             box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+            -webkit-tap-highlight-color: transparent;
         }
 
         .game-card::before {
@@ -197,23 +200,21 @@
             transition: left 0.5s ease;
         }
 
-        .game-card:hover::before {
+        .game-card:active::before {
             left: 100%;
         }
 
-        .game-card:hover {
-            transform: translateY(-12px) scale(1.02);
-            box-shadow: 0 25px 70px rgba(255,255,255,0.2);
+        .game-card:active {
+            transform: scale(0.98);
             background: linear-gradient(135deg, rgba(255,255,255,0.12), rgba(255,255,255,0.06));
-            border-color: rgba(255,255,255,0.3);
         }
 
         .game-number {
             position: absolute;
-            top: 20px;
-            right: 20px;
-            width: 50px;
-            height: 50px;
+            top: 15px;
+            right: 15px;
+            width: 45px;
+            height: 45px;
             background: rgba(255,255,255,0.1);
             border: 2px solid rgba(255,255,255,0.2);
             border-radius: 50%;
@@ -221,62 +222,65 @@
             align-items: center;
             justify-content: center;
             font-weight: bold;
-            font-size: 1.2em;
+            font-size: 1.1em;
             color: #888;
             transition: all 0.3s ease;
         }
 
-        .game-card:hover .game-number {
+        .game-card:active .game-number {
             background: white;
             color: black;
             transform: rotate(360deg);
         }
 
         .game-title {
-            font-size: 1.6em;
+            font-size: 1.4em;
             font-weight: bold;
-            margin-bottom: 15px;
+            margin-bottom: 12px;
             color: white;
+            padding-right: 50px;
         }
 
         .game-category {
             display: inline-block;
-            padding: 6px 18px;
+            padding: 5px 15px;
             background: rgba(255,255,255,0.1);
             border: 1px solid rgba(255,255,255,0.2);
             border-radius: 20px;
-            font-size: 0.85em;
-            margin-bottom: 15px;
+            font-size: 0.8em;
+            margin-bottom: 12px;
             color: #ccc;
             text-transform: uppercase;
             letter-spacing: 1px;
         }
 
         .play-btn {
-            margin-top: 20px;
-            padding: 14px 25px;
+            margin-top: 15px;
+            padding: 13px 25px;
             background: white;
             border: none;
             border-radius: 30px;
             color: black;
             font-weight: bold;
             cursor: pointer;
-            transition: all 0.3s ease;
+            transition: all 0.2s ease;
             width: 100%;
-            font-size: 1.05em;
+            font-size: 1em;
             letter-spacing: 1px;
+            -webkit-tap-highlight-color: transparent;
+            touch-action: manipulation;
         }
 
-        .play-btn:hover {
-            transform: scale(1.05);
-            box-shadow: 0 10px 30px rgba(255,255,255,0.3);
+        .play-btn:active {
+            transform: scale(0.95);
+            box-shadow: 0 5px 15px rgba(255,255,255,0.3);
         }
 
         .back-btn {
             position: fixed;
-            top: 30px;
-            left: 30px;
-            padding: 14px 28px;
+            top: 15px;
+            left: 15px;
+            padding: 12px 20px;
             background: rgba(255,255,255,0.05);
             border: 2px solid rgba(255,255,255,0.1);
             border-radius: 30px;
@@ -287,19 +291,21 @@
             font-weight: bold;
             z-index: 100;
             letter-spacing: 1px;
+            font-size: 0.9em;
+            -webkit-tap-highlight-color: transparent;
         }
 
-        .back-btn:hover {
+        .back-btn:active {
             background: white;
             color: black;
-            transform: translateX(-5px);
+            transform: scale(0.95);
         }
 
         .no-results {
             text-align: center;
             padding: 60px 20px;
             color: #666;
-            font-size: 1.3em;
+            font-size: 1.2em;
         }
 
         @keyframes fadeInDown {
@@ -329,10 +335,127 @@
             to { opacity: 1; }
         }
 
-        @media (max-width: 768px) {
-            h1 { font-size: 2.5em; }
-            .games-grid { grid-template-columns: 1fr; }
-            .back-btn { top: 15px; left: 15px; }
+        /* Tablette */
+        @media (min-width: 600px) {
+            .games-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 25px;
+            }
+            
+            h1 {
+                font-size: 3em;
+            }
+            
+            .container {
+                padding: 20px;
+            }
+        }
+
+        /* Desktop */
+        @media (min-width: 1024px) {
+            .games-grid {
+                grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+                gap: 30px;
+            }
+            
+            h1 {
+                font-size: 4em;
+            }
+            
+            header {
+                padding: 60px 20px 40px;
+            }
+            
+            .subtitle {
+                font-size: 1.3em;
+            }
+            
+            .search-container {
+                max-width: 600px;
+            }
+            
+            #searchInput {
+                padding: 18px 50px 18px 25px;
+                font-size: 1.1em;
+            }
+            
+            .search-icon {
+                font-size: 1.3em;
+            }
+            
+            .filter-btn {
+                padding: 12px 30px;
+                font-size: 1em;
+            }
+            
+            .filter-btn:hover {
+                background: rgba(255,255,255,0.1);
+                border-color: rgba(255,255,255,0.3);
+                color: white;
+                transform: translateY(-2px);
+            }
+            
+            .games-count {
+                font-size: 1.1em;
+            }
+            
+            .game-card {
+                padding: 35px;
+                cursor: pointer;
+            }
+            
+            .game-card:hover::before {
+                left: 100%;
+            }
+            
+            .game-card:hover {
+                transform: translateY(-12px) scale(1.02);
+                box-shadow: 0 25px 70px rgba(255,255,255,0.2);
+                background: linear-gradient(135deg, rgba(255,255,255,0.12), rgba(255,255,255,0.06));
+                border-color: rgba(255,255,255,0.3);
+            }
+            
+            .game-number {
+                width: 50px;
+                height: 50px;
+                font-size: 1.2em;
+            }
+            
+            .game-card:hover .game-number {
+                background: white;
+                color: black;
+                transform: rotate(360deg);
+            }
+            
+            .game-title {
+                font-size: 1.6em;
+            }
+            
+            .game-category {
+                font-size: 0.85em;
+            }
+            
+            .play-btn {
+                padding: 14px 25px;
+                font-size: 1.05em;
+            }
+            
+            .play-btn:hover {
+                transform: scale(1.05);
+                box-shadow: 0 10px 30px rgba(255,255,255,0.3);
+            }
+            
+            .back-btn {
+                top: 30px;
+                left: 30px;
+                padding: 14px 28px;
+            }
+            
+            .back-btn:hover {
+                background: white;
+                color: black;
+                transform: translateX(-5px);
+            }
         }
     </style>
 </head>
@@ -368,10 +491,10 @@
     </div>
 
     <script>
-        // Créer les étoiles
         function createStars() {
             const starsContainer = document.getElementById('stars');
-            for (let i = 0; i < 200; i++) {
+            const starCount = window.innerWidth < 768 ? 100 : 200;
+            for (let i = 0; i < starCount; i++) {
                 const star = document.createElement('div');
                 star.className = 'star';
                 star.style.left = Math.random() * 100 + '%';
