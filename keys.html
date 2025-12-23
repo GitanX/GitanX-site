@@ -725,7 +725,6 @@
             }
         }
 
-        /* Petits écrans (très petits mobiles) */
         @media (max-width: 360px) {
             h1 {
                 font-size: 1.9em;
@@ -783,7 +782,7 @@
             <div class="denied-info">
                 <p><strong>Why is this happening?</strong></p>
                 <p>• You're trying to bypass the verification</p>
-                <p>• You must use the Linkvertise link</p>
+                <p>• You must use the Linkvertise or Work.ink link</p>
                 <p>• Direct access is not allowed</p>
                 <p>• Join discord if its a bug : https://discord.gg/G9mZVF6TS5</p>
             </div>
@@ -820,7 +819,7 @@
             <div class="key-info">
                 <p>📅 <strong>Last Update:</strong> Today</p>
                 <p>⏰ <strong>Validity:</strong> 1 day Access</p>
-                <p>🔐 <strong>Status:</strong> Access via Linkvertise required</p>
+                <p>🔐 <strong>Status:</strong> Access via Linkvertise or Work.ink required</p>
                 <p>⚡ <strong>Features:</strong> Full Premium Access</p>
             </div>
         </div>
@@ -891,7 +890,8 @@
                     'linkvertise.com',
                     'link-center.net',
                     'link-target.net',
-                    'file-link.net'
+                    'file-link.net',
+                    'work.ink'
                 ];
                 
                 const isAllowed = allowedDomains.some(domain => {
@@ -952,7 +952,7 @@
             }
         }
 
-        function copyKey(button, keyValue) {
+function copyKey(button, keyValue) {
             if (button.disabled) return;
             
             navigator.clipboard.writeText(keyValue).then(() => {
