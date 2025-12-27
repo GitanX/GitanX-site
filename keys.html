@@ -276,11 +276,18 @@
         }
 
         .container {
-            max-width: 900px;
+            max-width: 1400px;
             margin: 0 auto;
             padding: 140px 40px 60px 40px;
             position: relative;
             z-index: 1;
+        }
+
+        .cards-wrapper {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            align-items: start;
         }
 
         header {
@@ -310,8 +317,7 @@
             border: 3px solid;
             border-image: linear-gradient(135deg, #FFD700, #FFA500) 1;
             border-radius: 28px;
-            padding: 50px;
-            margin-bottom: 40px;
+            padding: 40px;
             text-align: center;
             position: relative;
             overflow: hidden;
@@ -347,8 +353,8 @@
         }
 
         .lifetime-icon {
-            font-size: 6em;
-            margin-bottom: 25px;
+            font-size: 4em;
+            margin-bottom: 20px;
             animation: floatGlow 3s ease-in-out infinite;
             filter: drop-shadow(0 0 40px rgba(255, 215, 0, 0.6));
         }
@@ -365,15 +371,15 @@
         }
 
         .lifetime-title {
-            font-size: 3em;
+            font-size: 2em;
             font-weight: 800;
             background: linear-gradient(135deg, #FFD700, #FFA500);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
-            margin-bottom: 20px;
+            margin-bottom: 15px;
             text-transform: uppercase;
-            letter-spacing: 2px;
+            letter-spacing: 1px;
             animation: pulse 2s ease-in-out infinite;
         }
 
@@ -383,24 +389,24 @@
         }
 
         .lifetime-subtitle {
-            font-size: 1.4em;
+            font-size: 1.1em;
             color: rgba(255, 255, 255, 0.8);
-            margin-bottom: 30px;
-            line-height: 1.6;
+            margin-bottom: 25px;
+            line-height: 1.5;
         }
 
         .lifetime-features {
             display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 20px;
-            margin: 35px 0;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin: 25px 0;
             text-align: center;
         }
 
         .lifetime-feature {
             background: rgba(0, 0, 0, 0.5);
-            padding: 20px;
-            border-radius: 14px;
+            padding: 15px;
+            border-radius: 12px;
             border: 1px solid rgba(255, 215, 0, 0.3);
             transition: all 0.3s ease;
         }
@@ -412,13 +418,13 @@
         }
 
         .lifetime-feature-icon {
-            font-size: 2.5em;
-            margin-bottom: 10px;
+            font-size: 2em;
+            margin-bottom: 8px;
         }
 
         .lifetime-feature-text {
             color: rgba(255, 255, 255, 0.9);
-            font-size: 1.1em;
+            font-size: 0.95em;
             font-weight: 600;
         }
 
@@ -426,9 +432,9 @@
             display: inline-block;
             background: linear-gradient(135deg, #FFD700, #FFA500);
             color: #000000;
-            padding: 22px 60px;
-            border-radius: 16px;
-            font-size: 1.6em;
+            padding: 16px 40px;
+            border-radius: 14px;
+            font-size: 1.2em;
             font-weight: 800;
             text-decoration: none;
             transition: all 0.4s ease;
@@ -437,7 +443,7 @@
             position: relative;
             overflow: hidden;
             text-transform: uppercase;
-            letter-spacing: 1px;
+            letter-spacing: 0.5px;
         }
 
         .lifetime-cta::before {
@@ -477,11 +483,11 @@
             display: inline-block;
             background: rgba(255, 215, 0, 0.2);
             color: #FFD700;
-            padding: 10px 25px;
+            padding: 8px 20px;
             border-radius: 30px;
-            font-size: 1.1em;
+            font-size: 0.9em;
             font-weight: 700;
-            margin-top: 25px;
+            margin-top: 20px;
             border: 2px solid rgba(255, 215, 0, 0.4);
         }
 
@@ -489,7 +495,7 @@
             background: rgba(0, 0, 0, 0.8);
             border: 2px solid rgba(255, 255, 255, 0.15);
             border-radius: 28px;
-            padding: 60px;
+            padding: 40px;
             transition: all 0.4s ease;
             backdrop-filter: blur(20px);
             position: relative;
@@ -727,6 +733,11 @@
 
             .container {
                 padding: 100px 20px 50px 20px;
+            }
+
+            .cards-wrapper {
+                grid-template-columns: 1fr;
+                gap: 30px;
             }
 
             .lifetime-promo {
@@ -1034,62 +1045,64 @@
             <p class="subtitle">Premium Access Key</p>
         </header>
 
-        <div class="lifetime-promo" id="lifetimePromo">
-            <div class="lifetime-promo-content">
-                <div class="lifetime-icon">👑</div>
-                <h2 class="lifetime-title">🌟 Lifetime Access Available! 🌟</h2>
-                <p class="lifetime-subtitle">Stop getting daily keys! Upgrade to lifetime access and enjoy GitanX forever</p>
+        <div class="cards-wrapper" id="cardsWrapper" style="display: none;">
+            <div class="lifetime-promo" id="lifetimePromo">
+                <div class="lifetime-promo-content">
+                    <div class="lifetime-icon">👑</div>
+                    <h2 class="lifetime-title">🌟 Lifetime Access! 🌟</h2>
+                    <p class="lifetime-subtitle">Stop getting daily keys! Upgrade to lifetime access</p>
+                    
+                    <div class="lifetime-features">
+                        <div class="lifetime-feature">
+                            <div class="lifetime-feature-icon">♾️</div>
+                            <div class="lifetime-feature-text">Never Expire</div>
+                        </div>
+                        <div class="lifetime-feature">
+                            <div class="lifetime-feature-icon">⚡</div>
+                            <div class="lifetime-feature-text">Priority Support</div>
+                        </div>
+                        <div class="lifetime-feature">
+                            <div class="lifetime-feature-icon">🎯</div>
+                            <div class="lifetime-feature-text">Exclusive Features</div>
+                        </div>
+                        <div class="lifetime-feature">
+                            <div class="lifetime-feature-icon">🔥</div>
+                            <div class="lifetime-feature-text">Early Updates</div>
+                        </div>
+                    </div>
+
+                    <a href="https://discord.gg/G9mZVF6TS5" class="lifetime-cta" target="_blank">
+                        <span>💎 Buy Lifetime Key 💎</span>
+                    </a>
+
+                    <div class="lifetime-badge-text">
+                        ✨ One-time payment • Forever access ✨
+                    </div>
+                </div>
+            </div>
+
+            <div class="key-card" id="protectedKeyCard">
+                <div class="key-header">
+                    <div class="key-icon">⚡</div>
+                    <div class="key-game">GitanX Premium</div>
+                    <span class="key-status" id="keyStatus">🔒 Locked</span>
+                </div>
                 
-                <div class="lifetime-features">
-                    <div class="lifetime-feature">
-                        <div class="lifetime-feature-icon">♾️</div>
-                        <div class="lifetime-feature-text">Never Expire</div>
-                    </div>
-                    <div class="lifetime-feature">
-                        <div class="lifetime-feature-icon">⚡</div>
-                        <div class="lifetime-feature-text">Priority Support</div>
-                    </div>
-                    <div class="lifetime-feature">
-                        <div class="lifetime-feature-icon">🎯</div>
-                        <div class="lifetime-feature-text">Exclusive Features</div>
-                    </div>
-                    <div class="lifetime-feature">
-                        <div class="lifetime-feature-icon">🔥</div>
-                        <div class="lifetime-feature-text">Early Updates</div>
-                    </div>
+                <div class="key-display">
+                    <div class="key-label">🔐 Premium Key</div>
+                    <div class="key-value" id="keyValue">••••••••••••••••</div>
                 </div>
 
-                <a href="https://discord.gg/G9mZVF6TS5" class="lifetime-cta" target="_blank">
-                    <span>💎 Buy Lifetime Key on Discord 💎</span>
-                </a>
+                <button class="copy-btn" id="copyBtn" onclick="copyKey(this, 'GitanX_h6gf2k46f5g4u')">
+                    <span style="position: relative; z-index: 1;">📋 Copy Key</span>
+                </button>
 
-                <div class="lifetime-badge-text">
-                    ✨ One-time payment • Forever access • No daily links ✨
+                <div class="key-info">
+                    <p>📅 <strong>Last Update:</strong> Today</p>
+                    <p>⏰ <strong>Validity:</strong> 1 day Access</p>
+                    <p>🔐 <strong>Status:</strong> Access via Linkvertise or Work.ink required</p>
+                    <p>⚡ <strong>Features:</strong> Full Premium Access</p>
                 </div>
-            </div>
-        </div>
-
-        <div class="key-card" id="protectedKeyCard">
-            <div class="key-header">
-                <div class="key-icon">⚡</div>
-                <div class="key-game">GitanX Premium</div>
-                <span class="key-status" id="keyStatus">🔒 Locked</span>
-            </div>
-            
-            <div class="key-display">
-                <div class="key-label">🔐 Premium Key</div>
-                <div class="key-value" id="keyValue">••••••••••••••••</div>
-            </div>
-
-            <button class="copy-btn" id="copyBtn" onclick="copyKey(this, 'GitanX_h6gf2k46f5g4u')">
-                <span style="position: relative; z-index: 1;">📋 Copy Key</span>
-            </button>
-
-            <div class="key-info">
-                <p>📅 <strong>Last Update:</strong> Today</p>
-                <p>⏰ <strong>Validity:</strong> 1 day Access</p>
-                <p>🔐 <strong>Status:</strong> Access via Linkvertise or Work.ink required</p>
-                <p>⚡ <strong>Features:</strong> Full Premium Access</p>
             </div>
         </div>
     </div>
@@ -1103,7 +1116,7 @@
         const keyStatus = document.getElementById('keyStatus');
         const keyValue = document.getElementById('keyValue');
         const copyBtn = document.getElementById('copyBtn');
-        const lifetimePromo = document.getElementById('lifetimePromo');
+        const cardsWrapper = document.getElementById('cardsWrapper');
 
         function toggleMenu(e) {
             if (e) e.stopPropagation();
@@ -1190,7 +1203,7 @@
             copyBtn.style.opacity = '0.5';
             copyBtn.style.cursor = 'not-allowed';
             document.body.style.overflow = 'hidden';
-            lifetimePromo.style.display = 'none';
+            cardsWrapper.style.display = 'none';
         }
 
         function unlockAccess() {
@@ -1203,7 +1216,7 @@
             copyBtn.style.opacity = '1';
             copyBtn.style.cursor = 'pointer';
             document.body.style.overflow = '';
-            lifetimePromo.style.display = 'block';
+            cardsWrapper.style.display = 'grid';
         }
 
         function createStars() {
