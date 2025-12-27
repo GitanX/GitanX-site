@@ -102,33 +102,6 @@
             background: rgba(255, 255, 255, 0.1);
         }
 
-        .lifetime-badge {
-            background: linear-gradient(135deg, #FFD700, #FFA500);
-            color: #000000;
-            padding: 8px 16px;
-            border-radius: 8px;
-            font-size: 0.95em;
-            font-weight: 700;
-            text-decoration: none;
-            transition: all 0.3s ease;
-            box-shadow: 0 5px 20px rgba(255, 215, 0, 0.3);
-            animation: pulse-glow 2s infinite;
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        @keyframes pulse-glow {
-            0%, 100% { box-shadow: 0 5px 20px rgba(255, 215, 0, 0.3); }
-            50% { box-shadow: 0 5px 30px rgba(255, 215, 0, 0.6); }
-        }
-
-        .lifetime-badge:hover {
-            background: linear-gradient(135deg, #FFA500, #FFD700);
-            transform: translateY(-2px) scale(1.05);
-            box-shadow: 0 8px 30px rgba(255, 215, 0, 0.5);
-        }
-
         .menu-toggle {
             display: none;
             width: 40px;
@@ -329,6 +302,187 @@
             color: rgba(255, 255, 255, 0.5);
             font-weight: 400;
             letter-spacing: 1px;
+        }
+
+        .lifetime-promo {
+            display: none;
+            background: linear-gradient(135deg, rgba(255, 215, 0, 0.15), rgba(255, 165, 0, 0.15));
+            border: 3px solid;
+            border-image: linear-gradient(135deg, #FFD700, #FFA500) 1;
+            border-radius: 28px;
+            padding: 50px;
+            margin-bottom: 40px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 20px 60px rgba(255, 215, 0, 0.3);
+            animation: fadeInUp 0.8s ease;
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .lifetime-promo::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255, 215, 0, 0.1), transparent);
+            animation: shine 3s infinite;
+        }
+
+        @keyframes shine {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .lifetime-promo-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .lifetime-icon {
+            font-size: 6em;
+            margin-bottom: 25px;
+            animation: floatGlow 3s ease-in-out infinite;
+            filter: drop-shadow(0 0 40px rgba(255, 215, 0, 0.6));
+        }
+
+        @keyframes floatGlow {
+            0%, 100% { 
+                transform: translateY(0) scale(1);
+                filter: drop-shadow(0 0 40px rgba(255, 215, 0, 0.6));
+            }
+            50% { 
+                transform: translateY(-15px) scale(1.05);
+                filter: drop-shadow(0 0 60px rgba(255, 215, 0, 0.9));
+            }
+        }
+
+        .lifetime-title {
+            font-size: 3em;
+            font-weight: 800;
+            background: linear-gradient(135deg, #FFD700, #FFA500);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.8; }
+        }
+
+        .lifetime-subtitle {
+            font-size: 1.4em;
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 30px;
+            line-height: 1.6;
+        }
+
+        .lifetime-features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin: 35px 0;
+            text-align: left;
+        }
+
+        .lifetime-feature {
+            background: rgba(0, 0, 0, 0.5);
+            padding: 20px;
+            border-radius: 14px;
+            border: 1px solid rgba(255, 215, 0, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .lifetime-feature:hover {
+            transform: translateY(-5px);
+            border-color: rgba(255, 215, 0, 0.6);
+            box-shadow: 0 10px 30px rgba(255, 215, 0, 0.3);
+        }
+
+        .lifetime-feature-icon {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+
+        .lifetime-feature-text {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 1.1em;
+            font-weight: 600;
+        }
+
+        .lifetime-cta {
+            display: inline-block;
+            background: linear-gradient(135deg, #FFD700, #FFA500);
+            color: #000000;
+            padding: 22px 60px;
+            border-radius: 16px;
+            font-size: 1.6em;
+            font-weight: 800;
+            text-decoration: none;
+            transition: all 0.4s ease;
+            box-shadow: 0 15px 50px rgba(255, 215, 0, 0.4);
+            border: 3px solid transparent;
+            position: relative;
+            overflow: hidden;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .lifetime-cta::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
+
+        .lifetime-cta:hover::before {
+            width: 500px;
+            height: 500px;
+        }
+
+        .lifetime-cta:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 20px 70px rgba(255, 215, 0, 0.6);
+            border-color: #FFF;
+        }
+
+        .lifetime-cta:active {
+            transform: translateY(-2px) scale(1.02);
+        }
+
+        .lifetime-cta span {
+            position: relative;
+            z-index: 1;
+        }
+
+        .lifetime-badge-text {
+            display: inline-block;
+            background: rgba(255, 215, 0, 0.2);
+            color: #FFD700;
+            padding: 10px 25px;
+            border-radius: 30px;
+            font-size: 1.1em;
+            font-weight: 700;
+            margin-top: 25px;
+            border: 2px solid rgba(255, 215, 0, 0.4);
         }
 
         .key-card {
@@ -562,14 +716,6 @@
                 transform: scale(0.98);
             }
 
-            .lifetime-badge {
-                width: 100%;
-                padding: 20px;
-                font-size: 1.15em;
-                justify-content: center;
-                min-height: 60px;
-            }
-
             h1 {
                 font-size: 2.8em;
                 letter-spacing: -2px;
@@ -581,6 +727,34 @@
 
             .container {
                 padding: 100px 20px 50px 20px;
+            }
+
+            .lifetime-promo {
+                padding: 35px 25px;
+                margin-bottom: 30px;
+            }
+
+            .lifetime-icon {
+                font-size: 4em;
+                margin-bottom: 20px;
+            }
+
+            .lifetime-title {
+                font-size: 2em;
+            }
+
+            .lifetime-subtitle {
+                font-size: 1.1em;
+            }
+
+            .lifetime-features {
+                grid-template-columns: 1fr;
+                gap: 15px;
+            }
+
+            .lifetime-cta {
+                font-size: 1.3em;
+                padding: 18px 40px;
             }
 
             .key-card {
@@ -680,6 +854,27 @@
                 padding: 90px 15px 40px 15px;
             }
 
+            .lifetime-promo {
+                padding: 30px 20px;
+            }
+
+            .lifetime-icon {
+                font-size: 3.5em;
+            }
+
+            .lifetime-title {
+                font-size: 1.8em;
+            }
+
+            .lifetime-subtitle {
+                font-size: 1em;
+            }
+
+            .lifetime-cta {
+                font-size: 1.2em;
+                padding: 16px 35px;
+            }
+
             .key-card {
                 padding: 25px 20px;
                 border-radius: 18px;
@@ -731,12 +926,6 @@
                 min-height: 58px;
             }
 
-            .lifetime-badge {
-                font-size: 1.05em;
-                padding: 18px;
-                min-height: 58px;
-            }
-
             .denied-content {
                 margin: 15px;
                 padding: 30px 20px;
@@ -769,6 +958,10 @@
         @media (max-width: 360px) {
             h1 {
                 font-size: 1.9em;
+            }
+
+            .lifetime-title {
+                font-size: 1.5em;
             }
 
             .key-card {
@@ -808,12 +1001,6 @@
                 <li><a href="game.html">Game</a></li>
                 <li><a href="help.html">Help</a></li>
                 <li><a href="credits.html">Credits</a></li>
-                <li id="lifetimeBadgeContainer" style="display: none;">
-                    <a href="https://discord.gg/G9mZVF6TS5" class="lifetime-badge" target="_blank">
-                        <span>👑</span>
-                        <span>Buy Lifetime Key in Discord</span>
-                    </a>
-                </li>
             </ul>
         </div>
     </nav>
@@ -846,6 +1033,41 @@
             <h1>🔑 GitanX Key</h1>
             <p class="subtitle">Premium Access Key</p>
         </header>
+
+        <div class="lifetime-promo" id="lifetimePromo">
+            <div class="lifetime-promo-content">
+                <div class="lifetime-icon">👑</div>
+                <h2 class="lifetime-title">🌟 Lifetime Access Available! 🌟</h2>
+                <p class="lifetime-subtitle">Stop getting daily keys! Upgrade to lifetime access and enjoy GitanX forever</p>
+                
+                <div class="lifetime-features">
+                    <div class="lifetime-feature">
+                        <div class="lifetime-feature-icon">♾️</div>
+                        <div class="lifetime-feature-text">Never Expire</div>
+                    </div>
+                    <div class="lifetime-feature">
+                        <div class="lifetime-feature-icon">⚡</div>
+                        <div class="lifetime-feature-text">Priority Support</div>
+                    </div>
+                    <div class="lifetime-feature">
+                        <div class="lifetime-feature-icon">🎯</div>
+                        <div class="lifetime-feature-text">Exclusive Features</div>
+                    </div>
+                    <div class="lifetime-feature">
+                        <div class="lifetime-feature-icon">🔥</div>
+                        <div class="lifetime-feature-text">Early Updates</div>
+                    </div>
+                </div>
+
+                <a href="https://discord.gg/G9mZVF6TS5" class="lifetime-cta" target="_blank">
+                    <span>💎 Buy Lifetime Key on Discord 💎</span>
+                </a>
+
+                <div class="lifetime-badge-text">
+                    ✨ One-time payment • Forever access • No daily links ✨
+                </div>
+            </div>
+        </div>
 
         <div class="key-card" id="protectedKeyCard">
             <div class="key-header">
@@ -881,7 +1103,7 @@
         const keyStatus = document.getElementById('keyStatus');
         const keyValue = document.getElementById('keyValue');
         const copyBtn = document.getElementById('copyBtn');
-        const lifetimeBadgeContainer = document.getElementById('lifetimeBadgeContainer');
+        const lifetimePromo = document.getElementById('lifetimePromo');
 
         function toggleMenu(e) {
             if (e) e.stopPropagation();
@@ -968,7 +1190,7 @@
             copyBtn.style.opacity = '0.5';
             copyBtn.style.cursor = 'not-allowed';
             document.body.style.overflow = 'hidden';
-            lifetimeBadgeContainer.style.display = 'none';
+            lifetimePromo.style.display = 'none';
         }
 
         function unlockAccess() {
@@ -981,7 +1203,7 @@
             copyBtn.style.opacity = '1';
             copyBtn.style.cursor = 'pointer';
             document.body.style.overflow = '';
-            lifetimeBadgeContainer.style.display = 'block';
+            lifetimePromo.style.display = 'block';
         }
 
         function createStars() {
