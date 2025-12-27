@@ -102,6 +102,33 @@
             background: rgba(255, 255, 255, 0.1);
         }
 
+        .lifetime-badge {
+            background: linear-gradient(135deg, #FFD700, #FFA500);
+            color: #000000;
+            padding: 8px 16px;
+            border-radius: 8px;
+            font-size: 0.95em;
+            font-weight: 700;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 20px rgba(255, 215, 0, 0.3);
+            animation: pulse-glow 2s infinite;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        @keyframes pulse-glow {
+            0%, 100% { box-shadow: 0 5px 20px rgba(255, 215, 0, 0.3); }
+            50% { box-shadow: 0 5px 30px rgba(255, 215, 0, 0.6); }
+        }
+
+        .lifetime-badge:hover {
+            background: linear-gradient(135deg, #FFA500, #FFD700);
+            transform: translateY(-2px) scale(1.05);
+            box-shadow: 0 8px 30px rgba(255, 215, 0, 0.5);
+        }
+
         .menu-toggle {
             display: none;
             width: 40px;
@@ -535,6 +562,14 @@
                 transform: scale(0.98);
             }
 
+            .lifetime-badge {
+                width: 100%;
+                padding: 20px;
+                font-size: 1.15em;
+                justify-content: center;
+                min-height: 60px;
+            }
+
             h1 {
                 font-size: 2.8em;
                 letter-spacing: -2px;
@@ -696,6 +731,12 @@
                 min-height: 58px;
             }
 
+            .lifetime-badge {
+                font-size: 1.05em;
+                padding: 18px;
+                min-height: 58px;
+            }
+
             .denied-content {
                 margin: 15px;
                 padding: 30px 20px;
@@ -767,6 +808,12 @@
                 <li><a href="game.html">Game</a></li>
                 <li><a href="help.html">Help</a></li>
                 <li><a href="credits.html">Credits</a></li>
+                <li id="lifetimeBadgeContainer" style="display: none;">
+                    <a href="https://discord.gg/G9mZVF6TS5" class="lifetime-badge" target="_blank">
+                        <span>👑</span>
+                        <span>Buy Lifetime Key in Discord</span>
+                    </a>
+                </li>
             </ul>
         </div>
     </nav>
@@ -834,6 +881,7 @@
         const keyStatus = document.getElementById('keyStatus');
         const keyValue = document.getElementById('keyValue');
         const copyBtn = document.getElementById('copyBtn');
+        const lifetimeBadgeContainer = document.getElementById('lifetimeBadgeContainer');
 
         function toggleMenu(e) {
             if (e) e.stopPropagation();
@@ -920,6 +968,7 @@
             copyBtn.style.opacity = '0.5';
             copyBtn.style.cursor = 'not-allowed';
             document.body.style.overflow = 'hidden';
+            lifetimeBadgeContainer.style.display = 'none';
         }
 
         function unlockAccess() {
@@ -932,6 +981,7 @@
             copyBtn.style.opacity = '1';
             copyBtn.style.cursor = 'pointer';
             document.body.style.overflow = '';
+            lifetimeBadgeContainer.style.display = 'block';
         }
 
         function createStars() {
@@ -952,7 +1002,7 @@
             }
         }
 
-function copyKey(button, keyValue) {
+        function copyKey(button, keyValue) {
             if (button.disabled) return;
             
             navigator.clipboard.writeText(keyValue).then(() => {
